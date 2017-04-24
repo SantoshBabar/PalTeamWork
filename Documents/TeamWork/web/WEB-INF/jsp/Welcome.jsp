@@ -4,15 +4,20 @@
     Author     : Administrator
 --%>
 
+<%@page import="com.Paladion.teamwork.beans.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    
         <%@include file="Header.jsp" %>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+        <%! UserBean b; String name;%>
+        <% b=(UserBean)session.getAttribute("Luser"); 
+        name=b.getName().toString(); 
+        %>
+        <h4 align="center">Welcome <%=name%></h4>
+    
+

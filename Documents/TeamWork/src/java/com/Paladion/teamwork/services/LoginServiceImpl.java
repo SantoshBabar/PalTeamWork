@@ -8,6 +8,7 @@ package com.Paladion.teamwork.services;
 import com.Paladion.teamwork.DAO.LoginDAO;
 import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.UserBean;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -24,6 +25,11 @@ public class LoginServiceImpl implements LoginService{
     public UserBean Login(LoginBean LB) {
          
        return LD.Login(LB);
+    }
+
+    @Override
+    public void Logout(HttpSession sess) {
+         sess.invalidate();
     }
     
     

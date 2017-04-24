@@ -7,6 +7,7 @@ package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.UserBean;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -15,5 +16,6 @@ import com.Paladion.teamwork.beans.UserBean;
 public interface LoginService {
     
     public UserBean Login(LoginBean LB);
+    public void Logout(HttpSession sess);
     
 }

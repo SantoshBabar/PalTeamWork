@@ -10,6 +10,7 @@ import com.Paladion.teamwork.beans.UserBean;
 import com.Paladion.teamwork.services.LoginService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -51,11 +52,14 @@ return "Login";
 }
  
 @RequestMapping(value="/Login",method=RequestMethod.POST)
-public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB)
+public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletRequest req )
     {
         System.out.println("in login");
         ub=LS.Login(LB);
-        if (ub!=null) {return new ModelAndView("redirect:/Welcome.do");}
+        if (ub!=null) {
+            HttpSession LoginSess=req.getSession(true);
+            LoginSess.setAttribute("Luser", ub);
+            return new ModelAndView("redirect:/Welcome.do");}
         else {
            return new ModelAndView("Login","Lerror", "Login Failed");
         }
@@ -65,6 +69,13 @@ public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB)
 public ModelAndView Welcome()
 {
 return new ModelAndView("Welcome");
+}
+
+@RequestMapping(value="/Logout",method=RequestMethod.GET)
+public String Logout(HttpServletRequest req)
+{
+ LS.Logout(req.getSession());
+return "redirect:Login.do";
 }
     }
 
