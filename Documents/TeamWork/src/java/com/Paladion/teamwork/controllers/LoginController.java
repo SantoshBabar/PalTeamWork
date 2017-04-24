@@ -55,11 +55,17 @@ public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB)
     {
         System.out.println("in login");
         ub=LS.Login(LB);
-        if (ub!=null) {return new ModelAndView("Welcome");}
+        if (ub!=null) {return new ModelAndView("redirect:/Welcome.do");}
         else {
            return new ModelAndView("Login","Lerror", "Login Failed");
         }
         }
+
+@RequestMapping(value="/Welcome",method=RequestMethod.GET)
+public ModelAndView Welcome()
+{
+return new ModelAndView("Welcome");
+}
     }
 
    

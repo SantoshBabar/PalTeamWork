@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Welcome
-    Created on : 13 Apr, 2017, 8:45:16 PM
+    Document   : Header
+    Created on : 24 Apr, 2017, 11:54:55 AM
     Author     : Administrator
 --%>
 
@@ -9,10 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Teamwork</title>
     </head>
     <body>
-        <%@include file="Header.jsp" %>
-        <h1>Hello World!</h1>
+      <img src="PaladionLogo.png"/>
     </body>
 </html>
