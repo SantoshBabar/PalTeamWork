@@ -10,7 +10,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Paladion Teamwork</title>
+    <title>Paladion Teamwork</title>
     </head>
     
         <%@include file="Header.jsp" %>
@@ -19,5 +19,6 @@
         name=b.getName().toString(); 
         %>
         <h4 align="center">Welcome <%=name%></h4>
-    
-
+        
+        <a href=""
+        
