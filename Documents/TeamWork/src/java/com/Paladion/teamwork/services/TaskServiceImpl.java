@@ -16,12 +16,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
  */
 public class TaskServiceImpl implements TaskService{
 
+	@Autowired
+    @Qualifier(value="TaskDAO")
     
+    TaskDAO TD;
 	
 	@Override
 	public void addTask(TaskBean tb) {
 		
-		
+		System.out.println(tb.getDescription());
+		TD.addTaskDao(tb);
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 

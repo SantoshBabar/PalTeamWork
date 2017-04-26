@@ -26,6 +26,7 @@
     
  <bean id="LoginService" class="com.Paladion.teamwork.services.LoginServiceImpl" />
 <bean id="ProjectService" class="com.Paladion.teamwork.services.ProjectServiceImpl" />
+<bean id="TaskService" class="com.Paladion.teamwork.services.TaskServiceImpl" />
 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -55,4 +56,9 @@
 <bean id="LoginDAO" class="com.Paladion.teamwork.DAO.LoginDAOImpl">
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
+
+<bean id="TaskDAO" class="com.Paladion.teamwork.DAO.TaskDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
+
 </beans>

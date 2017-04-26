@@ -27,6 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TaskController {
 
+	TaskService TS;
+	
+	
 @ModelAttribute("TaskM")
 public TaskBean populate()
 {
@@ -38,9 +41,23 @@ public TaskBean populate()
     {    return "CreateTask";
     }
 	
-@RequestMapping(value="CreateTask",method=RequestMethod.POST)
-    public String updateTask(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
-    {return "";}
+@RequestMapping(value="/CreateTask",method=RequestMethod.POST)
+    public void createTask(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
+    {
+	    System.out.println("Inside create Task");
+	    System.out.println(TB.getTaskname());
+	       System.out.println(TB.getDescription());
+		     System.out.println(TB.getTaskid());
+	    
+                   TS.addTask(TB);
+
+
+	    
+   
+    
+    }
+   
+    
     public String deleteTask(String id){return "";}
     
 }
