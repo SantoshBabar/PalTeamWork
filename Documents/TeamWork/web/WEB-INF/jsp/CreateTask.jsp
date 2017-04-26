@@ -17,7 +17,7 @@
 <table align="center" border="2" width="25%">
 
 <tr><td align="center"><h2>Task Name:<form:input path="taskname" /></h2></td></tr>    
-<tr><td align="center"><h2>Description:<form:input path="taskname" /></h2></td></tr>  
+<tr><td align="center"><h2>Description:<form:input path="Description" /></h2></td></tr>  
 <tr><td align="center"><input type="submit" value="Login" style="height:40px; width:330px"/></td></tr>           
 </table>
 </form:form>
