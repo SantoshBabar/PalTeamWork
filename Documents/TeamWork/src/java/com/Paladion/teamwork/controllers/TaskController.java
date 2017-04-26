@@ -50,10 +50,6 @@ public TaskBean populate()
 		     System.out.println(TB.getTaskid());
 	    
                    TS.addTask(TB);
-
-
-	    
-   
     
     }
    
