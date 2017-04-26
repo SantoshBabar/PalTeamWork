@@ -20,7 +20,7 @@
 
 <tr><td align="center"><h4>Task Name:<form:input path="taskname" /></h4></td></tr>    
 <tr><td align="center"><h4>Description:<form:input path="Description" /></h4></td></tr>  
-<tr><td align="center"><h4>Task ID:<form:input path="taskid" /></h4></td></tr>  
+
 <tr><td align="center"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>           
 </table>
 </form:form>
