@@ -27,6 +27,7 @@
  <bean id="LoginService" class="com.Paladion.teamwork.services.LoginServiceImpl" />
 <bean id="ProjectService" class="com.Paladion.teamwork.services.ProjectServiceImpl" />
 <bean id="TaskService" class="com.Paladion.teamwork.services.TaskServiceImpl" />
+<bean id="TemplateService" class="com.Paladion.teamwork.services.TemplateServiceImpl" />
 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -36,21 +37,25 @@
 </bean>
 <!-- Hibernate 4 SessionFactory Bean definition -->
 <bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-<property name="dataSource" ref="dataSource" />
-<property name="annotatedClasses">
-<list>
-<value>com.Paladion.teamwork.beans.LoginBean</value>
-<value>com.Paladion.teamwork.beans.UserBean</value>
-<value>com.Paladion.teamwork.beans.TaskBean</value>
-</list>
-</property>
-<property name="hibernateProperties">
-<props>
-<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-<prop key="hibernate.current_session_context_class">thread</prop>
-<prop key="hibernate.show_sql">false</prop>
-</props>
-</property>
+
+           <property name="dataSource" ref="dataSource" />
+           <property name="annotatedClasses">
+                <list>
+                       <value>com.Paladion.teamwork.beans.LoginBean</value>
+                       <value>com.Paladion.teamwork.beans.UserBean</value>
+                       <value>com.Paladion.teamwork.beans.TaskBean</value>
+		 <value>com.Paladion.teamwork.beans.TemplateBean</value>
+                  </list>
+           </property>
+
+           <property name="hibernateProperties">
+                 <props>
+                       <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                       <prop key="hibernate.current_session_context_class">thread</prop>
+                       <prop key="hibernate.show_sql">false</prop>
+                 </props>
+           </property>
+
 </bean>
 
 <bean id="LoginDAO" class="com.Paladion.teamwork.DAO.LoginDAOImpl">
@@ -58,6 +63,10 @@
 </bean>
 
 <bean id="TaskDAO" class="com.Paladion.teamwork.DAO.TaskDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
+
+<bean id="TemplateDAO" class="com.Paladion.teamwork.DAO.TemplateDAOImpl">
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 

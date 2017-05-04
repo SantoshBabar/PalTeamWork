@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.TaskBean;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,6 @@ import com.Paladion.teamwork.beans.TaskBean;
 public interface TaskDAO {
 	
 	public void addTaskDao(TaskBean tb);
+	public List <TaskBean> getAllTasks();
     
 }

@@ -5,9 +5,8 @@
  */
 package com.Paladion.teamwork.services;
 
-import com.Paladion.teamwork.DAO.TaskDAO;
-import com.Paladion.teamwork.beans.TaskBean;
-import java.util.List;
+import com.Paladion.teamwork.DAO.TemplateDAO;
+import com.Paladion.teamwork.beans.TemplateBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -15,34 +14,25 @@ import org.springframework.beans.factory.annotation.Qualifier;
  *
  * @author user
  */
-
-public class TaskServiceImpl implements TaskService{
-
+public class TemplateServiceImpl implements TemplateService{
+	
 @Autowired
-@Qualifier(value="TaskDAO")
- TaskDAO TD;
-	
-	@Override
-	public void addTask(TaskBean tb) {
-		TD.addTaskDao(tb);
-	}
+@Qualifier(value="TemplateDAO")
+ TemplateDAO TempD;
 
 	@Override
-	public void editTask(TaskBean tb) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public void deleteTask(TaskBean tb) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public List<TaskBean> getAllTask() {
-		
-		System.out.println("Inside getAllTaks method");
-		return TD.getAllTasks();
-	
+	public void addTemplate(TemplateBean tempb) {
+		TempD.addTemplateDao(tempb);
 		}
+
+	@Override
+	public void editTemplate(TemplateBean tempb) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public void deleteTemplate(TemplateBean tempb) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 	
 }

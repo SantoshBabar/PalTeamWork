@@ -5,10 +5,13 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.TemplateBean;
+
 /**
  *
  * @author Administrator
  */
 public interface TemplateDAO {
+    public void addTemplateDao(TemplateBean tempb);
     
 }

@@ -5,12 +5,16 @@
  */
 package com.Paladion.teamwork.services;
 
+import com.Paladion.teamwork.beans.TemplateBean;
+
 /**
  *
  * @author Administrator
  */
 public interface TemplateService {
 	
-	
+	public void addTemplate(TemplateBean tempb);
+    public void editTemplate(TemplateBean tempb);
+    public void deleteTemplate(TemplateBean tempb);
     
 }

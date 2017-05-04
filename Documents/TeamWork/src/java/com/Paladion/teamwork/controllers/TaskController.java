@@ -5,20 +5,18 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.TaskBean;
-import com.Paladion.teamwork.beans.UserBean;
-import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.TaskService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -26,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class TaskController {
-
-	TaskService TS;
+	
+@Autowired
+@Qualifier(value="TaskService")
+TaskService TS;
 	
 	
 @ModelAttribute("TaskM")
@@ -38,22 +38,28 @@ public TaskBean populate()
 	
 @RequestMapping(value="/CreateTask",method=RequestMethod.GET)
      public String CreateTask()
-    {    return "CreateTask";
+    {   
+	    return "CreateTask";
     }
 	
+@Transactional
 @RequestMapping(value="/CreateTask",method=RequestMethod.POST)
     public void createTask(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
     {
-	    System.out.println("Inside create Task");
-	    System.out.println(TB.getTaskname());
-	       System.out.println(TB.getDescription());
-		     System.out.println(TB.getTaskid());
-	    
-                   TS.addTask(TB);
-    
-    }
-   
-    
+	System.out.println("\n inside create Task method ");
+	
+           TS.addTask(TB); 	
+	    System.out.println("Task Created with Taskid"+TB.getTaskid());
+    }	
+        
+    @RequestMapping(value="/DeleteTask",method=RequestMethod.POST)
     public String deleteTask(String id){return "";}
+    
+    public List <TaskBean>getAllTasks(){
+    List <TaskBean> list=new ArrayList<TaskBean>();
+     System.out.println("Inside Task Controller");
+	    list=TS.getAllTask();
+    return list;
+    }
     
 }

@@ -19,10 +19,11 @@
         name=b.getName().toString(); 
         %>
         <h4 align="center">Welcome <%=name%></h4>
-         <a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a>
-	    <br><br>
-	   <a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a>
-	   <br><br><a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a>
+              <a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br><br>
+	    
+	   <a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a><br><br>
+	    	    
+	   <a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a>
         
         <hr>
         <table border="2" width="60%">

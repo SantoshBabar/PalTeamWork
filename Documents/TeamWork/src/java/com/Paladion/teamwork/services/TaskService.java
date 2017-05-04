@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.beans.TaskBean;
+import java.util.List;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface TaskService {
 	public void addTask(TaskBean tb);
     public void editTask(TaskBean tb);
     public void deleteTask(TaskBean tb);
+    public List<TaskBean> getAllTask();
     
 }

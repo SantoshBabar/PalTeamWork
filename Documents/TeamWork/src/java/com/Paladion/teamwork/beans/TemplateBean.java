@@ -5,10 +5,56 @@
  */
 package com.Paladion.teamwork.beans;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  *
  * @author Administrator
  */
-public class TemplateBean {
-    
+@Entity
+@Table(name = "Templates",catalog="teamwork")
+public class TemplateBean implements Serializable{
+      
+@Id
+@GenericGenerator(name="gen",strategy="increment")
+@GeneratedValue(generator="gen")
+@Column(name = "templateid", unique = true, nullable = false, precision = 15, scale = 0)
+	long templateid;	 
+           public void setTemplateid(long templateid) {
+		this.templateid = templateid;
+	}
+	
+	public long getTemplateid() {
+		return templateid;
+	}
+
+	
+	@Column(name = "templatename")
+	String templatename;
+	public void setTemplatename(String templatename) {
+		this.templatename = templatename;
+	}
+	
+	
+		public String getTemplatename() {
+		return templatename;
+	}
+
+	@Column(name = "templateDesc")	
+	String templateDesc;
+	public void setTemplateDesc(String templateDesc) {
+		this.templateDesc = templateDesc;
+	}
+	
+	public String getTemplateDesc() {
+		return templateDesc;
+	}
+	 
+	 
 }
