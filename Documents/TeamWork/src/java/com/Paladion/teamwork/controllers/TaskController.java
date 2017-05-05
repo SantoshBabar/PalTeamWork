@@ -55,11 +55,12 @@ public TaskBean populate()
     @RequestMapping(value="/DeleteTask",method=RequestMethod.POST)
     public String deleteTask(String id){return "";}
     
-    public List <TaskBean>getAllTasks(){
+    @Transactional
+    public void getAllTasks(){
     List <TaskBean> list=new ArrayList<TaskBean>();
      System.out.println("Inside Task Controller");
-	    list=TS.getAllTask();
-    return list;
+	
+    
     }
     
 }

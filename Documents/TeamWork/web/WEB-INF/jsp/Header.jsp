@@ -15,8 +15,8 @@
 <body>
 <table>     
  <tr>
- <td width="40%"><img src="PaladionLogo.png"/></td>
- <td width="60%"><h1>Paladion Team work Software</h1></td>
+ <td width="30%"><img src="PaladionLogo.png"/></td>
+ <td width="70%"><h1>Paladion Team work Software</h1></td>
  <td width="20%"><a href="Logout.do" style="text-decoration:none"><input type="button" value="Sign Out"/></a></td>
  </tr>
 </table>    

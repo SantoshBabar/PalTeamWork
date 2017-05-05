@@ -38,10 +38,10 @@ public class TaskServiceImpl implements TaskService{
 	}
 
 	@Override
-	public List<TaskBean> getAllTask() {
+	public void getAllTask() {
 		
-		System.out.println("Inside getAllTaks method");
-		return TD.getAllTasks();
+		System.out.println("Inside TaskServiceImpl -getAllTaks method");
+	TD.getAllTasks();
 	
 		}
 	

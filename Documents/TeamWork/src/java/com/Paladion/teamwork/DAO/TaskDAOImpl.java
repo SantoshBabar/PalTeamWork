@@ -43,7 +43,7 @@ public class TaskDAOImpl implements TaskDAO{
 	}
 	
     @Override
-	public List <TaskBean> getAllTasks()
+	public void getAllTasks()
 	{
 		List <TaskBean> Tasklist=new ArrayList<TaskBean>();
 		System.out.println("Inside getAllTasks DAO");
@@ -57,7 +57,7 @@ public class TaskDAOImpl implements TaskDAO{
     System.out.println(TB.getTaskname());
 }
     }
-				  return Tasklist;
+				 
 	}
 	
 }

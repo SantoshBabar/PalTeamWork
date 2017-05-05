@@ -15,6 +15,6 @@ import java.util.List;
 public interface TaskDAO {
 	
 	public void addTaskDao(TaskBean tb);
-	public List <TaskBean> getAllTasks();
+	public void getAllTasks();
     
 }
