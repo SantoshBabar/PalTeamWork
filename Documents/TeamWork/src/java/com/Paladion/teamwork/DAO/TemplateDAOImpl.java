@@ -6,6 +6,10 @@
 package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.TemplateBean;
+import com.Paladion.teamwork.utils.DatabaseUtils;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+import java.sql.PreparedStatement;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,6 +41,31 @@ public class TemplateDAOImpl implements TemplateDAO{
 	tx.commit();
 	
 				System.out.println("Template create successfully");	
+	}
+
+	@Override
+	public void addTaskToTemplate(int[] taskid, int[]weight, int TempID){
+		int i,j;
+		DatabaseUtils dbUtils=new DatabaseUtils();
+		
+		try{
+	Connection conn=	dbUtils.getConnection();
+	Statement st = (Statement)conn.createStatement();
+	
+	String query="Insert into template_task values(?,?,?)";
+              for(i=0;i<taskid.length;i++)
+		    {
+			    PreparedStatement statement=conn.prepareStatement(query);
+			    statement.setInt(1,TempID);
+			 statement.setInt(2, taskid[i]);
+			 statement.setInt(3,weight[i]);
+			 statement.executeUpdate();
+			 
+			    System.out.println("Insert Query executed for template task " +i);
+		    }
+
+	
+		}catch(Exception ex){}
 	}
 	
 }

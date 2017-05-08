@@ -16,5 +16,6 @@ public interface TemplateService {
 	public void addTemplate(TemplateBean tempb);
     public void editTemplate(TemplateBean tempb);
     public void deleteTemplate(TemplateBean tempb);
+    public void addTaskToTemplate(int []taskid, int[] weight, int Tempid);
     
 }

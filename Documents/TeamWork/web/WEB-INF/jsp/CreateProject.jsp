@@ -21,21 +21,20 @@
     
        <%@include file="Header.jsp" %>
         <h1>Create New Project</h1>
-	   <form:form action="CreateProject.do" method="post" commandName="ProjectM">
+	 <form:form action="CreateProject.do" method="post" modelAttribute="ProjectM">
+<table align="left" border="2" width="50%">
 
-	   <table border="2">
-	   <tr><td> Project Name : </td><td>
-	   <form:input path="projectname" /> 
-	   </td> </tr>
-	  
-	  <tr><td> Engineer : </td><td>
-	   <form:input path="engineer" /> 
-	   </td> </tr>
-	   <tr>    
-          <td colspan="2"><input type="submit" value="Save" /></td>    
-         </tr>    
-        </table> 
-	   
+<tr><td align="center"><h4>OPID :</td><td><form:input path="templatename" /></h4></td></tr>    
+<tr><td align="center"><h4>Project Name :</td><td><form:input path="templateDesc" /></h4></td></tr>  
+<tr><td align="center"><h4>Lead :</td><td><form:input path="templateDesc" /></h4></td></tr>
+<tr><td align="center"><h4>Engineer :</td><td><form:input path="templateDesc" /></h4></td></tr>
+<tr><td align="center"><h4>Start Date:</td><td><form:input path="templateDesc" /></h4></td></tr>
+<tr><td align="center"><h4>End Date:</td><td><form:input path="templateDesc" /></h4></td></tr>
+<tr><td align="center"><h4>Template :</td><td><form:input path="templateDesc" /></h4></td></tr>
+
+
+<tr><td align="center"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>           
+</table>
 </form:form>
 <center>${Lerror}</center><br>      
 	   

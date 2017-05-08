@@ -37,11 +37,12 @@ document.getElementById('checkfield').onchange = function() {
 	   <table border="1">
 	   <tr><th>Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
                 <c:forEach items="${AllTasks}" var="task">     
-	   <tr> <td><c:out value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" style="width:150px;"></td></tr>
+	   <tr> <td><c:out value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="number" id="textfield" name="${task.taskid}" style="width:150px;"></td></tr>
                </c:forEach>
 	   
 	   <tr><td><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>
 </table>
 	   </form:form>
+	   <center>${Temperror}</center><br>
 </html>
 l

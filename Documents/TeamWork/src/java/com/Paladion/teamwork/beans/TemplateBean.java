@@ -25,12 +25,12 @@ public class TemplateBean implements Serializable{
 @GenericGenerator(name="gen",strategy="increment")
 @GeneratedValue(generator="gen")
 @Column(name = "templateid", unique = true, nullable = false, precision = 15, scale = 0)
-	long templateid;	 
-           public void setTemplateid(long templateid) {
+	int templateid;	 
+           public void setTemplateid(int templateid) {
 		this.templateid = templateid;
 	}
 	
-	public long getTemplateid() {
+	public int getTemplateid() {
 		return templateid;
 	}
 

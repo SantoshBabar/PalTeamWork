@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -44,12 +45,14 @@ public TaskBean populate()
 	
 @Transactional
 @RequestMapping(value="/CreateTask",method=RequestMethod.POST)
-    public void createTask(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
+    public ModelAndView createTask(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
     {
 	System.out.println("\n inside create Task method ");
 	
            TS.addTask(TB); 	
 	    System.out.println("Task Created with Taskid"+TB.getTaskid());
+	    
+	    return new ModelAndView( "Welcome","TaskSuccess","Task Created Successfully"  );
     }	
         
     @RequestMapping(value="/DeleteTask",method=RequestMethod.POST)

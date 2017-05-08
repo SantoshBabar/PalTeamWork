@@ -20,16 +20,27 @@ import java.util.List;
  */
 public class DatabaseUtils {
 	
+	public Connection getConnection() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+		System.out.println("Inside getConnection mmethod");
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+System.out.println("Utils Class.forname done");
+Connection conn = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull", "root", "root");
+System.out.println("inside getConnection method, Connection eastablished");
+return conn;
+	}
+	
+	
 	public  List<TaskBean>getAllTasks() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
 		
 		System.out.println("Inside Utils Class");
 Class.forName("com.mysql.jdbc.Driver").newInstance();
 System.out.println("Utils Class.forname done");
-Connection conn = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull", "root", "root");
-System.out.println("Utils Connection eastablished");
+Connection conn =getConnection();
+	   System.out.println("Utils Connection eastablished");
 String query = "select * from Tasks";
 
 Statement st = (Statement)conn.createStatement();
+
 System.out.println("Utils Query executed");
 ResultSet rs = st.executeQuery(query);
 List <TaskBean> taskList=new ArrayList<TaskBean>();

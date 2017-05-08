@@ -14,11 +14,20 @@
     </head>
     
         <%@include file="Header.jsp" %>
+	  
         <%! UserBean b; String name;%>
         <% b=(UserBean)session.getAttribute("Luser"); 
         name=b.getName().toString(); 
         %>
         <h4 align="center">Welcome <%=name%></h4>
+	   
+	   <div> <font color="red"><b><center>${TaskSuccess}</center><br>
+	 
+	   <center>${TemplateSuccess}</center><br></b></font>
+	   	   
+	   </div> 
+	   
+	   
               <a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br><br>
 	    
 	   <a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a><br><br>

@@ -12,6 +12,7 @@ import com.Paladion.teamwork.utils.DatabaseUtils;
 import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,20 +70,51 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)
-public void AddTaskToTemplate(HttpServletRequest req){
+public ModelAndView AddTaskToTemplate(HttpServletRequest req){
 	System.out.println("Inside Add Task to template controller");
 	int i,j=0;
 	
-	String[] weight=new String[30];
-	String[] taskid=req.getParameterValues("task");
+	HttpSession session=req.getSession();
+	TemplateBean TempB; int Tempid;
+	TempB=(TemplateBean)session.getAttribute("Template"); 
+           Tempid=TempB.getTemplateid();
+		 
+		 System.out.println("The ttemplateid to which tasks will be added: "+Tempid);
+		 
+	String[] taskID=req.getParameterValues("task");
+	int[] taskid=new int[taskID.length];
+	i=0;
+	 for(String str:taskID){
+        taskid[i]=Integer.parseInt(str);//Exception in this line
+        i++;
+    }
+	
+	int[] weight=new int[taskid.length];
 	for(i=0;i<taskid.length;i++)
 	{
-		String tid=taskid[i];
-	           weight[i]=(String)req.getParameter(tid);
+		String tid=taskID[i];
+	           weight[i]=Integer.parseInt(req.getParameter(tid));
 	}
+	
+	int sum= IntStream.of(weight).sum();
 	System.out.println(Arrays.toString(taskid));
 	
 	System.out.println(Arrays.toString(weight));	
+	
+	System.out.println("The sum of all the weights entered: "+sum);
+	if(sum!=100)
+	{
+		      return new ModelAndView("AddTasksToTemplate","Temperror", "Total weight must be 100%" );
+	}	
+	else{
+		TempS.addTaskToTemplate(taskid,weight,Tempid);
+		return new ModelAndView("Welcome","TemplateSuccess","Template Created Successfully");
+		
+	}
+	
+	
+	
+	
 }
     
 }

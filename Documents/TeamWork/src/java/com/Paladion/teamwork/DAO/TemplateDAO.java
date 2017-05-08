@@ -13,5 +13,6 @@ import com.Paladion.teamwork.beans.TemplateBean;
  */
 public interface TemplateDAO {
     public void addTemplateDao(TemplateBean tempb);
+    public void addTaskToTemplate(int[] taskid, int[] weight,int TempID);
     
 }

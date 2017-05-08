@@ -34,5 +34,11 @@ public class TemplateServiceImpl implements TemplateService{
 	public void deleteTemplate(TemplateBean tempb) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
+
+	@Override
+	public void addTaskToTemplate(int[] taskid, int[] weight, int TemplateID) {
+		TempD.addTaskToTemplate(taskid, weight, TemplateID);
+		
+	}
 	
 }
