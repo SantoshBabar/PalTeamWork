@@ -1,13 +1,10 @@
 <%-- 
-    Document   : Welcome
-    Created on : 13 Apr, 2017, 8:45:16 PM
+    Document   : Login
+    Created on : 12 Apr, 2017, 8:31:39 PM
     Author     : Administrator
 --%>
-
-<%@page import="com.Paladion.teamwork.beans.UserBean"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html >
@@ -58,8 +55,7 @@ body {
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
 input { 
-	width: 20%; 
-	
+	width: 100%; 
 	margin-bottom: 10px; 
 	background: rgba(0,0,0,0.3);
 	border: none;
@@ -82,56 +78,37 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     </style>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-  </form>
 
 
 
+<script language="JavaScript"> 
+function updateStats(){ 
+var jspcall="ForgotPassword.jsp" 
+window.location.href=jspcall 
+} 
+</script>
 </head>
 <div align="center">
 <td width="100%"><img src="PaladionLogo.png" width="180" height="60"/></td>
 </div>
-<h1>Paladion Team work Software</h1>
-	   <div align="left">
-	   <a href="Logout.do" style="text-decoration:none"><input width="30"type="submit" value="Sign Out"/></a>
-	   </div>
- </tr>
-</table>    
-<% if (null==session.getAttribute("Luser"))
-              {response.sendRedirect("Login.do");
-              }
-              %>
-	  
-        <%! UserBean b; String name;%>
-        <% b=(UserBean)session.getAttribute("Luser"); 
-        name=b.getName().toString(); 
-        %>
-        <h4 align="center">Welcome <%=name%></h4>
+<body>
+
+
+  <div class="login">
+  <h3 style="color: white">Forgot Password</h3>
+    <form:form action="ForgotPassword.do" method="POST" commandName="LoginM"> 
+    	<form:input path="Email" placeholder="enter the email"/>
+        
+        <button type="submit" value="Forgot"class="btn btn-primary btn-block btn-large">Reset</button><br>
 	   
-	   <div> <font color="red"><b><center>${TaskSuccess}</center><br>
+	   </form:form>
 	 
-	   <center>${TemplateSuccess}</center><br></b></font>
-	   	   
-	   </div> 
-	   
-	   
-              <a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br><br>
-	    
-	   <a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a><br><br>
-	    	    
-	   <a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a>
-        
-        <hr>
-        <table border="2" width="60%">
-            
-            <tr><th width="17%">Project ID </th>
-                <th width="20%">Project Title</th>
-                <th width="17%">Lead</th>
-                <th width="17%">Start Date</th>
-                <th width="17%">End Date</th>
-                <th width="17%">Status</th></tr>
-            
-            
-            
-        </table>
-        
-        
+	   <center><h4 style="color: white">${Lerror}</h4></center>
+    </body>
+    </form>
+</div>
+  
+</html>
+    <script src="js/index.js"></script>
+
+
