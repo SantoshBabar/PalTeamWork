@@ -24,13 +24,13 @@
 	 <form:form action="CreateProject.do" method="post" modelAttribute="ProjectM">
 <table align="left" border="2" width="50%">
 
-<tr><td align="center"><h4>OPID :</td><td><form:input path="templatename" /></h4></td></tr>    
-<tr><td align="center"><h4>Project Name :</td><td><form:input path="templateDesc" /></h4></td></tr>  
-<tr><td align="center"><h4>Lead :</td><td><form:input path="templateDesc" /></h4></td></tr>
-<tr><td align="center"><h4>Engineer :</td><td><form:input path="templateDesc" /></h4></td></tr>
-<tr><td align="center"><h4>Start Date:</td><td><form:input path="templateDesc" /></h4></td></tr>
-<tr><td align="center"><h4>End Date:</td><td><form:input path="templateDesc" /></h4></td></tr>
-<tr><td align="center"><h4>Template :</td><td><form:input path="templateDesc" /></h4></td></tr>
+<tr><td align="center"><h4>OPID :</td><td><form:input path="opid" /></h4></td></tr>    
+<tr><td align="center"><h4>Project Name :</td><td><form:input path="projectname" /></h4></td></tr>  
+<tr><td align="center"><h4>Lead :</td><td><form:input path="lead" /></h4></td></tr>
+<tr><td align="center"><h4>Engineer :</td><td><form:input path="engineer" /></h4></td></tr>
+<tr><td align="center"><h4>Start Date:</td><td><form:input path="startdate" /></h4></td></tr>
+<tr><td align="center"><h4>End Date:</td><td><form:input path="enddate" /></h4></td></tr>
+<tr><td align="center"><h4>Template :</td><td><form:input path="templateid" /></h4></td></tr>
 
 
 <tr><td align="center"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>           

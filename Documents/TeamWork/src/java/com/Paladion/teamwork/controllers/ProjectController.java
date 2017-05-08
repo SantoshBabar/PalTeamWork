@@ -22,8 +22,18 @@ public String CreateProject()
 {
 return "CreateProject";
 }
+
+@RequestMapping(value="/CreateProject",method=RequestMethod.POST)
+    public String CreateProject(ProjectBean pBean)
+    {
+	   
+	    
+	    
+	    return "";
+    }
     
-    public String CreateProject(ProjectBean pBean){return "";}
+    
+    
     public String updateProject(ProjectBean pBean){return "";}
     public String deleteProject(String id){return "";}
     

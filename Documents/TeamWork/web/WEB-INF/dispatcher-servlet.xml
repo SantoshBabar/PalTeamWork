@@ -45,6 +45,7 @@
                        <value>com.Paladion.teamwork.beans.UserBean</value>
                        <value>com.Paladion.teamwork.beans.TaskBean</value>
 		 <value>com.Paladion.teamwork.beans.TemplateBean</value>
+		 <value>com.Paladion.teamwork.beans.ProjectBean</value>
                   </list>
            </property>
 
