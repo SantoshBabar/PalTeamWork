@@ -45,11 +45,38 @@ public class LoginController {
    return new LoginBean(); // populates form for the first time if its null
 }
  
+ 
+ 
 @RequestMapping(value="/Login",method=RequestMethod.GET)
 public String Login()
 {
 return "Login";
 }
+
+@RequestMapping(value="/ForgotPassword",method=RequestMethod.GET)
+public String forgot()
+{
+ 
+return "ForgotPassword";
+}
+
+//forgot password starts
+@RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
+public ModelAndView Forgot(@ModelAttribute("ForgotM")UserBean UB,HttpServletRequest req )
+    {
+        System.out.println("forgotPassword");
+       
+	  //ub=LS.ForgotPassword(UB);
+        if (false) {
+            HttpSession LoginSess=req.getSession(true);
+            //LoginSess.setAttribute("Luser", ub);
+            return new ModelAndView("redirect:/ForgotPassword.do");}
+        else {
+           return new ModelAndView("ForgotPassword","Lerror", "If your Email id is valid you will receive a email from us");
+        }
+        }
+
+//forgot password ends
  
 @RequestMapping(value="/Login",method=RequestMethod.POST)
 public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletRequest req )
@@ -80,4 +107,3 @@ return "redirect:Login.do";
     }
 
    
-
