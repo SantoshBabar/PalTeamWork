@@ -32,17 +32,10 @@
 <tr><td align="center"><h4>Project Name :</td><td><form:input path="projectname" /></h4></td></tr>  
 <tr><td align="center"><h4>Lead :</td><td><form:input path="lead" /></h4></td></tr>
 <tr><td align="center"><h4>Engineer :</td><td><form:input path="engineer" /></h4></td></tr>
-
-<tr><td align="center"><h4>Template :</td><td><form:select path="templateid" >  
-	  <c:forEach items="${AllTemplates}" var="template">     
-	  <option value="${template.templateid}">${template.templatename}</option>
-	  </c:forEach></td>	  
-</form:select>
-	  
 <tr><td align="center" colspan="2"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>           
 </table>
 </form:form>
-<center>${Lerror}</center><br>      
+   
 	   
     </body>
 </html>

@@ -5,10 +5,12 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.ProjectBean;
+
 /**
  *
  * @author Administrator
  */
 public interface ProjectDAO {
-    
+   public void addProjectDao(ProjectBean pb);
 }

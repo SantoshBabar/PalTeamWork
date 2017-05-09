@@ -5,10 +5,12 @@
  */
 package com.Paladion.teamwork.services;
 
+import com.Paladion.teamwork.beans.ProjectBean;
+
 /**
  *
  * @author Administrator
  */
 public interface ProjectService {
-    
+    public void addProject(ProjectBean pb);
 }

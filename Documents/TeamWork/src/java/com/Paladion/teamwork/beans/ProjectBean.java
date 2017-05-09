@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -25,7 +26,7 @@ public class ProjectBean implements Serializable{
 @Id
 @GenericGenerator(name="gen",strategy="increment")
 @GeneratedValue(generator="gen")
-@Column(name = "taskid", unique = true, nullable = false, precision = 15, scale = 0)
+@Column(name = "projectid", unique = true, nullable = false, precision = 15, scale = 0)
 	int projectid;	 
 
 	public int getProjectid() {
@@ -81,6 +82,7 @@ public class ProjectBean implements Serializable{
 	}
 	
 	@Column(name = "startdate")
+	@DateTimeFormat (pattern="dd.MM.yyyy")
 	Date startdate;
 
 	public Date getStartdate() {
@@ -92,6 +94,7 @@ public class ProjectBean implements Serializable{
 	}
 	
 	@Column(name = "enddate")
+	@DateTimeFormat(pattern="dd.MM.yyyy")
 	Date enddate;
 
 	public Date getEnddate() {

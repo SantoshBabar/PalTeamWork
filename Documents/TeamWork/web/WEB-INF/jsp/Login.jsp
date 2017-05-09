@@ -84,7 +84,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 </head>
 <div align="center">
-<td width="100%"><img src="PaladionLogo.png" width="180" height="60"/></td>
+<td width="100%"><img src="PaladionLogo.png" width="80" height="60"/></td>
 </div>
 <body>
 

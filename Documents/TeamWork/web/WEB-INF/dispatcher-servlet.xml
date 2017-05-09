@@ -29,6 +29,7 @@
 <bean id="TaskService" class="com.Paladion.teamwork.services.TaskServiceImpl" />
 <bean id="TemplateService" class="com.Paladion.teamwork.services.TemplateServiceImpl" />
 
+
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull" /> 
@@ -68,6 +69,10 @@
 </bean>
 
 <bean id="TemplateDAO" class="com.Paladion.teamwork.DAO.TemplateDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
+
+<bean id="ProjectDAO" class="com.Paladion.teamwork.DAO.ProjectDAOImpl">
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 
