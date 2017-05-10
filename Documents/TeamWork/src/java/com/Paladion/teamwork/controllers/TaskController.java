@@ -43,7 +43,7 @@ public TaskBean populate()
 	    return "CreateTask";
     }
 	
-	@RequestMapping(value="/CreateTask",method=RequestMethod.GET)
+	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
      public String CreateUser()
     {   
 	    return "CreateUser";
