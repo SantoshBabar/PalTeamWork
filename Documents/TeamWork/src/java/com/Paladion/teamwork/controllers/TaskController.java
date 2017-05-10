@@ -49,7 +49,9 @@ public CreateUserBean generate()
 	    return "CreateTask";
     }
 	
-@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
+
+
+	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
      public String CreateUser()
     {   
 	    return "CreateUser";

@@ -101,14 +101,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	   <form:form action="AddProject.do" method="post" commandName="ProjectM">
 <table align="left" border="2" width="50%">
 
-<tr><td align="center"><h4 style="color: white">OPID :</td><td><form:input placeholder="Enter the OPID" path="opid" /></h4></td></tr>    
-<tr><td align="center"><h4 style="color: white">Project Name :</td><td><form:input placeholder="Enter the project name" path="projectname" /></h4></td></tr>  
-<tr><td align="center"><h4 style="color: white">Lead :</td><td><form:input placeholder="Enter the lead name" path="lead" /></h4></td></tr>
-<tr><td align="center"><h4 style="color: white">Engineer :</td><td><form:input placeholder="Enter the engineer name" path="engineer" /></h4></td></tr>
-<tr><td align="center"><h4 style="color: white">Start Date :</td><td><form:input placeholder="Enter the start date" id="datepicker" path="startdate" /></h4></td></tr>
-<tr><td align="center"><h4 style="color: white">End Date :</td><td><form:input  placeholder="Enter the end date" id="datepickers" path="enddate" /></h4></td></tr>
-
-<tr><td align="center"><h4 style="color: white">Template :</td><td><form:select path="templateid" >  
+<tr><td align="center"><h4>OPID :</td><td><form:input path="opid" /></h4></td></tr>    
+<tr><td align="center"><h4>Project Name :</td><td><form:input path="projectname" /></h4></td></tr>  
+<tr><td align="center"><h4>Lead :</td><td><form:input path="lead" /></h4></td></tr>
+<tr><td align="center"><h4>Engineer :</td><td><form:input path="engineer" /></h4></td></tr>
+<tr><td align="center"><h4>Start Date :</td><td><form:input id="datepicker" path="startdate"  /></h4></td></tr>
+<tr><td align="center"><h4>End Date :</td><td><form:input  id="datepickers" path="enddate" /></h4></td></tr>
+<tr><td align="center"><h4>Template :</td><td><form:select path="templateid" >  
 	  <c:forEach items="${AllTemplates}" var="template">     
 	  <option value="${template.templateid}">${template.templatename}</option>
 	  </c:forEach></td>	  
