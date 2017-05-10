@@ -16,12 +16,22 @@
     </head>
     <body>
  
-    <script type="text/javascript">
-      $(function() {
-          $('#idDateField').datepicker();
-      });
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+  <script>
+  $(document).ready(function() {
+    $("#datepicker").datepicker();
+  });
   </script>
-    
+  <script>
+  $(document).ready(function() {
+    $("#datepickers").datepicker();
+  });
+  </script>
+  
+  
        <%@include file="Header.jsp" %>
         <h3>Create New Project</h3>
 	   
@@ -32,8 +42,8 @@
 <tr><td align="center"><h4>Project Name :</td><td><form:input path="projectname" /></h4></td></tr>  
 <tr><td align="center"><h4>Lead :</td><td><form:input path="lead" /></h4></td></tr>
 <tr><td align="center"><h4>Engineer :</td><td><form:input path="engineer" /></h4></td></tr>
-<tr><td align="center"><h4>Start Date :</td><td><form:input path="startdate" /></h4></td></tr>
-<tr><td align="center"><h4>End Date :</td><td><form:input path="enddate" /></h4></td></tr>
+<tr><td align="center"><h4>Start Date :</td><td><form:input id="datepicker" path="startdate" /></h4></td></tr>
+<tr><td align="center"><h4>End Date :</td><td><form:input  id="datepickers" path="enddate" /></h4></td></tr>
 
 <tr><td align="center"><h4>Template :</td><td><form:select path="templateid" >  
 	  <c:forEach items="${AllTemplates}" var="template">     

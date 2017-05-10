@@ -32,6 +32,11 @@ public class LoginServiceImpl implements LoginService{
          sess.invalidate();
     }
     
+    @Override
+    public LoginBean ForgotPassword(LoginBean LB){
+	    return LD.ForgotPassword(LB);
+    }
+    
     
     
 }

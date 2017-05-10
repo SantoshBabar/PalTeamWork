@@ -37,6 +37,7 @@ public class LoginController {
  LoginService LS;
  
  UserBean ub=null;
+ LoginBean lb=null;
  
  
  @ModelAttribute("LoginM")
@@ -62,14 +63,14 @@ return "ForgotPassword";
 
 //forgot password starts
 @RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
-public ModelAndView Forgot(@ModelAttribute("ForgotM")UserBean UB,HttpServletRequest req )
+public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
     {
         System.out.println("forgotPassword");
        
-	  //ub=LS.ForgotPassword(UB);
-        if (false) {
+	  lb=LS.ForgotPassword(LB);
+        if (lb!=null) {
             HttpSession LoginSess=req.getSession(true);
-            //LoginSess.setAttribute("Luser", ub);
+            LoginSess.setAttribute("Luser", ub);
             return new ModelAndView("redirect:/ForgotPassword.do");}
         else {
            return new ModelAndView("ForgotPassword","Lerror", "If your Email id is valid you will receive a email from us");
