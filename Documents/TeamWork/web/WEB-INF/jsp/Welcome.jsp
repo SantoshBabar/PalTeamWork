@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -87,15 +87,11 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 
 </head>
-<div align="center">
-<td width="100%"><img src="PaladionLogo.png" width="180" height="60"/></td>
-</div>
-<h1>Paladion Team work Software</h1>
-	   <div align="left">
-	   <a href="Logout.do" style="text-decoration:none"><input width="30"type="submit" value="Sign Out"/></a>
-	   </div>
+<body>
+
  </tr>
 </table>    
+<%@include file="Header.jsp" %>
 <% if (null==session.getAttribute("Luser"))
               {response.sendRedirect("Login.do");
               }
@@ -105,6 +101,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         <% b=(UserBean)session.getAttribute("Luser"); 
         name=b.getName().toString(); 
         %>
+	   
         <h4 align="center">Welcome <%=name%></h4>
 	   
 	   <div> <font color="red"><b><center>${TaskSuccess}</center><br>
@@ -113,14 +110,14 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	   	   
 	   </div> 
 	   
-	   
-              <a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br><br>
+	   <table border="1">
+	   <tr><a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br><br>
 	    
 	   <a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a><br><br>
 	   <a href="CreateUser.do" style="text-decoration:none"> <input type="button" value="Create New user" style="height:30px; width:180px"/> </a><br><br>
 	    	    
 	   <a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a>
-        
+        <tr>
         <hr>
         <table border="2" width="60%">
             
@@ -134,5 +131,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             
             
         </table>
-        
+</body>
+</html>
         
