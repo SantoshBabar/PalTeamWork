@@ -16,8 +16,10 @@
 <table>     
  <tr>
  <td width="30%"><img src="PaladionLogo.png"/></td>
- <td width="70%"><h1>Paladion Team work Software</h1></td>
- <td width="20%"><a href="Logout.do" style="text-decoration:none"><input type="button" value="Sign Out"/></a></td>
+ <td width="50%"><h1 style="color: white">Paladion Team work Software</h1></td>
+ <td></td>
+ <td></td>
+ <td width="20%"><a href="Logout.do" style="text-decoration:none"><input type="button" value="logout"/></a></td>
  </tr>
 </table>    
 <% if (null==session.getAttribute("Luser"))

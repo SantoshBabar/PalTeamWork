@@ -1,17 +1,22 @@
 <%-- 
-    Document   : CreateTaskTemplate
-    Created on : 24 Apr, 2017, 5:29:06 PM
+    Document   : Login
+    Created on : 12 Apr, 2017, 8:31:39 PM
     Author     : Administrator
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<html >
-<head>
-  <meta charset="UTF-8">
-  <title>Login Form</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=UTF-8">
+        <title>CreateTask</title>
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	   <!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   
       <style>
@@ -54,8 +59,7 @@ body {
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
 input { 
-	width: 80%; 
-	
+	width: 100%; 
 	margin-bottom: 10px; 
 	background: rgba(0,0,0,0.3);
 	border: none;
@@ -76,21 +80,24 @@ input {
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
     </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     </head>
     <body>
-        <%@include file="Header.jsp" %>
-	   <h3 style="color: white">Create Task Template</h3>
-        
-	   <form:form action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM">
+    <%@include file="Header.jsp" %>
+    
+        <h3 style="color: white">Create Task</h3>
+	   <form:form action="CreateUser.do" method="post" modelAttribute="CreateM">
 <table align="left" border="2" width="50%">
 
-<tr><td align="center"><h4 style="color: white">Template Name:</td><td><form:input placeholder="Enter template name"   path="templatename" /></h4></td></tr>    
-<tr><td align="center"><h4 style="color: white">Description:</td><td><form:input placeholder="Enter description"   path="templateDesc" /></h4></td></tr> 
-<tr><td align="center" colspan="2"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr> 
+<tr ><td align="center"><h4 style="color: white">User Name:</td><td><form:input placeHolder="Enter the username"  path="name" /></h4></td></tr>    
+<tr><td align="center"><h4 style="color: white">Email id</td><td><form:input placeHolder="Enter the email" path="email" /></h4></td></tr>  
+<tr><td align="center"><h4 style="color: white">Mobile</td><td><form:input placeHolder="Enter the mobile" path="phone" /></h4></td></tr>
+<tr><td align="center"><h4 style="color: white">Team</td><td><form:input placeHolder="Enter the team" path="team" /></h4></td></tr>
+<tr><td align="center"><h4 style="color: white">Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
+<tr><td align="center"><h4 style="color: white">Password</td><td><form:input  placeHolder="Enter the role" path="role" /></h4></td></tr>
+<tr><td align="center" colspan="2"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>            
 </table>
 </form:form>
-<center>${Lerror}</center><br>     
+<center>${Lerror}</center><br>      
     </body>
 </html>
