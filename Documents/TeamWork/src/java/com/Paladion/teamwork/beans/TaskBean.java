@@ -21,9 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "Tasks",catalog="teamwork")
 public class TaskBean implements Serializable{
 	
-	
-           
-           @Id
+@Id
 @GenericGenerator(name="gen",strategy="increment")
 @GeneratedValue(generator="gen")
 @Column(name = "taskid", unique = true, nullable = false, precision = 15, scale = 0)

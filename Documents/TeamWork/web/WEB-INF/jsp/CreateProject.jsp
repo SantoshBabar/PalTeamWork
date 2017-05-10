@@ -32,6 +32,8 @@
 <tr><td align="center"><h4>Project Name :</td><td><form:input path="projectname" /></h4></td></tr>  
 <tr><td align="center"><h4>Lead :</td><td><form:input path="lead" /></h4></td></tr>
 <tr><td align="center"><h4>Engineer :</td><td><form:input path="engineer" /></h4></td></tr>
+<tr><td align="center"><h4>Start Date :</td><td><form:input path="startdate" /></h4></td></tr>
+<tr><td align="center"><h4>End Date :</td><td><form:input path="enddate" /></h4></td></tr>
 
 <tr><td align="center"><h4>Template :</td><td><form:select path="templateid" >  
 	  <c:forEach items="${AllTemplates}" var="template">     

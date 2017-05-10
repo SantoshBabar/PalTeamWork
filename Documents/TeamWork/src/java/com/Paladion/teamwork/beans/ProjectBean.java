@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Administrator
  */
 @Entity
-@Table(name = "Tasks",catalog="teamwork")
+@Table(name = "projects",catalog="teamwork")
 public class ProjectBean implements Serializable{           
            
 @Id
@@ -82,7 +82,7 @@ public class ProjectBean implements Serializable{
 	}
 	
 	@Column(name = "startdate")
-	@DateTimeFormat (pattern="dd.MM.yyyy")
+	@DateTimeFormat (pattern="dd/MM/yyyy")
 	Date startdate;
 
 	public Date getStartdate() {
@@ -94,7 +94,7 @@ public class ProjectBean implements Serializable{
 	}
 	
 	@Column(name = "enddate")
-	@DateTimeFormat(pattern="dd.MM.yyyy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	Date enddate;
 
 	public Date getEnddate() {
