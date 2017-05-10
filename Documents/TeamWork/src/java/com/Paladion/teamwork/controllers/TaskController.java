@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.CreateUserBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.services.TaskService;
 import java.util.ArrayList;
@@ -36,6 +37,11 @@ public TaskBean populate()
 {
 	   return new TaskBean();
 }
+@ModelAttribute("CreateM")
+public CreateUserBean generate()
+{
+	   return new CreateUserBean();
+}
 	
 @RequestMapping(value="/CreateTask",method=RequestMethod.GET)
      public String CreateTask()
@@ -43,7 +49,7 @@ public TaskBean populate()
 	    return "CreateTask";
     }
 	
-	@RequestMapping(value="/CreateTask",method=RequestMethod.GET)
+@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
      public String CreateUser()
     {   
 	    return "CreateUser";
@@ -57,7 +63,7 @@ public TaskBean populate()
 	
            TS.addTask(TB); 	
 	    System.out.println("Task Created with Taskid"+TB.getTaskid());
-	    
+	 
 	    return new ModelAndView( "Welcome","TaskSuccess","Task Created Successfully"  );
     }	
         
@@ -82,6 +88,9 @@ public TaskBean populate()
     List <TaskBean> list=new ArrayList<TaskBean>();
      System.out.println("Inside Task Controller");
 	
+
+                   
+
     
     }
     

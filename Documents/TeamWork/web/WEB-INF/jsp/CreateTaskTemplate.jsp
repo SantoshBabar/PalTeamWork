@@ -54,7 +54,7 @@ body {
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
 input { 
-	width: 20%; 
+	width: 80%; 
 	
 	margin-bottom: 10px; 
 	background: rgba(0,0,0,0.3);
@@ -81,13 +81,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     </head>
     <body>
         <%@include file="Header.jsp" %>
-	   <h3 style="color: white">Create Task Template</h3><br>
+	   <h3 style="color: white">Create Task Template</h3>
         
 	   <form:form action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM">
 <table align="left" border="2" width="50%">
 
-<tr><td align="center"><h4 style="color: white">Template Name:</td><td><form:input placeholder="Enter the template name" path="templatename" /></h4></td></tr>    
-<tr><td align="center"><h4 style="color: white">Description:</td><td><form:input placeholder="Enter the description" path="templateDesc" /></h4></td></tr> 
+<tr><td align="center"><h4 style="color: white">Template Name:</td><td><form:input placeholder="Enter template name"   path="templatename" /></h4></td></tr>    
+<tr><td align="center"><h4 style="color: white">Description:</td><td><form:input placeholder="Enter description"   path="templateDesc" /></h4></td></tr> 
 <tr><td align="center" colspan="2"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr> 
 </table>
 </form:form>
