@@ -25,5 +25,14 @@ public class ProjectServiceImpl implements ProjectService {
 		PD.addProjectDao(pb);
 		
 		}
+
+	@Override
+	public void getAllWeights(int tempID) {
+	
+	PD.getAllWeights(tempID);
+	
+	
+	}
     
+	
 }

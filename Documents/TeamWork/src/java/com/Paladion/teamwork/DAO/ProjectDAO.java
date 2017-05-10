@@ -6,6 +6,8 @@
 package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.ProjectBean;
+import com.Paladion.teamwork.beans.TaskWeightBean;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import com.Paladion.teamwork.beans.ProjectBean;
  */
 public interface ProjectDAO {
    public void addProjectDao(ProjectBean pb);
+   public List<TaskWeightBean> getAllWeights(int tempID);
 }

@@ -37,6 +37,18 @@ public class ProjectBean implements Serializable{
 		this.projectid = projectid;
 	}
 	
+	@Column(name = "mandays")
+	int mandays;
+
+	public int getMandays() {
+		return mandays;
+	}
+
+	public void setMandays(int mandays) {
+		this.mandays = mandays;
+	}
+	
+	
 	@Column(name = "opid")
 	String opid;
 

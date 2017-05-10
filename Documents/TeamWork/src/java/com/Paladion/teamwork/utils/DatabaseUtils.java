@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.utils;
 
 import com.Paladion.teamwork.beans.TaskBean;
+import com.Paladion.teamwork.beans.TaskWeightBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -83,5 +84,31 @@ public  List<TemplateBean>getAllTemplates() throws ClassNotFoundException, Insta
 	}	
            return templateList;
      }
+
+
+//public List<TaskWeightBean> getWeights(){
+//	List <TaskWeightBean> TaskWeightList=new ArrayList<TaskWeightBean>();
+//	Connection conn =getConnection();
+//	String query1 = "select * from template_task";
+//	try{
+//		Statement st = (Statement)conn.createStatement();
+//	           ResultSet rs = st.executeQuery(query);
+//
+//		while(rs.next())
+//		{
+//			TemplateBean tb=new TemplateBean();
+//			tb.setTemplateid(rs.getInt("templateid"));
+//			tb.setTemplatename(rs.getString("templatename"));
+//			templateList.add(tb);
+//		}
+//	}
+//	catch(Exception ex){return null;}
+//           finally {
+//                      if (conn != null) {
+//                         try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
+//             }
+//	}	
+//           return templateList;
+//}
 
 }

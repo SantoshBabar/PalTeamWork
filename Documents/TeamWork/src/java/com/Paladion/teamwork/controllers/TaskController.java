@@ -61,19 +61,6 @@ public TaskBean populate()
 	    return new ModelAndView( "Welcome","TaskSuccess","Task Created Successfully"  );
     }	
         
- @Transactional
-@RequestMapping(value="/CreateUser",method=RequestMethod.POST)
-    public ModelAndView createUser(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
-    {
-	System.out.println("\n inside create Task method ");
-	
-           TS.addTask(TB); 	
-	    System.out.println("Task Created with Taskid"+TB.getTaskid());
-	    
-	    return new ModelAndView( "Welcome","TaskSuccess","Task Created Successfully"  );
-    }	
-   
-    
     @RequestMapping(value="/DeleteTask",method=RequestMethod.POST)
     public String deleteTask(String id){return "";}
     

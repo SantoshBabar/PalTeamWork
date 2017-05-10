@@ -13,4 +13,5 @@ import com.Paladion.teamwork.beans.ProjectBean;
  */
 public interface ProjectService {
     public void addProject(ProjectBean pb);
+    public void getAllWeights(int tempID);
 }

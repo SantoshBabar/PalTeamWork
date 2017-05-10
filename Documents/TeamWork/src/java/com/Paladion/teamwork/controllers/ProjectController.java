@@ -9,6 +9,8 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.utils.DatabaseUtils;
+import com.Paladion.teamwork.utils.ManDaysCalculator;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,16 +60,26 @@ public ModelAndView CreateProject()
 @RequestMapping(value="/AddProject",method=RequestMethod.POST)
     public ModelAndView CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req)
     {
+	    ManDaysCalculator mdc= new ManDaysCalculator();
 	   System.out.println("\n inside create Project POST method ");
 	    System.out.println(PB.getEngineer());
 	    System.out.println(PB.getLead());
 	    System.out.println(PB.getTemplateid());
 	   System.out.println(PB.getStartdate());
               System.out.println(PB.getEnddate());
+		    Date startDate=PB.getStartdate();
+		    Date endDate=PB.getEnddate();
+		     int days=   mdc.getWorkingDays(startDate, endDate);
+			int tempid=PB.getTemplateid();
+			
 	   PS.addProject(PB); 	
-	    System.out.println("Task Created with Project id "+PB.getProjectid());
+	    System.out.println("Project Created with Project id"+PB.getProjectid());
 	    
-	    return new ModelAndView( "Welcome","ProjectSuccess","Project Created Successfully"  );
+	PS.getAllWeights(tempid);
+	    System.out.println("Man days :"+days);
+	    
+	    
+	    return new ModelAndView( "DisplayProjectStatus","ProjectSuccess","Project Created Successfully"  );
 
 	    
     }
