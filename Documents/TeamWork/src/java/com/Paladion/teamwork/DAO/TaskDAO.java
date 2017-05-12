@@ -16,5 +16,6 @@ public interface TaskDAO {
 	
 	public void addTaskDao(TaskBean tb);
 	public void getAllTasks();
+       
     
 }

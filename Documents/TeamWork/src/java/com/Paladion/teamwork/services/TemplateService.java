@@ -5,7 +5,9 @@
  */
 package com.Paladion.teamwork.services;
 
+import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
+import java.util.List;
 
 /**
  *
@@ -17,5 +19,6 @@ public interface TemplateService {
     public void editTemplate(TemplateBean tempb);
     public void deleteTemplate(TemplateBean tempb);
     public void addTaskToTemplate(int []taskid, int[] weight, int Tempid);
+    public List<TaskBean> getAllTasksforTemplate();
     
 }

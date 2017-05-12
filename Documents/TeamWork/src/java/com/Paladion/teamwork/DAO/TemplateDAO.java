@@ -5,7 +5,9 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
+import java.util.List;
 
 /**
  *
@@ -14,5 +16,6 @@ import com.Paladion.teamwork.beans.TemplateBean;
 public interface TemplateDAO {
     public void addTemplateDao(TemplateBean tempb);
     public void addTaskToTemplate(int[] taskid, int[] weight,int TempID);
+    public List<TaskBean> getAllTasksforTemplate();
     
 }

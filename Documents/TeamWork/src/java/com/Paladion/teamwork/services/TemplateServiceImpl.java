@@ -6,7 +6,9 @@
 package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.DAO.TemplateDAO;
+import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -40,5 +42,11 @@ public class TemplateServiceImpl implements TemplateService{
 		TempD.addTaskToTemplate(taskid, weight, TemplateID);
 		
 	}
+
+    @Override
+    public List<TaskBean> getAllTasksforTemplate() {
+    return TempD.getAllTasksforTemplate();
+    }
+
 	
 }

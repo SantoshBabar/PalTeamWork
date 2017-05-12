@@ -5,11 +5,15 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.utils.DatabaseUtils;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -22,8 +26,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  */
 public class TemplateDAOImpl implements TemplateDAO{
 	
-	
-	 @Autowired
+    @Autowired
     @Qualifier(value="hibernate4AnnotatedSessionFactory")
     private SessionFactory sessionFactory;
 
@@ -35,29 +38,29 @@ public class TemplateDAOImpl implements TemplateDAO{
 	@Override
 	public void addTemplateDao(TemplateBean TempB) {
 	Session session1 = sessionFactory.getCurrentSession();
-		Transaction tx = null;
+	Transaction tx = null;
 	tx = session1.beginTransaction();
 	session1.save(TempB);
 	tx.commit();
 	
-				System.out.println("Template create successfully");	
+	System.out.println("Template create successfully");	
 	}
 
 	@Override
 	public void addTaskToTemplate(int[] taskid, int[]weight, int TempID){
-		int i,j;
-		DatabaseUtils dbUtils=new DatabaseUtils();
+	int i,j;
+	DatabaseUtils dbUtils=new DatabaseUtils();
 		
-		try{
+	try{
 	Connection conn=	dbUtils.getConnection();
 	Statement st = (Statement)conn.createStatement();
 	
 	String query="Insert into template_task values(?,?,?)";
               for(i=0;i<taskid.length;i++)
 		    {
-			    PreparedStatement statement=conn.prepareStatement(query);
-			    statement.setInt(1,TempID);
-			 statement.setInt(2, taskid[i]);
+               PreparedStatement statement=conn.prepareStatement(query);
+               statement.setInt(1,TempID);
+		statement.setInt(2, taskid[i]);
 			 statement.setInt(3,weight[i]);
 			 statement.executeUpdate();
 			 
@@ -67,5 +70,21 @@ public class TemplateDAOImpl implements TemplateDAO{
 	
 		}catch(Exception ex){}
 	}
+
+@Override
+    public List<TaskBean> getAllTasksforTemplate() 
+    {
+        
+        List <TaskBean> taskList=new ArrayList<TaskBean>();
+        Session session=sessionFactory.openSession();
+       String taskquery= "from TaskBean";
+        System.out.println(taskquery);
+        Query query2 = session.createQuery(taskquery);
+       
+          taskList= query2.list();
+	
+           return taskList;
+        
+      }
 	
 }

@@ -60,12 +60,12 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 	System.out.println("Template Created with Template id  "+TempB.getTemplateid());
 	    
 	try{
-	         Tasklist =dbUtil.getAllTasks();
+	         Tasklist =TempS.getAllTasksforTemplate();
 	         model.addObject("AllTasks", Tasklist);
-	    }catch(Exception ex){}
+	    }catch(Exception ex){ex.printStackTrace();}
 	    
 	      HttpSession TempSession=req.getSession(true);
-                 TempSession.setAttribute("Template", TempB);
+              TempSession.setAttribute("Template", TempB);
 	      return model;
 }
 

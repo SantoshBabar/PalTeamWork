@@ -15,17 +15,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  *
  * @author user
  */
 public class DatabaseUtils {
+
+    @Autowired
+    @Qualifier(value="hibernate4AnnotatedSessionFactory")
+    private SessionFactory sessionFactory;
+
+    
 	
 public Connection getConnection() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
 {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull", "root", "root");
+        Connection conn = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull", "root1", "root");
         return conn;
 }
 	
@@ -33,26 +44,28 @@ public Connection getConnection() throws ClassNotFoundException, InstantiationEx
 public  List<TaskBean>getAllTasks() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
 {
 	List <TaskBean> taskList=new ArrayList<TaskBean>();
-	Connection conn =getConnection();
-	String query = "select * from Tasks";
-	try{
-		Statement st = (Statement)conn.createStatement();
-	           ResultSet rs = st.executeQuery(query);
+        Session session;
+//	Connection conn =getConnection();
+//	String query = "select * from Tasks";
+//	try{
+//		Statement st = (Statement)conn.createStatement();
+//	           ResultSet rs = st.executeQuery(query);
+//
+//		while(rs.next())
+//		{
+//			TaskBean tb=new TaskBean();
+//			tb.setTaskid(rs.getInt("taskid"));
+//			tb.setTaskname(rs.getString("taskname"));
+//			taskList.add(tb);
+//		}
 
-		while(rs.next())
-		{
-			TaskBean tb=new TaskBean();
-			tb.setTaskid(rs.getInt("taskid"));
-			tb.setTaskname(rs.getString("taskname"));
-			taskList.add(tb);
-		}
-	}
-	catch(Exception ex){return null;}
-           finally {
-                      if (conn != null) {
-                         try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-             }
-	}	
+       session = sessionFactory.openSession();
+       String taskquery= "from TaskBean";
+        System.out.println(taskquery);
+        Query query2 = session.createQuery(taskquery);
+       
+          taskList= query2.list();
+	
            return taskList;
      }
 
