@@ -5,6 +5,8 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.DAO.ProjectDAO;
+import com.Paladion.teamwork.DAO.ProjectDAOImpl;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.ProjectService;
@@ -74,9 +76,10 @@ public ModelAndView CreateProject()
 			
 	   PS.addProject(PB); 	
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
+	    System.out.println("Man days :"+days);
 	    
 	PS.getAllWeights(tempid);
-	    System.out.println("Man days :"+days);
+	    
 	    
 	    
 	    return new ModelAndView( "DisplayProjectStatus","ProjectSuccess","Project Created Successfully"  );
@@ -88,5 +91,16 @@ public ModelAndView CreateProject()
     
     public String updateProject(ProjectBean pBean){return "";}
     public String deleteProject(String id){return "";}
+    
+    
+    public List<ProjectBean> showAllProject(){
+	    
+	    ProjectDAO projectDAO=new ProjectDAOImpl();
+	    
+	  return  projectDAO.getAllProjects();
+	    
+	    
+	    
+    }
     
 }

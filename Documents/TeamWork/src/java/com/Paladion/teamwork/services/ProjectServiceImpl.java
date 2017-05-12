@@ -7,6 +7,7 @@ package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.DAO.ProjectDAO;
 import com.Paladion.teamwork.beans.ProjectBean;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -32,6 +33,11 @@ public class ProjectServiceImpl implements ProjectService {
 	PD.getAllWeights(tempID);
 	
 	
+	}
+
+	@Override
+	public List<ProjectBean> getAllProjects() {
+		return PD.getAllProjects();
 	}
     
 	

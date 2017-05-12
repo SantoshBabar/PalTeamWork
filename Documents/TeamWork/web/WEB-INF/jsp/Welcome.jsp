@@ -3,9 +3,10 @@
     Created on : 13 Apr, 2017, 8:45:16 PM
     Author     : Administrator
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.Paladion.teamwork.beans.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.Paladion.teamwork.beans.ProjectBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
@@ -128,6 +129,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                 <th width="17%">End Date</th>
                 <th width="17%">Status</th></tr>
             
+	<c:forEach  items="${AllProjects}" var="project">     
+	   <tr> <td style="color: white"><c:out  value="${project.projectname}"/></td>
+	   
+	   <td style="color: white"><h1>gsdjhjf</h1></td>
+	   </tr>
+	   </c:forEach>
+	  
             
             
         </table>

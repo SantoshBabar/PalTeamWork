@@ -16,4 +16,5 @@ import java.util.List;
 public interface ProjectDAO {
    public void addProjectDao(ProjectBean pb);
    public List<TaskWeightBean> getAllWeights(int tempID);
+   public List<ProjectBean> getAllProjects();
 }

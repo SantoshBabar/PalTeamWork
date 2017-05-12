@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.beans.ProjectBean;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import com.Paladion.teamwork.beans.ProjectBean;
 public interface ProjectService {
     public void addProject(ProjectBean pb);
     public void getAllWeights(int tempID);
+    public List<ProjectBean> getAllProjects();
 }

@@ -5,12 +5,20 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.DAO.ProjectDAO;
+import com.Paladion.teamwork.DAO.ProjectDAOImpl;
 import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.UserBean;
 import com.Paladion.teamwork.services.LoginService;
+import com.Paladion.teamwork.services.ProjectService;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.catalina.tribes.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -35,6 +43,10 @@ public class LoginController {
  @Autowired
  @Qualifier(value="LoginService")
  LoginService LS;
+ 
+ @Autowired
+ @Qualifier(value="ProjectService")
+ ProjectService PS1;
  
  UserBean ub=null;
  LoginBean lb=null;
@@ -87,7 +99,30 @@ public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletReque
         if (ub!=null) {
             HttpSession LoginSess=req.getSession(true);
             LoginSess.setAttribute("Luser", ub);
-            return new ModelAndView("redirect:/Welcome.do");}
+		  List <ProjectBean> projectList=null;
+		  ModelAndView model=new ModelAndView("redirect:/Welcome.do");
+	try{
+		
+		
+	             projectList =PS1.getAllProjects();
+			  System.out.println(projectList);
+			   
+			   Iterator itr = projectList.iterator();
+		while (itr.hasNext()) {
+
+			ProjectBean emp = (ProjectBean) itr.next();
+			System.out.println(emp.getProjectid());
+			System.out.println(emp.getProjectname());
+			
+		}
+			   
+			   
+	         model.addObject("AllProjects", projectList);
+	    }catch(Exception ex){
+		    ex.printStackTrace();
+	    System.out.println("cfashgdsha");
+	    }
+            return  model;}
         else {
            return new ModelAndView("Login","Lerror", "Login Failed");
         }
