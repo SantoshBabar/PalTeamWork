@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.utils.DatabaseUtils;
@@ -47,28 +48,19 @@ public class TemplateDAOImpl implements TemplateDAO{
 	}
 
 	@Override
-	public void addTaskToTemplate(int[] taskid, int[]weight, int TempID){
-	int i,j;
-	DatabaseUtils dbUtils=new DatabaseUtils();
-		
-	try{
-	Connection conn=	dbUtils.getConnection();
-	Statement st = (Statement)conn.createStatement();
+	public boolean addTaskToTemplate(MapTemplateTaskBean MTT){
+        try 
+        {
+        Session session1 = sessionFactory.getCurrentSession();
+        Transaction tx = null;
+	tx = session1.beginTransaction();
+	session1.save(MTT);
+	tx.commit();
 	
-	String query="Insert into template_task values(?,?,?)";
-              for(i=0;i<taskid.length;i++)
-		    {
-               PreparedStatement statement=conn.prepareStatement(query);
-               statement.setInt(1,TempID);
-		statement.setInt(2, taskid[i]);
-			 statement.setInt(3,weight[i]);
-			 statement.executeUpdate();
-			 
-			    System.out.println("Insert Query executed for template task " +i);
-		    }
-
-	
-		}catch(Exception ex){}
+	System.out.println("Template weights added successfully");    
+        return true;
+        }
+        catch(Exception e){e.printStackTrace();return false;}
 	}
 
 @Override

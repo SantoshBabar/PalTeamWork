@@ -7,6 +7,7 @@ package com.Paladion.teamwork.beans;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +16,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "template_task",catalog="teamwork")
-public class TemplateTaskMapping implements Serializable{
+public class MapTemplateTaskBean implements Serializable{
 	
+        @Id
 	int templateid;
 
 	public int getTemplateid() {
@@ -27,7 +29,7 @@ public class TemplateTaskMapping implements Serializable{
 		this.templateid = templateid;
 	}
 	
-	
+	@Id
 	int taskid;
 
 	public int getTaskid() {
@@ -49,5 +51,15 @@ public class TemplateTaskMapping implements Serializable{
 		this.weight = weight;
 	}
 	
-	
+        String taskname;
+
+        public String getTaskname() {
+        return taskname;
+        }
+
+        public void setTaskname(String taskname) {
+        this.taskname = taskname;
+        } 
+        
+      	
 }

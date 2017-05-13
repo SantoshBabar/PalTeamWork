@@ -6,7 +6,6 @@
 package com.Paladion.teamwork.utils;
 
 import com.Paladion.teamwork.beans.TaskBean;
-import com.Paladion.teamwork.beans.TaskWeightBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -45,28 +44,15 @@ public  List<TaskBean>getAllTasks() throws ClassNotFoundException, Instantiation
 {
 	List <TaskBean> taskList=new ArrayList<TaskBean>();
         Session session;
-//	Connection conn =getConnection();
-//	String query = "select * from Tasks";
-//	try{
-//		Statement st = (Statement)conn.createStatement();
-//	           ResultSet rs = st.executeQuery(query);
-//
-//		while(rs.next())
-//		{
-//			TaskBean tb=new TaskBean();
-//			tb.setTaskid(rs.getInt("taskid"));
-//			tb.setTaskname(rs.getString("taskname"));
-//			taskList.add(tb);
-//		}
-
-       session = sessionFactory.openSession();
-       String taskquery= "from TaskBean";
+       
+        session = sessionFactory.openSession();
+        String taskquery= "from TaskBean";
         System.out.println(taskquery);
         Query query2 = session.createQuery(taskquery);
        
-          taskList= query2.list();
+        taskList= query2.list();
 	
-           return taskList;
+        return taskList;
      }
 
 

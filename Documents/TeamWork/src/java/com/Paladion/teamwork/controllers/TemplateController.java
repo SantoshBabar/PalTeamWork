@@ -5,9 +5,11 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.TemplateService;
+import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.DatabaseUtils;
 import java.sql.Array;
 import java.util.Arrays;
@@ -50,67 +52,50 @@ return "CreateTaskTemplate";
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.POST)
 public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean TempB,HttpServletRequest req) 
 {
-           System.out.println("\n inside create Template method ");
+        System.out.println("\n inside create Template method ");
+        DatabaseUtils dbUtil=new DatabaseUtils();
+           
+        List <TaskBean> Tasklist = null;
+        
             
-	DatabaseUtils dbUtil=new DatabaseUtils();
-           List <TaskBean> Tasklist;
-           ModelAndView model=new ModelAndView("AddTasksToTemplate");
-            
-           TempS.addTemplate(TempB); 	
+        TempS.addTemplate(TempB); 	
 	System.out.println("Template Created with Template id  "+TempB.getTemplateid());
 	    
-	try{
-	         Tasklist =TempS.getAllTasksforTemplate();
-	         model.addObject("AllTasks", Tasklist);
-	    }catch(Exception ex){ex.printStackTrace();}
+	try
+        {
+            Tasklist =TempS.getAllTasksforTemplate();
+	}
+        catch(Exception ex){ex.printStackTrace();}
 	    
-	      HttpSession TempSession=req.getSession(true);
-              TempSession.setAttribute("Template", TempB);
-	      return model;
+	HttpSession TempSession=req.getSession(false);
+        TempSession.setAttribute("Template", TempB);
+        TempSession.setAttribute("TaskList", Tasklist);
+              
+	return new ModelAndView("AddTasksToTemplate","AllTasks", Tasklist);
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)
 public ModelAndView AddTaskToTemplate(HttpServletRequest req){
-	System.out.println("Inside Add Task to template controller");
-	int i,j=0;
-	
-	HttpSession session=req.getSession();
-	TemplateBean TempB; int Tempid;
-	TempB=(TemplateBean)session.getAttribute("Template"); 
-           Tempid=TempB.getTemplateid();
-		 
-		 System.out.println("The ttemplateid to which tasks will be added: "+Tempid);
-		 
-	String[] taskID=req.getParameterValues("task");
-	int[] taskid=new int[taskID.length];
-	i=0;
-	 for(String str:taskID){
-        taskid[i]=Integer.parseInt(str);//Exception in this line
-        i++;
-    }
-	
-	int[] weight=new int[taskid.length];
-	for(i=0;i<taskid.length;i++)
-	{
-		String tid=taskID[i];
-	           weight[i]=Integer.parseInt(req.getParameter(tid));
-	}
-	
-	int sum= IntStream.of(weight).sum();
-	System.out.println(Arrays.toString(taskid));
-	
-	System.out.println(Arrays.toString(weight));	
-	
-	System.out.println("The sum of all the weights entered: "+sum);
-	if(sum!=100)
-	{
-		      return new ModelAndView("AddTasksToTemplate","Temperror", "Total weight must be 100%" );
-	}	
-	else{
-		TempS.addTaskToTemplate(taskid,weight,Tempid);
-		return new ModelAndView("Welcome","TemplateSuccess","Template Created Successfully");
-		
-	}
+    System.out.println("Inside Add Task to template controller");
+    HttpSession session=req.getSession();
+    CommonUtil CUtil=new CommonUtil();
+    List<MapTemplateTaskBean> MTTB=null;
+    MTTB = CUtil.Maptasktotemplate(req, session);
+        if(null!=MTTB)
+        {
+            for(MapTemplateTaskBean MTT:MTTB)
+            {
+            if(!TempS.addTaskToTemplate(MTT))
+            {
+                return new ModelAndView("AddTasksToTemplate","Temperror", "Something went wrong during save" );
+            }
+            }
+            return new ModelAndView("Welcome","TemplateSuccess","Template Created Successfully");	
+        }
+        else
+        {
+            return new ModelAndView("AddTasksToTemplate","Temperror", "Total weight is not 100% or something went wrong" );
+        }
 	
 	
 	

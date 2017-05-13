@@ -62,25 +62,16 @@ public ModelAndView CreateProject()
 @RequestMapping(value="/AddProject",method=RequestMethod.POST)
     public ModelAndView CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req)
     {
-	    ManDaysCalculator mdc= new ManDaysCalculator();
+	   ManDaysCalculator mdc= new ManDaysCalculator();
 	   System.out.println("\n inside create Project POST method ");
-	    System.out.println(PB.getEngineer());
-	    System.out.println(PB.getLead());
-	    System.out.println(PB.getTemplateid());
-	   System.out.println(PB.getStartdate());
-              System.out.println(PB.getEnddate());
-		    Date startDate=PB.getStartdate();
-		    Date endDate=PB.getEnddate();
-		     int days=   mdc.getWorkingDays(startDate, endDate);
-			int tempid=PB.getTemplateid();
-			
-	   PS.addProject(PB); 	
+           PB.setMandays(mdc.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
+            
+            PS.addProject(PB); 	
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
-	    System.out.println("Man days :"+days);
+	    System.out.println("Man days :"+PB.getMandays());
 	    
-	PS.getAllWeights(tempid);
-	    
-	    
+            PS.getAllWeights(PB.getTemplateid());
+	       
 	    
 	    return new ModelAndView( "DisplayProjectStatus","ProjectSuccess","Project Created Successfully"  );
 
@@ -95,9 +86,9 @@ public ModelAndView CreateProject()
     
     public List<ProjectBean> showAllProject(){
 	    
-	    ProjectDAO projectDAO=new ProjectDAOImpl();
+	    ProjectDAO prDAO=new ProjectDAOImpl();
 	    
-	  return  projectDAO.getAllProjects();
+	  return  prDAO.getAllProjects();
 	    
 	    
 	    

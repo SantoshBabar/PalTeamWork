@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.DAO.TemplateDAO;
+import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import java.util.List;
@@ -38,8 +39,9 @@ public class TemplateServiceImpl implements TemplateService{
 	}
 
 	@Override
-	public void addTaskToTemplate(int[] taskid, int[] weight, int TemplateID) {
-		TempD.addTaskToTemplate(taskid, weight, TemplateID);
+	public boolean addTaskToTemplate(MapTemplateTaskBean MTT) {
+		
+            return TempD.addTaskToTemplate(MTT);
 		
 	}
 
