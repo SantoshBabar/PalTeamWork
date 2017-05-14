@@ -44,9 +44,6 @@ public class LoginController {
  @Qualifier(value="LoginService")
  LoginService LS;
  
- @Autowired
- @Qualifier(value="ProjectService")
- ProjectService PS1;
  
  UserBean ub=null;
  LoginBean lb=null;
@@ -99,30 +96,9 @@ public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletReque
         if (ub!=null) {
             HttpSession LoginSess=req.getSession(true);
             LoginSess.setAttribute("Luser", ub);
-		  List <ProjectBean> projectList=null;
-		  ModelAndView model=new ModelAndView("redirect:/Welcome.do");
-	try{
-		
-		
-	             projectList =PS1.getAllProjects();
-			  System.out.println(projectList);
-			   
-			   Iterator itr = projectList.iterator();
-		while (itr.hasNext()) {
-
-			ProjectBean emp = (ProjectBean) itr.next();
-			System.out.println(emp.getProjectid());
-			System.out.println(emp.getProjectname());
-			
-		}
-			   
-			   
-	         model.addObject("AllProjects", projectList);
-	    }catch(Exception ex){
-		    ex.printStackTrace();
-	    System.out.println("cfashgdsha");
-	    }
-            return  model;}
+           
+	    return new ModelAndView("redirect:/Welcome.do");
+	}
         else {
            return new ModelAndView("Login","Lerror", "Login Failed");
         }

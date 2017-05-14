@@ -1,22 +1,19 @@
 <%-- 
-    Document   : CreateProject
-    Created on : 24 Apr, 2017, 5:28:38 PM
-    Author     : Administrator
+    Document   : DisplayProjectStatus
+    Created on : May 10, 2017, 6:51:12 AM
+    Author     : user
 --%>
 
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create a New Project</title>
-	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-  
-      <style>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Projects Details</title>
+<style>
       /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
  @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 .btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
@@ -83,41 +80,42 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   
-  <script>
-  $(document).ready(function() {
-    $("#datepicker").datepicker();
-  });
-  </script>
-  <script>
-  $(document).ready(function() {
-    $("#datepickers").datepicker();
-  });
-  </script>
-    </head>
-    <body>
-    <%@include file="Header.jsp" %>
-        <h3 style="color: white">Create New Project</h3>
-        <center>${Projectresp}</center><br> 
-	   
-<form:form action="AddProject.do" method="post" commandName="ProjectM">
-<table align="left" border="2" width="50%">
 
-<tr><td align="center"><h4>OPID :</td><td><form:input path="opid" /></h4></td></tr>    
-<tr><td align="center"><h4>Project Name :</td><td><form:input path="projectname" /></h4></td></tr>  
-<tr><td align="center"><h4>Lead :</td><td><form:input path="lead" /></h4></td></tr>
-<tr><td align="center"><h4>Engineer :</td><td><form:input path="engineer" /></h4></td></tr>
-<tr><td align="center"><h4>Start Date :</td><td><form:input id="datepicker" path="startdate" value=""/></h4></td></tr>
-<tr><td align="center"><h4>End Date :</td><td><form:input  id="datepickers" path="enddate" value=""/></h4></td></tr>
-<tr><td align="center"><h4>Template :</td><td><form:select path="templateid" >  
-	  <c:forEach items="${AllTemplates}" var="template">     
-	  <option value="${template.templateid}">${template.templatename}</option>
-	  </c:forEach></td>	  
-</form:select>
-	  
-<tr><td align="center" colspan="2"><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>           
-</table>
-</form:form>
+
+</head>
+<body>
+
+     <%@include file="Header.jsp" %>
      
+     <table border="2" width="60%" align="center">
+            
+            <tr>
+                <th width="15%" style="color: whitesmoke">OPID </th>
+                <th width="20%" style="color: whitesmoke">Project Title</th>
+                <th width="15%" style="color: whitesmoke">Engineer</th>
+                <th width="15%" style="color: whitesmoke">Lead</th>
+                <th width="10%" style="color: whitesmoke">Start Date</th>
+                <th width="10%" style="color: whitesmoke">End Date</th>
+                <th width="10%" style="color: whitesmoke">Man Days</th></tr>
+            </tr>
+            
+<c:forEach  items="${AllProjects}" var="project">     
+    
+<fmt:formatDate value="${project.startdate}" var="SDate" type="date" pattern="dd-MMM-yyyy" />
+<fmt:formatDate value="${project.enddate}" var="EDate" type="date" pattern="dd-MMM-yyyy" />
 	   
-    </body>
+            <tr> 
+                <td style="color: whitesmoke"> ${project.opid}</td>
+	        <td style="color: whitesmoke">${project.projectname}</td>
+                <td style="color: whitesmoke">${project.engineer}</td>
+                <td style="color: whitesmoke">${project.lead}</td>
+                <td style="color: whitesmoke">${SDate}</td>
+                <td style="color: whitesmoke">${EDate}</td>
+                <td style="color: whitesmoke">${project.mandays}</td>
+	   </tr>
+           
+</c:forEach>
+          
+        </table>
+</body>
 </html>

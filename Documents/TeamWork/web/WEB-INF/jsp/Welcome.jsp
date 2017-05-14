@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : Welcome
     Created on : 13 Apr, 2017, 8:45:16 PM
     Author     : Administrator
@@ -93,11 +93,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  </tr>
 </table>    
 <%@include file="Header.jsp" %>
-<% if (null==session.getAttribute("Luser"))
-              {response.sendRedirect("Login.do");
-              }
-              %>
-	  
+  
         <%! UserBean b; String name;%>
         <% b=(UserBean)session.getAttribute("Luser"); 
         name=b.getName().toString(); 
@@ -120,25 +116,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	   <a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a>
         <tr>
         <hr>
-        <table border="2" width="60%">
-            
-            <tr><th width="17%">Project ID </th>
-                <th width="20%">Project Title</th>
-                <th width="17%">Lead</th>
-                <th width="17%">Start Date</th>
-                <th width="17%">End Date</th>
-                <th width="17%">Status</th></tr>
-            
-	<c:forEach  items="${AllProjects}" var="project">     
-	   <tr> <td style="color: white"><c:out  value="${project.projectname}"/></td>
-	   
-	   <td style="color: white"><h1>gsdjhjf</h1></td>
-	   </tr>
-	   </c:forEach>
-	  
-            
-            
-        </table>
+        
 </body>
 </html>
         

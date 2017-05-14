@@ -73,7 +73,7 @@ public class ProjectDAOImpl implements ProjectDAO
 		Session session1 = sessionFactory.getCurrentSession();
 		System.out.println("getAllProjects2");
 		Transaction tx = null;
-	            tx = session1.beginTransaction();
+	        tx = session1.beginTransaction();
 		Criteria criteria = session1.createCriteria(ProjectBean.class);
 		System.out.println("getAllProjects3");
 		List <ProjectBean>allProjects = criteria.list();

@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,8 +61,12 @@ public ModelAndView CreateProject()
 
 
 @RequestMapping(value="/AddProject",method=RequestMethod.POST)
-    public ModelAndView CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req)
+    public Object CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req,Model E) throws Exception
     {
+        ModelAndView result = null;
+       
+        try
+            {
 	   ManDaysCalculator mdc= new ManDaysCalculator();
 	   System.out.println("\n inside create Project POST method ");
            PB.setMandays(mdc.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
@@ -69,11 +74,20 @@ public ModelAndView CreateProject()
             PS.addProject(PB); 	
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
 	    System.out.println("Man days :"+PB.getMandays());
-	    
-            PS.getAllWeights(PB.getTemplateid());
-	       
-	    
-	    return new ModelAndView( "DisplayProjectStatus","ProjectSuccess","Project Created Successfully"  );
+            }
+            catch(Exception ex){
+             DatabaseUtils dbUtil=new DatabaseUtils();
+             List <TemplateBean> TemplateList;
+             TemplateList=dbUtil.getAllTemplates();
+		
+            result = new ModelAndView("CreateProject","Projectresp","Project Creation failed");
+            result.addObject("AllTemplates", TemplateList);
+            return result;
+            }
+//            PS.getAllWeights(PB.getTemplateid());
+            result=new ModelAndView("DisplayProjects","Projectresp","Project Created Successfully");
+	    result.addObject("AllProjects", PS.getAllProjects());
+	    return result;
 
 	    
     }
@@ -86,7 +100,7 @@ public ModelAndView CreateProject()
     
     public List<ProjectBean> showAllProject(){
 	    
-	    ProjectDAO prDAO=new ProjectDAOImpl();
+	  ProjectDAO prDAO=new ProjectDAOImpl();
 	    
 	  return  prDAO.getAllProjects();
 	    
