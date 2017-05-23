@@ -90,8 +90,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 </head>
 <body>
 
- </tr>
-</table>    
+  
 <%@include file="Header.jsp" %>
   
         <%! UserBean b; String name;%>
@@ -107,16 +106,15 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	   	   
 	   </div> 
 	   
-	   <table border="1">
-	   <tr><a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br><br>
-	    
-	   <a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a><br><br>
-	   <a href="CreateUser.do" style="text-decoration:none"> <input type="button" value="Create New user" style="height:30px; width:180px"/> </a><br><br>
-	    	    
-	   <a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a>
-        <tr>
-        <hr>
+    <table border="2" align="center">
         
+           <tr><td><a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" style="height:30px; width:180px"/> </a><br></td></tr>
+           <tr><td><a href="showAllProject.do" style="text-decoration:none"> <input type="button" value="View Projects" style="height:30px; width:180px"/> </a></td></tr>
+	   <tr><td><a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" style="height:30px; width:180px"/> </a></td></tr>
+	   <tr><td><a href="CreateUser.do" style="text-decoration:none"> <input type="button" value="Create New user" style="height:30px; width:180px"/> </a></td></tr>
+	    	    
+	   <tr><td><a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" style="height:30px; width:230px"/> </a></td></tr>
+    </table>
 </body>
 </html>
         

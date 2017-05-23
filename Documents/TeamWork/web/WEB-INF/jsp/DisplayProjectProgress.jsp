@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,33 @@
         <title>Individual Project Status</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+         <%@include file="Header.jsp" %>
+     
+     <table border="2" width="80%" align="center">
+            
+<!--            <tr>
+                <th width="15%" style="color: whitesmoke">PID </th>
+                <th width="15%" style="color: whitesmoke">OPID </th>
+                <th width="20%" style="color: whitesmoke">Project Title</th>
+                <th width="15%" style="color: whitesmoke">Engineer</th>
+                <th width="15%" style="color: whitesmoke">Lead</th>
+                <th width="10%" style="color: whitesmoke">Start Date</th>
+                <th width="10%" style="color: whitesmoke">End Date</th>
+                <th width="10%" style="color: whitesmoke">Man Days</th></tr>
+            </tr>-->
+
+<c:forEach  items="${WeightData}" var="MTTP">     
+    
+
+            <tr> 
+                <td style="color: black">${MTTP.taskid}</td>
+                <td style="color: black"> ${MTTP.weight}</td>
+	        <td style="color: black">${MTTP.taskname}</td>
+
+	   </tr>
+           
+</c:forEach>
+          
+        </table>
     </body>
 </html>

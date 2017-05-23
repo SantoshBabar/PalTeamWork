@@ -17,9 +17,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
  */
 public class ProjectServiceImpl implements ProjectService {
 
-	@Autowired
+@Autowired
 @Qualifier(value="ProjectDAO")
- ProjectDAO PD;
+ProjectDAO PD;
 	
 	@Override
 	public void addProject(ProjectBean pb) {
@@ -39,6 +39,13 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectBean> getAllProjects() {
 		return PD.getAllProjects();
 	}
+
+    @Override
+    public List<Object> getProjectById(int id) {
+    
+        return PD.getProjectById(id); 
+        
+    }
     
 	
 }

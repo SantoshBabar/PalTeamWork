@@ -87,9 +87,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
      <%@include file="Header.jsp" %>
      
-     <table border="2" width="60%" align="center">
+     <table border="2" width="80%" align="center">
             
             <tr>
+                <th width="15%" style="color: whitesmoke">PID </th>
                 <th width="15%" style="color: whitesmoke">OPID </th>
                 <th width="20%" style="color: whitesmoke">Project Title</th>
                 <th width="15%" style="color: whitesmoke">Engineer</th>
@@ -105,6 +106,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 <fmt:formatDate value="${project.enddate}" var="EDate" type="date" pattern="dd-MMM-yyyy" />
 	   
             <tr> 
+                <td style="color: whitesmoke"> <a href="showProgress.do?id=${project.projectid}">${project.projectid}</a></td>
                 <td style="color: whitesmoke"> ${project.opid}</td>
 	        <td style="color: whitesmoke">${project.projectname}</td>
                 <td style="color: whitesmoke">${project.engineer}</td>

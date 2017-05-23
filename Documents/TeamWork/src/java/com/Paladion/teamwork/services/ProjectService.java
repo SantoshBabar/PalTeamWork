@@ -16,4 +16,5 @@ public interface ProjectService {
     public void addProject(ProjectBean pb);
     public void getAllWeights(int tempID);
     public List<ProjectBean> getAllProjects();
+    public List<Object> getProjectById(int id);
 }

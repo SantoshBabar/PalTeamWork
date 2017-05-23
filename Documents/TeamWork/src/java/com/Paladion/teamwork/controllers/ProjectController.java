@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -85,8 +86,8 @@ public ModelAndView CreateProject()
             return result;
             }
 //            PS.getAllWeights(PB.getTemplateid());
-            result=new ModelAndView("DisplayProjects","Projectresp","Project Created Successfully");
-	    result.addObject("AllProjects", PS.getAllProjects());
+            result=new ModelAndView("CreateProject","Projectresp","Project Created Successfully");
+	    //result.addObject("AllProjects", PS.getAllProjects());
 	    return result;
 
 	    
@@ -97,15 +98,24 @@ public ModelAndView CreateProject()
     public String updateProject(ProjectBean pBean){return "";}
     public String deleteProject(String id){return "";}
     
+    @RequestMapping(value="/showAllProject",method=RequestMethod.GET)
+    public ModelAndView showAllProject()
+    {
+	    
+        ModelAndView result=new ModelAndView("DisplayProjects","Projectresp","Project Created Successfully");
+	result.addObject("AllProjects", PS.getAllProjects());
+	    
+	  return  result;
     
-    public List<ProjectBean> showAllProject(){
-	    
-	  ProjectDAO prDAO=new ProjectDAOImpl();
-	    
-	  return  prDAO.getAllProjects();
-	    
-	    
-	    
     }
     
+    @RequestMapping(value="/showProgress",method=RequestMethod.GET)
+    public ModelAndView showProjectProgress(@RequestParam int id)
+    {
+        List<Object> PRDATA=PS.getProjectById(id);
+        ModelAndView result=new ModelAndView("DisplayProjectProgress");
+        result.addObject("ProjectData",PRDATA.get(0));
+        result.addObject("WeightData",PRDATA.get(1));
+        return result;
+    }
 }
