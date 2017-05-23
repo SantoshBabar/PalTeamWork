@@ -32,9 +32,10 @@
     
 
             <tr> 
-                <td style="color: black">${MTTP.taskid}</td>
-                <td style="color: black"> ${MTTP.weight}</td>
-	        <td style="color: black">${MTTP.taskname}</td>
+                <td style="color: black">${MTTP.taskname}</td>
+                <td style="color: black"> ${MTTP.taskstartdate}</td>
+	        <td style="color: black">${MTTP.taskenddate}</td>
+                	        <td style="color: black">${MTTP.taskdays}</td>
 
 	   </tr>
            

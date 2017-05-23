@@ -7,11 +7,15 @@ package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.DAO.ProjectDAO;
 import com.Paladion.teamwork.DAO.ProjectDAOImpl;
+import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
+import com.Paladion.teamwork.beans.individualProjectStatusBean;
 import com.Paladion.teamwork.services.ProjectService;
+import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.DatabaseUtils;
 import com.Paladion.teamwork.utils.ManDaysCalculator;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +87,7 @@ public ModelAndView CreateProject()
 		
             result = new ModelAndView("CreateProject","Projectresp","Project Creation failed");
             result.addObject("AllTemplates", TemplateList);
-            return result;
+             return result;
             }
 //            PS.getAllWeights(PB.getTemplateid());
             result=new ModelAndView("CreateProject","Projectresp","Project Created Successfully");
@@ -110,12 +114,16 @@ public ModelAndView CreateProject()
     }
     
     @RequestMapping(value="/showProgress",method=RequestMethod.GET)
-    public ModelAndView showProjectProgress(@RequestParam int id)
+    public ModelAndView showProjectProgress(@RequestParam int id) throws ParseException
     {
+        List<individualProjectStatusBean> PSBList;
         List<Object> PRDATA=PS.getProjectById(id);
+        CommonUtil CU=new CommonUtil();
+      PSBList=  CU.devideDaysfortasks((ProjectBean)PRDATA.get(0), (List<MapTemplateTaskBean>) PRDATA.get(1));
         ModelAndView result=new ModelAndView("DisplayProjectProgress");
         result.addObject("ProjectData",PRDATA.get(0));
-        result.addObject("WeightData",PRDATA.get(1));
+        result.addObject("WeightData",PSBList);
+       
         return result;
     }
 }
