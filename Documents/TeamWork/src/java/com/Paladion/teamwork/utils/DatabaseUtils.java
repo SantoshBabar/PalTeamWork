@@ -35,7 +35,7 @@ public class DatabaseUtils {
 public Connection getConnection() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
 {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull", "root1", "root");
+        Connection conn = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/teamwork?zeroDateTimeBehavior=convertToNull", "root", "root");
         return conn;
 }
 	
