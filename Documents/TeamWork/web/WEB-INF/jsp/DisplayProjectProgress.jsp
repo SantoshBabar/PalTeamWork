@@ -15,9 +15,8 @@
     <body>
          <%@include file="Header.jsp" %>
      
-     
-    
-
+     <table border="2" width="80%" align="center">
+            
 
 
 <h2>Project Name: ${ProjectData.projectname}</h2>
@@ -41,6 +40,6 @@
            
 </c:forEach>
           
-        
+        </table>
     </body>
 </html>
