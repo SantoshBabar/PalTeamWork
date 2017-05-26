@@ -30,6 +30,7 @@ body {
 input{
 
 border-bottom-color: black;
+
 }
 
 .login-card {
@@ -37,7 +38,7 @@ border-bottom-color: black;
   top: 30%;
   padding: 40px;
   width: 700px;
-  height: 850px;
+  height: Auto;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 20px;
@@ -131,7 +132,16 @@ border-bottom-color: black;
   text-align: center;
   font-size: 12px;
 }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    align-items: center;
+    overflow:scroll;
+}
 
+tr,th {
+    text-align:center;
+}
 
 </style>
 </head>
@@ -149,24 +159,30 @@ border-bottom-color: black;
         TempName=TempB.getTemplatename().toString();
         %>
 	   
-	   <h2 style="color: white">  Select the Tasks for the <font color="red"><%=TempName%> Template</font></h2> 
+	   <div align="center">  <h2>  Select the Tasks for the <%=TempName%> Template</font></h2> </div>
 	   
-	   <h4 style="color: white">List of All the Tasks </h4>  
+	   <h4 >List of All the Tasks </h4>  
 	   
 	   <form:form  action="AddTaskTemplate.do" method="post">
 	   <table>
-	   <tr style="color: white"><th style="color: white">Task Name </th>  <th style="color: white"> Check/Uncheck</th> <th style="color: white"> Weight(%)</th></tr>
+	    <tr ><th >Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
+	   </table>
+	   <div style="overflow: auto;height: 350px; width: 700px;">
+	   <table>
+	  
                 <c:forEach  items="${AllTasks}" var="task">     
-	   <tr> <td style="color: white"><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="number" id="textfield" name="${task.taskid}" style="width:150px;"></td></tr>
+	   <tr> <td ><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" ></td></tr>
                
 	   </c:forEach>
 	  
 	   
 	   
-	   <tr><td><input type="submit" value="Create" style="height:40px; width:330px"/></td></tr>
+	   
 	   
 	   </table>
-	    
+	   </div>
+	   <tr></tr>
+	   <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
 	   </form:form>
 	  
 	   <center>${Temperror}</center><br>

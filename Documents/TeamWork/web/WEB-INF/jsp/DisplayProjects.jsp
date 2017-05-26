@@ -146,7 +146,7 @@ th {
  
         <div class="login-card">
 	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Projects</h2><br></div>
- 
+ <div style="overflow: auto;height: 350px; width: auto;">
      <table border="1">
             
             <tr>
@@ -179,6 +179,7 @@ th {
 </c:forEach>
           
         </table>
+ </div>
 	   </div>
 </body>
 </html>
