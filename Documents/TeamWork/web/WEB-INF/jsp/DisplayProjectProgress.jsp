@@ -15,19 +15,19 @@
     <body>
          <%@include file="Header.jsp" %>
      
-     <table border="2" width="80%" align="center">
-            
-<!--            <tr>
-                <th width="15%" style="color: whitesmoke">PID </th>
-                <th width="15%" style="color: whitesmoke">OPID </th>
-                <th width="20%" style="color: whitesmoke">Project Title</th>
-                <th width="15%" style="color: whitesmoke">Engineer</th>
-                <th width="15%" style="color: whitesmoke">Lead</th>
-                <th width="10%" style="color: whitesmoke">Start Date</th>
-                <th width="10%" style="color: whitesmoke">End Date</th>
-                <th width="10%" style="color: whitesmoke">Man Days</th></tr>
-            </tr>-->
+     
+    
 
+
+
+<h2>Project Name: ${ProjectData.projectname}</h2>
+
+<h3>OPID: ${ProjectData.opid}</h3>
+<h3>Lead Assigned: ${ProjectData.lead}</h3>
+<h3>Engineer Assigned: ${ProjectData.engineer}</h3>
+<h3>Start Date: ${ProjectData.startdate}</h3>
+
+<tr><th>Task Name </th><th>Task Start Date</th><th>Start End Date</th><th>Hours</th></tr>
 <c:forEach  items="${WeightData}" var="MTTP">     
     
 
@@ -35,12 +35,12 @@
                 <td style="color: black">${MTTP.taskname}</td>
                 <td style="color: black"> ${MTTP.taskstartdate}</td>
 	        <td style="color: black">${MTTP.taskenddate}</td>
-                	        <td style="color: black">${MTTP.taskdays}</td>
+                	        <td style="color: black">${MTTP.taskdays*9}</td>
 
 	   </tr>
            
 </c:forEach>
           
-        </table>
+        
     </body>
 </html>

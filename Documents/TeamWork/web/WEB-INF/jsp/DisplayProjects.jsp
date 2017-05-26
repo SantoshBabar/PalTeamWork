@@ -145,7 +145,7 @@ th {
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
         <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
+	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Projects</h2><br></div>
  
      <table border="1">
             

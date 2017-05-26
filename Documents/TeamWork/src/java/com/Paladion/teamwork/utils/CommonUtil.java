@@ -94,16 +94,20 @@ public class CommonUtil {
         Date TaskEndDate=null;
         float iMandays;
         int Weight;
-        int TotalMandays=PB.getMandays();
+        float TotalMandays=PB.getMandays();
         int taskcount=MTTP.size();
         Calendar ProjectTime = Calendar.getInstance();
         ProjectTime.setTime(PB.getStartdate());
+	if (ProjectTime.get(Calendar.HOUR_OF_DAY) < 10) 
+           {
+                       ProjectTime.set(Calendar.HOUR, 10);
+           }
        
         for(MapTemplateTaskBean MB :MTTP)
         {
         individualProjectStatusBean PSB = new individualProjectStatusBean();
         Weight =MB.getWeight();
-        iMandays=(TotalMandays * Weight)/100;
+        iMandays=TotalMandays * Weight/100;
         PSB.setTaskdays(iMandays);
         if(null==TaskEndDate)
         {
