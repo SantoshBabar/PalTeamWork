@@ -14,7 +14,7 @@
 
 body {
  
-  background-image: url(http://www.glossa-group.com/fileadmin/background/background11.jpg);
+  background-image: url(new.jpg);
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -120,6 +120,7 @@ body {
   font-size: 12px;
 }
 
+
 </style>
   <meta charset="UTF-8">
 
@@ -139,8 +140,8 @@ body {
     
 <!-- UI goes here-->
     <form:form action="Login.do" method="post" commandName="LoginM"> 
-    	<form:input path="username"/>
-        <form:password path="password" />
+    	Username:<form:input path="username" placeholder="Enter the username"/>
+        Password:<form:password path="password" placeholder="Enter the password"/>
         <button type="submit" name=login value="Login"class="login login-submit">Login</button><br>
 	   
 	   
@@ -153,7 +154,11 @@ body {
 	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>
   <!-- UI goes here-->
 <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
-
+  </div>
+  
+ 
+  
+</html>
 </body>
 
-</html>
+

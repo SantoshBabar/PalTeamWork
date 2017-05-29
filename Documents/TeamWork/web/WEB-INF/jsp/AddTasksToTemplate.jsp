@@ -18,7 +18,7 @@
 
 body {
  
-  background-image: url(http://www.glossa-group.com/fileadmin/background/background11.jpg);
+  background-image: url(new.jpg);
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -64,7 +64,7 @@ border-bottom-color: black;
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: 100%;
+  width: 20%;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -102,6 +102,7 @@ border-bottom-color: black;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
   background-color: #ff3333;
+  
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -139,9 +140,6 @@ table {
     overflow:scroll;
 }
 
-tr,th {
-    text-align:center;
-}
 
 </style>
 </head>
@@ -164,20 +162,16 @@ tr,th {
 	   <h4 >List of All the Tasks </h4>  
 	   
 	   <form:form  action="AddTaskTemplate.do" method="post">
-	   <table>
-	    <tr ><th >Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
-	   </table>
+	   
 	   <div style="overflow: auto;height: 350px; width: 700px;">
 	   <table>
-	  
+	   <div align="center">
+	   <tr ><th >Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
                 <c:forEach  items="${AllTasks}" var="task">     
-	   <tr> <td ><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" ></td></tr>
+			 <tr align="center"> <td><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" ></td></tr>
                
 	   </c:forEach>
-	  
-	   
-	   
-	   
+	   </div>
 	   
 	   </table>
 	   </div>
