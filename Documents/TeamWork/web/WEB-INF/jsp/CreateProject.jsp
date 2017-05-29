@@ -7,8 +7,21 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <head>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#date").datepicker();
+  });
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $("#datepicker").datepicker();
+  });
+  </script>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
@@ -131,16 +144,7 @@ border-bottom-color: black;
 
 </style>
 
-  <script>
-  $(document).ready(function() {
-    $("#datepicker").datepicker();
-  });
-  </script>
-  <script>
-  $(document).ready(function() {
-    $("#datepickers").datepicker();
-  });
-  </script>
+  
     </head>
     <body>
     <div align="left">
@@ -160,8 +164,8 @@ border-bottom-color: black;
 <tr><td align="center"><h4>Project Name :</td><td><form:input placeholder="Enter Project Name" path="projectname" /></h4></td></tr>  
 <tr><td align="center"><h4>Lead :</td><td><form:input placeholder="Enter Lead Name" path="lead" /></h4></td></tr>
 <tr><td align="center"><h4>Engineer :</td><td><form:input placeholder="Enter Engineer Name" path="engineer" /></h4></td></tr>
-<tr><td align="center"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="datepicker" path="startdate" value=""/></h4></td></tr>
-<tr><td align="center"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepickers" path="enddate" value=""/></h4></td></tr>
+<tr><td align="center"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="date" path="startdate" value=""/></h4></td></tr>
+<tr><td align="center"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate" value=""/></h4></td></tr>
 <tr><td align="center"><h4 >Template :</td><td ><form:select  path="templateid">  
 	  <c:forEach items="${AllTemplates}" var="template">     
 	  <<option class="login login-submit" value="${template.templateid}">${template.templatename}</option>
@@ -174,15 +178,6 @@ border-bottom-color: black;
 </form:form>
 	   </div>
      
-	   <script>
-  $(document).ready(function() {
-    $("#datepicker").datepicker();
-  });
-  </script>
-  <script>
-  $(document).ready(function() {
-    $("#datepickers").datepicker();
-  });
-  </script>
+	   
     </body>
 </html>
