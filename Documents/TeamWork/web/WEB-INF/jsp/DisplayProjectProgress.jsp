@@ -12,7 +12,7 @@
 
 body {
  
-  background-image: url(http://www.glossa-group.com/fileadmin/background/background11.jpg);
+  background-image: url(new.jpg);
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -138,6 +138,20 @@ tr,th {
     text-align:center;
 }
 
+.right {
+    position: absolute;
+    right: 10px;
+    width: 200px;
+    border: 2px solid ;
+    padding: 10px;
+}
+.left {
+    
+    right: 0px;
+    width: 250px;
+    border: 2px solid;
+    padding: 10px;
+}
 </style>
 </head>
     <body>
@@ -147,14 +161,19 @@ tr,th {
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
     <br>
         <div class="login-card">
-	   <div align="center">  <h1 style="color: #ff3333; font-family: sans-serif; font-style: normal">Project Details</h2><br></div>
-
-	   <h3 style="color: red">Project Name: ${ProjectData.projectname}</h2>
-
-<h4 style="color: red">OPID: ${ProjectData.opid}</h4>
-<h4 style="color: red; ">Lead Assigned: ${ProjectData.lead}</h4>
-<h4 style="color: red">Engineer Assigned: ${ProjectData.engineer}</h4>
-<h4 style="color: red" >Start Date: ${ProjectData.startdate}</h4>
+	   <div align="center">  <h3 style="color: #ff3333; font-family: sans-serif; font-style: normal">Project Details</h3></div>
+	   
+	   <div class="right">
+	   <tr><h4 style="color: red; font-size: 15px">Project Name: ${ProjectData.projectname}</h2></tr>
+	   <tr><h4 style="color: red; font-size: 15px">OPID: ${ProjectData.opid}</h4></h3></tr>
+	   
+	   </div>
+	   <div class="left">
+	   <tr><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></tr>
+              <tr><h4 style="color: red; font-size: 15px">Engineer Assigned: ${ProjectData.engineer}</h4></tr>
+              </tr><h4 style="color: red; font-size: 15px" >Start Date: ${ProjectData.startdate}</h4></tr>
+	   </div><br>
+<div style="overflow: auto;height: 200px; width: auto;">
 <table border="1" align="center">
 <tr><th>Task Name </th><th>Task Start Date</th><th>Start End Date</th><th>Hours</th></tr>
 <c:forEach  items="${WeightData}" var="MTTP">     
@@ -169,5 +188,6 @@ tr,th {
 </c:forEach>
           
 	    </table>
+</div>
     </body>
 </html>

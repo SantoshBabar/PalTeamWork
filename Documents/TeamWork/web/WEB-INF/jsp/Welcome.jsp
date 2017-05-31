@@ -15,7 +15,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
-  background-image: url(http://www.glossa-group.com/fileadmin/background/background11.jpg);
+  background-image: url(new.jpg);
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -147,7 +147,7 @@ th {
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
 </table>  
-<h1 align="center" style="color: #e60000; " >Welcome </h1><h2 align="center" style="color: #e60000;"><%=name%></h2>
+<h1 align="center" style="color: whitesmoke; " >Welcome </h1><h2 align="center" style="color: #e60000;"><%=name%></h2>
 	   
 	   <div> <font color="red"><b><center>${TaskSuccess}</center><br>
 	 

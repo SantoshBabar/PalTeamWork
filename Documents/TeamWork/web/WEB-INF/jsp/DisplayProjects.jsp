@@ -13,7 +13,7 @@
 
 body {
  
-  background-image: url(http://www.glossa-group.com/fileadmin/background/background11.jpg);
+  background-image: url(new.jpg);
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
