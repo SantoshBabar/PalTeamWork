@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.Paladion.teamwork.DAO;
+
+import com.Paladion.teamwork.beans.CreateUserBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+/**
+ *
+ * @author user
+ */
+public class UserDAOImpl implements UserDAO{
+	
+	@Autowired
+           @Qualifier(value="hibernate4AnnotatedSessionFactory")
+           private SessionFactory sessionFactory;
+	
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+	@Override
+	public boolean createUser(CreateUserBean userBean) {
+		
+		Session session1 = sessionFactory.getCurrentSession();
+		Transaction tx = null;
+	            tx = session1.beginTransaction();
+			  
+			  
+			  
+	           session1.save(userBean );
+	           tx.commit();
+		System.out.println("User created successfully");
+		
+		
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+	
+}

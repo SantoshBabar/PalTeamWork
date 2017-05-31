@@ -27,6 +27,7 @@
 <bean id="ProjectService" class="com.Paladion.teamwork.services.ProjectServiceImpl" />
 <bean id="TaskService" class="com.Paladion.teamwork.services.TaskServiceImpl" />
 <bean id="TemplateService" class="com.Paladion.teamwork.services.TemplateServiceImpl" />
+<bean id="UserService" class="com.Paladion.teamwork.services.UserServiceImpl" />
 
 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
@@ -61,6 +62,10 @@
 </bean>
 
 <bean id="LoginDAO" class="com.Paladion.teamwork.DAO.LoginDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
+
+<bean id="UserDAO" class="com.Paladion.teamwork.DAO.UserDAOImpl">
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 

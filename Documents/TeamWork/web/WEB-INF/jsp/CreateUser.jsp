@@ -137,7 +137,7 @@ border-bottom-color: black;
         <div class="login-card">
 	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
 
-	   <form:form action="CreateUser.do" method="post" modelAttribute="CreateM">
+	   <form:form action="createUser.do" method="post" modelAttribute="CreateM">
 <table>
 
 <tr ><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="name" /></h4></td></tr>    

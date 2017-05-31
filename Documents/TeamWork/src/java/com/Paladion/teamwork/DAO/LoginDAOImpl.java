@@ -76,7 +76,7 @@ public class LoginDAOImpl implements LoginDAO{
         String SQL_QUERY1 ="select userid from LoginBean where Email=?";
         System.out.println(SQL_QUERY1);
         Query query1 = session.createQuery(SQL_QUERY1);
-        query1.setParameter(0,LB.getEmail());
+        query1.setParameter(0,LB.getRole());
         List list1=query1.list();
         
          System.out.print("Logged in user is"+SessLoginBean.getEmail());

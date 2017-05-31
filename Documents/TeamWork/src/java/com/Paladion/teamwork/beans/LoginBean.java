@@ -21,7 +21,9 @@ public class LoginBean implements Serializable {
     @Id
     String userid;
        
-    String username,password,email;
+    String username,password,role;
+
+	
 
     public String getUsername() {
         return username;
@@ -39,9 +41,7 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
-	public String getEmail() {
-		return email;
-	}
+	
 	
 
     public String getUserid() {
@@ -52,10 +52,13 @@ public class LoginBean implements Serializable {
         this.userid = userid;
     }
 
-	public void setEmail(String email) {
-		this.email = email;
+    public String getRole() {
+		return role;
 	}
-    
+
+	public void setRole(String role) {
+		this.role = role;
+	}
   
     
 }
