@@ -5,28 +5,18 @@
  */
 package com.Paladion.teamwork.services;
 
-import com.Paladion.teamwork.DAO.LoginDAO;
-import com.Paladion.teamwork.DAO.UserDAO;
-import com.Paladion.teamwork.beans.CreateUserBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.Paladion.teamwork.beans.UserBean;
 
 /**
  *
  * @author user
  */
-public class UserServiceImpl implements  UserService{
-	
-	
-	@Autowired
-    @Qualifier(value="UserDAO")
-    UserDAO userDAO;
+public class UserServiceImpl implements UserService{
 
 	@Override
-	public boolean createUser(CreateUserBean userBean) {
+	public void addUser(UserBean ubean) {
 		
-		userDAO.createUser(userBean);
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+		
+		}
 	
 }

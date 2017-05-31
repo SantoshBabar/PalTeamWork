@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService{
     LoginDAO LD;
     
     @Override
-    public UserBean Login(LoginBean LB) {
+    public LoginBean Login(LoginBean LB) {
          
        return LD.Login(LB);
     }

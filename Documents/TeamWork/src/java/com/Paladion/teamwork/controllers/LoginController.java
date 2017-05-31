@@ -92,10 +92,10 @@ public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletReq
 public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletRequest req )
     {
         System.out.println("in login");
-        ub=LS.Login(LB);
-        if (ub!=null) {
+        lb=LS.Login(LB);
+        if (lb!=null) {
             HttpSession LoginSess=req.getSession(true);
-            LoginSess.setAttribute("Luser", ub);
+            LoginSess.setAttribute("Luser", lb);
            
 	    return new ModelAndView("redirect:/Welcome.do");
 	}

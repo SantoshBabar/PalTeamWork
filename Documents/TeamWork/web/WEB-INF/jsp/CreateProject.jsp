@@ -178,6 +178,15 @@ border-bottom-color: black;
 </form:form>
 	   </div>
      
-	   
+	   <script>
+  $(document).ready(function() {
+    $("#datepicker").datepicker();
+  });
+  </script>
+  <script>
+  $(document).ready(function() {
+    $("#datepickers").datepicker();
+  });
+  </script>
     </body>
 </html>

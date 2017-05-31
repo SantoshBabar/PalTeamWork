@@ -5,37 +5,35 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.CreateUserBean;
 import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.services.LoginService;
+import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author Satyam.k
+ * @author user
  */
-
 @Controller
 public class UserController {
 	
 	
 	@Autowired
- @Qualifier(value="UserService")
- UserService userService;
+@Qualifier(value="UserService")
+ UserService UserS;
 	
-	
-	@ModelAttribute("CreateM")
-public CreateUserBean generate()
+	@ModelAttribute("UserM")
+ public UserBean PopulateUserBean() 
 {
-	   return new CreateUserBean();
+   return new UserBean(); // populates form for the first time if its null
 }
 	
 	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
@@ -44,19 +42,12 @@ public CreateUserBean generate()
 	    return "CreateUser";
     }
 	
-	
-	
-	@RequestMapping(value="/createUser",method=RequestMethod.POST)
-	public String createUser(@ModelAttribute("CreateM") CreateUserBean userBean,HttpServletRequest req){
-		
-		
-		System.out.println("createUser");
-        userService.createUser(userBean);
-       
-            		
-		System.out.println("createUser() post method");
-		return "SUCCESS";
-		
-	}
-	
+	@RequestMapping(value="/CreateUser",method=RequestMethod.POST)
+public ModelAndView Login(@ModelAttribute("UserM")UserBean UB,HttpServletRequest req )
+    {
+        System.out.println("in user controller create user post method");
+    
+	   UserS.addUser(UB);
+	   return new ModelAndView();
+        }
 }

@@ -5,15 +5,12 @@
  */
 package com.Paladion.teamwork.services;
 
-import com.Paladion.teamwork.beans.CreateUserBean;
+import com.Paladion.teamwork.beans.UserBean;
 
 /**
  *
  * @author user
  */
 public interface UserService {
-	
-	public boolean createUser(CreateUserBean userBean);
-	
-	
+	public void addUser(UserBean ubean);
 }
