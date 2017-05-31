@@ -1,4 +1,5 @@
-    <%-- 
+    <%@page import="com.Paladion.teamwork.beans.LoginBean"%>
+<%-- 
     Document   : Welcome
     Created on : 13 Apr, 2017, 8:45:16 PM
     Author     : Administrator
@@ -136,9 +137,9 @@ th {
 
 
   
-        <%! UserBean b; String name;%>
-        <% b=(UserBean)session.getAttribute("Luser"); 
-        name=b.getName().toString(); 
+        <%! LoginBean b; String name;%>
+        <% b=(LoginBean)session.getAttribute("Luser"); 
+        name=b.userinfo.getName().toString(); 
         %>
 <div align="left">
 	   <img width="230px" height="70px" src="PaladionLogo.png"/>

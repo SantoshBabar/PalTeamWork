@@ -30,36 +30,36 @@ public class LoginDAOImpl implements LoginDAO{
     }
 
     @Override
-    public UserBean Login(LoginBean LB) {
-        UserBean SessUserBean=null;
+    public LoginBean Login(LoginBean LB) {
+        LoginBean SessUserBean=null;
         Session session = this.sessionFactory.openSession();
         String userid="";
-        String SQL_QUERY1 ="select userid from LoginBean as o where o.username=? and o.password=?";
+        String SQL_QUERY1 ="from LoginBean as o where o.username=? and o.password=?";
         System.out.println(SQL_QUERY1);
         Query query1 = session.createQuery(SQL_QUERY1);
         query1.setParameter(0,LB.getUsername());
         query1.setParameter(1,LB.getPassword());
         List list1=query1.list();
-        try
-        {
-        userid=(String)list1.get(0);
-        }
-        catch(IndexOutOfBoundsException ex)
-        { return null;}
-        String SQL_QUERY2 = "from UserBean as o where o.userid=?";
-        System.out.println(SQL_QUERY2);
-        Query query2 = session.createQuery(SQL_QUERY2);
-        query2.setParameter(0,userid);
-        
-        List list2 = query2.list();
-        Iterator it= list2.iterator();
+//        try
+//        {
+//        userid=(String)list1.get(0);
+//        }
+//        catch(IndexOutOfBoundsException ex)
+//        { return null;}
+//        String SQL_QUERY2 = "from UserBean as o where o.userid=?";
+//        System.out.println(SQL_QUERY2);
+//        Query query2 = session.createQuery(SQL_QUERY2);
+//        query2.setParameter(0,userid);
+//        
+//        List list2 = query2.list();
+        Iterator it= list1.iterator();
         while(it.hasNext())
         {
-         SessUserBean=(UserBean) it.next();
-         System.out.print("Logged in user is"+SessUserBean.getName());
+         SessUserBean=(LoginBean) it.next();
+         System.out.print("Logged in user is"+SessUserBean.userinfo.getName());
         }
                         
-        if ((list2 != null) && (list2.size() > 0)) 
+        if ((list1 != null) && (list1.size() > 0)) 
         {
         return SessUserBean;
         }
@@ -76,7 +76,7 @@ public class LoginDAOImpl implements LoginDAO{
         String SQL_QUERY1 ="select userid from LoginBean where Email=?";
         System.out.println(SQL_QUERY1);
         Query query1 = session.createQuery(SQL_QUERY1);
-        query1.setParameter(0,LB.getEmail());
+        query1.setParameter(0,LB.getUsername());
         List list1=query1.list();
         
          System.out.print("Logged in user is"+SessLoginBean.getEmail());

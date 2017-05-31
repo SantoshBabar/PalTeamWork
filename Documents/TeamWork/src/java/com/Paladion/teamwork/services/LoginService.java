@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  */
 public interface LoginService {
     
-    public UserBean Login(LoginBean LB);
+    public LoginBean Login(LoginBean LB);
     public void Logout(HttpSession sess);
     public LoginBean ForgotPassword(LoginBean LB);
     

@@ -6,8 +6,11 @@
 package com.Paladion.teamwork.beans;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,7 +24,29 @@ public class LoginBean implements Serializable {
     @Id
     String userid;
        
-    String username,password,email;
+    String username,password,role;
+    
+        
+        
+           @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userid")
+	public UserBean userinfo;
+
+	public UserBean getUserinfo() {
+		return userinfo;
+	}
+
+	public void setUserinfo(UserBean userinfo) {
+		this.userinfo = userinfo;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
     public String getUsername() {
         return username;
@@ -39,9 +64,7 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
-	public String getEmail() {
-		return email;
-	}
+	
 	
 
     public String getUserid() {
@@ -52,9 +75,6 @@ public class LoginBean implements Serializable {
         this.userid = userid;
     }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
     
   
     

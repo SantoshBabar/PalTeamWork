@@ -51,11 +51,7 @@ public CreateUserBean generate()
 	
 
 
-	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
-     public String CreateUser()
-    {   
-	    return "CreateUser";
-    }
+	
 
 @Transactional
 @RequestMapping(value="/CreateTask",method=RequestMethod.POST)
