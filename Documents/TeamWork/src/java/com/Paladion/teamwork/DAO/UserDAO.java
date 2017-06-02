@@ -5,13 +5,13 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.TemplateBean;
-import com.Paladion.teamwork.beans.UserBean;
 
 /**
  *
  * @author user
  */
 public interface UserDAO {
-	public void addUserDao(UserBean Ubean);
+	public boolean addUser(LoginBean loginbean);
 }

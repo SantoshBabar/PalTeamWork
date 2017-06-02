@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.UserBean;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,10 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-/**
- *
- * @author user
- */
+
 public class UserDAOImpl implements UserDAO{
 
 	 @Autowired
@@ -28,14 +26,25 @@ public class UserDAOImpl implements UserDAO{
 	
 	
 	@Override
-	public void addUserDao(UserBean UB) {
-		
-		Session session1 = sessionFactory.getCurrentSession();
+	public boolean addUser(LoginBean loginBean) {
+		try{
+		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = null;
-	            tx = session1.beginTransaction();
-	           session1.save(UB);
+	            tx = session.beginTransaction();
+		UserBean ub=loginBean.getUserinfo();
+		ub.setName(loginBean.getUsername());
+		session.save(loginBean);
+		session.save(ub);
+		System.out.println("done");
+				 
 	           tx.commit();
+		}catch(Exception ex){
+			System.out.println("In catch block: Exception raised");
+			return false;
+		}
 		System.out.println("User created successfully");
+		return true;
+		
 	}
 	
 }

@@ -26,28 +26,29 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 	
 	
-	@Autowired
+@Autowired
 @Qualifier(value="UserService")
- UserService UserS;
+ UserService userService;
 	
-	@ModelAttribute("UserM")
- public UserBean PopulateUserBean() 
+@ModelAttribute("LoginM")
+ public LoginBean PopulateLoginBean() 
 {
-   return new UserBean(); // populates form for the first time if its null
+   return new LoginBean(); // populates form for the first time if its null
 }
 	
 	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
-     public String CreateUser()
+     public String createUser()
     {   
 	    return "CreateUser";
     }
 	
 	@RequestMapping(value="/CreateUser",method=RequestMethod.POST)
-public ModelAndView Login(@ModelAttribute("UserM")UserBean UB,HttpServletRequest req )
+public ModelAndView createUser(@ModelAttribute("LoginM")LoginBean loginBean,HttpServletRequest req )
     {
         System.out.println("in user controller create user post method");
     
-	   UserS.addUser(UB);
-	   return new ModelAndView();
+	   userService.addUser(loginBean);
+	   
+	   return new ModelAndView("Welcome","TaskSuccess","User Created Successfully");
         }
 }

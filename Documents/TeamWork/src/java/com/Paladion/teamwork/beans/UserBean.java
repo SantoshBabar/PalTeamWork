@@ -6,11 +6,10 @@
 package com.Paladion.teamwork.beans;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,16 +21,18 @@ import javax.persistence.Table;
 public class UserBean implements Serializable {
 
     @Id
-    String userid;
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
+@GeneratedValue(strategy=GenerationType.AUTO)
+    long userId;
     
-       String name, email, phone,team;
+    String name, email, phone,team;
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
     public String getName() {
         return name;
