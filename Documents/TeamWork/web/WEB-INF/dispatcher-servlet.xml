@@ -82,6 +82,7 @@
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 
+<bean id="UserDAO" class="com.Paladion.teamwork.DAO.UserDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
 
-
-</beans>

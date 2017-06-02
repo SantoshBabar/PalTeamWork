@@ -25,6 +25,17 @@ UserDAO userDAO;
 	public void addUser(LoginBean loginBean) {
 		userDAO.addUser(loginBean);
 		System.out.println("com.Paladion.teamwork.services.UserServiceImpl.addUser()");
+import com.Paladion.teamwork.beans.UserBean;
+
+/**
+ *
+ * @author user
+ */
+public class UserServiceImpl implements UserService{
+
+	@Override
+	public void addUser(UserBean ubean) {
+		
 		
 		}
 	
