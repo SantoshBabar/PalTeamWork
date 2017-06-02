@@ -1,12 +1,17 @@
 <%-- 
-    Document   : DisplayProjectStatus
-    Created on : May 10, 2017, 6:51:12 AM
+    Document   : AddTasks
+    Created on : May 4, 2017, 8:19:13 AM
     Author     : user
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="com.Paladion.teamwork.controllers.TaskController"%>
+<%@page import="com.Paladion.teamwork.DAO.TaskDAOImpl"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.Paladion.teamwork.beans.TaskBean"%>
+<%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
@@ -25,14 +30,15 @@ body {
 input{
 
 border-bottom-color: black;
+
 }
 
 .login-card {
   
   top: 30%;
   padding: 40px;
-  width: 1000px;
-  height: auto;
+  width: 700px;
+  height: Auto;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 20px;
@@ -58,7 +64,7 @@ border-bottom-color: black;
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: 100%;
+  width: 20%;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -96,6 +102,7 @@ border-bottom-color: black;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
   background-color: #ff3333;
+  
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -130,10 +137,11 @@ table {
     border-collapse: collapse;
     width: 100%;
     align-items: center;
+    overflow:scroll;
 }
 
-th {
-    text-align:left;
+tr,th {
+    text-align:center;
 }
 
 </style>
@@ -145,41 +153,34 @@ th {
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
         <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Projects</h2><br></div>
- <div style="overflow: auto;height: 350px; width: auto;">
-     <table border="1">
-            
-            <tr>
-                <th width="15%" >PID </th>
-                <th width="15%" >OPID </th>
-                <th width="20%" >Project Title</th>
-          
-                <th width="15%" >Lead</th>
-                <th width="10%" >Start Date</th>
-                <th width="10%" >End Date</th>
-                <th width="10%" >Man Days</th></tr>
-            </tr>
-            
-<c:forEach  items="${AllProjects}" var="project">     
-    
-<fmt:formatDate value="${project.startdate}" var="SDate" type="date" pattern="dd-MMM-yyyy" />
-<fmt:formatDate value="${project.enddate}" var="EDate" type="date" pattern="dd-MMM-yyyy" />
+	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Add Task Template</h2><br></div>
+
+   <%! TemplateBean TempB; String TempName;%>
+        <% TempB=(TemplateBean)session.getAttribute("Template"); 
+        TempName=TempB.getTemplatename().toString();
+        %>
 	   
-            <tr> 
-                <td > <a href="showProgress.do?id=${project.projectid}">${project.projectid}</a></td>
-                <td > ${project.opid}</td>
-	        <td style=>${project.projectname}</td>
-    
-                <td style=>${project.lead}</td>
-                <td style=${SDate}</td>
-                <td style=>${EDate}</td>
-                <td style=>${project.mandays}</td>
-	   </tr>
-           
-</c:forEach>
-          
-        </table>
- </div>
+	   <div align="center">  <h2>  Select the Tasks for the <%=TempName%> Template</font></h2> </div>
+	   
+	   <h4 >List of All the Tasks </h4>  
+	   
+	   <form:form  action="AddTaskTemplate.do" method="post">
+	   
+	   <div style="overflow: auto;height: 350px; width: 700px;">
+	   <table>
+	   <div align="center">
+	   <tr ><th >Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
+                <c:forEach  items="${AllTasks}" var="task">     
+			 <tr align="center"> <td><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" ></td></tr>
+               
+	   </c:forEach>
 	   </div>
-</body>
+	   
+	   </table>
+	   </div>
+	   <tr></tr>
+	   <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
+	   </form:form>
+	  
+	   <center>${Temperror}</center><br>
 </html>

@@ -5,8 +5,10 @@
  */
 package com.Paladion.teamwork.DAO;
 
+import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.UserBean;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,6 @@ import com.Paladion.teamwork.beans.UserBean;
  */
 public interface UserDAO {
 	public void addUserDao(UserBean Ubean);
-}
+	public List<LoginBean> getAllEngineers();
+	public List<LoginBean> getAllLeads();
+		   }

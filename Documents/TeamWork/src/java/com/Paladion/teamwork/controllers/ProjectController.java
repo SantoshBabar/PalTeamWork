@@ -76,7 +76,7 @@ public ModelAndView CreateProject()
 	   System.out.println("\n inside create Project POST method ");
            PB.setMandays(mdc.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
             
-            PS.addProject(PB); 	
+           PS.addProject(PB); 	
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
 	    System.out.println("Man days :"+PB.getMandays());
             }
@@ -89,11 +89,24 @@ public ModelAndView CreateProject()
             result.addObject("AllTemplates", TemplateList);
              return result;
             }
-//            PS.getAllWeights(PB.getTemplateid());
-            result=new ModelAndView("CreateProject","Projectresp","Project Created Successfully");
-	    //result.addObject("AllProjects", PS.getAllProjects());
-	    return result;
 
+//            result=new ModelAndView("AssignTaskToUsers","Projectresp","Project Created Successfully");
+//	    //result.addObject("AllProjects", PS.getAllProjects());
+//	    
+//	  result.addObject("AllProjectTasks",PS.getAllWeights(PB.getTemplateid()));
+//	    
+//	    return result;
+	    
+	    List<individualProjectStatusBean> PSBList;
+       //List<Object> PRDATA=PS.getProjectById(PB.getProjectid());
+        CommonUtil CU=new CommonUtil();
+   //   PSBList=  CU.devideDaysfortasks((ProjectBean)PRDATA.get(0), (List<MapTemplateTaskBean>) PRDATA.get(1));
+      result=new ModelAndView("AssignTaskToUsers");
+        result.addObject("ProjectData",PB);
+	   result.addObject("AllProjectTasks",PS.getAllWeights(PB.getTemplateid()));
+      // result.addObject("WeightData",PSBList);
+       
+        return result;
 	    
     }
     

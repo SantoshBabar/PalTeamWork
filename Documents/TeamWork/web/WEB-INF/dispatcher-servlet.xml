@@ -48,6 +48,7 @@
                        <value>com.Paladion.teamwork.beans.TemplateBean</value>
                        <value>com.Paladion.teamwork.beans.ProjectBean</value>
                        <value>com.Paladion.teamwork.beans.MapTemplateTaskBean</value>
+		<value>com.Paladion.teamwork.beans.individualProjectStatusBean</value>
 		
                     </list>
            </property>

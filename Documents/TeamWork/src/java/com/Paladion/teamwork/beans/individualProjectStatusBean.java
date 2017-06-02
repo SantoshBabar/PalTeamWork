@@ -7,14 +7,51 @@ package com.Paladion.teamwork.beans;
 
 import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author root
  */
+@Entity
+@Table(name = "project_transaction",catalog="teamwork")
 public class individualProjectStatusBean {
     
+   
+	@Id
+    int projectid;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public float getTaskhours() {
+		return taskhours;
+	}
+
+	public void setTaskhours(float taskhours) {
+		this.taskhours = taskhours;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
     String taskname;
+    int userid;
+    float taskhours;
+    String status;
+    Date taskstartdate, taskenddate;
+    float taskdays;
 
     public String getTaskname() {
         return taskname;
@@ -48,7 +85,14 @@ public class individualProjectStatusBean {
     public void setTaskdays(float taskdays) {
         this.taskdays = taskdays;
     }
-    Date taskstartdate, taskenddate;
-    float taskdays;
+
+	public int getProjectid() {
+		return projectid;
+	}
+
+	public void setProjectid(int projectid) {
+		this.projectid = projectid;
+	}
+    
     
 }

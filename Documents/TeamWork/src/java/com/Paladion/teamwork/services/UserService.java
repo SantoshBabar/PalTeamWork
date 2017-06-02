@@ -5,7 +5,9 @@
  */
 package com.Paladion.teamwork.services;
 
+import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.UserBean;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,6 @@ import com.Paladion.teamwork.beans.UserBean;
  */
 public interface UserService {
 	public void addUser(UserBean ubean);
+		   public List<LoginBean> getAllEngineers();
+		   public List<LoginBean> getAllLeads();
 }

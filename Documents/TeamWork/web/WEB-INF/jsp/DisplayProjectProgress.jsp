@@ -170,7 +170,7 @@ tr,th {
 	   </div>
 	   <div class="left">
 	   <tr><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></tr>
-              <tr><h4 style="color: red; font-size: 15px">Engineer Assigned: ${ProjectData.engineer}</h4></tr>
+             
               </tr><h4 style="color: red; font-size: 15px" >Start Date: ${ProjectData.startdate}</h4></tr>
 	   </div><br>
 <div style="overflow: auto;height: 200px; width: auto;">
