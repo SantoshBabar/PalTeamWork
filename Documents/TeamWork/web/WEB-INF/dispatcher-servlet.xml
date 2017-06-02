@@ -48,22 +48,27 @@
                        <value>com.Paladion.teamwork.beans.TemplateBean</value>
                        <value>com.Paladion.teamwork.beans.ProjectBean</value>
                        <value>com.Paladion.teamwork.beans.MapTemplateTaskBean</value>
-		<value>com.Paladion.teamwork.beans.individualProjectStatusBean</value>
+		<value>com.Paladion.teamwork.beans.ProjectTransactionBean</value>
 		
                     </list>
            </property>
 
            <property name="hibernateProperties">
-                 <props>
+           <props>
                        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                        <prop key="hibernate.current_session_context_class">thread</prop>
                        <prop key="hibernate.show_sql">false</prop>
-                 </props>
+		
+	</props>
            </property>
 
 </bean>
 
 <bean id="LoginDAO" class="com.Paladion.teamwork.DAO.LoginDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
+
+<bean id="UserDAO" class="com.Paladion.teamwork.DAO.UserDAOImpl">
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 
@@ -79,8 +84,6 @@
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 
-<bean id="UserDAO" class="com.Paladion.teamwork.DAO.UserDAOImpl">
-<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-</bean>
+
 
 </beans>

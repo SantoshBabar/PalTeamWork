@@ -8,10 +8,13 @@ package com.Paladion.teamwork.beans;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Generated;
 
 /**
  *
@@ -21,17 +24,16 @@ import javax.persistence.Table;
 @Table(name = "userstable",catalog="teamwork")
 public class LoginBean implements Serializable {
 
-    @Id
-    String userid;
-       
-    String username,password,role;
-    
+    @Id 
+    private String username;
+    private String password;
+    private String role;
+     
+@OneToOne
+@JoinColumn(name = "userId")
+public UserBean userinfo;
         
-        
-           @OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userid")
-	public UserBean userinfo;
-
+           
 	public UserBean getUserinfo() {
 		return userinfo;
 	}
@@ -64,18 +66,4 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
-	
-	
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    
-  
-    
 }

@@ -153,27 +153,31 @@ tr,th {
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
         <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Add Task Template</h2><br></div>
+	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Assign Tasks for the Engineers</h2><br></div>
 
-   <%! TemplateBean TempB; String TempName;%>
-        <% TempB=(TemplateBean)session.getAttribute("Template"); 
-        TempName=TempB.getTemplatename().toString();
-        %>
+ 
 	   
-	   <div align="center">  <h2>  Select the Tasks for the <%=TempName%> Template</font></h2> </div>
 	   
-	   <h4 >List of All the Tasks </h4>  
 	   
-	   <form:form  action="AddTaskTemplate.do" method="post">
+	<form:form  action="AssignTaskToEngineers.do" method="post" >
 	   
-	   <div style="overflow: auto;height: 350px; width: 700px;">
-	   <table>
-	   <div align="center">
-	   <tr ><th >Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
-                <c:forEach  items="${AllTasks}" var="task">     
-			 <tr align="center"> <td><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" ></td></tr>
+	<div style="overflow: auto;height: 350px; width: 700px;">
+	<table>
+	<div align="center">
+	<tr ><th >Task Name </th>  <th> Engineer</th></tr>
+	   
+           <c:forEach  items="${AllProjectTasks}" var="task">     
+	 <tr align="center"> <td><input value="${task.taskname}" name="taskname"></td> 
+	
+	    <td>
+		<select>
+	           <c:forEach  items="${AllEngineers}" var="engineer"> 
+	           <option value="${engineer.userinfo.userId}" name="userid"><c:out value="${engineer.username}" /><option>
+	           </c:forEach><select> </td>	
+	   </tr>
+           </c:forEach>
                
-	   </c:forEach>
+	   
 	   </div>
 	   
 	   </table>

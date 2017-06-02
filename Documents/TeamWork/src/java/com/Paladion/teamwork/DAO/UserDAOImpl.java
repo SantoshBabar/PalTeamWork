@@ -17,10 +17,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-/**
- *
- * @author user
- */
+
 public class UserDAOImpl implements UserDAO{
 
 	 @Autowired
@@ -33,69 +30,53 @@ public class UserDAOImpl implements UserDAO{
 	
 	
 	@Override
-	public void addUserDao(UserBean UB) {
-		
-		Session session1 = sessionFactory.getCurrentSession();
+	public boolean addUser(LoginBean loginBean) {
+		try{
+		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = null;
-	            tx = session1.beginTransaction();
-	           session1.save(UB);
+	            tx = session.beginTransaction();
+		UserBean ub=loginBean.getUserinfo();
+		ub.setName(loginBean.getUsername());
+		session.save(loginBean);
+		session.save(ub);
+		System.out.println("done");
+				 
 	           tx.commit();
+		}catch(Exception ex){
+			System.out.println("In catch block: Exception raised");
+			return false;
+		}
 		System.out.println("User created successfully");
+		return true;
+		
 	}
 	
 	@Override
-	public List<LoginBean> getAllEngineers(){
-		List<LoginBean> allEngineers=new ArrayList<LoginBean>();
+	public List<LoginBean> getUsersByRole(String role)
+	{
+		List<LoginBean> UserList=new ArrayList<LoginBean>();
+		LoginBean ubean=new LoginBean();
 		
 		Session session1 = sessionFactory.getCurrentSession();
-		Transaction tx= null;
-		 tx = session1.beginTransaction();
-		 System.out.println("Get all engineers UserDAO");
-     
-	//Session session1 = sessionFactory.getCurrentSession();
-	        
-        String SQL_QUERY1= "from LoginBean where role='engineer'";
-        Query query2 = session1.createQuery(SQL_QUERY1);
-            LoginBean ubean=new LoginBean();
-        List list2 = query2.list();
-	   System.out.println("Query executed :)");
-	 Iterator it= list2.iterator();
-        while(it.hasNext())
-        {
+		Transaction tx;
+		tx = session1.beginTransaction();
 		
-         ubean=(LoginBean) it.next();
-         System.out.print("\nUser name Engineers from the DB"+ubean.getUserid());
-	    allEngineers.add(ubean);
-        }
-	   return allEngineers;	
+		System.out.println("Get Users by Role UserDAO");
+	           String SQL_QUERY1= "from LoginBean where role=?";
+                      Query query2 = session1.createQuery(SQL_QUERY1);
+	           query2.setParameter(0,role);
+         
+                      List list2 = query2.list();
+	           tx.commit();
+	           System.out.println("Query executed :)");
+	           Iterator it= list2.iterator();
+                      while(it.hasNext())
+                      {
+		           ubean=(LoginBean) it.next();
+                                  System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.userinfo.getName());
+	                       UserList.add(ubean);
+                      }
+		
+	           return UserList;	
 	}
-	
-	@Override
-	public List<LoginBean> getAllLeads(){
-		List<LoginBean> allLeads = new ArrayList <LoginBean>();
-		
-		
-		 System.out.println("Get all leads UserDAO");
-      LoginBean ubean=new LoginBean();
-	Session session1 = sessionFactory.getCurrentSession();
-	        
-        String SQL_QUERY1= "from LoginBean where role='engineer'";
-        Query query2 = session1.createQuery(SQL_QUERY1);
-        
-        List list2 = query2.list();
-	   System.out.println("Query executed :)");
-	 Iterator it= list2.iterator();
-        while(it.hasNext())
-        {
-         ubean=(LoginBean) it.next();
-         System.out.print("\nUser name Leads from the DB"+ubean.userinfo.getName());
-	 allLeads.add(ubean);
-        }
-	   return allLeads;	
-	}
-	
-	
-	
-	
-	
 }

@@ -1,42 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.Paladion.teamwork.services;
+
 
 import com.Paladion.teamwork.DAO.UserDAO;
 import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.UserBean;
 import java.util.List;
+
+import com.Paladion.teamwork.DAO.LoginDAO;
+import com.Paladion.teamwork.DAO.UserDAO;
+import com.Paladion.teamwork.beans.LoginBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-/**
- *
- * @author user
- */
 public class UserServiceImpl implements UserService{
+	
 @Autowired
 @Qualifier(value="UserDAO")
- UserDAO UserD;
+UserDAO userDAO;
 	
-	
-	@Override
-	public void addUser(UserBean ubean) {
-		
-		
-		}
+@Override
+	public void addUser(LoginBean loginBean) {
+		userDAO.addUser(loginBean);
+		System.out.println("com.Paladion.teamwork.services.UserServiceImpl.addUser()");	
 
-	@Override
-	public List<LoginBean> getAllEngineers() {
-		return UserD.getAllEngineers();
-	}
-
-	@Override
-	public List<LoginBean> getAllLeads() {
-	return UserD.getAllLeads();
-	}
+}
 	
 	
+	
+	@Override
+	public List<LoginBean> getUsersByRole(String role) {
+		return userDAO.getUsersByRole(role);
+	}
 }

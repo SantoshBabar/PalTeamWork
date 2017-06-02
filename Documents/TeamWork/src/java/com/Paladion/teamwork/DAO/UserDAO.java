@@ -10,12 +10,16 @@ import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.UserBean;
 import java.util.List;
 
+
 /**
  *
  * @author user
  */
 public interface UserDAO {
-	public void addUserDao(UserBean Ubean);
-	public List<LoginBean> getAllEngineers();
-	public List<LoginBean> getAllLeads();
-		   }
+
+	//public void addUserDao(UserBean Ubean);
+	public List<LoginBean> getUsersByRole(String role);
+
+	public boolean addUser(LoginBean loginbean);
+
+}

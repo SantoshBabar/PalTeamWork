@@ -37,11 +37,7 @@ public TaskBean populate()
 {
 	   return new TaskBean();
 }
-@ModelAttribute("CreateM")
-public CreateUserBean generate()
-{
-	   return new CreateUserBean();
-}
+
 	
 @RequestMapping(value="/CreateTask",method=RequestMethod.GET)
      public String CreateTask()

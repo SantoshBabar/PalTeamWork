@@ -135,15 +135,15 @@ border-bottom-color: black;
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
         <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
+	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create User</h2><br></div>
 
-	   <form:form action="CreateUser.do" method="post" modelAttribute="CreateM">
+	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
 <table>
 
-<tr ><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="name" /></h4></td></tr>    
-<tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="email" /></h4></td></tr>  
-<tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="phone" /></h4></td></tr>
-<tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="team" /></h4></td></tr>
+<tr ><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username" /></h4></td></tr>    
+<tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
+<tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
+<tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="userinfo.team" /></h4></td></tr>
 <tr><td align="center"><h4 >Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
 <tr><td align="center"><h4 >Enter the Role</td><td><form:input  placeHolder="Enter the role" path="role" /></h4></td></tr>
 <tr><td align="center" colspan="2"><input type="submit" value="Create" class="login login-submit"/></td></tr>            

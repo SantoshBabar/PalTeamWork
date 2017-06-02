@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "project_transaction",catalog="teamwork")
-public class individualProjectStatusBean {
+public class ProjectTransactionBean {
     
    
 	@Id

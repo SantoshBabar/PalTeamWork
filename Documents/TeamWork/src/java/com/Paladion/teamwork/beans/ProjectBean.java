@@ -143,13 +143,13 @@ public class ProjectBean implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "projectid")
 	@JoinTable(name = "project_transaction", joinColumns = { @JoinColumn(name = "projectid") })
-	public Set <individualProjectStatusBean> projectstatusbean;
+	public Set <ProjectTransactionBean> projectstatusbean;
 
-	public Set<individualProjectStatusBean> getProjectstatusbean() {
+	public Set<ProjectTransactionBean>Projectstatusbean() {
 		return projectstatusbean;
 	}
 
-	public void setProjectstatusbean(Set<individualProjectStatusBean> projectstatusbean) {
+	public void setProjectstatusbean(Set<ProjectTransactionBean>projectstatusbean ) {
 		this.projectstatusbean = projectstatusbean;
 	}
 
