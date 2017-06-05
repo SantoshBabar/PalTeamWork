@@ -135,10 +135,25 @@ border-bottom-color: black;
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
          
-<div> <font color="red"><b><center>${Success}</center><br><br></b></font></div>
+<div> <font color="red"><b><center>${success}</center><br><br></b></font></div>
 
-<a href="http://localhost:8084/TeamWork/sendMail.do">Send mail</a>
-	 
 
-    </body>
+<div class="login-card">
+<div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create email template</h2><br></div>
+<form:form action="createEmailTemp.do" method="POST" modelAttribute="EmailBean">
+<table>
+
+<tr ><td align="center"><h4 >Template Name:</td><td><form:input placeHolder="Enter the template name"  path="emailTemplateName" /></h4></td></tr>    
+<tr><td align="center"><h4 >Email Subject:</td><td><form:input placeHolder="Enter the email subject" path="emailTemplateSubject" /></h4></td></tr>  
+<tr><td align="center"><h4>Email Body</td><td><form:textarea placeHolder="Enter the email message" path="emailTemplateMessage" /></h4></td></tr>
+<tr><td align="center" colspan="2"><input type="submit" value="Create email template" class="login login-submit"/></td></tr>            
+</table>
+</form:form>
+<form:form action="sendMail.do" method="POST">
+<table>
+<tr><td align="center" colspan="2"><input type="submit" value="Send Mail" class="login login-submit"/></td></tr>            
+</table>
+</form:form>
+
+</body>
 </html>

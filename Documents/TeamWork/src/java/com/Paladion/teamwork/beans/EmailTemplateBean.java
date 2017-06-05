@@ -7,6 +7,7 @@ package com.Paladion.teamwork.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -14,13 +15,15 @@ import javax.persistence.Table;
  * @author user
  */
 @Entity
-@Table(name = "ETemplateTable",catalog="teamwork")
+@Table(name = "EmailTemplate",catalog="teamwork")
 public class EmailTemplateBean {
 	
 	@Id
 	private int emailTemplateId;
 	private String emailTemplateName;
 	private String emailTemplateSubject;
+	
+	@Lob
 	private String emailTemplateMessage;
 
 	public int getEmailTemplateId() {

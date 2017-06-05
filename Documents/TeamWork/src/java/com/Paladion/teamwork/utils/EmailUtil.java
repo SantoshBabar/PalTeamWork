@@ -44,10 +44,12 @@ public class EmailUtil {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("teamwork.codereview@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("satyam.krishna@paladion.net"));
-			message.setSubject("Testing Subject");
-			message.setText("Dear Mail Crawler," +
-					"\n\n No spam to my email, please!");
+					InternetAddress.parse(emailTO));
+			message.setSubject(emailSubject);
+			//message.setText("Dear Mail Crawler," +
+					//"\n\n No spam to my email, please!");
+			
+			message.setText(emailMessage);
 
 			Transport.send(message);
 
