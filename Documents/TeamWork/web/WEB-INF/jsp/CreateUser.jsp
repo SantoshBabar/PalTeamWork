@@ -135,7 +135,7 @@ border-bottom-color: black;
 <div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
  
         <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
+	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create User</h2><br></div>
 
 	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
 <table>

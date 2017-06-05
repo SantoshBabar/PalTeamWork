@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.DAO.ProjectDAO;
+import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ ProjectDAO PD;
 		}
 
 	@Override
-	public void getAllWeights(int tempID) {
+	public List <MapTemplateTaskBean> getAllWeights(int tempID) {
 	
-	PD.getAllWeights(tempID);
+	return PD.getAllWeights(tempID);
 	
 	
 	}

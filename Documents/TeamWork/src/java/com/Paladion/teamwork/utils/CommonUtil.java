@@ -9,7 +9,7 @@ import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
-import com.Paladion.teamwork.beans.individualProjectStatusBean;
+import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,69 +28,92 @@ public class CommonUtil {
     
     public List<MapTemplateTaskBean> Maptasktotemplate(HttpServletRequest req,HttpSession session)
     {
-        List<MapTemplateTaskBean> mTTBList=new ArrayList<MapTemplateTaskBean>();
+           List<MapTemplateTaskBean> mTTBList=new ArrayList<MapTemplateTaskBean>();
 	List<TaskBean> tasklist = null;
-        TemplateBean TempB=null;
-        int Tempid,i,j=0;
+           TemplateBean TempB=null;
+           int Tempid,i,j=0;
         
         //retrieving tasks and templates from session stored in controller
 	TempB=(TemplateBean)session.getAttribute("Template"); 
-        tasklist=(List<TaskBean>)session.getAttribute("TaskList");
+            tasklist=(List<TaskBean>)session.getAttribute("TaskList");
         
-        Tempid=TempB.getTemplateid();
-        System.out.println("The templateid to which tasks will be added: "+Tempid);
+           Tempid=TempB.getTemplateid();
+           System.out.println("The templateid to which tasks will be added: "+Tempid);
 		 
 	String[] taskID=req.getParameterValues("task");
 	
-        int[] taskid=new int[taskID.length];
+           int[] taskid=new int[taskID.length];
 	i=0;
 	
-        for(String str:taskID)
-        {
-        taskid[i]=Integer.parseInt(str);//Exception in this line
-        i++;
-        }
+           for(String str:taskID)
+          {
+            taskid[i]=Integer.parseInt(str);//Exception in this line
+            i++;
+          }
 	
 	int[] weight=new int[taskid.length];
 	
-        for(i=0;i<taskid.length;i++)
+           for(i=0;i<taskid.length;i++)
 	{
 		String tid=taskID[i];
-	        weight[i]=Integer.parseInt(req.getParameter(tid));
+	           weight[i]=Integer.parseInt(req.getParameter(tid));
 	}
 	
 	int sum= IntStream.of(weight).sum();
 	System.out.println(Arrays.toString(taskid));
-	
 	System.out.println(Arrays.toString(weight));	
-	
 	System.out.println("The sum of all the weights entered: "+sum);
         
-        if(sum==100)
-        {
-        
-        for(i=0;i<taskid.length;i++)
-        {
-            MapTemplateTaskBean mb=new MapTemplateTaskBean();
-            mb.setTaskid(taskid[i]);
-            for(TaskBean tb:tasklist)
-            {
-            if(tb.getTaskid()==taskid[i])mb.setTaskname(tb.getTaskname());
-            }
-            mb.setTemplateid(Tempid);
-            mb.setWeight(weight[i]);
-            mTTBList.add(mb);
-        
-        }   
-                  
-        return mTTBList;
+           if(sum==100)
+          {
+            for(i=0;i<taskid.length;i++)
+                 {
+                      MapTemplateTaskBean mb=new MapTemplateTaskBean();
+                      mb.setTaskid(taskid[i]);
+                      for(TaskBean tb:tasklist)
+                     {
+                                  if(tb.getTaskid()==taskid[i])mb.setTaskname(tb.getTaskname());
+                     }
+                      mb.setTemplateid(Tempid);
+                      mb.setWeight(weight[i]);
+                      mTTBList.add(mb);
+                 }   
+           return mTTBList;
         }
-        else{return null;}
+      else{return null;}
     }
     
-    public List<individualProjectStatusBean> devideDaysfortasks(ProjectBean PB, List<MapTemplateTaskBean> MTTP) throws ParseException
+    
+     public List<ProjectTransactionBean> assignEngineerToProject(HttpServletRequest req)
+ {
+	 List<ProjectTransactionBean> TransactionList=new ArrayList<ProjectTransactionBean>();
+	 ProjectTransactionBean PTB=new ProjectTransactionBean();
+	String[] strUserID=req.getParameterValues("userid");
+	String[] taskName=req.getParameterValues("taskname");
+	int i=0;
+	int[] userid=new int[strUserID.length];
+	
+           for(String str:strUserID)
+          {
+               userid[i]=Integer.parseInt(str);//Exception in this line
+                i++;
+          }
+		 
+		 
+	 
+	 
+	 
+	 return null;
+ }
+    
+    
+    
+    
+    
+    
+    public List<ProjectTransactionBean> devideDaysfortasks(ProjectBean PB, List<MapTemplateTaskBean> MTTP) throws ParseException
     {
-        List <individualProjectStatusBean> PSBList=new ArrayList<individualProjectStatusBean>();
+        List <ProjectTransactionBean> PSBList=new ArrayList<ProjectTransactionBean>();
         Date TaskEndDate=null;
         float iMandays;
         int Weight;
@@ -105,7 +128,7 @@ public class CommonUtil {
        
         for(MapTemplateTaskBean MB :MTTP)
         {
-        individualProjectStatusBean PSB = new individualProjectStatusBean();
+        ProjectTransactionBean PSB = new ProjectTransactionBean();
         Weight =MB.getWeight();
         iMandays=TotalMandays * Weight/100;
         PSB.setTaskdays(iMandays);
@@ -220,6 +243,10 @@ Date end = null;
     
     
     
+
+ 
+ 
+ 
     
     
     

@@ -1,8 +1,15 @@
 package com.Paladion.teamwork.services;
 
+
+import com.Paladion.teamwork.DAO.UserDAO;
+import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.beans.UserBean;
+import java.util.List;
+
 import com.Paladion.teamwork.DAO.LoginDAO;
 import com.Paladion.teamwork.DAO.UserDAO;
 import com.Paladion.teamwork.beans.LoginBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -18,4 +25,11 @@ UserDAO userDAO;
 		System.out.println("com.Paladion.teamwork.services.UserServiceImpl.addUser()");	
 
 }
+	
+	
+	
+	@Override
+	public List<LoginBean> getUsersByRole(String role) {
+		return userDAO.getUsersByRole(role);
+	}
 }

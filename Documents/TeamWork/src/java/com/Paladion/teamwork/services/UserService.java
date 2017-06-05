@@ -7,11 +7,21 @@ package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.beans.LoginBean;
 
+import com.Paladion.teamwork.beans.UserBean;
+import java.util.List;
+
+
 
 /**
  *
  * @author user
  */
 public interface UserService {
+
+	
+		   public List<LoginBean> getUsersByRole(String role);
+		  
+
 	public void addUser(LoginBean loginBean);
+
 }

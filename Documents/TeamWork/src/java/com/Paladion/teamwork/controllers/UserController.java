@@ -39,6 +39,8 @@ public class UserController {
 	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
      public String createUser()
     {   
+//	    userService.getUsersByRole("engineer");
+//	    userService.getUsersByRole("lead");
 	    return "CreateUser";
     }
 	

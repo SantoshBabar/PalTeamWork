@@ -7,12 +7,16 @@ package com.Paladion.teamwork.beans;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -84,16 +88,16 @@ public class ProjectBean implements Serializable{
 		this.lead = lead;
 	}
 	
-	@Column(name = "engineer")
-	String engineer;
-
-	public String getEngineer() {
-		return engineer;
-	}
-
-	public void setEngineer(String engineer) {
-		this.engineer = engineer;
-	}
+//	@Column(name = "engineer")
+//	String engineer;
+//
+//	public String getEngineer() {
+//		return engineer;
+//	}
+//
+//	public void setEngineer(String engineer) {
+//		this.engineer = engineer;
+//	}
 	
 	@Column(name = "startdate")
 	@DateTimeFormat (pattern="dd/MM/yyyy")
@@ -134,5 +138,21 @@ public class ProjectBean implements Serializable{
 	public void setTemplateid(int templateid) {
 		this.templateid = templateid;
 	}
+	
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "projectid")
+	@JoinTable(name = "project_transaction", joinColumns = { @JoinColumn(name = "projectid") })
+	public Set <ProjectTransactionBean> projectstatusbean;
+
+	public Set<ProjectTransactionBean>Projectstatusbean() {
+		return projectstatusbean;
+	}
+
+	public void setProjectstatusbean(Set<ProjectTransactionBean>projectstatusbean ) {
+		this.projectstatusbean = projectstatusbean;
+	}
+
+
 	
 }

@@ -7,6 +7,10 @@ package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.UserBean;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -47,4 +51,32 @@ public class UserDAOImpl implements UserDAO{
 		
 	}
 	
+	@Override
+	public List<LoginBean> getUsersByRole(String role)
+	{
+		List<LoginBean> UserList=new ArrayList<LoginBean>();
+		LoginBean ubean=new LoginBean();
+		
+		Session session1 = sessionFactory.getCurrentSession();
+		Transaction tx;
+		tx = session1.beginTransaction();
+		
+		System.out.println("Get Users by Role UserDAO");
+	           String SQL_QUERY1= "from LoginBean where role=?";
+                      Query query2 = session1.createQuery(SQL_QUERY1);
+	           query2.setParameter(0,role);
+         
+                      List list2 = query2.list();
+	           tx.commit();
+	           System.out.println("Query executed :)");
+	           Iterator it= list2.iterator();
+                      while(it.hasNext())
+                      {
+		           ubean=(LoginBean) it.next();
+                                  System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.userinfo.getName());
+	                       UserList.add(ubean);
+                      }
+		
+	           return UserList;	
+	}
 }

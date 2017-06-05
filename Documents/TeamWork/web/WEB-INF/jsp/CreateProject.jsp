@@ -163,7 +163,6 @@ border-bottom-color: black;
 <tr><td align="center"><h4>OPID :</td><td><form:input placeholder="Enter OPID" path="opid" /></h4></td></tr>    
 <tr><td align="center"><h4>Project Name :</td><td><form:input placeholder="Enter Project Name" path="projectname" /></h4></td></tr>  
 <tr><td align="center"><h4>Lead :</td><td><form:input placeholder="Enter Lead Name" path="lead" /></h4></td></tr>
-<tr><td align="center"><h4>Engineer :</td><td><form:input placeholder="Enter Engineer Name" path="engineer" /></h4></td></tr>
 <tr><td align="center"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="date" path="startdate" value=""/></h4></td></tr>
 <tr><td align="center"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate" value=""/></h4></td></tr>
 <tr><td align="center"><h4 >Template :</td><td ><form:select  path="templateid">  
