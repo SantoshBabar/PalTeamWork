@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
@@ -19,11 +20,11 @@ import javax.persistence.Table;
 public class EmailTemplateBean {
 	
 	@Id
+	@GeneratedValue
 	private int emailTemplateId;
 	private String emailTemplateName;
 	private String emailTemplateSubject;
 	
-	@Lob
 	private String emailTemplateMessage;
 
 	public int getEmailTemplateId() {

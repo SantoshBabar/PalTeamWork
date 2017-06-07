@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
 <style>
@@ -149,11 +150,43 @@ border-bottom-color: black;
 <tr><td align="center" colspan="2"><input type="submit" value="Create email template" class="login login-submit"/></td></tr>            
 </table>
 </form:form>
+<div>
 <form:form action="sendMail.do" method="POST">
 <table>
 <tr><td align="center" colspan="2"><input type="submit" value="Send Mail" class="login login-submit"/></td></tr>            
 </table>
 </form:form>
+
+</div>
+</div>
+
+
+<hr>
+
+<h2 bgcolor="yellow">Show Email Template</h2>
+<table width="50%" bgcolor="yellow">
+	<tr>
+		<th>Email TemplateID</th>
+		<th>Email Template Name</th>
+		<th>Email Template Subject</th>
+		<th>Email Template Message</th>
+		<th>Actions</th>
+	</tr>
+	<c:forEach items="${emailList}" var="eList">
+		<tr>
+			<td>${eList.emailTemplateId}</td>
+			<td>${eList.emailTemplateName}</td>
+			<td>${eList.emailTemplateSubject}</td>
+			<td>${eList.emailTemplateMessage}</td>
+			<td><a href="<c:url value='/updateEmailTemp.do/${eList.emailTemplateId}' />" >Update</a></td>
+			<td><a href="<c:url value='/deleteEmailTemp.do`/${eList.emailTemplateId}' />" >Delete</a></td>
+			
+			
+		</tr>
+	</c:forEach>
+</table>	
+<br/>
+
 
 </body>
 </html>

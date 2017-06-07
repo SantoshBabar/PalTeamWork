@@ -7,10 +7,16 @@ package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.EmailTemplateBean;
 import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.services.EmailService;
 import com.Paladion.teamwork.utils.EmailUtil;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmailController {
 	
 	
+@Autowired
+@Qualifier(value="EmailService")
+EmailService emailService;
+	
+	
 @ModelAttribute("EmailBean")
  public EmailTemplateBean PopulateLoginBean() 
 {
@@ -30,10 +41,17 @@ public class EmailController {
 }
 	
 @RequestMapping(value="/Email",method=RequestMethod.GET)
-public String sendMail()
+public ModelAndView sendMail()
+	   
 {
-	return "Email";
-}
+	List EmailTemplateBean=emailService.listEmailTemplate();
+	
+	System.out.println(EmailTemplateBean);
+	
+	
+	return new ModelAndView("Email", "emailList", EmailTemplateBean);
+	
+	}
 
 @RequestMapping(value="/sendMail",method=RequestMethod.POST)
 public ModelAndView sendMail(String st)
@@ -51,35 +69,44 @@ public ModelAndView sendMail(String st)
 }
 
 @RequestMapping(value="/createEmailTemp",method=RequestMethod.POST)
-public ModelAndView createEmailTemplate(@ModelAttribute("EmailBean")EmailTemplateBean emailBean,HttpServletRequest req)
+public String createEmailTemplate(@ModelAttribute("EmailBean")EmailTemplateBean emailBean,HttpServletRequest req)
 {
-return new ModelAndView( "Email","success","Email Template Created Successfully"  );
+	emailService.createEmailTemplate(emailBean);
+	
+return "Email";
 	
 }
 
-@RequestMapping(value="/updateEmailTemp",method=RequestMethod.POST)
-public ModelAndView updateEmailTemplate()
+@RequestMapping("/updateEmailTemp")
+public String updateEmailTemplate(@PathVariable("id") int id,Model model)
 {
-
-return new ModelAndView( "Email","success","Email Template Updated Successfully"  );
+	System.out.println("Update email template");
+//emailService.updateEmailTemplate();
+return "Email";
 }
 
-@RequestMapping(value="/listEmailTemp",method=RequestMethod.POST)
-public ModelAndView listEmailTemplate()
+@RequestMapping(value="/deleteEmailTemp/{id}",method=RequestMethod.GET)
+public ModelAndView deleteEmailTemplate(@PathVariable("id") int id)
 {
-
-return new ModelAndView( "Email");
-}
-
-
-@RequestMapping(value="/deleteEmailTemp",method=RequestMethod.POST)
-public ModelAndView deleteEmailTemplate()
-{
-
+	
+	System.out.println(id);
+	System.out.println("delete email template");
+//emailService.deleteEmailTemplate(emailBean);
+	
+	   
 return new ModelAndView( "Email","success","Email Template Deleted Successfully"  );
 }
 
 
+
+
+
+@RequestMapping(value="/listEmailTemp",method=RequestMethod.POST)
+public ModelAndView listEmailTemplate()
+{
+emailService.listEmailTemplate();
+return new ModelAndView( "Email");
+}
 
 	
 }

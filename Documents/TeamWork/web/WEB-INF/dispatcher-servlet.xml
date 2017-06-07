@@ -28,6 +28,7 @@
 <bean id="TaskService" class="com.Paladion.teamwork.services.TaskServiceImpl" />
 <bean id="TemplateService" class="com.Paladion.teamwork.services.TemplateServiceImpl" />
 <bean id="UserService" class="com.Paladion.teamwork.services.UserServiceImpl" />
+<bean id="EmailService" class="com.Paladion.teamwork.services.EmailServiceImpl" />
 
 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
@@ -49,6 +50,7 @@
                        <value>com.Paladion.teamwork.beans.ProjectBean</value>
                        <value>com.Paladion.teamwork.beans.MapTemplateTaskBean</value>
 		<value>com.Paladion.teamwork.beans.ProjectTransactionBean</value>
+		<value>com.Paladion.teamwork.beans.EmailTemplateBean</value>
 		
                     </list>
            </property>
@@ -58,6 +60,7 @@
                        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                        <prop key="hibernate.current_session_context_class">thread</prop>
                        <prop key="hibernate.show_sql">false</prop>
+<!--		<prop key="hibernate.hbm2ddl.auto">create</prop>-->
 		
 	</props>
            </property>
@@ -81,6 +84,11 @@
 </bean>
 
 <bean id="ProjectDAO" class="com.Paladion.teamwork.DAO.ProjectDAOImpl">
+<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+</bean>
+
+
+<bean id="EmailDAO" class="com.Paladion.teamwork.DAO.EmailDAOImpl">
 <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 </bean>
 
