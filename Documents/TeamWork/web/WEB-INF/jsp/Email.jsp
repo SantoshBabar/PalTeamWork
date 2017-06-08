@@ -3,6 +3,8 @@
     Created on : 12 Apr, 2017, 8:31:39 PM
     Author     : Administrator
 --%>
+
+<html> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -178,8 +180,8 @@ border-bottom-color: black;
 			<td>${eList.emailTemplateName}</td>
 			<td>${eList.emailTemplateSubject}</td>
 			<td>${eList.emailTemplateMessage}</td>
-			<td><a href="<c:url value='/updateEmailTemp.do/${eList.emailTemplateId}' />" >Update</a></td>
-			<td><a href="<c:url value='/deleteEmailTemp.do`/${eList.emailTemplateId}' />" >Delete</a></td>
+			<td><a href="<c:url value='/EmailUpdateTemp/${eList.emailTemplateId}.do' />" >Update</a></td>
+			<td><a href="<c:url value='/deleteEmailTemp/${eList.emailTemplateId}.do' />" >Delete</a></td>
 			
 			
 		</tr>

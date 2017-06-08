@@ -77,10 +77,10 @@ return "Email";
 	
 }
 
-@RequestMapping("/updateEmailTemp")
-public String updateEmailTemplate(@PathVariable("id") int id,Model model)
+@RequestMapping(value="/EmailUpdateTemp/{id}",method=RequestMethod.GET)
+public String updateEmailTemplate(@PathVariable("id") int id)
 {
-	System.out.println("Update email template");
+	System.out.println("fgfguiy"+id);
 //emailService.updateEmailTemplate();
 return "Email";
 }
