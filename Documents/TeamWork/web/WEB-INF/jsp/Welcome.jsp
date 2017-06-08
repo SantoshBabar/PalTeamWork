@@ -1,10 +1,11 @@
-    <%@page import="com.Paladion.teamwork.beans.LoginBean"%>
+  
 <%-- 
     Document   : Welcome
     Created on : 13 Apr, 2017, 8:45:16 PM
     Author     : Administrator
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.Paladion.teamwork.beans.LoginBean"%>
 <%@page import="com.Paladion.teamwork.beans.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.Paladion.teamwork.beans.ProjectBean"%>
@@ -171,3 +172,4 @@ th {
 	   </div>
 	   
         
+
