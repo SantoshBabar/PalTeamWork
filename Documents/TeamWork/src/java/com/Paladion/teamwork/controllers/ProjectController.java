@@ -85,9 +85,8 @@ public ModelAndView CreateProject()
 	            System.out.println("Man days :"+PB.getMandays());
                 }
            catch(Exception ex){
-                      DatabaseUtils dbUtil=new DatabaseUtils();
                       List <TemplateBean> TemplateList;
-                      TemplateList=dbUtil.getAllTemplates();
+                      TemplateList=TS.getAllTemplates();
 	              result = new ModelAndView("CreateProject","Projectresp","Project Creation failed");
                       result.addObject("AllTemplates", TemplateList);
                       return result;
@@ -139,26 +138,17 @@ public ModelAndView CreateProject()
         return result;
     }
     
-    
-    
-    
-    
-    
+
     @RequestMapping(value="/showProgress",method=RequestMethod.GET)
     public ModelAndView showProjectProgress(@RequestParam int id) throws ParseException
     {
            List<ProjectTransactionBean> PSBList;
-           ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
-           List<MapTemplateTaskBean> MTTB;
-        
            ProjectBean PRDATA=PS.getProjectById(id);
-            MTTB=PS.getAllWeights(PRDATA.getTemplateid());
-           CommonUtil CU=new CommonUtil();
-           PSBList=  CU.devideDaysfortasks(PRDATA, MTTB);
+           PSBList = PS.getProjectTransaction(id);
+ 
            ModelAndView result=new ModelAndView("DisplayProjectProgress");
            result.addObject("ProjectData",PRDATA);
-           PTW.setProjectlist(PSBList);
-           result.addObject("PTW",PTW);
+           result.addObject("TaskDetails",PSBList);
            return result;
     }
 }

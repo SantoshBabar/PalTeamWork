@@ -40,49 +40,49 @@ public Connection getConnection() throws ClassNotFoundException, InstantiationEx
 }
 	
 	
-public  List<TaskBean>getAllTasks() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
-{
-	List <TaskBean> taskList=new ArrayList<TaskBean>();
-        Session session;
-       
-        session = sessionFactory.openSession();
-        String taskquery= "from TaskBean";
-        System.out.println(taskquery);
-        Query query2 = session.createQuery(taskquery);
-       
-        taskList= query2.list();
-	
-        return taskList;
-     }
+//public  List<TaskBean>getAllTasks() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
+//{
+//	List <TaskBean> taskList=new ArrayList<TaskBean>();
+//        Session session;
+//       
+//        session = sessionFactory.openSession();
+//        String taskquery= "from TaskBean";
+//        System.out.println(taskquery);
+//        Query query2 = session.createQuery(taskquery);
+//       
+//        taskList= query2.list();
+//	
+//        return taskList;
+//     }
 
 
 
-
-public  List<TemplateBean>getAllTemplates() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
-{
-	List <TemplateBean> templateList=new ArrayList<TemplateBean>();
-	Connection conn =getConnection();
-	String query = "from TemplateBean";
-	try{
-		Statement st = (Statement)conn.createStatement();
-	           ResultSet rs = st.executeQuery(query);
-
-		while(rs.next())
-		{
-			TemplateBean tb=new TemplateBean();
-			tb.setTemplateid(rs.getInt("templateid"));
-			tb.setTemplatename(rs.getString("templatename"));
-			templateList.add(tb);
-		}
-	}
-	catch(Exception ex){return null;}
-           finally {
-                      if (conn != null) {
-                         try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-             }
-	}	
-           return templateList;
-     }
+//
+//public  List<TemplateBean>getAllTemplates() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
+//{
+//	List <TemplateBean> templateList=new ArrayList<TemplateBean>();
+//	Connection conn =getConnection();
+//	String query = "from TemplateBean";
+//	try{
+//		Statement st = (Statement)conn.createStatement();
+//	           ResultSet rs = st.executeQuery(query);
+//
+//		while(rs.next())
+//		{
+//			TemplateBean tb=new TemplateBean();
+//			tb.setTemplateid(rs.getInt("templateid"));
+//			tb.setTemplatename(rs.getString("templatename"));
+//			templateList.add(tb);
+//		}
+//	}
+//	catch(Exception ex){return null;}
+//           finally {
+//                      if (conn != null) {
+//                         try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
+//             }
+//	}	
+//           return templateList;
+//     }
 
 
 //public List<TaskWeightBean> getWeights(){

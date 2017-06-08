@@ -8,7 +8,7 @@ package com.Paladion.teamwork.beans;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -122,15 +122,14 @@ this.templateid = templateid;
 	
 	
 @OneToMany(cascade = CascadeType.ALL)
-@JoinColumn(name = "projectid")
-@JoinTable(name = "project_transaction", joinColumns = { @JoinColumn(name = "projectid") })
+@JoinTable(name = "projects_transaction", joinColumns = { @JoinColumn(name = "projectid") })
 public Set <ProjectTransactionBean> projectstatusbean;
 
-public Set<ProjectTransactionBean>Projectstatusbean() {
+public Set<ProjectTransactionBean> getProjectstatusbean() {
 return projectstatusbean;
 }
 
-public void setProjectstatusbean(Set<ProjectTransactionBean>projectstatusbean ) {
+public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
 this.projectstatusbean = projectstatusbean;
 }
 

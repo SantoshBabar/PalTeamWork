@@ -81,21 +81,19 @@ public class TemplateDAOImpl implements TemplateDAO{
         
       }
     
-    
-    
-    public  List<TemplateBean>getAllTemplates() {
+     public  List<TemplateBean> getAllTemplates() {
         
 	List <TemplateBean> templateList=new ArrayList<TemplateBean>();
 	 
         Session session=sessionFactory.openSession();
-       String templatequery= "from TemplateBean";
+        String templatequery= "from TemplateBean";
         System.out.println("template query");
         Query query2 = session.createQuery(templatequery);
        
-          templateList= query2.list();
+        templateList= query2.list();
 	
          
-           return templateList;
+        return templateList;
      }
     
     

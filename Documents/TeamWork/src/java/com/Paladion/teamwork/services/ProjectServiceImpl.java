@@ -55,6 +55,13 @@ ProjectDAO PD;
          PD.insertProjectTransaction(PTBList); 
         
     }
+    
+    @Override
+    public List<ProjectTransactionBean> getProjectTransaction(int projectid) {
+    
+         return PD.getProjectTransaction(projectid);
+        
+    }
    
 	
 }

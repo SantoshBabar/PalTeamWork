@@ -10,7 +10,7 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -76,7 +76,6 @@ public class ProjectDAOImpl implements ProjectDAO
 		Criteria criteria = session1.createCriteria(ProjectBean.class);
 		List <ProjectBean>allProjects = criteria.list();
 		tx.commit();
-		System.out.println(allProjects);
 		return allProjects;
         }
 
@@ -88,16 +87,14 @@ public class ProjectDAOImpl implements ProjectDAO
            String SQL_QUERY1= "from ProjectBean as O where O.projectid=?";
            Query query1 = session1.createQuery(SQL_QUERY1);
            query1.setParameter(0,id);
-        
            List list1 = query1.list();       
            ProjectBean PB = (ProjectBean) list1.get(0);
-           
            tx.commit();
         
            return PB;
       }
 
-    
+    @Override
     public void insertProjectTransaction(List <ProjectTransactionBean> PTBList){
         
         for(ProjectTransactionBean PTBean : PTBList){
@@ -109,6 +106,24 @@ public class ProjectDAOImpl implements ProjectDAO
 		System.out.println("Project transaction updated successfully");
         }
         
+    }
+    
+    
+        @Override
+       public List<ProjectTransactionBean> getProjectTransaction(int projectid){
+        
+           List<ProjectTransactionBean> PTBList=new ArrayList<ProjectTransactionBean>();
+           Transaction tx = null;
+	   Session session1 = sessionFactory.getCurrentSession();
+           tx = session1.beginTransaction();
+           String SQL_QUERY1= "from ProjectTransactionBean as O where O.projectid=?";
+           Query query1 = session1.createQuery(SQL_QUERY1);
+           query1.setParameter(0,projectid);
+           List list1 = query1.list();
+           PTBList=list1;
+           tx.commit();
+        
+           return PTBList;
     }
 
 }
