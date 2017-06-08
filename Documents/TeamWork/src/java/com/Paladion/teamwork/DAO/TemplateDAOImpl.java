@@ -12,6 +12,8 @@ import com.Paladion.teamwork.utils.DatabaseUtils;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -78,5 +80,25 @@ public class TemplateDAOImpl implements TemplateDAO{
            return taskList;
         
       }
+    
+    
+    
+    public  List<TemplateBean>getAllTemplates() {
+        
+	List <TemplateBean> templateList=new ArrayList<TemplateBean>();
+	 
+        Session session=sessionFactory.openSession();
+       String templatequery= "from TemplateBean";
+        System.out.println("template query");
+        Query query2 = session.createQuery(templatequery);
+       
+          templateList= query2.list();
+	
+         
+           return templateList;
+     }
+    
+    
+    
 	
 }

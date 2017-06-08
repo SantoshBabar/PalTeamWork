@@ -175,19 +175,18 @@ tr,th {
 	   </div><br>
 <div style="overflow: auto;height: 200px; width: auto;">
 <table border="1" align="center">
-<tr><th>Task Name </th><th>Task Start Date</th><th>Start End Date</th><th>Hours</th></tr>
-<c:forEach  items="${WeightData}" var="MTTP">     
+    <tr><th>Task Name </th><th>Task Start Date</th><th>Start End Date</th><th>Hours</th><th>Status</th></tr>
+<c:forEach  items="${TaskDetails}" var="Task">     
             <tr> 
-                <td style="color: black">${MTTP.taskname}</td>
-                <td style="color: black"> ${MTTP.taskstartdate}</td>
-	        <td style="color: black">${MTTP.taskenddate}</td>
-                	        <td style="color: black">${MTTP.taskdays*9}</td>
-
-	   </tr>
+                <td style="color: black">${Task.taskname}</td>
+                <td style="color: black">${Task.taskstartdate}</td>
+	        <td style="color: black">${Task.taskenddate}</td>
+                <td style="color: black">${Task.taskhours}</td>
+                <td style="color: black">${Task.status}</td>
+            </tr>
            
 </c:forEach>
-          
-	    </table>
+</table>
 </div>
     </body>
 </html>

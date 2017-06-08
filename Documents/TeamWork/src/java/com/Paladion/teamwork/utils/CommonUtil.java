@@ -10,12 +10,16 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -84,27 +88,22 @@ public class CommonUtil {
     }
     
     
-     public List<ProjectTransactionBean> assignEngineerToProject(HttpServletRequest req)
- {
-	 List<ProjectTransactionBean> TransactionList=new ArrayList<ProjectTransactionBean>();
-	 ProjectTransactionBean PTB=new ProjectTransactionBean();
-	String[] strUserID=req.getParameterValues("userid");
-	String[] taskName=req.getParameterValues("taskname");
-	int i=0;
-	int[] userid=new int[strUserID.length];
-	
-           for(String str:strUserID)
-          {
-               userid[i]=Integer.parseInt(str);//Exception in this line
-                i++;
-          }
-		 
-		 
-	 
-	 
-	 
-	 return null;
- }
+//    public List<ProjectTransactionBean> assignEngineerToProject(HttpServletRequest req)
+//     {
+//	 List<ProjectTransactionBean> TransactionList=new ArrayList<ProjectTransactionBean>();
+//	 ProjectTransactionBean PTB=new ProjectTransactionBean();
+//	String[] strUserID=req.getParameterValues("userid");
+//	String[] taskName=req.getParameterValues("taskname");
+//	int i=0;
+//	int[] userid=new int[strUserID.length];
+//	
+//           for(String str:strUserID)
+//          {
+//               userid[i]=Integer.parseInt(str);//Exception in this line
+//                i++;
+//          }
+//	 return null;
+// }
     
     
     
@@ -157,24 +156,7 @@ public class CommonUtil {
         return PSBList;
     
     }
-//    
-// public Date getTaskEndTime(Date sDate, int hours){
-//       
-//    Calendar startDate = Calendar.getInstance();
-//    startDate.setTime(sDate);    
-//    while (hours > 0){
-//        int step = 0,step1 = 0;
-//        if(hours >= 9) step1 = 24;
-//        else step = hours;          
-//        hours -= step;          
-//        startDate.add(Calendar.HOUR_OF_DAY, step1);          
-//        int dayOfWeek = startDate.get(Calendar.DAY_OF_WEEK);
-//        if(dayOfWeek == Calendar.SATURDAY) hours += 24;
-//        if(dayOfWeek == Calendar.SUNDAY) hours += 24;
-//    }
-//    return startDate.getTime();
-//}
-//   
+
     
  Date calculateResponseTime(Calendar ProjectTime, float ProjectDurationinHours) {
      
@@ -239,7 +221,83 @@ Date end = null;
     
     
     
-    
+     public List<ProjectTransactionBean> setTaskHours(ProjectBean PB, List<MapTemplateTaskBean> MTTP) throws ParseException
+    {
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        
+        List <ProjectTransactionBean> PSBList=new ArrayList<ProjectTransactionBean>();
+       
+        float iMandays;
+        int Weight;
+        float TotalMandays=PB.getMandays();
+        
+        for(MapTemplateTaskBean MB :MTTP)
+        {
+            ProjectTransactionBean PSB = new ProjectTransactionBean();
+            Weight =MB.getWeight();
+            iMandays=TotalMandays * Weight/100;
+            PSB.setTaskdays(iMandays);
+            PSB.setTaskhours(iMandays*9);
+            PSB.setProjectid(PB.getProjectid());
+            PSB.setTaskname(MB.getTaskname());
+            PSB.setStatus("New");
+            PSBList.add(PSB);
+        }
+      return PSBList;
+    }
+     
+     
+     public List<ProjectTransactionBean> updateProjectTransaction(List<ProjectTransactionBean> PTBList, ProjectBean PB) throws ParseException{
+         
+         HashMap<Integer, List<ProjectTransactionBean>> hashMap = new HashMap<Integer, List<ProjectTransactionBean>>();
+         List <ProjectTransactionBean> ResultList=new ArrayList<ProjectTransactionBean>();
+         
+         for(ProjectTransactionBean PTBean : PTBList)
+         {
+            if (!hashMap.containsKey(PTBean.getUserid())) {
+            List<ProjectTransactionBean> list = new ArrayList<ProjectTransactionBean>();
+            list.add(PTBean);
+            hashMap.put(PTBean.getUserid(), list);
+           } 
+            else {
+            hashMap.get(PTBean.getUserid()).add(PTBean);}
+        }
+         
+        System.out.println("No of users assigned to project : "+hashMap.size());
+        
+        for (Map.Entry<Integer, List<ProjectTransactionBean>> entry : hashMap.entrySet())
+        {
+            Date TaskEndDate=null;
+            List<ProjectTransactionBean> PTlist = entry.getValue();
+            Calendar ProjectTime = Calendar.getInstance();
+            ProjectTime.setTime(PB.getStartdate());
+	    if (ProjectTime.get(Calendar.HOUR_OF_DAY) < 10) 
+               {
+                       ProjectTime.set(Calendar.HOUR, 10);
+               }
+            for (ProjectTransactionBean PTBean : PTlist)
+              {
+                if(null==TaskEndDate)
+                  {
+                    PTBean.setTaskstartdate(ProjectTime);
+                    TaskEndDate=calculateResponseTime(ProjectTime, PTBean.getTaskhours());
+                    PTBean.setTaskenddate(TaskEndDate);
+                   }
+                else
+                  {
+                    ProjectTime.setTime(TaskEndDate);
+                    PTBean.setTaskstartdate(ProjectTime);
+                    TaskEndDate=calculateResponseTime(ProjectTime,PTBean.getTaskhours());
+                    PTBean.setTaskenddate(TaskEndDate);
+                  }
+                ResultList.add(PTBean);
+            }
+        }
+      return ResultList;    
+    }
+            
+ }
     
     
     
@@ -250,4 +308,4 @@ Date end = null;
     
     
     
-}
+

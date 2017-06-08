@@ -50,5 +50,13 @@ public class TemplateServiceImpl implements TemplateService{
     return TempD.getAllTasksforTemplate();
     }
 
+    
+    
+    @Override
+    public List<TemplateBean>getAllTemplates(){
+        
+        return TempD.getAllTemplates();
+    }
+    
 	
 }

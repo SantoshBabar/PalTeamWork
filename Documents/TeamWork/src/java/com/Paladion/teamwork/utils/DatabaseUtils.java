@@ -62,7 +62,7 @@ public  List<TemplateBean>getAllTemplates() throws ClassNotFoundException, Insta
 {
 	List <TemplateBean> templateList=new ArrayList<TemplateBean>();
 	Connection conn =getConnection();
-	String query = "select * from Templates";
+	String query = "from TemplateBean";
 	try{
 		Statement st = (Statement)conn.createStatement();
 	           ResultSet rs = st.executeQuery(query);
