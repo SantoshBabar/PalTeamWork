@@ -18,5 +18,5 @@ public interface LoginService {
     public LoginBean Login(LoginBean LB);
     public void Logout(HttpSession sess);
     public LoginBean ForgotPassword(LoginBean LB);
-    
+    public LoginBean ResetPassword(LoginBean LB);
 }

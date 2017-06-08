@@ -136,12 +136,12 @@ body {
   <div align="center">
 <img src="PaladionLogo.png"/>
     </div>
-    <h1>Forgot Password</h1><br>
+    <h1>OTP</h1><br>
     
 <!-- UI goes here-->
-    <form:form action="ForgotPassword.do" method="post" commandName="LoginM"> 
-    	Username:<form:input path="email" placeholder="Enter the email"/>
-        <button type="submit" name=login value="Login"class="login login-submit">Reset</button><br>
+    <form:form action="NewPassword.do" method="post" commandName="LoginM"> 
+    	Password:<form:input path="password" placeholder="Enter the password"/>
+        <button type="submit" name=login value="Login"class="login login-submit">Change</button><br>
 	   
 	   
     </body>

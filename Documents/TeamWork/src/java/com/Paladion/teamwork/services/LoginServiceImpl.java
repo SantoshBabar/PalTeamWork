@@ -37,6 +37,11 @@ public class LoginServiceImpl implements LoginService{
 	    return LD.ForgotPassword(LB);
     }
     
+    @Override
+    public LoginBean ResetPassword(LoginBean LB){
+	    return LD.ResetPassword(LB);
+    }
+    
     
     
 }

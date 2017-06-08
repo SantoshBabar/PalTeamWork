@@ -144,13 +144,13 @@ body {
         Password:<form:password path="password" placeholder="Enter the password"/>
         <button type="submit" name=login value="Login"class="login login-submit">Login</button><br>
 	   
-	   
+        <br>
     </body>
     </form>
-    <!--<form:form action="ForgotPassword.do" method="GET">
+    <form:form action="Forgot.do" method="GET">
     <button type="submit" value="forgot" class="login login-submit">Forgot Password</button></a>
     </form:form>
-  </form:form>-->
+  </form:form>
 	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>
   <!-- UI goes here-->
 <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
