@@ -16,4 +16,5 @@ public interface LoginDAO {
     
     public LoginBean Login(LoginBean LB);
     public LoginBean ForgotPassword(LoginBean LB);
+    public LoginBean ResetPassword(LoginBean LB);
 }

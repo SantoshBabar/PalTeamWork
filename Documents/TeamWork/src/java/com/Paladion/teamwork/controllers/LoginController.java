@@ -59,6 +59,22 @@ public String forgot()
 return "ForgotPassword";
 }
 
+@RequestMapping(value="/ResetPassword",method=RequestMethod.GET)
+public String Reset()
+{
+ 
+return "ResetPassword";
+}
+
+@RequestMapping(value="/Forgot",method=RequestMethod.GET)
+public String forgot1()
+{
+ 
+return "ForgotPassword";
+}
+
+
+
 //forgot password starts
 @RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
 public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
@@ -68,9 +84,29 @@ public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletReq
            if (lb!=null) {
             HttpSession LoginSess=req.getSession(true);
             LoginSess.setAttribute("Luser", ub);
-            return new ModelAndView("redirect:/ForgotPassword.do");}
+            return new ModelAndView("ResetPassword");
+           }
            else {
-           return new ModelAndView("ForgotPassword","Lerror", "If your Email id is valid you will receive a email from us");
+           return new ModelAndView("ForgotPassword","Lerror", "fail");
+           }
+}
+//////////////////////////
+
+
+///////////////////////////
+
+@RequestMapping(value="/ResetPassword",method=RequestMethod.POST)
+public ModelAndView ResetPassword(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
+    {
+           System.out.println("ResetPassword");
+           lb=LS.ResetPassword(LB);
+           if (lb!=null) {
+            HttpSession LoginSess=req.getSession(true);
+            LoginSess.setAttribute("Luser", ub);
+            return new ModelAndView("Login","Lerror", "password updated successfully");
+           }
+           else {
+           return new ModelAndView("ResetPassword","Lerror", "incorrect OTP");
            }
 }
 

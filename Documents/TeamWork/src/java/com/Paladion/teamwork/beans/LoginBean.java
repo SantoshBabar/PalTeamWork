@@ -28,6 +28,8 @@ public class LoginBean implements Serializable {
     private String username;
     private String password;
     private String role;
+    private String email;
+    private String OTP;
      
 @OneToOne
 @JoinColumn(name = "userId")
@@ -65,5 +67,23 @@ public UserBean userinfo;
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getOTP() {
+        return OTP;
+    }
+
+    public void setOTP(String OTP) {
+        this.OTP = OTP;
+    }
+    
+    
 
 }
