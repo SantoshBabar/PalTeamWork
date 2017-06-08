@@ -126,11 +126,13 @@ public class LoginDAOImpl implements LoginDAO{
                         
         if ((list1 != null) && (list1.size() > 0)) 
         {      
-            String sql = "update userstable set password=? where OTP=?";
+            String sql = "update userstable set password=?, OTP=? where OTP=?";
              SQLQuery query = session.createSQLQuery(sql);
              query.setParameter(0, LB.getPassword());
-             query.setParameter(1, LB.getOTP());
+             query.setParameter(1, null);
+             query.setParameter(2, LB.getOTP());
              query.executeUpdate();
+             System.out.println("running");
         return SessUserBean;
         }
         else
