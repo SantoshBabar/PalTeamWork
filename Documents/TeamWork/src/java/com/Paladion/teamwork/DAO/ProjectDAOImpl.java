@@ -7,9 +7,10 @@ package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
+import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -36,74 +37,93 @@ public class ProjectDAOImpl implements ProjectDAO
 	public void addProjectDao(ProjectBean PB) {
 		Session session1 = sessionFactory.getCurrentSession();
 		Transaction tx = null;
-	            tx = session1.beginTransaction();
-	           session1.save(PB );
-	           tx.commit();
+	        tx = session1.beginTransaction();
+	        session1.save(PB );
+	        tx.commit();
 		System.out.println("Project created successfully");
-}
+      }
 
 	@Override
 	public List<MapTemplateTaskBean> getAllWeights(int tempID) {
 		 
            System.out.println("com.Paladion.teamwork.DAO.ProjectDAOImpl.getAllWeights()");
            MapTemplateTaskBean MTTB;
-	Session session1 = sessionFactory.getCurrentSession();
-	Transaction tx = null;
+	   Session session1 = sessionFactory.getCurrentSession();
+	   Transaction tx = null;
            tx = session1.beginTransaction();
            String SQL_QUERY1= "from MapTemplateTaskBean as O where O.templateid=?";
            Query query2 = session1.createQuery(SQL_QUERY1);
            query2.setParameter(0,tempID);
         
            List list2 = query2.list();
-	System.out.println("Query executed :)");
-	Iterator it= list2.iterator();
-	tx.commit();
+	   System.out.println("Query executed :)");
+	   Iterator it= list2.iterator();
+	   tx.commit();
                 while(it.hasNext())
                   {
                       MTTB=(MapTemplateTaskBean) it.next();
                       System.out.print("Taskid from the DB"+MTTB.getTaskid());
                   }
-	return list2;
-}
+	   return list2;
+        }
 
 	@Override
 	public List<ProjectBean> getAllProjects() {
-		System.out.println("getAllProjects1");
+		
 		Session session1 = sessionFactory.getCurrentSession();
-		System.out.println("getAllProjects2");
-		Transaction tx = null;
-	           tx = session1.beginTransaction();
+	        Transaction tx = null;
+	        tx = session1.beginTransaction();
 		Criteria criteria = session1.createCriteria(ProjectBean.class);
-		System.out.println("getAllProjects3");
 		List <ProjectBean>allProjects = criteria.list();
 		tx.commit();
-		System.out.println("getAllProjects4");
-		
-		System.out.println(allProjects);
-		
 		return allProjects;
-}
+        }
 
-    @Override
-    public List<Object> getProjectById(int id) {
-	    
-           List<Object> PRDATA=new ArrayList<Object>();
-           Transaction tx = null;
-	Session session1 = sessionFactory.getCurrentSession();
+        @Override
+        public ProjectBean getProjectById(int id) {
+	   Transaction tx = null;
+	   Session session1 = sessionFactory.getCurrentSession();
            tx = session1.beginTransaction();
            String SQL_QUERY1= "from ProjectBean as O where O.projectid=?";
            Query query1 = session1.createQuery(SQL_QUERY1);
            query1.setParameter(0,id);
-        
            List list1 = query1.list();       
            ProjectBean PB = (ProjectBean) list1.get(0);
-        
-           List<MapTemplateTaskBean> MTTB=this.getAllWeights(PB.getTemplateid());
            tx.commit();
-           PRDATA.add(PB);
-           PRDATA.add(MTTB);
-           return PRDATA;
-}
-	
+        
+           return PB;
+      }
+
+    @Override
+    public void insertProjectTransaction(List <ProjectTransactionBean> PTBList){
+        
+        for(ProjectTransactionBean PTBean : PTBList){
+                Session session1 = sessionFactory.getCurrentSession();
+		Transaction tx = null;
+	        tx = session1.beginTransaction();
+	        session1.save(PTBean);
+	        tx.commit();
+		System.out.println("Project transaction updated successfully");
+        }
+        
+    }
+    
+    
+        @Override
+       public List<ProjectTransactionBean> getProjectTransaction(int projectid){
+        
+           List<ProjectTransactionBean> PTBList=new ArrayList<ProjectTransactionBean>();
+           Transaction tx = null;
+	   Session session1 = sessionFactory.getCurrentSession();
+           tx = session1.beginTransaction();
+           String SQL_QUERY1= "from ProjectTransactionBean as O where O.projectid=?";
+           Query query1 = session1.createQuery(SQL_QUERY1);
+           query1.setParameter(0,projectid);
+           List list1 = query1.list();
+           PTBList=list1;
+           tx.commit();
+        
+           return PTBList;
+    }
 
 }

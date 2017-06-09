@@ -16,14 +16,21 @@ import javax.persistence.Table;
  * @author root
  */
 @Entity
-@Table(name = "project_transaction",catalog="teamwork")
+@Table(name = "projects_transaction",catalog="teamwork")
 public class ProjectTransactionBean {
     
    
 	@Id
     int projectid;
-
-	public int getUserid() {
+    String taskname;
+    int userid;
+    float taskhours;
+    String status;
+    Date taskstartdate, taskenddate;
+    float taskdays;
+        
+        
+        public int getUserid() {
 		return userid;
 	}
 
@@ -46,12 +53,7 @@ public class ProjectTransactionBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-    String taskname;
-    int userid;
-    float taskhours;
-    String status;
-    Date taskstartdate, taskenddate;
-    float taskdays;
+  
 
     public String getTaskname() {
         return taskname;

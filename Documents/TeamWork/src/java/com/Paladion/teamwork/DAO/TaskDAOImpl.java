@@ -38,7 +38,7 @@ public class TaskDAOImpl implements TaskDAO{
 	Session session1 = sessionFactory.getCurrentSession();
 	Transaction tx = null;
 	tx = session1.beginTransaction();
-	session1.save(TB );
+	session1.save(TB);
 	tx.commit();
 	
 	System.out.println("Task create successfully");

@@ -7,6 +7,7 @@ package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
+import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.util.List;
 
 /**
@@ -17,5 +18,7 @@ public interface ProjectService {
     public void addProject(ProjectBean pb);
     public List<MapTemplateTaskBean> getAllWeights(int tempID);
     public List<ProjectBean> getAllProjects();
-    public List<Object> getProjectById(int id);
+    public ProjectBean getProjectById(int id);
+    public void insertProjectTransaction(List <ProjectTransactionBean> PTBList);
+    public List<ProjectTransactionBean> getProjectTransaction(int projectid);
 }

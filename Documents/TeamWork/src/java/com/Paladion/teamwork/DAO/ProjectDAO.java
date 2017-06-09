@@ -7,6 +7,7 @@ package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
+import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.util.List;
 
 /**
@@ -18,5 +19,8 @@ public interface ProjectDAO {
    public List<MapTemplateTaskBean> getAllWeights(int tempID);
    public List<ProjectBean> getAllProjects();
 
-    public List<Object> getProjectById(int id);
+    public ProjectBean getProjectById(int id);
+    public void insertProjectTransaction(List<ProjectTransactionBean> PTBList);
+    public List<ProjectTransactionBean> getProjectTransaction(int projectid);
+    
 }

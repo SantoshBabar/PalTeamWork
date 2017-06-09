@@ -9,12 +9,15 @@ import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
+import com.Paladion.teamwork.beans.ProjectTransactionWrapper;
 import com.Paladion.teamwork.services.ProjectService;
+import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.DatabaseUtils;
 import com.Paladion.teamwork.utils.ManDaysCalculator;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProjectController {
 	
-	
+
+@Autowired
+@Qualifier(value="TemplateService")
+TemplateService TS;
+    
 @Autowired
 @Qualifier(value="ProjectService")
 ProjectService PS;
@@ -49,22 +56,16 @@ public ProjectBean populate()
 	   return new ProjectBean();
 }
 
-@ModelAttribute("ProjectTransactionM")
-public ProjectTransactionBean populateB()
-{
-	   return new ProjectTransactionBean();
-}
-
 	
 @RequestMapping(value="/CreateProject",method=RequestMethod.GET)
 public ModelAndView CreateProject()
 {    
-	DatabaseUtils dbUtil=new DatabaseUtils();
+	
 	List <TemplateBean> TemplateList;
 	ModelAndView model=new ModelAndView("CreateProject");
 	System.out.println("Inside Project controller for get method");
 	try{
-	           TemplateList=dbUtil.getAllTemplates();
+	        TemplateList=TS.getAllTemplates();
 		model.addObject("AllTemplates", TemplateList);
 	    }catch(Exception ex){}
 	return model;
@@ -76,36 +77,32 @@ public ModelAndView CreateProject()
     {
            ModelAndView result = null;
            try{
-	           ManDaysCalculator mdc= new ManDaysCalculator();
-	           System.out.println("\n inside create Project POST method ");
-                      PB.setMandays(mdc.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
-                      PS.addProject(PB); 	
-	           System.out.println("Project Created with Project id"+PB.getProjectid());
-	           System.out.println("Man days :"+PB.getMandays());
-           }
+	            ManDaysCalculator mdc= new ManDaysCalculator();
+	            System.out.println("\n inside create Project POST method ");
+                    PB.setMandays(mdc.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
+                    PS.addProject(PB); 	
+	            System.out.println("Project Created with Project id"+PB.getProjectid());
+	            System.out.println("Man days :"+PB.getMandays());
+                }
            catch(Exception ex){
-                      DatabaseUtils dbUtil=new DatabaseUtils();
                       List <TemplateBean> TemplateList;
-                      TemplateList=dbUtil.getAllTemplates();
-	           result = new ModelAndView("CreateProject","Projectresp","Project Creation failed");
+                      TemplateList=TS.getAllTemplates();
+	              result = new ModelAndView("CreateProject","Projectresp","Project Creation failed");
                       result.addObject("AllTemplates", TemplateList);
                       return result;
             }
-//            result=new ModelAndView("AssignTaskToUsers","Projectresp","Project Created Successfully");
-//	    //result.addObject("AllProjects", PS.getAllProjects());
-//	    
-//	  result.addObject("AllProjectTasks",PS.getAllWeights(PB.getTemplateid()));
-//	    
-//	    return result;    
+           
+           ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
            List<ProjectTransactionBean> PSBList;
-          //List<Object> PRDATA=PS.getProjectById(PB.getProjectid());
+           ProjectBean PRDATA=PS.getProjectById(PB.getProjectid());
+           List<MapTemplateTaskBean> MTTB=PS.getAllWeights(PRDATA.getTemplateid());
            CommonUtil CU=new CommonUtil();
-           //   PSBList=  CU.devideDaysfortasks((ProjectBean)PRDATA.get(0), (List<MapTemplateTaskBean>) PRDATA.get(1));
+           PSBList=  CU.setTaskHours(PRDATA, MTTB);
+           PTW.setProjectlist(PSBList);
            result=new ModelAndView("AssignTaskToUsers");
-           result.addObject("ProjectData",PB);  
-	result.addObject("AllProjectTasks",PS.getAllWeights(PB.getTemplateid()));
-	result.addObject("AllEngineers",US.getUsersByRole("engineer"));
-           // result.addObject("WeightData",PSBList);
+           result.addObject("AllEngineers",US.getUsersByRole("engineer"));
+        
+           result.addObject("ProjectW",PTW);
            return result;
 	    
     }
@@ -125,32 +122,33 @@ public ModelAndView CreateProject()
     
     
     @RequestMapping(value="/AssignTaskToEngineers", method=RequestMethod.POST)
-    public void AssignTaskToEngineer(@ModelAttribute("ProjectTransactionM")ProjectTransactionBean PTB,HttpServletRequest req,Model E) throws Exception
+    public ModelAndView AssignTaskToEngineer(@ModelAttribute("ProjectW")ProjectTransactionWrapper ProjectW,HttpServletRequest req) throws Exception
     {
-	System.out.println("Inside Assign Engineers to Task Post Method");
-    	CommonUtil CUtil=new CommonUtil();
-	//List<Object> PRDATA=PS.getProjectById();
-	
-	System.out.println(PTB.getUserid());
-	
-	System.out.println(PTB.getTaskname());
+        String projid=req.getParameter("projectid");
+        int projectid=Integer.parseInt(projid);
+        ProjectBean PRDATA=PS.getProjectById(projectid);
+	List <ProjectTransactionBean> PTBList=ProjectW.getProjectlist();
+        List <ProjectTransactionBean> PTBList1=new ArrayList<ProjectTransactionBean>();
+        CommonUtil cu=new CommonUtil();
+        PTBList1= cu.updateProjectTransaction(PTBList, PRDATA);
+        PS.insertProjectTransaction(PTBList1);
+        ModelAndView result=new ModelAndView("DisplayProjectProgress");
+        result.addObject("TaskDetails",PTBList1);
+        result.addObject("ProjectData",PRDATA);
+        return result;
     }
     
-    
-    
-    
-    
-    
+
     @RequestMapping(value="/showProgress",method=RequestMethod.GET)
     public ModelAndView showProjectProgress(@RequestParam int id) throws ParseException
     {
            List<ProjectTransactionBean> PSBList;
-           List<Object> PRDATA=PS.getProjectById(id);
-           CommonUtil CU=new CommonUtil();
-           PSBList=  CU.devideDaysfortasks((ProjectBean)PRDATA.get(0), (List<MapTemplateTaskBean>) PRDATA.get(1));
+           ProjectBean PRDATA=PS.getProjectById(id);
+           PSBList = PS.getProjectTransaction(id);
+ 
            ModelAndView result=new ModelAndView("DisplayProjectProgress");
-           result.addObject("ProjectData",PRDATA.get(0));
-           result.addObject("WeightData",PSBList);
+           result.addObject("ProjectData",PRDATA);
+           result.addObject("TaskDetails",PSBList);
            return result;
     }
 }

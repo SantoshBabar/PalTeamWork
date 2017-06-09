@@ -18,5 +18,6 @@ public interface TemplateDAO {
     public void addTemplateDao(TemplateBean tempb);
     public boolean addTaskToTemplate(MapTemplateTaskBean MTT);
     public List<TaskBean> getAllTasksforTemplate();
+    public List<TemplateBean> getAllTemplates();
     
 }

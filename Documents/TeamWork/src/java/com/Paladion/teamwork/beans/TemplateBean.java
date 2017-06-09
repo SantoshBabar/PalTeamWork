@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author Administrator
  */
 @Entity
-@Table(name = "Templates",catalog="teamwork")
+@Table(name = "templates",catalog="teamwork")
 public class TemplateBean implements Serializable{
       
 @Id

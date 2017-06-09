@@ -10,7 +10,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.Paladion.teamwork.beans.TaskBean"%>
 <%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
 <style>
@@ -154,30 +154,34 @@ tr,th {
  
         <div class="login-card">
 	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Assign Tasks for the Engineers</h2><br></div>
-
- 
+        
+           <form:form  action="AssignTaskToEngineers.do" method="post" modelAttribute="ProjectW">
 	   
+            <div style="overflow: auto;height: 350px; width: 700px;">
+            <table>
+            <div align="center">
+            <tr><th>Task Name </th>  <th> Engineer</th></tr>
 	   
-	   
-	<form:form  action="AssignTaskToEngineers.do" method="post" >
-	   
-	<div style="overflow: auto;height: 350px; width: 700px;">
-	<table>
-	<div align="center">
-	<tr ><th >Task Name </th>  <th> Engineer</th></tr>
-	   
-           <c:forEach  items="${AllProjectTasks}" var="task">     
-	 <tr align="center"> <td><input value="${task.taskname}" name="taskname"></td> 
+             <c:forEach   varStatus="status"  items="${ProjectW.projectlist}"  var="task" >     
+             <tr align="center"> <td><c:out value="${task.taskname}"/></td> 
 	
 	    <td>
-		<select>
+		<form:select path="projectlist[${status.index}].userid">
 	           <c:forEach  items="${AllEngineers}" var="engineer"> 
-	           <option value="${engineer.userinfo.userId}" name="userid"><c:out value="${engineer.username}" /><option>
-	           </c:forEach><select> </td>	
+	           <form:option value="${engineer.userinfo.userId}" name="userid"><c:out value="${engineer.username}" /></form:option>
+	           </c:forEach></form:select> </td>	
+            
+            <input type="hidden" name="projectlist[${status.index}].taskname" value="${task.taskname}"/>
+            <input type="hidden" name="projectlist[${status.index}].taskhours" value="${task.taskhours}"/>
+            <input type="hidden" name="projectlist[${status.index}].taskdays" value="${task.taskdays}"/>
+            <input type="hidden" name="projectlist[${status.index}].projectid" value="${task.projectid}"/>
+            <input type="hidden" name="projectlist[${status.index}].status" value="${task.status}"/>
+            
+              <input type="hidden" name="projectid" value="${task.projectid}"/>
 	   </tr>
            </c:forEach>
                
-	   
+	 
 	   </div>
 	   
 	   </table>

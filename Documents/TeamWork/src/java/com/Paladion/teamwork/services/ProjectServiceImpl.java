@@ -8,6 +8,7 @@ package com.Paladion.teamwork.services;
 import com.Paladion.teamwork.DAO.ProjectDAO;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
+import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,11 +43,25 @@ ProjectDAO PD;
 	}
 
     @Override
-    public List<Object> getProjectById(int id) {
+    public ProjectBean getProjectById(int id) {
     
         return PD.getProjectById(id); 
         
     }
     
+    @Override
+    public void insertProjectTransaction(List<ProjectTransactionBean> PTBList) {
+    
+         PD.insertProjectTransaction(PTBList); 
+        
+    }
+    
+    @Override
+    public List<ProjectTransactionBean> getProjectTransaction(int projectid) {
+    
+         return PD.getProjectTransaction(projectid);
+        
+    }
+   
 	
 }
