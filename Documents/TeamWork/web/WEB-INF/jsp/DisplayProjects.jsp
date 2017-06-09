@@ -153,7 +153,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 10%;
+  width: 20%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -228,7 +228,7 @@ th {
          <br>  
 
         <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Projects</h2><br></div>
+	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Projects</h2><br></div>
  <div style="overflow: auto;height: 350px; width: auto;">
      <table border="2" id="headerTable">
             
@@ -250,12 +250,11 @@ th {
             <tr> 
                 <td > <a href="showProgress.do?id=${project.projectid}">${project.projectid}</a></td>
                 <td > ${project.opid}</td>
-	        <td style=>${project.projectname}</td>
-    
-                <td style=>${project.lead}</td>
-                <td style=>${SDate}</td>
-                <td style=>${EDate}</td>
-                <td style=>${project.mandays}</td>
+	        <td >${project.projectname}</td>
+                <td >${project.lead}</td>
+                <td >${SDate}</td>
+                <td >${EDate}</td>
+                <td >${project.mandays}</td>
 	   </tr>
            
 </c:forEach>
