@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.LoginBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
@@ -14,8 +15,6 @@ import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
-import com.Paladion.teamwork.utils.DatabaseUtils;
-import com.Paladion.teamwork.utils.ManDaysCalculator;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,10 @@ public class ProjectController {
 @Autowired
 @Qualifier(value="TemplateService")
 TemplateService TS;
+
+@Autowired
+@Qualifier(value="CommonUtil")
+CommonUtil CU;
     
 @Autowired
 @Qualifier(value="ProjectService")
@@ -62,11 +65,14 @@ public ModelAndView CreateProject()
 {    
 	
 	List <TemplateBean> TemplateList;
+        List <LoginBean> LeadList;
 	ModelAndView model=new ModelAndView("CreateProject");
 	System.out.println("Inside Project controller for get method");
 	try{
 	        TemplateList=TS.getAllTemplates();
+                LeadList=US.getUsersByRole("lead");
 		model.addObject("AllTemplates", TemplateList);
+                model.addObject("AllLeads", LeadList);
 	    }catch(Exception ex){}
 	return model;
 }
@@ -77,9 +83,8 @@ public ModelAndView CreateProject()
     {
            ModelAndView result = null;
            try{
-	            ManDaysCalculator mdc= new ManDaysCalculator();
 	            System.out.println("\n inside create Project POST method ");
-                    PB.setMandays(mdc.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
+                    PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
                     PS.addProject(PB); 	
 	            System.out.println("Project Created with Project id"+PB.getProjectid());
 	            System.out.println("Man days :"+PB.getMandays());
@@ -96,7 +101,6 @@ public ModelAndView CreateProject()
            List<ProjectTransactionBean> PSBList;
            ProjectBean PRDATA=PS.getProjectById(PB.getProjectid());
            List<MapTemplateTaskBean> MTTB=PS.getAllWeights(PRDATA.getTemplateid());
-           CommonUtil CU=new CommonUtil();
            PSBList=  CU.setTaskHours(PRDATA, MTTB);
            PTW.setProjectlist(PSBList);
            result=new ModelAndView("AssignTaskToUsers");

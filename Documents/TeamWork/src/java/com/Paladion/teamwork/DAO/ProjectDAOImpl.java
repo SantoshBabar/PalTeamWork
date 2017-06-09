@@ -35,12 +35,12 @@ public class ProjectDAOImpl implements ProjectDAO
 	
 	@Override
 	public void addProjectDao(ProjectBean PB) {
-		Session session1 = sessionFactory.getCurrentSession();
-		Transaction tx = null;
-	        tx = session1.beginTransaction();
-	        session1.save(PB );
-	        tx.commit();
-		System.out.println("Project created successfully");
+	    Session session1 = sessionFactory.getCurrentSession();
+            Transaction tx = null;
+	    tx = session1.beginTransaction();
+	    session1.save(PB );
+	    tx.commit();
+            System.out.println("Project created successfully");
       }
 
 	@Override
@@ -70,13 +70,13 @@ public class ProjectDAOImpl implements ProjectDAO
 	@Override
 	public List<ProjectBean> getAllProjects() {
 		
-		Session session1 = sessionFactory.getCurrentSession();
-	        Transaction tx = null;
-	        tx = session1.beginTransaction();
-		Criteria criteria = session1.createCriteria(ProjectBean.class);
-		List <ProjectBean>allProjects = criteria.list();
-		tx.commit();
-		return allProjects;
+            Session session1 = sessionFactory.getCurrentSession();
+	    Transaction tx = null;
+	    tx = session1.beginTransaction();
+            Criteria criteria = session1.createCriteria(ProjectBean.class);
+	    List <ProjectBean>allProjects = criteria.list();
+	    tx.commit();
+	    return allProjects;
         }
 
         @Override

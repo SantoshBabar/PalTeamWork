@@ -6,7 +6,9 @@
 package com.Paladion.teamwork.beans;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
 import javax.persistence.CascadeType;
@@ -27,8 +29,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "projects",catalog="teamwork")
-public class ProjectBean implements Serializable{           
-     
+public class ProjectBean implements Serializable{              
+    
 @Id
 @GenericGenerator(name="gen",strategy="increment")
 @GeneratedValue(generator="gen")
@@ -107,6 +109,7 @@ return enddate;
 }
 
 public void setEnddate(Date enddate) throws ParseException {
+         
             this.enddate = enddate;
 }
 @Column(name = "templateid")

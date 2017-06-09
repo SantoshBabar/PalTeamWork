@@ -10,7 +10,6 @@ import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.utils.CommonUtil;
-import com.Paladion.teamwork.utils.DatabaseUtils;
 import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
@@ -53,11 +52,9 @@ return "CreateTaskTemplate";
 public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean TempB,HttpServletRequest req) 
 {
         System.out.println("\n inside create Template method ");
-        DatabaseUtils dbUtil=new DatabaseUtils();
-           
+
         List <TaskBean> Tasklist = null;
         
-            
         TempS.addTemplate(TempB); 	
 	System.out.println("Template Created with Template id  "+TempB.getTemplateid());
 	    
@@ -65,13 +62,13 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
         {
             Tasklist =TempS.getAllTasksforTemplate();
 	}
-        catch(Exception ex){ex.printStackTrace();}
+        catch(Exception ex){}
 	    
 	HttpSession TempSession=req.getSession(false);
         TempSession.setAttribute("Template", TempB);
         TempSession.setAttribute("TaskList", Tasklist);
               
-	return new ModelAndView("AddTasksToTemplate","AllTasks", Tasklist);
+	return new ModelAndView("Test","AllTasks", Tasklist);
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)
@@ -97,9 +94,6 @@ public ModelAndView AddTaskToTemplate(HttpServletRequest req){
             return new ModelAndView("AddTasksToTemplate","Temperror", "Total weight is not 100% or something went wrong" );
         }
 	
-	
-	
-	
-}
+    }
     
 }

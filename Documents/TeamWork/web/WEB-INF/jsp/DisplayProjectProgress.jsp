@@ -172,6 +172,7 @@ tr,th {
 	   <tr><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></tr>
              
               </tr><h4 style="color: red; font-size: 15px" >Start Date: ${ProjectData.startdate}</h4></tr>
+               </tr><h4 style="color: red; font-size: 15px" >End Date: ${ProjectData.enddate}</h4></tr>
 	   </div><br>
 <div style="overflow: auto;height: 200px; width: auto;">
 <table border="1" align="center">

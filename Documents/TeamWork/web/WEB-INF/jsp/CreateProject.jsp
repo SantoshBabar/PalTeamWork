@@ -160,14 +160,22 @@ border-bottom-color: black;
 <div align="center">
 <table >
 
-<tr><td align="center"><h4>OPID :</td><td><form:input placeholder="Enter OPID" path="opid" /></h4></td></tr>    
-<tr><td align="center"><h4>Project Name :</td><td><form:input placeholder="Enter Project Name" path="projectname" /></h4></td></tr>  
-<tr><td align="center"><h4>Lead :</td><td><form:input placeholder="Enter Lead Name" path="lead" /></h4></td></tr>
-<tr><td align="center"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="date" path="startdate" value=""/></h4></td></tr>
-<tr><td align="center"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate" value=""/></h4></td></tr>
-<tr><td align="center"><h4 >Template :</td><td ><form:select  path="templateid">  
+<tr><td align="right"><h4>OPID :</td><td><form:input placeholder="Enter OPID" path="opid" /></h4></td></tr>    
+<tr><td align="right"><h4>Project Name :</td><td><form:input placeholder="Enter Project Name" path="projectname" /></h4></td></tr>  
+<tr><td align="right"><h4>Lead :</td>
+    <td><form:select path="lead">
+	           <c:forEach  items="${AllLeads}" var="lead"> 
+	           <form:option class="login login-submit" value="${lead.userinfo.name}">${lead.userinfo.name}</form:option>
+	           </c:forEach></form:select>
+    </td>
+</tr>
+<tr><td align="right"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="date" path="startdate" /></h4></td></tr>
+<tr><td align="right"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate"/></h4></td></tr>
+<tr><td align="right"><h4>No. of Engineers :</td><td><form:input placeholder="No. of Engineers" path="enddate"/></h4></td></tr>
+<tr><td align="right"><h4 >Template :</td>
+    <td ><form:select  path="templateid">  
 	  <c:forEach items="${AllTemplates}" var="template">     
-	  <<option class="login login-submit" value="${template.templateid}">${template.templatename}</option>
+	  <option class="login login-submit" value="${template.templateid}">${template.templatename}</option>
 	  </c:forEach></td>	  
 </form:select>
 	  

@@ -8,12 +8,6 @@ package com.Paladion.teamwork.DAO;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
-import com.Paladion.teamwork.utils.DatabaseUtils;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -71,13 +65,13 @@ public class TemplateDAOImpl implements TemplateDAO{
         
         List <TaskBean> taskList=new ArrayList<TaskBean>();
         Session session=sessionFactory.openSession();
-       String taskquery= "from TaskBean";
+        String taskquery= "from TaskBean";
         System.out.println(taskquery);
         Query query2 = session.createQuery(taskquery);
        
-          taskList= query2.list();
+        taskList= query2.list();
 	
-           return taskList;
+        return taskList;
         
       }
     
