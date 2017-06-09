@@ -13,8 +13,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
- 
-  background-image: url(new.jpg);
+
+	color:#6a6f8c;
+	background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -27,7 +28,7 @@ body {
   
   top: 30%;
   padding: 40px;
-  width: 400px;
+  width: 500px;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 20px;

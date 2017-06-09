@@ -3,8 +3,12 @@
     Created on : 12 Apr, 2017, 8:31:39 PM
     Author     : Administrator
 --%>
+<%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
+<%@page import="net.tanesha.recaptcha.ReCaptcha"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -13,8 +17,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
- 
-  background-image: url(new.jpg);
+
+  color:#6a6f8c;
+  background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -27,8 +32,8 @@ body {
   
   top: 30%;
   padding: 40px;
-  width: 400px;
-  background-color: #F7F7F7;
+  width: 500px;
+  background-color: #ddddbb;
   margin: 0 auto 10px;
   border-radius: 20px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -85,6 +90,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
+  width: 150px;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -142,13 +148,17 @@ body {
     <form:form action="Login.do" method="post" commandName="LoginM"> 
     	Username:<form:input path="username" placeholder="Enter the username"/>
         Password:<form:password path="password" placeholder="Enter the password"/>
-        <button type="submit" name=login value="Login"class="login login-submit">Login</button><br>
+        <%
+          ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdlHOsSAAAAACe2WYaGCjU2sc95EZqCI9wLcLXY", false);
+          out.print(c.createRecaptchaHtml(null, null));
+          %>
+        <div align="left"><button type="submit" name=login value="Login"class="login login-submit">Login</button></div><br>
 	   
-        <br>
+        
     </body>
     </form>
     <form:form action="Forgot.do" method="GET">
-    <button type="submit" value="forgot" class="login login-submit">Forgot Password</button></a>
+        <div align="left">   <button type="submit" value="forgot" class="login login-submit">Forgot Password</button></a></div>
     </form:form>
   </form:form>
 	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>

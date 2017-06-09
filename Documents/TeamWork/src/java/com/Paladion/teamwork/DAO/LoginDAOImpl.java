@@ -81,7 +81,7 @@ public class LoginDAOImpl implements LoginDAO{
             String uuid = UUID.randomUUID().toString();
             System.out.println("uuid = " + uuid);
             String emailSubject="OTP";
-            String emailMessage="Dear user \n Your OTP is: " +uuid+"";
+            String emailMessage="Dear user \nYour OTP is: " +uuid+"";
             email.sendEmail(SessUserBean.getEmail(), emailSubject,emailMessage);
             
              System.out.print("i got your email id"+SessUserBean.getEmail());

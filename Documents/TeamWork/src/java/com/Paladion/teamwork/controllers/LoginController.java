@@ -11,6 +11,8 @@ import com.Paladion.teamwork.services.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -49,8 +51,11 @@ public class LoginController {
 @RequestMapping(value="/Login",method=RequestMethod.GET)
 public String Login()
 {
+    // change to login
 return "Login";
 }
+
+
 
 @RequestMapping(value="/ForgotPassword",method=RequestMethod.GET)
 public String forgot()
@@ -79,6 +84,23 @@ return "ForgotPassword";
 @RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
 public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
     {
+        String remoteAddr = req.getRemoteAddr();
+		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
+
+		String challenge = req
+				.getParameter("recaptcha_challenge_field");
+		String uresponse = req.getParameter("recaptcha_response_field");
+		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
+				remoteAddr, challenge, uresponse);
+
+		if (reCaptchaResponse.isValid()) {
+			String user = req
+					.getParameter("user");
+			               
+		} else {
+			 return new ModelAndView("ForgotPassword","Lerror", "Captcha failed");
+		}
            System.out.println("forgotPassword");
            lb=LS.ForgotPassword(LB);
            if (lb!=null) {
@@ -87,13 +109,11 @@ public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletReq
             return new ModelAndView("ResetPassword");
            }
            else {
-           return new ModelAndView("ForgotPassword","Lerror", "fail");
+           return new ModelAndView("ForgotPassword","Lerror", "failed");
            }
 }
 //////////////////////////
 
-
-///////////////////////////
 
 @RequestMapping(value="/ResetPassword",method=RequestMethod.POST)
 public ModelAndView ResetPassword(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
@@ -115,6 +135,23 @@ public ModelAndView ResetPassword(@ModelAttribute("ForgotM")LoginBean LB,HttpSer
 @RequestMapping(value="/Login",method=RequestMethod.POST)
 public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletRequest req )
     {
+        String remoteAddr = req.getRemoteAddr();
+		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
+
+		String challenge = req
+				.getParameter("recaptcha_challenge_field");
+		String uresponse = req.getParameter("recaptcha_response_field");
+		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
+				remoteAddr, challenge, uresponse);
+
+		if (reCaptchaResponse.isValid()) {
+			String user = req
+					.getParameter("user");
+			               
+		} else {
+			 return new ModelAndView("Login","Lerror", "Captcha failed");
+		}
            System.out.println("in login");
            lb=LS.Login(LB);
            if (lb!=null) {
