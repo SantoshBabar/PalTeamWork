@@ -22,6 +22,10 @@ public interface UserService {
 		   public List<LoginBean> getUsersByRole(String role);
 		  
 
-	public void addUser(LoginBean loginBean);
+	           public void addUser(LoginBean loginBean);
+                   
+                   public List<LoginBean> ViewAllUser();
+                   
+                   public boolean DeleteUser(int id);
 
 }

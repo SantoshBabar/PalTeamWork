@@ -1,11 +1,14 @@
 <%-- 
-    Document   : Login
-    Created on : 12 Apr, 2017, 8:31:39 PM
-    Author     : Administrator
+    Document   : DisplayProjectStatus
+    Created on : May 10, 2017, 6:51:12 AM
+    Author     : user
 --%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
+    
 <style>
 ul {
     list-style-type: none;
@@ -71,7 +74,7 @@ body {
 }
 
 .login-card input[type=submit] {
-  width: 20%;
+  width: 10%;
   display: block;
   margin-bottom: 10px;
   position: relative;
@@ -81,7 +84,7 @@ body {
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: 30%;
+  width: 20%;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -116,7 +119,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 50%;
+  width: 20%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -156,14 +159,20 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 100%;
-    color: #ff0000;
-    border-color: white;
-    align-items: center;
+    width: 50%;
+    height:auto;
 }
 
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F7F7F7}
+
 th {
-    text-align: center;
+    background-color: #ff3333;
+    color: white;
 }
 </style>
 
@@ -183,32 +192,46 @@ th {
   <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
 </ul>
 </div>
-         <br>
+         <br>  
 
-   
         <div class="login-card">
-	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create User</h2></div>
-
-	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
-<table>
-   
-<tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username" /></h4></td></tr>    
-<tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
-<tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
-<tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="userinfo.team" /></h4></td></tr>
-<tr><td align="center"><h4 >Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
-<tr><td align="center"><h4 >Enter the Role</td><td><form:input  placeHolder="Enter the role" path="role" /></h4></td></tr>
-<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>
-
-
+	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All user</h2><br></div>
+ <table border="2" >
+            
+            <tr>
+                
+                <th width="10%" >UserId </th>
+                <th width="10%" >User Name </th>
+                
+               
+                
+            </tr>
+ </table>
+           
+     <table border="2" id="headerTable">
+            
+            
+            
+<c:forEach  items="${AllUsers}" var="user">     
     
-</table>
-</form:form>
-           <table>
-           <form:form action="ViewAllUser.do" method="POST" modelAttribute="LoginM">
-          <tr><td align="left"> <input type="submit" value="view all user" class="login login-submit"/></td></tr>
-           </table>
-           </form:form>
-<center>${Lerror}</center>      
-    </body>
+
+	   
+            <tr> 
+                
+               <td width="10%"> <a href="DeleteUser.do?id=${user.userinfo.userId}">${user.userinfo.userId}</a></td>
+               <td width="10%"> ${user.userinfo.name}</td>
+               
+                
+	   </tr>
+           
+</c:forEach>
+          
+        </table>
+      <center>${Success}</center>
+ </div>
+           
+	   </div>
+         
+     
+</body>
 </html>
