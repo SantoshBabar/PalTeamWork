@@ -84,7 +84,7 @@ body {
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: 20%;
+  width: auto;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -200,11 +200,10 @@ th {
             
             <tr>
                 
-                <th width="10%" >UserId </th>
+                <th width="10%" >Delete user </th>
+                <th width="10%" >Update user info </th>
                 <th width="10%" >User Name </th>
-                
                
-                
             </tr>
  </table>
            
@@ -218,8 +217,10 @@ th {
 	   
             <tr> 
                 
-               <td width="10%"> <a href="DeleteUser.do?id=${user.userinfo.userId}">${user.userinfo.userId}</a></td>
+               <td width="10%"><a href="DeleteUser.do?id=${user.userinfo.userId}">DELETE</a></td>
+               <td width="10%"><a href="UpdateUser.do?id=${user.userinfo.userId}">UPDATE</a></td>
                <td width="10%"> ${user.userinfo.name}</td>
+               
                
                 
 	   </tr>

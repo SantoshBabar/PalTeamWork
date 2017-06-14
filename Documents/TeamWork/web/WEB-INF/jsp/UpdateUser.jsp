@@ -189,12 +189,13 @@ th {
 
    
         <div class="login-card">
-	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create User</h2></div>
+	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Update User</h2></div>
 
 	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
 <table>
-   
-<tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username" /></h4></td></tr>    
+   <c:forEach  items="${UpdateUser}" var="user">    
+       ${user.userinfo.name}
+<tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username"  /></h4></td></tr>    
 <tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
 <tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
 <tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="userinfo.team" /></h4></td></tr>
@@ -206,11 +207,7 @@ th {
     
 </table>
 </form:form>
-           <table>
-           <form:form action="ViewAllUser.do" method="POST" modelAttribute="LoginM">
-          <tr><td align="left"> <input type="submit" value="view all user" class="login login-submit"/></td></tr>
-           </table>
-           </form:form>
+           
 <center>${Lerror}</center>      
     </body>
 </html>
