@@ -3,6 +3,8 @@
     Created on : 12 Apr, 2017, 8:31:39 PM
     Author     : Administrator
 --%>
+<%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
+<%@page import="net.tanesha.recaptcha.ReCaptcha"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,8 +15,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
- 
-  background-image: url(new.jpg);
+
+	color:#6a6f8c;
+	background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -27,7 +30,7 @@ body {
   
   top: 30%;
   padding: 40px;
-  width: 400px;
+  width: 500px;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 20px;
@@ -141,12 +144,18 @@ body {
 <!-- UI goes here-->
     <form:form action="ForgotPassword.do" method="post" commandName="LoginM"> 
     	Username:<form:input path="email" placeholder="Enter the email"/>
+        <%
+          ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO", false);
+          out.print(c.createRecaptchaHtml(null, null));
+        %>
+        <br>
         <button type="submit" name=login value="Login"class="login login-submit">Reset</button><br>
-	   
+   
 	   
     </body>
     </form>
   </form:form>
+    
 	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>
   <!-- UI goes here-->
 <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>

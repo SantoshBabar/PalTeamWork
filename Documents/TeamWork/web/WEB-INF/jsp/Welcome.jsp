@@ -11,12 +11,47 @@
 <%@page import="com.Paladion.teamwork.beans.ProjectBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <head>
+    
+    
+    <style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ff6666;
+    width:1500px;
+   
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #b30000;
+}
+
+.active {
+    background-color: #ff1a1a;
+}
+</style>
 <style>
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
-  background-image: url(new.jpg);
+
+	color:#6a6f8c;
+	background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -27,7 +62,8 @@ body {
 
 .login-card {
   padding: 40px;
-  width: 274px;
+  width: 1420px;
+  height: 550px;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 2px;
@@ -36,7 +72,7 @@ body {
 }
 
 .login-card h1 {
-  font-weight: 100;
+  font-weight: 1;
   text-align: center;
   font-size: 2.3em;
 }
@@ -88,7 +124,7 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #e60000;
+  background-color: #ff3333;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -142,13 +178,11 @@ th {
         <% b=(LoginBean)session.getAttribute("Luser"); 
         name=b.userinfo.getName().toString(); 
         %>
-<div align="left">
+<!--<div align="left">
 	   <img width="230px" height="70px" src="PaladionLogo.png"/>
-</div>
-<div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
- 
+</div>-->
+
 </table>  
-<h1 align="center" style="color: whitesmoke; " >Welcome </h1><h2 align="center" style="color: #e60000;"><%=name%></h2>
 	   
 	   <div> <font color="red"><b><center>${TaskSuccess}</center><br>
 	 
@@ -158,18 +192,52 @@ th {
 	   
         
 	   	   
-	 
-	   <div align="center">   
-	   <table>
-        
-	   <tr align="center"><td><a href="CreateProject.do" style="text-decoration:none"> <input type="button" value="Start New Project" class="login login-submit"/> </a></td>
-           <td><a href="showAllProject.do" style="text-decoration:none"> <input type="button" value="View Projects" class="login login-submit"/> </a></td>
-	   <td><a href="CreateTask.do" style="text-decoration:none"> <input type="button" value="Create New Task" class="login login-submit"/> </a></td>
-	   <td><a href="CreateUser.do" style="text-decoration:none"> <input type="button" value="Create New user" class="login login-submit"/> </a></td>
-	    	    
-	   <td><a href="CreateTaskTemplate.do" style="text-decoration:none"> <input type="button" value="Create New Task Template" class="login login-submit"> </a></td>
-    </table>
-	   </div>
+	 <div align="center">
+<ul>
+  <li><a href="CreateProject.do">Create New Project</a></li>
+  <li><a href="showAllProject.do">View Projects</a></li>
+  <li><a href="CreateTask.do">Create New Task</a></li>
+  <li><a href="CreateUser.do">Create New user</a></li>
+  <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
+ 
+  
+  <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
+   
+   <li style="float:right"><a class="active"><%=name%></a></li>
+   <li style="float:right"><a class="active">Welcome</a></li>
+</ul>
+</div>
+   <br>
+   <div class="login-card">
+       <div id="piechart" style="width: 900px; height: 500px;"></div>
+   </div>
+</head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	   
 	   
         
 
