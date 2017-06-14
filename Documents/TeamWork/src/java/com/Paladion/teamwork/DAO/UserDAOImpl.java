@@ -100,14 +100,14 @@ public class UserDAOImpl implements UserDAO{
                       
 	           tx.commit();
                    
-	           System.out.println("Query executed");
+	           
 	           Iterator it= list2.iterator();
                       while(it.hasNext())
                       {
                           LoginBean ubean=new LoginBean();
 		            ubean=(LoginBean)it.next();
                            UserList.add(ubean);
-                           System.out.print("User name: "+ubean.userinfo.getName());
+                          
 	                     
                       }
 		
@@ -123,9 +123,23 @@ public class UserDAOImpl implements UserDAO{
              SQLQuery query = session.createSQLQuery(sql);
              query.setParameter(0, id);
              query.executeUpdate();
-             System.out.println("running");
+             
 		return true;	
+	}
+        
+        
+        @Override
+	public boolean UpdateUser(int id)
+	{
+            Session session = this.sessionFactory.openSession();
+            String sql = "select from userstable where userId=?";
+             SQLQuery query = session.createSQLQuery(sql);
+             query.setParameter(0, id);
+             query.executeUpdate();
+             
+		return true;	
+	}	
 	}
 
     
-}
+

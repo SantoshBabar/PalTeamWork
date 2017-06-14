@@ -43,6 +43,16 @@ UserDAO userDAO;
     public boolean DeleteUser(int id) {
         return userDAO.DeleteUser(id);
     }
+    
+    @Override
+	 public boolean UpdateUser(int id) {
+		return userDAO.UpdateUser(id);
+		
+}
+
+    
+
+    
 
     
         

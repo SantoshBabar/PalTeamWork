@@ -88,12 +88,15 @@ public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletReq
 //		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
 //		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
 //
-//		String challenge = req.getParameter("recaptcha_challenge_field");
+//		String challenge = req
+//				.getParameter("recaptcha_challenge_field");
 //		String uresponse = req.getParameter("recaptcha_response_field");
-//		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+//		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
+//				remoteAddr, challenge, uresponse);
 //
 //		if (reCaptchaResponse.isValid()) {
-//			String user = req.getParameter("user");
+//			String user = req
+//					.getParameter("user");
 //			               
 //		} else {
 //			 return new ModelAndView("ForgotPassword","Lerror", "Captcha failed");
@@ -132,7 +135,7 @@ public ModelAndView ResetPassword(@ModelAttribute("ForgotM")LoginBean LB,HttpSer
 @RequestMapping(value="/Login",method=RequestMethod.POST)
 public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletRequest req )
     {
-//        String remoteAddr = req.getRemoteAddr();
+//     String remoteAddr = req.getRemoteAddr();
 //		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
 //		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
 //
@@ -143,8 +146,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletReque
 //				remoteAddr, challenge, uresponse);
 //
 //		if (reCaptchaResponse.isValid()) {
-//			String user = req
-//					.getParameter("user");
+//			String user = req.getParameter("user");
 //			               
 //		} else {
 //			 return new ModelAndView("Login","Lerror", "Captcha failed");

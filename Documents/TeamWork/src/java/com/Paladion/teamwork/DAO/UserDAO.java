@@ -25,5 +25,7 @@ public interface UserDAO {
         public List<LoginBean> ViewAllUser();
         
         public boolean DeleteUser(int id);
+        
+       public boolean UpdateUser(int id);
 
 }

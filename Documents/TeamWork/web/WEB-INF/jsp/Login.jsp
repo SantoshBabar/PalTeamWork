@@ -3,8 +3,7 @@
     Created on : 12 Apr, 2017, 8:31:39 PM
     Author     : Administrator
 --%>
-<%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
-<%@page import="net.tanesha.recaptcha.ReCaptcha"%>
+
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -148,10 +147,7 @@ body {
     <form:form action="Login.do" method="post" commandName="LoginM"> 
     	Username:<form:input path="username" placeholder="Enter the username"/>
         Password:<form:password path="password" placeholder="Enter the password"/>
-      <!-- <%
-          ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdlHOsSAAAAACe2WYaGCjU2sc95EZqCI9wLcLXY", false);
-          out.print(c.createRecaptchaHtml(null, null));
-          %> -->
+      
         <div align="left"><button type="submit" name=login value="Login"class="login login-submit">Login</button></div><br>
 	   
         

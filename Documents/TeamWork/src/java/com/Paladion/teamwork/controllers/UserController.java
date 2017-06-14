@@ -50,6 +50,7 @@ public class UserController {
    return new LoginBean(); // populates form for the first time if its null
 }
 	
+ 
 	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
      public String createUser()
     {   
@@ -87,7 +88,7 @@ public ModelAndView ViewAllUser(@ModelAttribute("LoginM")LoginBean loginBean,Htt
            if(id!=0)
            {
                userService.DeleteUser(id);
-               System.out.println("deleted");
+               
                List<LoginBean> userList=userService.ViewAllUser();
 	  
            result.addObject("AllUsers",userList);
@@ -102,7 +103,34 @@ public ModelAndView ViewAllUser(@ModelAttribute("LoginM")LoginBean loginBean,Htt
            }
            return result;
       
-           
     }
-    }
-
+    
+    @RequestMapping(value="/UpdateUser",method=RequestMethod.GET)
+public ModelAndView UpdateUser(@RequestParam int id)
+{
+    
+    ModelAndView result=new ModelAndView("UpdateUser");
+           if(id!=0)
+           {
+               userService.UpdateUser(id);
+               
+               List<LoginBean> userList=userService.ViewAllUser();
+	  
+           result.addObject("UpdateUser",userList);
+               
+                result.addObject("Success","User displayed successfully");
+                result=new ModelAndView("UpdateUser");
+                return result;
+                
+               
+           }
+           else{
+               
+            result=new ModelAndView("fail");
+          
+           }
+           return result;
+}
+    
+    
+}
