@@ -11,8 +11,8 @@ import com.Paladion.teamwork.services.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import net.tanesha.recaptcha.ReCaptchaImpl;
-import net.tanesha.recaptcha.ReCaptchaResponse;
+//import net.tanesha.recaptcha.ReCaptchaImpl;
+//import net.tanesha.recaptcha.ReCaptchaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -84,23 +84,23 @@ return "ForgotPassword";
 @RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
 public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
     {
-        String remoteAddr = req.getRemoteAddr();
-		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
-
-		String challenge = req
-				.getParameter("recaptcha_challenge_field");
-		String uresponse = req.getParameter("recaptcha_response_field");
-		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
-				remoteAddr, challenge, uresponse);
-
-		if (reCaptchaResponse.isValid()) {
-			String user = req
-					.getParameter("user");
-			               
-		} else {
-			 return new ModelAndView("ForgotPassword","Lerror", "Captcha failed");
-		}
+//        String remoteAddr = req.getRemoteAddr();
+//		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+//		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
+//
+//		String challenge = req
+//				.getParameter("recaptcha_challenge_field");
+//		String uresponse = req.getParameter("recaptcha_response_field");
+//		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
+//				remoteAddr, challenge, uresponse);
+//
+//		if (reCaptchaResponse.isValid()) {
+//			String user = req
+//					.getParameter("user");
+//			               
+//		} else {
+//			 return new ModelAndView("ForgotPassword","Lerror", "Captcha failed");
+//		}
            System.out.println("forgotPassword");
            lb=LS.ForgotPassword(LB);
            if (lb!=null) {
