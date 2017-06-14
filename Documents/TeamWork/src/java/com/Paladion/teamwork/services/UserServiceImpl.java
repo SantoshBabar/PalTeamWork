@@ -32,4 +32,23 @@ UserDAO userDAO;
 	public List<LoginBean> getUsersByRole(String role) {
 		return userDAO.getUsersByRole(role);
 	}
+        
+        @Override
+	public List<LoginBean> ViewAllUser() {
+		return userDAO.ViewAllUser();
+		
 }
+
+    @Override
+    public boolean DeleteUser(int id) {
+        return userDAO.DeleteUser(id);
+    }
+
+    
+        
+		
+}
+
+
+
+

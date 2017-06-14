@@ -21,5 +21,9 @@ public interface UserDAO {
 	public List<LoginBean> getUsersByRole(String role);
 
 	public boolean addUser(LoginBean loginbean);
+        
+        public List<LoginBean> ViewAllUser();
+        
+        public boolean DeleteUser(int id);
 
 }

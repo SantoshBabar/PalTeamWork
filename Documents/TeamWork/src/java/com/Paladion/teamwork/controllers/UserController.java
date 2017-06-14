@@ -6,16 +6,23 @@
 package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.beans.ProjectBean;
+import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
+import java.text.ParseException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,6 +32,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 	
+    @Autowired
+ @Qualifier(value="LoginService")
+ LoginService LS;
+ 
+ 
+ UserBean ub=null;
+ LoginBean lb=null;
 	
 @Autowired
 @Qualifier(value="UserService")
@@ -53,4 +67,42 @@ public ModelAndView createUser(@ModelAttribute("LoginM")LoginBean loginBean,Http
 	   
 	   return new ModelAndView("Welcome","TaskSuccess","User Created Successfully");
         }
-}
+
+
+@RequestMapping(value="/ViewAllUser",method=RequestMethod.POST)
+public ModelAndView ViewAllUser(@ModelAttribute("LoginM")LoginBean loginBean,HttpServletRequest req )
+    {
+        System.out.println("ViewAllUser");
+    
+	   List<LoginBean> userList=userService.ViewAllUser();
+	   ModelAndView result=new ModelAndView("ViewAllUser");
+           result.addObject("AllUsers",userList);
+	   return result;
+        }
+
+@RequestMapping(value="/DeleteUser",method=RequestMethod.GET)
+    public ModelAndView DeleteUser(@RequestParam int id) throws ParseException
+    {
+        ModelAndView result=new ModelAndView("ViewAllUser");
+           if(id!=0)
+           {
+               userService.DeleteUser(id);
+               System.out.println("deleted");
+               List<LoginBean> userList=userService.ViewAllUser();
+	  
+           result.addObject("AllUsers",userList);
+               
+                result.addObject("Success","User deleted successfully");
+               
+           }
+           else{
+               
+            result=new ModelAndView("Welcome");
+          
+           }
+           return result;
+      
+           
+    }
+    }
+

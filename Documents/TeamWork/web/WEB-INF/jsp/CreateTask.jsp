@@ -189,7 +189,7 @@ th {
 	   <form:form action="CreateTask.do" method="post" modelAttribute="TaskM">
 <table>
 
-<tr ><td align="center"><h4>Task Name:</td><td><form:input placeholder="Enter Task Name" path="taskname" /></h4></td></tr>    
+<tr><td align="center"><h4>Task Name:</td><td><form:input placeholder="Enter Task Name" path="taskname" /></h4></td></tr>    
 <tr><td align="center"><h4>Description:</td><td><form:input placeholder="Enter Description" path="Description" /></h4></td></tr>  
 <tr></tr>
 <tr></tr>
