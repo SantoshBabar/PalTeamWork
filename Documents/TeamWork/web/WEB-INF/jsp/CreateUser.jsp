@@ -78,6 +78,13 @@ body {
   float: center;
 }
 
+.login-card select[type=submit] {
+  width: 20%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  float: center;
+}
 
 
 .login-card input[type=text], input[type=password] {
@@ -194,12 +201,32 @@ th {
 	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
 <table>
    
-<tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username" /></h4></td></tr>    
-<tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
-<tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
-<tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="userinfo.team" /></h4></td></tr>
-<tr><td align="center"><h4 >Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
-<tr><td align="center"><h4 >Enter the Role</td><td><form:input  placeHolder="Enter the role" path="role" /></h4></td></tr>
+<tr><td align="center"><h4 >User Name:</td>
+    <td><form:input placeHolder="Enter the username"  path="username" /></h4></td></tr>    
+<tr><td align="center"><h4 >Email id</td>
+    <td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
+<tr><td align="center"><h4>Mobile</td>
+    <td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
+<tr><td align="center"><h4 >Team</td>
+    <td><form:select path="userinfo.team">
+         <form:option class="login login-submit" value="">Select</form:option>
+	 <form:option class="login login-submit" value="codereview">Code Review</form:option>
+	 <form:option class="login login-submit" value="appsec">App Sec</form:option>
+         <form:option class="login login-submit" value="netpt">Network PT</form:option>
+    </form:select></h4></td></tr>
+      
+<tr><td align="center"><h4 >Password</td>
+    <td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
+<tr><td align="center"><h4 >Enter the Role</td>
+    <td>
+   <form:select path="role">
+            <form:option class="login login-submit" value="">Select</form:option>
+	    <form:option class="login login-submit" value="admin">Admin</form:option>
+	    <form:option class="login login-submit" value="manager">Manager</form:option>
+            <form:option class="login login-submit" value="lead">Lead</form:option>
+            <form:option class="login login-submit" value="engineer">Engineer</form:option>       
+   </form:select></h4></td></tr>
+
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>
 
 

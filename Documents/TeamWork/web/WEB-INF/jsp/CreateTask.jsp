@@ -166,27 +166,30 @@ th {
     text-align: center;
 }
 </style>
+
+<script type="text/javascript">
+    var form = document.getElementById('taskform');
+form.reset();
+</script>
+
 </head>
     <body>
-    
-        <br><br>
-        <div align="center">
-<ul>
-  <li><a href="CreateProject.do">Create New Project</a></li>
-  <li><a href="showAllProject.do">View Projects</a></li>
-  <li><a href="CreateTask.do">Create New Task</a></li>
-  <li><a href="CreateUser.do">Create New user</a></li>
-  <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
- 
-  
-  <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
+    <br><br>
+      <div align="center">
+        <ul>
+           <li><a href="CreateProject.do">Create New Project</a></li>
+           <li><a href="showAllProject.do">View Projects</a></li>
+           <li><a href="CreateTask.do">Create New Task</a></li>
+           <li><a href="CreateUser.do">Create New user</a></li>
+           <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
+           <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
 </ul>
 </div>
         <br>
         <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
 
-	   <form:form action="CreateTask.do" method="post" modelAttribute="TaskM">
+	   <form:form action="CreateTask.do" method="post" modelAttribute="TaskM" id="taskform">
 <table>
 
 <tr><td align="center"><h4>Task Name:</td><td><form:input placeholder="Enter Task Name" path="taskname" /></h4></td></tr>    
@@ -196,9 +199,9 @@ th {
 <tr></tr>
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>            
 </table>
-
+<center>${TaskSuccess}</center>
 </form:form>
 	   </div>
-<center>${Lerror}</center><br>      
+<br>      
     </body>
 </html>

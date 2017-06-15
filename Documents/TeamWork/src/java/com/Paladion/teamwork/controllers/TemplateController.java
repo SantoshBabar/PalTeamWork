@@ -55,7 +55,9 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 
         List <TaskBean> Tasklist = null;
         
-        TempS.addTemplate(TempB); 	
+        HttpSession TempSession=req.getSession(false);
+        TempSession.setAttribute("Template", TempB);
+        //TempS.addTemplate(TempB); 	
 	System.out.println("Template Created with Template id  "+TempB.getTemplateid());
 	    
 	try
@@ -64,8 +66,7 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 	}
         catch(Exception ex){}
 	    
-	HttpSession TempSession=req.getSession(false);
-        TempSession.setAttribute("Template", TempB);
+	
         TempSession.setAttribute("TaskList", Tasklist);
               
 	return new ModelAndView("Test","AllTasks", Tasklist);
@@ -75,9 +76,13 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 public ModelAndView AddTaskToTemplate(HttpServletRequest req){
     System.out.println("Inside Add Task to template controller");
     HttpSession session=req.getSession();
+    TemplateBean TempB=(TemplateBean)session.getAttribute("Template"); 
+   
     CommonUtil CUtil=new CommonUtil();
     List<MapTemplateTaskBean> MTTB=null;
+    TempS.addTemplate(TempB);
     MTTB = CUtil.Maptasktotemplate(req, session);
+    session.removeAttribute("Template");
         if(null!=MTTB)
         {
             for(MapTemplateTaskBean MTT:MTTB)

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <style>
 ul {
@@ -156,7 +157,8 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 70%;
+    
 }
 
 th, td {
@@ -199,20 +201,41 @@ th {
 	   <div class="left">
 	   <tr><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></tr>
              
-              </tr><h4 style="color: red; font-size: 15px" >Start Date: ${ProjectData.startdate}</h4></tr>
-               </tr><h4 style="color: red; font-size: 15px" >End Date: ${ProjectData.enddate}</h4></tr>
+              </tr><h4 style="color: red; font-size: 15px" >Start Date:
+                   <fmt:formatDate type = "date" value = "${ProjectData.startdate}"/></h4></tr>
+               </tr><h4 style="color: red; font-size: 15px" >End Date: 
+                   <fmt:formatDate type = "date"  value = "${ProjectData.enddate}"/></h4></tr>
 	   </div><br>
-<div style="overflow: auto;height: 200px; width: auto;">
-<table border="1" align="center">
-    <tr><th>Task Name </th><th>Task Start Date</th><th>Start End Date</th><th>Hours</th><th>Status</th></tr>
-<c:forEach  items="${TaskDetails}" var="Task">     
-            <tr> 
-                <td style="color: black">${Task.taskname}</td>
-                <td style="color: black">${Task.taskstartdate}</td>
-	        <td style="color: black">${Task.taskenddate}</td>
-                <td style="color: black">${Task.taskhours}</td>
-                <td style="color: black">${Task.status}</td>
-            </tr>
+
+<table border="1" align="left">
+    <tr>
+        <th width="20%">Task Name </th>
+        <th width="10%">Task Start Date</th>
+        <th width="10%">Start End Date</th>
+        <th width="10%">Hours</th>
+        <th width="10%">Status</th>
+    </tr>
+</table>
+           <br>   
+           <br>
+               
+    <div style="overflow: auto;height: 200px; width: auto;"> 
+        
+          
+    <table border="1" align="left">
+   
+    <c:forEach  items="${TaskDetails}" var="Task">  
+        
+        <fmt:formatDate value="${Task.taskstartdate}" var="SDate" type="both" dateStyle = "short" timeStyle = "short"/>
+        <fmt:formatDate value="${Task.taskenddate}" var="EDate" type="both" dateStyle = "short" timeStyle = "short" />
+        
+        <tr> 
+            <td width="21%" style="color: black">${Task.taskname}</td>
+            <td width="10%" style="color: black">${SDate}</td>
+	    <td width="10%" style="color: black">${EDate}</td>
+            <td width="10%" style="color: black">${Task.taskhours}</td>
+            <td width="10%" style="color: black">${Task.status}</td>
+        </tr>
            
 </c:forEach>
 </table>
