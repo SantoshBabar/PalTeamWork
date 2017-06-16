@@ -213,7 +213,9 @@ th {
         <th width="10%">Task Start Date</th>
         <th width="10%">Start End Date</th>
         <th width="10%">Hours</th>
+        <th width="10%">Days</th>
         <th width="10%">Status</th>
+        
     </tr>
 </table>
            <br>   
@@ -234,6 +236,7 @@ th {
             <td width="10%" style="color: black">${SDate}</td>
 	    <td width="10%" style="color: black">${EDate}</td>
             <td width="10%" style="color: black">${Task.taskhours}</td>
+            <td width="10%" style="color: black">${Task.taskdays}</td>
             <td width="10%" style="color: black">${Task.status}</td>
         </tr>
            

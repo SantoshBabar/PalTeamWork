@@ -28,6 +28,15 @@ public class ProjectTransactionBean {
     String status;
     Date taskstartdate, taskenddate;
     float taskdays;
+    String engname;
+
+    public String getEngname() {
+        return engname;
+    }
+
+    public void setEngname(String engname) {
+        this.engname = engname;
+    }
         
         
         public int getUserid() {

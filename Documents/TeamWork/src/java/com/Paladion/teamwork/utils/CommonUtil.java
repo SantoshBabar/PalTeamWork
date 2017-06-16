@@ -281,6 +281,7 @@ Date end = null;
                 if(null==TaskEndDate)
                   {
                     PTBean.setTaskstartdate(ProjectTime);
+                  //  PTBean.setEngname(getUserById(PTBean.getUserid()));
                     TaskEndDate=calculateResponseTime(ProjectTime, PTBean.getTaskhours());
                     PTBean.setTaskenddate(TaskEndDate);
                    }

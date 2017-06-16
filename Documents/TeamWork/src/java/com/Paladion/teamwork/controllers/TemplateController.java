@@ -82,7 +82,7 @@ public ModelAndView AddTaskToTemplate(HttpServletRequest req){
     List<MapTemplateTaskBean> MTTB=null;
     TempS.addTemplate(TempB);
     MTTB = CUtil.Maptasktotemplate(req, session);
-    session.removeAttribute("Template");
+    
         if(null!=MTTB)
         {
             for(MapTemplateTaskBean MTT:MTTB)

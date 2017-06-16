@@ -232,13 +232,14 @@ th {
  <table border="2" >
             
             <tr>
-                <th width="15%" >PID </th>
+                
                 <th width="15%" >OPID </th>
                 <th width="15%" >Project Title</th>
                 <th width="15%" >Lead</th>
                 <th width="11%" >Start Date</th>
                 <th width="9%" >End Date</th>
-                <th width="12%" >Man Days</th></tr>
+                <th width="12%" >Man Days</th>
+            <th width="15%" >View Status</th>
             </tr>
  </table>
            <div style="overflow: auto;height: 350px; width: auto;">
@@ -252,13 +253,14 @@ th {
 <fmt:formatDate value="${project.enddate}" var="EDate" type="date" pattern="dd-MMM-yyyy" />
 	   
             <tr> 
-                <td width="15%"> <a href="showProgress.do?id=${project.projectid}">${project.projectid}</a></td>
+                
                 <td width="15%"> ${project.opid}</td>
 	        <td width="15%">${project.projectname}</td>
                 <td width="15%">${project.lead}</td>
                 <td width="10%">${SDate}</td>
                 <td width="10%">${EDate}</td>
                 <td width="10%">${project.mandays}</td>
+                <td width="15%"> <a href="showProgress.do?id=${project.projectid}">View Status</a></td>
 	   </tr>
            
 </c:forEach>
