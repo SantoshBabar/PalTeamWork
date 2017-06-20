@@ -124,17 +124,17 @@ this.templateid = templateid;
 }
 	
 	
-@OneToMany(cascade = CascadeType.ALL)
-@JoinTable(name = "projects_transaction", joinColumns = { @JoinColumn(name = "projectid") })
-public Set <ProjectTransactionBean> projectstatusbean;
-
-public Set<ProjectTransactionBean> getProjectstatusbean() {
-return projectstatusbean;
-}
-
-public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
-this.projectstatusbean = projectstatusbean;
-}
+//@OneToMany(cascade = CascadeType.ALL)
+//@JoinTable(name = "projects_transaction", joinColumns = { @JoinColumn(name = "projectid") })
+//public Set <ProjectTransactionBean> projectstatusbean;
+//
+//public Set<ProjectTransactionBean> getProjectstatusbean() {
+//return projectstatusbean;
+//}
+//
+//public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
+//this.projectstatusbean = projectstatusbean;
+//}
 
 
 }

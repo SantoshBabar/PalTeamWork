@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author Administrator
  */
 @Entity
-@Table(name = "Tasks",catalog="teamwork")
+@Table(name = "tasks",catalog="teamwork")
 public class TaskBean implements Serializable{
 	
 @Id

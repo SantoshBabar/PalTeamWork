@@ -7,9 +7,12 @@ package com.Paladion.teamwork.beans;
 
 import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -19,8 +22,11 @@ import javax.persistence.Table;
 @Table(name = "projects_transaction",catalog="teamwork")
 public class ProjectTransactionBean {
     
-   
-	@Id
+    @Id
+    @GenericGenerator(name="gen",strategy="increment")
+    @GeneratedValue(generator="gen")
+    @Column(name = "transid", unique = true, nullable = false, precision = 15, scale = 0)        
+    int transid;
     int projectid;
     String taskname;
     int userid;
@@ -29,6 +35,16 @@ public class ProjectTransactionBean {
     Date taskstartdate, taskenddate;
     float taskdays;
     String engname;
+
+    public int getTransid() {
+        return transid;
+    }
+
+    public void setTransid(int transid) {
+        this.transid = transid;
+    }
+    
+    
 
     public String getEngname() {
         return engname;

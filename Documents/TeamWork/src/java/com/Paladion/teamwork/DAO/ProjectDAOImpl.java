@@ -17,6 +17,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -113,44 +114,16 @@ public class ProjectDAOImpl implements ProjectDAO
         @Override
        public List<ProjectTransactionBean> getProjectTransaction(int projectid){
         
-           List<ProjectTransactionBean> PTBList=new ArrayList<ProjectTransactionBean>();
+           List<ProjectTransactionBean> PList;
            Transaction tx = null;
 	   Session session1 = sessionFactory.getCurrentSession();
-          tx = session1.beginTransaction();
-           String SQL_QUERY1= "select * from projects_transaction where projectid=?";
-           Query query1 = session1.createSQLQuery(SQL_QUERY1);
-           //query1.
-           //query1.addEntity(ProjectTransactionBean.class);
-           query1.setParameter(0,projectid);
-           
-           List list1 = query1.list();
-         /*  for(Object obj: list1){
-               ProjectTransactionBean PTBean =new ProjectTransactionBean();
-                       PTBean=(ProjectTransactionBean)obj;
-               PTBList.add(PTBean);
-               
-           }**/
-           
-             //Iterator it= list1.iterator();
-            /* for (int i=0;i<list1.size();i++)
-             {
-                  ProjectTransactionBean PTBean =new ProjectTransactionBean();
-                  
-                 Object o= list1.get(i);
-                 System.out.println(list1.get(i));
-             }**/
-//             
- /*               for (Object obj : list1)
-                {
-                 ProjectTransactionBean ref=(ProjectTransactionBean)obj;
-                 System.out.println( ref.getTaskname());
-                }
-**/
-//                
-          
-          tx.commit();
-          PTBList=list1;
-           return PTBList;
+           tx = session1.beginTransaction();
+           Criteria criteria = session1.createCriteria(ProjectTransactionBean.class);
+         criteria.add(Restrictions.eq("projectid", projectid));
+//         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+	   PList = criteria.list();
+	 
+           return PList;
     }
 
 }
