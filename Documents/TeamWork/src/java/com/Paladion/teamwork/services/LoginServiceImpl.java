@@ -6,8 +6,8 @@
 package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.DAO.LoginDAO;
-import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.beans.UserDataBean;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService{
     LoginDAO LD;
     
     @Override
-    public LoginBean Login(LoginBean LB) {
+    public UserDataBean Login(UserDataBean LB) {
          
        return LD.Login(LB);
     }
@@ -33,12 +33,12 @@ public class LoginServiceImpl implements LoginService{
     }
     
     @Override
-    public LoginBean ForgotPassword(LoginBean LB){
+    public UserDataBean ForgotPassword(UserDataBean LB){
 	    return LD.ForgotPassword(LB);
     }
     
     @Override
-    public LoginBean ResetPassword(LoginBean LB){
+    public UserDataBean ResetPassword(UserDataBean LB){
 	    return LD.ResetPassword(LB);
     }
     

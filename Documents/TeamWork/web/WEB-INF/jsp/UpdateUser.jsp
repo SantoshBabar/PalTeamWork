@@ -191,23 +191,20 @@ th {
         <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Update User</h2></div>
 
-	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
-<table>
-   <c:forEach  items="${UpdateUser}" var="user">    
-       ${user.userinfo.name}
-<tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username"  /></h4></td></tr>    
-<tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
-<tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
-<tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="userinfo.team" /></h4></td></tr>
-<tr><td align="center"><h4 >Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
-<tr><td align="center"><h4 >Enter the Role</td><td><form:input  placeHolder="Enter the role" path="role" /></h4></td></tr>
-<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>
-
-
-    
-</table>
-</form:form>
+    <form:form action="UpdateUserDetails.do" method="POST" modelAttribute="UserM">
+        <table>
+           <tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username" value="${UserDetail.username}" /></h4></td></tr>    
+            <tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="email" value="${UserDetail.email}"/></h4></td></tr>  
+            <tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="phone" value="${UserDetail.phone}" /></h4></td></tr>
+            <tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="team" value="${UserDetail.team}" /></h4></td></tr>
+            <%-- <tr><td align="center"><h4 >Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr> --%>
+            <tr><td align="center"><h4 >Change Role</td><td><form:input  placeHolder="Enter the role" path="role" value="${UserDetail.role}"/></h4></td></tr>
+            <input type="hidden" name="userid" value="${UserDetail.userid}"/>
+            <tr><td align="center"><input type="submit" value="Update" class="login login-submit"/></td></tr>
+            
+        </table>
+    </form:form>
            
-<center>${Lerror}</center>      
+        <center>${Lerror}</center>      
     </body>
 </html>

@@ -1,12 +1,14 @@
   
+<%@page import="com.Paladion.teamwork.beans.UserDataBean"%>
+<%@page import="com.Paladion.teamwork.beans.UserDataBean"%>
 <%-- 
     Document   : Welcome
     Created on : 13 Apr, 2017, 8:45:16 PM
     Author     : Administrator
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.Paladion.teamwork.beans.LoginBean"%>
-<%@page import="com.Paladion.teamwork.beans.UserBean"%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.Paladion.teamwork.beans.ProjectBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -174,9 +176,9 @@ th {
 
 
   
-        <%! LoginBean b; String name;%>
-        <% b=(LoginBean)session.getAttribute("Luser"); 
-        name=b.userinfo.getName().toString(); 
+        <%! UserDataBean b; String name;%>
+        <% b=(UserDataBean)session.getAttribute("Luser"); 
+        name=b.getUsername().toString();
         %>
 <!--<div align="left">
 	   <img width="230px" height="70px" src="PaladionLogo.png"/>

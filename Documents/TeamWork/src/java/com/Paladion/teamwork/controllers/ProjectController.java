@@ -5,7 +5,7 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
@@ -65,7 +65,7 @@ public ModelAndView CreateProject()
 {    
 	
 	List <TemplateBean> TemplateList;
-        List <LoginBean> LeadList;
+        List <UserDataBean> LeadList;
 	ModelAndView model=new ModelAndView("CreateProject");
 	System.out.println("Inside Project controller for get method");
 	try{

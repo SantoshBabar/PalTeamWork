@@ -178,37 +178,40 @@ th {
 
 </head>
     <body>
-        <br><br>   
+  <%-- Header Code Begins --%> 
+    <br><br>   
+    <div align="center">
+    <ul>
+        <li><a href="Welcome.do">Home</a></li>
+        <li><a href="CreateProject.do">Create New Project</a></li>
+        <li><a href="showAllProject.do">View Projects</a></li>
+        <li><a href="CreateTask.do">Create New Task</a></li>
+        <li><a href="CreateUser.do">Create New user</a></li>
+        <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
+        <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
+    </ul>
+    </div>
+         
+    <br>  
 
-<div align="center">
-<ul>
-  <li><a href="CreateProject.do">Create New Project</a></li>
-  <li><a href="showAllProject.do">View Projects</a></li>
-  <li><a href="CreateTask.do">Create New Task</a></li>
-  <li><a href="CreateUser.do">Create New user</a></li>
-  <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
- 
-  
-  <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-</ul>
-</div>
-         <br>
-
+    <div> <font color="red"><b><center>${Message}</center><br></font> </div>
+    
+    <%-- Header Code Ends --%>   
    
         <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create User</h2></div>
 
-	   <form:form action="CreateUser.do" method="POST" modelAttribute="LoginM">
+	   <form:form action="CreateUser.do" method="POST" modelAttribute="UserM">
 <table>
    
 <tr><td align="center"><h4 >User Name:</td>
     <td><form:input placeHolder="Enter the username"  path="username" /></h4></td></tr>    
 <tr><td align="center"><h4 >Email id</td>
-    <td><form:input placeHolder="Enter the email" path="userinfo.email" /></h4></td></tr>  
+    <td><form:input placeHolder="Enter the email" path="email" /></h4></td></tr>  
 <tr><td align="center"><h4>Mobile</td>
-    <td><form:input placeHolder="Enter the mobile" path="userinfo.phone" /></h4></td></tr>
+    <td><form:input placeHolder="Enter the mobile" path="phone" /></h4></td></tr>
 <tr><td align="center"><h4 >Team</td>
-    <td><form:select path="userinfo.team">
+    <td><form:select path="team">
          <form:option class="login login-submit" value="">Select</form:option>
 	 <form:option class="login login-submit" value="codereview">Code Review</form:option>
 	 <form:option class="login login-submit" value="appsec">App Sec</form:option>

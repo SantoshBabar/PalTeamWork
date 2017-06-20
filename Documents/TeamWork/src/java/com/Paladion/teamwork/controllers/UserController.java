@@ -5,17 +5,13 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.beans.ProjectBean;
-import com.Paladion.teamwork.beans.ProjectTransactionBean;
-import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.beans.UserDataBean;
+
 import com.Paladion.teamwork.services.LoginService;
-import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,45 +33,47 @@ public class UserController {
  LoginService LS;
  
  
- UserBean ub=null;
- LoginBean lb=null;
+ 
+ UserDataBean lb=null;
 	
 @Autowired
 @Qualifier(value="UserService")
  UserService userService;
 	
-@ModelAttribute("LoginM")
- public LoginBean PopulateLoginBean() 
+@ModelAttribute("UserM")
+ public UserDataBean PopulateLoginBean() 
 {
-   return new LoginBean(); // populates form for the first time if its null
+   return new UserDataBean(); // populates form for the first time if its null
 }
 	
  
 	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
      public String createUser()
     {   
-//	    userService.getUsersByRole("engineer");
-//	    userService.getUsersByRole("lead");
 	    return "CreateUser";
     }
 	
 	@RequestMapping(value="/CreateUser",method=RequestMethod.POST)
-public ModelAndView createUser(@ModelAttribute("LoginM")LoginBean loginBean,HttpServletRequest req )
+    public ModelAndView createUser(@ModelAttribute("UserM")UserDataBean loginBean,HttpServletRequest req )
     {
         System.out.println("in user controller create user post method");
     
-	   userService.addUser(loginBean);
-	   
-	   return new ModelAndView("Welcome","TaskSuccess","User Created Successfully");
+	  boolean result = userService.addUser(loginBean);
+	   if(result=true){
+	   return new ModelAndView("CreateUser","Message","User Created Successfully");
+           }
+           else{
+               return new ModelAndView("CreateUser","Message","User Creation Failed Due to Error");
+           }
         }
 
 
 @RequestMapping(value="/ViewAllUser",method=RequestMethod.POST)
-public ModelAndView ViewAllUser(@ModelAttribute("LoginM")LoginBean loginBean,HttpServletRequest req )
+public ModelAndView ViewAllUser( )
     {
         System.out.println("ViewAllUser");
     
-	   List<LoginBean> userList=userService.ViewAllUser();
+	   List<UserDataBean> userList=userService.GetAllUser();
 	   ModelAndView result=new ModelAndView("ViewAllUser");
            result.addObject("AllUsers",userList);
 	   return result;
@@ -88,50 +86,50 @@ public ModelAndView ViewAllUser(@ModelAttribute("LoginM")LoginBean loginBean,Htt
            if(id!=0)
            {
                userService.DeleteUser(id);
-               
-               List<LoginBean> userList=userService.ViewAllUser();
-	  
-           result.addObject("AllUsers",userList);
-               
-                result.addObject("Success","User deleted successfully");
-               
+               List<UserDataBean> userList=userService.GetAllUser();
+	       result.addObject("AllUsers",userList);
+               result.addObject("Success","User deleted successfully");    
            }
            else{
-               
-            result=new ModelAndView("Welcome");
-          
-           }
+                result=new ModelAndView("Welcome");
+            }
            return result;
       
     }
     
-    @RequestMapping(value="/UpdateUser",method=RequestMethod.GET)
-public ModelAndView UpdateUser(@RequestParam int id)
+@RequestMapping(value="/GetUserDetails",method=RequestMethod.GET)
+public ModelAndView GetUserDetails(@RequestParam int id)
 {
-    
-    ModelAndView result=new ModelAndView("UpdateUser");
+           ModelAndView result=new ModelAndView("UpdateUser");
            if(id!=0)
-           {
-               userService.UpdateUser(id);
-               
-               List<LoginBean> userList=userService.ViewAllUser();
-	  
-           result.addObject("UpdateUser",userList);
-               
-                result.addObject("Success","User displayed successfully");
-                result=new ModelAndView("UpdateUser");
+            {
+                UserDataBean userBean=userService.GetUserById(id);
+                result.addObject("UserDetail",userBean);
                 return result;
-                
-               
-           }
+            }
            else{
-               
-            result=new ModelAndView("fail");
-          
-           }
+                result=new ModelAndView("fail");
+            }
            return result;
 }
     
+
+
+@RequestMapping(value="/UpdateUserDetails",method=RequestMethod.POST)
+    public ModelAndView updateUserDetails(@ModelAttribute("UserM")UserDataBean UserBean)
+    {
+        System.out.println("in update user details controller method");
+    
+	   userService.UpdateUserDetails(UserBean);
+           
+           List<UserDataBean> userList=userService.GetAllUser();
+	   ModelAndView result=new ModelAndView("ViewAllUser");
+           result.addObject("AllUsers",userList);
+           result.addObject("Message","User Details Updated Successfully");
+	   return result;
+	   
+	   
+        }
     
 }
 

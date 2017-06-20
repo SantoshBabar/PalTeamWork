@@ -5,8 +5,8 @@
  */
 package com.Paladion.teamwork.DAO;
 
-import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.beans.UserDataBean;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,15 +31,12 @@ public class UserDAOImpl implements UserDAO{
 	
 	
 	@Override
-	public boolean addUser(LoginBean loginBean) {
+	public boolean addUser(UserDataBean userBean) {
 		try{
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = null;
-	            tx = session.beginTransaction();
-		UserBean ub=loginBean.getUserinfo();
-		ub.setName(loginBean.getUsername());
-		session.save(loginBean);
-		session.save(ub);
+	        tx = session.beginTransaction();
+		session.save(userBean);
 		System.out.println("done");
 				 
 	           tx.commit();
@@ -51,19 +48,25 @@ public class UserDAOImpl implements UserDAO{
 		return true;
 		
 	}
+        
+    
+
+        
+        
+        
 	
 	@Override
-	public List<LoginBean> getUsersByRole(String role)
+	public List<UserDataBean> getUsersByRole(String role)
 	{
-		List<LoginBean> UserList=new ArrayList<LoginBean>();
-		LoginBean ubean=new LoginBean();
+		List<UserDataBean> UserList=new ArrayList<UserDataBean>();
+		UserDataBean ubean=new UserDataBean();
 		
 		Session session1 = sessionFactory.getCurrentSession();
 		Transaction tx;
 		tx = session1.beginTransaction();
 		
 		System.out.println("Get Users by Role UserDAO");
-	           String SQL_QUERY1= "from LoginBean where role=?";
+	           String SQL_QUERY1= "from UserDataBean where role=?";
                       Query query2 = session1.createQuery(SQL_QUERY1);
 	           query2.setParameter(0,role);
          
@@ -73,45 +76,37 @@ public class UserDAOImpl implements UserDAO{
 	           Iterator it= list2.iterator();
                       while(it.hasNext())
                       {
-		           ubean=(LoginBean) it.next();
-                                  System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.userinfo.getName());
-	                       UserList.add(ubean);
+		           ubean=(UserDataBean) it.next();
+                           System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.getUsername());
+	                   UserList.add(ubean);
                       }
 		
 	           return UserList;	
 	}
         
-        
-        //////////////////////////////////
+  
        @Override
-	public List<LoginBean> ViewAllUser()
+	public List<UserDataBean> GetAllUser()
 	{
-		List<LoginBean> UserList=new ArrayList<LoginBean>();
+		List<UserDataBean> UserList=new ArrayList<UserDataBean>();
                 
 		Session session1 = sessionFactory.getCurrentSession();
 		Transaction tx;
 		tx = session1.beginTransaction();
 		
-                String SQL_QUERY1= "from LoginBean";
+                String SQL_QUERY1= "from UserDataBean";
                 Query query2 = session1.createQuery(SQL_QUERY1);
-	           
-         
-                      List list2 = query2.list();
-                      
-	           tx.commit();
+	        List list2 = query2.list();
+                tx.commit();
                    
-	           
-	           Iterator it= list2.iterator();
-                      while(it.hasNext())
-                      {
-                          LoginBean ubean=new LoginBean();
-		            ubean=(LoginBean)it.next();
-                           UserList.add(ubean);
-                          
-	                     
-                      }
-		
-	           return UserList;	
+	        Iterator it= list2.iterator();
+                   while(it.hasNext())
+                    {
+                       UserDataBean ubean=new UserDataBean();
+		       ubean=(UserDataBean)it.next();
+                       UserList.add(ubean);
+                    }
+		return UserList;	
 	}
         
         
@@ -119,27 +114,56 @@ public class UserDAOImpl implements UserDAO{
 	public boolean DeleteUser(int id)
 	{
             Session session = this.sessionFactory.openSession();
-            String sql = "Delete from userstable where userId=?";
-             SQLQuery query = session.createSQLQuery(sql);
-             query.setParameter(0, id);
-             query.executeUpdate();
-             
-		return true;	
+            String sql = "Delete from users where userid=?";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setParameter(0, id);
+            query.executeUpdate();
+            return true;	
 	}
         
         
         @Override
-	public boolean UpdateUser(int id)
+	public boolean UpdateUserDetails(UserDataBean UB)
 	{
             Session session = this.sessionFactory.openSession();
-            String sql = "select from userstable where userId=?";
-             SQLQuery query = session.createSQLQuery(sql);
-             query.setParameter(0, id);
-             query.executeUpdate();
-             
-		return true;	
-	}	
+            Transaction tx;
+            tx = session.beginTransaction();
+            String sql = "UPDATE users SET username=?,email=?,team=?,phone=?,role=? WHERE userid=?";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setParameter(0,UB.getUsername());
+            query.setParameter(1,UB.getEmail());
+            query.setParameter(2,UB.getTeam());
+            query.setParameter(3,UB.getPhone());
+            query.setParameter(4,UB.getRole());
+            query.setParameter(5,UB.getUserid());
+            query.executeUpdate();
+            tx.commit();
+            return true;	
 	}
+        
+        @Override
+        public UserDataBean GetUserById(int id)
+        {
+            Session session1 = sessionFactory.getCurrentSession();
+            Transaction tx;
+            tx = session1.beginTransaction();
+            UserDataBean ubean=new UserDataBean();
+		
+            String SQL_QUERY1= "from UserDataBean where userid=?";
+                Query query2 = session1.createQuery(SQL_QUERY1);
+                query2.setParameter(0, id);
+	        List list2 = query2.list();
+                Iterator it= list2.iterator();
+                while(it.hasNext())
+                  {
+                     ubean=(UserDataBean)it.next();
+                  }
+                tx.commit();
+                return ubean;       
+        }
+	
+
+}
 
     
 

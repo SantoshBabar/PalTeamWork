@@ -5,8 +5,8 @@
  */
 package com.Paladion.teamwork.DAO;
 
-import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.beans.UserDataBean;
+
 
 /**
  *
@@ -14,7 +14,7 @@ import com.Paladion.teamwork.beans.UserBean;
  */
 public interface LoginDAO {
     
-    public LoginBean Login(LoginBean LB);
-    public LoginBean ForgotPassword(LoginBean LB);
-    public LoginBean ResetPassword(LoginBean LB);
+    public UserDataBean Login(UserDataBean LB);
+    public UserDataBean ForgotPassword(UserDataBean LB);
+    public UserDataBean ResetPassword(UserDataBean LB);
 }

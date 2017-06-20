@@ -212,7 +212,7 @@ th {
 <tr><td align="right"><h4>Lead :</td>
     <td><form:select path="lead">
 	           <c:forEach  items="${AllLeads}" var="lead"> 
-	           <form:option class="login login-submit" value="${lead.userinfo.name}">${lead.userinfo.name}</form:option>
+	           <form:option class="login login-submit" value="${lead.username}">${lead.username}</form:option>
 	           </c:forEach></form:select>
     </td>
 </tr>

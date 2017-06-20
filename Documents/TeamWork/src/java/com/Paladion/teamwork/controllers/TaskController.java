@@ -5,7 +5,6 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.CreateUserBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.services.TaskService;
 import java.util.ArrayList;

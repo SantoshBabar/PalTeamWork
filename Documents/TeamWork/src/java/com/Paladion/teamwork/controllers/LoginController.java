@@ -5,8 +5,8 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.beans.UserDataBean;
+
 import com.Paladion.teamwork.services.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,14 +36,14 @@ public class LoginController {
  LoginService LS;
  
  
- UserBean ub=null;
- LoginBean lb=null;
+ 
+ UserDataBean lb=null;
  
  
  @ModelAttribute("LoginM")
- public LoginBean PopulateLoginBean() 
+ public UserDataBean PopulateLoginBean() 
 {
-   return new LoginBean(); // populates form for the first time if its null
+   return new UserDataBean(); // populates form for the first time if its null
 }
  
  
@@ -82,7 +82,7 @@ return "ForgotPassword";
 
 //forgot password starts
 @RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
-public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
+public ModelAndView Forgot(@ModelAttribute("ForgotM")UserDataBean LB,HttpServletRequest req )
     {
         String remoteAddr = req.getRemoteAddr();
 		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
@@ -102,24 +102,23 @@ public ModelAndView Forgot(@ModelAttribute("ForgotM")LoginBean LB,HttpServletReq
            lb=LS.ForgotPassword(LB);
            if (lb!=null) {
             HttpSession LoginSess=req.getSession(true);
-            LoginSess.setAttribute("Luser", ub);
+            LoginSess.setAttribute("Luser", lb);
             return new ModelAndView("ResetPassword");
            }
            else {
            return new ModelAndView("ForgotPassword","Lerror", "failed");
            }
 }
-//////////////////////////
 
 
 @RequestMapping(value="/ResetPassword",method=RequestMethod.POST)
-public ModelAndView ResetPassword(@ModelAttribute("ForgotM")LoginBean LB,HttpServletRequest req )
+public ModelAndView ResetPassword(@ModelAttribute("ForgotM")UserDataBean LB,HttpServletRequest req )
     {
            System.out.println("ResetPassword");
            lb=LS.ResetPassword(LB);
            if (lb!=null) {
             HttpSession LoginSess=req.getSession(true);
-            LoginSess.setAttribute("Luser", ub);
+            LoginSess.setAttribute("Luser", lb);
             return new ModelAndView("Login","Lerror", "password updated successfully");
            }
            else {
@@ -130,32 +129,34 @@ public ModelAndView ResetPassword(@ModelAttribute("ForgotM")LoginBean LB,HttpSer
 //forgot password ends
  
 @RequestMapping(value="/Login",method=RequestMethod.POST)
-public ModelAndView Login(@ModelAttribute("LoginM")LoginBean LB,HttpServletRequest req )
+public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRequest req )
     {
-     String remoteAddr = req.getRemoteAddr();
-		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
+        //Captcha code begins
+        String remoteAddr = req.getRemoteAddr();
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+	reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
 
-		String challenge = req
-				.getParameter("recaptcha_challenge_field");
-		String uresponse = req.getParameter("recaptcha_response_field");
-		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
-				remoteAddr, challenge, uresponse);
+	String challenge = req.getParameter("recaptcha_challenge_field");
+	String uresponse = req.getParameter("recaptcha_response_field");
+	ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(
+	remoteAddr, challenge, uresponse);
 
-		if (reCaptchaResponse.isValid()) {
-			String user = req.getParameter("user");
-			               
-		} else {
-			 return new ModelAndView("Login","Lerror", "Captcha failed");
+	if (reCaptchaResponse.isValid()) {
+		String user = req.getParameter("user");
+            } else {
+			return new ModelAndView("Login","Lerror", "Captcha failed");
 		}
-           System.out.println("in login");
+         //Captha code ends  
+        
+        
+        System.out.println("in login");
            lb=LS.Login(LB);
            if (lb!=null) {
                       HttpSession LoginSess=req.getSession(true);
                       LoginSess.setAttribute("Luser", lb);
            
 	            return new ModelAndView("redirect:/Welcome.do");
-	}
+           }
            else {
            return new ModelAndView("Login","Lerror", "Login Failed");
            }

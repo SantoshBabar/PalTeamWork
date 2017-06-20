@@ -5,9 +5,9 @@
  */
 package com.Paladion.teamwork.DAO;
 
-import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.beans.TemplateBean;
-import com.Paladion.teamwork.beans.UserBean;
+
 import java.util.List;
 
 
@@ -18,14 +18,16 @@ import java.util.List;
 public interface UserDAO {
 
 	//public void addUserDao(UserBean Ubean);
-	public List<LoginBean> getUsersByRole(String role);
+	public List<UserDataBean> getUsersByRole(String role);
 
-	public boolean addUser(LoginBean loginbean);
+	public boolean addUser(UserDataBean loginbean);
         
-        public List<LoginBean> ViewAllUser();
+        public List<UserDataBean> GetAllUser();
         
         public boolean DeleteUser(int id);
         
-       public boolean UpdateUser(int id);
+       public boolean UpdateUserDetails(UserDataBean LB);
+       
+       public UserDataBean GetUserById(int id);
 
 }

@@ -5,8 +5,7 @@
  */
 package com.Paladion.teamwork.DAO;
 import java.util.UUID;
-import com.Paladion.teamwork.beans.LoginBean;
-import com.Paladion.teamwork.beans.UserBean;
+import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.utils.EmailUtil;
 import java.util.Iterator;
 import java.util.List;
@@ -32,21 +31,21 @@ public class LoginDAOImpl implements LoginDAO{
     }
 
     @Override
-    public LoginBean Login(LoginBean LB) {
-        LoginBean SessUserBean=null;
+    public UserDataBean Login(UserDataBean LB) {
+        UserDataBean SessUserBean=null;
         Session session = this.sessionFactory.openSession();
+        System.out.println("Inside LoginDao");
         String userid="";
-        String SQL_QUERY1 ="from LoginBean as o where o.username=? and o.password=?";
-        
+        String SQL_QUERY1 ="from UserDataBean as o where o.email=? and o.password=?";
         Query query1 = session.createQuery(SQL_QUERY1);
-        query1.setParameter(0,LB.getUsername());
+        query1.setParameter(0,LB.getEmail());
         query1.setParameter(1,LB.getPassword());
         List list1=query1.list();
         Iterator it= list1.iterator();
         while(it.hasNext())
         {
-         SessUserBean=(LoginBean) it.next();
-        
+         SessUserBean=(UserDataBean) it.next();
+            System.out.println("Query succefully executed");
         }
                         
         if ((list1 != null) && (list1.size() > 0)) 
@@ -58,12 +57,14 @@ public class LoginDAOImpl implements LoginDAO{
         return null;
         }            
     }
+    
+    
     @Override
-    public LoginBean ForgotPassword(LoginBean LB){
-	    LoginBean SessUserBean=null;
+    public UserDataBean ForgotPassword(UserDataBean LB){
+	    UserDataBean SessUserBean=null;
         Session session = this.sessionFactory.openSession();
         String userid="";
-        String SQL_QUERY1 ="from LoginBean as o where o.email=?";
+        String SQL_QUERY1 ="from UserDataBean as o where o.email=?";
         
         Query query1 = session.createQuery(SQL_QUERY1);
         query1.setParameter(0,LB.getEmail());
@@ -72,7 +73,7 @@ public class LoginDAOImpl implements LoginDAO{
         Iterator it= list1.iterator();
         while(it.hasNext())
         {
-         SessUserBean=(LoginBean) it.next();
+         SessUserBean=(UserDataBean) it.next();
         }
                         
         if ((list1 != null) && (list1.size() > 0)) 
@@ -86,7 +87,7 @@ public class LoginDAOImpl implements LoginDAO{
             
              System.out.print("i got your email id"+SessUserBean.getEmail());
              //update userdata set OTP=? where email=? email ge SessUserBean.getEmail()
-             String sql = "update userstable set OTP=? where email=?";
+             String sql = "update users set otp=? where email=?";
              SQLQuery query = session.createSQLQuery(sql);
              query.setParameter(0, uuid);
              query.setParameter(1, SessUserBean.getEmail());
@@ -106,31 +107,30 @@ public class LoginDAOImpl implements LoginDAO{
         
 }
       @Override
-    public LoginBean ResetPassword(LoginBean LB){
-	    LoginBean SessUserBean=null;
+    public UserDataBean ResetPassword(UserDataBean UB){
+	    UserDataBean SessUserBean=null;
         Session session = this.sessionFactory.openSession();
         String userid="";
-        String SQL_QUERY1 ="from LoginBean as o where o.OTP=?";
+        String SQL_QUERY1 ="from UserDataBean as o where o.otp=?";
         
         Query query1 = session.createQuery(SQL_QUERY1);
-        query1.setParameter(0,LB.getOTP());
+        query1.setParameter(0,UB.getOtp());
         
         List list1=query1.list();
         Iterator it= list1.iterator();
         while(it.hasNext())
         {
-            System.out.println("hello sumukh "+LB.getOTP());
-            
-         SessUserBean=(LoginBean) it.next();
+            System.out.println("hello sumukh "+UB.getOtp());
+            SessUserBean=(UserDataBean) it.next();
         }
                         
         if ((list1 != null) && (list1.size() > 0)) 
         {      
             String sql = "update userstable set password=?, OTP=? where OTP=?";
              SQLQuery query = session.createSQLQuery(sql);
-             query.setParameter(0, LB.getPassword());
+             query.setParameter(0, UB.getPassword());
              query.setParameter(1, null);
-             query.setParameter(2, LB.getOTP());
+             query.setParameter(2, UB.getOtp());
              query.executeUpdate();
              System.out.println("running");
         return SessUserBean;

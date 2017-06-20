@@ -174,18 +174,27 @@ form.reset();
 
 </head>
     <body>
-    <br><br>
-      <div align="center">
-        <ul>
-           <li><a href="CreateProject.do">Create New Project</a></li>
-           <li><a href="showAllProject.do">View Projects</a></li>
-           <li><a href="CreateTask.do">Create New Task</a></li>
-           <li><a href="CreateUser.do">Create New user</a></li>
-           <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
-           <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-</ul>
-</div>
-        <br>
+     <%-- Header Code Begins --%> 
+    <br><br>   
+    <div align="center">
+    <ul>
+        <li><a href="Welcome.do">Home</a></li>
+        <li><a href="CreateProject.do">Create New Project</a></li>
+        <li><a href="showAllProject.do">View Projects</a></li>
+        <li><a href="CreateTask.do">Create New Task</a></li>
+        <li><a href="CreateUser.do">Create New user</a></li>
+        <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
+        <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
+    </ul>
+    </div>
+         
+    <br>  
+
+    <div> <font color="red"><b><center>${Message}</center><br></font> </div>
+    
+    <%-- Header Code Ends --%>   
+    
+    
         <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
 

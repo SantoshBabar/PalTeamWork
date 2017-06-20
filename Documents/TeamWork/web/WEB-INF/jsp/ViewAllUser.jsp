@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
     
 <style>
@@ -177,62 +177,55 @@ th {
 </style>
 
 </head>
-    <body>
-        <br><br>   
-
-<div align="center">
-<ul>
-  <li><a href="CreateProject.do">Create New Project</a></li>
-  <li><a href="showAllProject.do">View Projects</a></li>
-  <li><a href="CreateTask.do">Create New Task</a></li>
-  <li><a href="CreateUser.do">Create New user</a></li>
-  <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
- 
-  
-  <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-</ul>
-</div>
-         <br>  
-
-        <div class="login-card">
-	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All user</h2><br></div>
- <table border="2" >
-            
-            <tr>
-                
-                <th width="10%" >Delete user </th>
-                <th width="10%" >Update user info </th>
-                <th width="10%" >User Name </th>
-               
-            </tr>
- </table>
-           
-     <table border="2" id="headerTable">
-            
-            
-            
-<c:forEach  items="${AllUsers}" var="user">     
     
+<body>
+    
+    <%-- Header Code Begins --%> 
+    <br><br>   
+    <div align="center">
+    <ul>
+        <li><a href="Welcome.do">Home</a></li>
+        <li><a href="CreateProject.do">Create New Project</a></li>
+        <li><a href="showAllProject.do">View Projects</a></li>
+        <li><a href="CreateTask.do">Create New Task</a></li>
+        <li><a href="CreateUser.do">Create New user</a></li>
+        <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
+        <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
+    </ul>
+    </div>
+         
+    <br>  
 
-	   
+    <div> <font color="red"><b><center>${Message}</center><br></font> </div>
+    
+    <%-- Header Code Ends --%>        
+            
+    <div class="login-card">
+    <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All user</h2><br></div>
+    
+    <table border="2" >
+        <tr>
+            <th width="10%" >Delete user </th>
+            <th width="10%" >Update user info </th>
+            <th width="10%" >User Name </th>
+        </tr>
+    </table>
+           
+    <table border="2" id="headerTable">
+            
+        <c:forEach  items="${AllUsers}" var="user">     
             <tr> 
-                
-               <td width="10%"><a href="DeleteUser.do?id=${user.userinfo.userId}">DELETE</a></td>
-               <td width="10%"><a href="UpdateUser.do?id=${user.userinfo.userId}">UPDATE</a></td>
-               <td width="10%"> ${user.userinfo.name}</td>
-               
-               
-                
-	   </tr>
-           
-</c:forEach>
-          
-        </table>
-      <center>${Success}</center>
- </div>
-           
-	   </div>
+                <td width="10%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
+                <td width="10%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
+                <td width="10%"> ${user.username}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    </div>
+    
          
      
-</body>
+    </body>
+
+    
 </html>

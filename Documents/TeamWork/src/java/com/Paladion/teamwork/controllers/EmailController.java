@@ -6,7 +6,7 @@
 package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.EmailTemplateBean;
-import com.Paladion.teamwork.beans.LoginBean;
+import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.services.EmailService;
 import com.Paladion.teamwork.utils.EmailUtil;
 import java.util.List;

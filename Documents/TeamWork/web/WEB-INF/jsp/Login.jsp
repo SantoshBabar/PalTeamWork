@@ -146,7 +146,7 @@ body {
     
 <!-- UI goes here-->
     <form:form action="Login.do" method="post" commandName="LoginM"> 
-    	Username:<form:input path="username" placeholder="Enter the username"/>
+    	Username:<form:input path="email" placeholder="Enter the username"/>
         Password:<form:password path="password" placeholder="Enter the password"/>
        <%
           ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdlHOsSAAAAACe2WYaGCjU2sc95EZqCI9wLcLXY", true);
