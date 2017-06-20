@@ -13,12 +13,47 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
+    
+        
 <style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ff6666;
+    width:1500px;
+   
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #b30000;
+}
+
+.active {
+    background-color: #ff1a1a;
+}
+</style>
+<style>
+
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
- 
-  background-image: url(new.jpg);
+
+	color:#6a6f8c;
+	background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -27,44 +62,35 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-input{
-
-border-bottom-color: black;
-
-}
-
 .login-card {
-  
-  top: 30%;
   padding: 40px;
-  width: 700px;
-  height: Auto;
+  width: 1420px;
+  height: auto;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
-  border-radius: 20px;
+  border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
 .login-card h1 {
-  font-weight: 100;
+  font-weight: 1;
   text-align: center;
   font-size: 2.3em;
 }
 
-
-
 .login-card input[type=submit] {
-  width: 100%;
+  width: 10%;
   display: block;
   margin-bottom: 10px;
   position: relative;
+  float: center;
 }
 
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: 20%;
+  width: auto;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -77,8 +103,9 @@ border-bottom-color: black;
 }
 
 .login-card input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
+  border: 2px solid #b9b9b9;
+  
+  border-top: 5px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
@@ -96,13 +123,23 @@ border-bottom-color: black;
   user-select: none; */
 }
 
+
+
+.login-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #ff8080;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
 .login-submit {
   /* border: 1px solid #3079ed; */
+  width: 20%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
   background-color: #ff3333;
-  
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -110,7 +147,7 @@ border-bottom-color: black;
   /* border: 1px solid #2f5bb7; */
   border: 0px;
   text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #ff0000;
+  background-color: #ff8080;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 
@@ -133,54 +170,122 @@ border-bottom-color: black;
   text-align: center;
   font-size: 12px;
 }
+
+
+
 table {
     border-collapse: collapse;
-    width: 100%;
-    align-items: center;
-    overflow:scroll;
+    width: 50%;
+    height:auto;
+    border-spacing: 40px 0;
 }
 
-tr,th {
-    text-align:center;
+th, td {
+    text-align: left;
+    padding: 8px;
 }
 
+tr:nth-child(even){background-color: #F7F7F7}
+
+th {
+    background-color: #ff3333;
+    color: white;
+}
 </style>
-</head>
-    <body>
-    <div align="left">
-    <img width="230px" height="70px" src="PaladionLogo.png"/>
-</div>
-<div align="right"><a href="Logout.do" style="text-decoration:none"><input class="login login-submit" type="button" value="logout"/></a></div>
- 
-        <div class="login-card">
-	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Add Task Template</h2><br></div>
+    
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
 
-   <%! TemplateBean TempB; String TempName;%>
+$('table').on('change', '[type=checkbox]', function() {
+  var $this = $(this);
+  var row = $this.closest('tr');
+  if ($this.prop('checked')) { // move to top
+    row.insertBefore(row.parent().find('tr:last-child'))
+      .find('label').html('move to bottom');
+  } else { // move to bottom
+    row.insertAfter(row.parent().find('tr:last-child'))
+      .find('label').html('move to top');
+  }
+});
+
+
+</script>
+<script>
+var intermediate="";
+var checked='';
+jQuery(function($) {
+  $('#t1 :checkbox').on('change', function() {
+    var tr = $(this).closest('tr');
+    var tbody = $('#t1 tbody');
+    if (this.checked) {
+		child=tr.children("td");
+		intermediate=intermediate +"<tr>"+tr.html()+"</tr>";
+		tr.html('');
+		checked=checked +","+this.id;
+		
+		approve(this);
+    } else {
+      tbody.prepend(tr);
+    }
+  });
+});
+
+function approve(child)
+{
+
+var tab=$("#t2");
+
+tab.html(intermediate);
+
+var ch="#"+child.id;
+$(ch).prop('checked', true);
+all_ids=checked.split(",");
+for (var i=0;i<all_ids.length;i++)
+{
+var c="#"+all_ids[i];
+$(c).prop('checked', true);
+}
+}
+</script>
+</head>
+
+
+<body>
+     <%@include file="Header.jsp" %>
+    <div class="login-card">
+    <%! TemplateBean TempB; String TempName;%>
         <% TempB=(TemplateBean)session.getAttribute("Template"); 
         TempName=TempB.getTemplatename().toString();
-        %>
+    %>
 	   
-	   <div align="center">  <h2>  Select the Tasks for the <%=TempName%> Template</font></h2> </div>
+	   <div align="center">  <h2> Select the Tasks for the <%=TempName%> Template</font></h2> </div>
 	   
 	   <h4 >List of All the Tasks </h4>  
 	   
 	   <form:form  action="AddTaskTemplate.do" method="post">
 	   
-	   <div style="overflow: auto;height: 350px; width: 700px;">
-	   <table>
-	   <div align="center">
-	   <tr ><th >Task Name </th>  <th> Check/Uncheck</th> <th> Weight(%)</th></tr>
-                <c:forEach  items="${AllTasks}" var="task">     
-			 <tr align="center"> <td><c:out  value="${task.taskname}"/></td> <td><input type="checkbox" id="checkfield"  name="task" value="${task.taskid}"> </td><td><input type="text" id="textfield" name="${task.taskid}" ></td></tr>
+            <table> <tr> <th>Task Name</th><th> Check/Uncheck</th> <th> Weight(%)</th></tr></table>    
+             <div style="overflow:auto; height:auto; width:auto;">  
+            <table id="t2">
+                
+            </table>
+             </div>
+            <div style="overflow:auto; height:350px; width:700px;">
+	    <table id="t1">
+            <c:forEach  items="${AllTasks}" var="task">     
+              <tr align="center"> 
                
-	   </c:forEach>
-	   </div>
-	   
+                <td  style="padding:0 15px 0 45px;"><c:out  value="${task.taskname}"/></td>
+                <td  style="padding:0 75px 0 75px;"><input type="checkbox" id="one"  name="task" value="${task.taskid}"></td>
+                <td  style="padding:0 75px 0 75px;"><input type="text" id="textfield" name="${task.taskid}"></td>
+               
+              </tr>
+            </c:forEach>
+	   </div>     
 	   </table>
 	   </div>
-	   <tr></tr>
-	   <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
+               
+           <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
 	   </form:form>
-	  
-	   <center>${Temperror}</center><br>
+</div>
 </html>

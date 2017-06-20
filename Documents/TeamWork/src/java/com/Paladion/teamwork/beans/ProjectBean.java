@@ -122,7 +122,17 @@ return templateid;
 public void setTemplateid(int templateid) {
 this.templateid = templateid;
 }
-	
+
+@Column(name = "status")
+String status;
+
+	 public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 	
 //@OneToMany(cascade = CascadeType.ALL)
 //@JoinTable(name = "projects_transaction", joinColumns = { @JoinColumn(name = "projectid") })
@@ -135,6 +145,8 @@ this.templateid = templateid;
 //public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
 //this.projectstatusbean = projectstatusbean;
 //}
+
+   
 
 
 }

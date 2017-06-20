@@ -68,7 +68,7 @@ public class UserController {
         }
 
 
-@RequestMapping(value="/ViewAllUser",method=RequestMethod.POST)
+@RequestMapping(value="/ViewAllUser",method=RequestMethod.GET)
 public ModelAndView ViewAllUser( )
     {
         System.out.println("ViewAllUser");
@@ -88,7 +88,7 @@ public ModelAndView ViewAllUser( )
                userService.DeleteUser(id);
                List<UserDataBean> userList=userService.GetAllUser();
 	       result.addObject("AllUsers",userList);
-               result.addObject("Success","User deleted successfully");    
+               result.addObject("Message","User deleted successfully");    
            }
            else{
                 result=new ModelAndView("Welcome");

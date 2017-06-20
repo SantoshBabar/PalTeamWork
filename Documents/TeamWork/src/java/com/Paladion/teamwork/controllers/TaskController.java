@@ -57,7 +57,7 @@ public TaskBean populate()
            TS.addTask(TB); 	
 	    System.out.println("Task Created with Taskid"+TB.getTaskid());
 	 
-	    return new ModelAndView( "CreateTask","TaskSuccess","Task Created Successfully"  );
+	    return new ModelAndView( "CreateTask","Message","Task Created Successfully"  );
     }	
         
     @RequestMapping(value="/DeleteTask",method=RequestMethod.POST)

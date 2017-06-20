@@ -158,7 +158,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
 	            return new ModelAndView("redirect:/Welcome.do");
            }
            else {
-           return new ModelAndView("Login","Lerror", "Login Failed");
+           return new ModelAndView("Login","Message", "Login Failed");
            }
  }
 

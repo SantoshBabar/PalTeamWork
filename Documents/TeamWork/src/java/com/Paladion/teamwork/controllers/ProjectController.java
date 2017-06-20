@@ -85,6 +85,7 @@ public ModelAndView CreateProject()
            try{
 	            System.out.println("\n inside create Project POST method ");
                     PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
+                    PB.setStatus("new");
                     PS.addProject(PB); 	
 	            System.out.println("Project Created with Project id"+PB.getProjectid());
 	            System.out.println("Man days :"+PB.getMandays());
@@ -92,7 +93,7 @@ public ModelAndView CreateProject()
            catch(Exception ex){
                       List <TemplateBean> TemplateList;
                       TemplateList=TS.getAllTemplates();
-	              result = new ModelAndView("CreateProject","Projectresp","Project Creation failed");
+	              result = new ModelAndView("CreateProject","Message","Project Creation failed");
                       result.addObject("AllTemplates", TemplateList);
                       return result;
             }
@@ -119,7 +120,7 @@ public ModelAndView CreateProject()
     @RequestMapping(value="/showAllProject",method=RequestMethod.GET)
     public ModelAndView showAllProject()
     {
-	ModelAndView result=new ModelAndView("DisplayProjects","Projectresp","Project Created Successfully");
+	ModelAndView result=new ModelAndView("DisplayProjects");
 	result.addObject("AllProjects", PS.getAllProjects());
 	return  result;
     }

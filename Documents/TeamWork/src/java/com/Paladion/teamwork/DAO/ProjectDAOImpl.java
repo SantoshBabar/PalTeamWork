@@ -56,7 +56,7 @@ public class ProjectDAOImpl implements ProjectDAO
            String SQL_QUERY1= "from MapTemplateTaskBean as O where O.templateid=?";
            Query query2 = session1.createQuery(SQL_QUERY1);
            query2.setParameter(0,tempID);
-        
+           
            List list2 = query2.list();
 	   System.out.println("Query executed :)");
 	   Iterator it= list2.iterator();
@@ -122,7 +122,7 @@ public class ProjectDAOImpl implements ProjectDAO
          criteria.add(Restrictions.eq("projectid", projectid));
 //         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 	   PList = criteria.list();
-	 
+	 tx.commit();
            return PList;
     }
 

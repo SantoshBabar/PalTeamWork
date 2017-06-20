@@ -211,21 +211,10 @@ th {
 
 </head>
     <body>
-        <br><br>   
+         
 
-<div align="center">
-<ul>
-  <li><a href="CreateProject.do">Create New Project</a></li>
-  <li><a href="showAllProject.do">View Projects</a></li>
-  <li><a href="CreateTask.do">Create New Task</a></li>
-  <li><a href="CreateUser.do">Create New user</a></li>
-  <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
- 
-  
-  <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-</ul>
-</div>
-         <br>  
+<%@include file="Header.jsp" %>
+         
 
         <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Projects</h2><br></div>
@@ -233,13 +222,14 @@ th {
             
             <tr>
                 
-                <th width="15%" >OPID </th>
+                <th width="13%" >OPID </th>
                 <th width="15%" >Project Title</th>
                 <th width="15%" >Lead</th>
                 <th width="11%" >Start Date</th>
                 <th width="9%" >End Date</th>
                 <th width="12%" >Man Days</th>
-            <th width="15%" >View Status</th>
+                <th width="12%" >Status</th>
+           
             </tr>
  </table>
            <div style="overflow: auto;height: 350px; width: auto;">
@@ -254,13 +244,13 @@ th {
 	   
             <tr> 
                 
-                <td width="15%"> ${project.opid}</td>
-	        <td width="15%">${project.projectname}</td>
-                <td width="15%">${project.lead}</td>
-                <td width="10%">${SDate}</td>
+                <td width="12%"> <a href="showProgress.do?id=${project.projectid}"> ${project.opid}</a></td>
+	        <td width="14%">${project.projectname}</td>
+                <td width="13%">${project.lead}</td>
+                <td width="9%">${SDate}</td>
                 <td width="10%">${EDate}</td>
                 <td width="10%">${project.mandays}</td>
-                <td width="15%"> <a href="showProgress.do?id=${project.projectid}">View Status</a></td>
+                <td width="10%">${project.status}</td>
 	   </tr>
            
 </c:forEach>

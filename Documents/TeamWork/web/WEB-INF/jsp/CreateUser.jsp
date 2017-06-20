@@ -178,25 +178,8 @@ th {
 
 </head>
     <body>
-  <%-- Header Code Begins --%> 
-    <br><br>   
-    <div align="center">
-    <ul>
-        <li><a href="Welcome.do">Home</a></li>
-        <li><a href="CreateProject.do">Create New Project</a></li>
-        <li><a href="showAllProject.do">View Projects</a></li>
-        <li><a href="CreateTask.do">Create New Task</a></li>
-        <li><a href="CreateUser.do">Create New user</a></li>
-        <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
-        <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-    </ul>
-    </div>
-         
-    <br>  
-
-    <div> <font color="red"><b><center>${Message}</center><br></font> </div>
     
-    <%-- Header Code Ends --%>   
+   <%@include file="Header.jsp" %>   
    
         <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create User</h2></div>
@@ -236,11 +219,7 @@ th {
     
 </table>
 </form:form>
-           <table>
-           <form:form action="ViewAllUser.do" method="POST" modelAttribute="LoginM">
-          <tr><td align="left"> <input type="submit" value="view all user" class="login login-submit"/></td></tr>
-           </table>
-           </form:form>
+     
 <center>${Lerror}</center>      
     </body>
 </html>

@@ -117,6 +117,16 @@ body {
   user-select: none; */
 }
 
+
+
+.login-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #ff8080;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
 .login-submit {
   /* border: 1px solid #3079ed; */
   width: 20%;
@@ -175,31 +185,10 @@ th {
     color: white;
 }
 </style>
-
 </head>
     
 <body>
-    
-    <%-- Header Code Begins --%> 
-    <br><br>   
-    <div align="center">
-    <ul>
-        <li><a href="Welcome.do">Home</a></li>
-        <li><a href="CreateProject.do">Create New Project</a></li>
-        <li><a href="showAllProject.do">View Projects</a></li>
-        <li><a href="CreateTask.do">Create New Task</a></li>
-        <li><a href="CreateUser.do">Create New user</a></li>
-        <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
-        <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-    </ul>
-    </div>
-         
-    <br>  
-
-    <div> <font color="red"><b><center>${Message}</center><br></font> </div>
-    
-    <%-- Header Code Ends --%>        
-            
+    <%@include file="Header.jsp" %>        
     <div class="login-card">
     <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All user</h2><br></div>
     
@@ -222,10 +211,5 @@ th {
         </c:forEach>
     </table>
     </div>
-    
-         
-     
     </body>
-
-    
 </html>

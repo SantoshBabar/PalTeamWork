@@ -13,9 +13,7 @@
 <%@page import="com.Paladion.teamwork.beans.ProjectBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <head>
-    
-    
-    <style>
+ <style>
 ul {
     list-style-type: none;
     margin: 0;
@@ -172,44 +170,9 @@ th {
     text-align: center;
 }
 </style>
-
-
-
-  
-        <%! UserDataBean b; String name;%>
-        <% b=(UserDataBean)session.getAttribute("Luser"); 
-        name=b.getUsername().toString();
-        %>
-<!--<div align="left">
-	   <img width="230px" height="70px" src="PaladionLogo.png"/>
-</div>-->
-
-</table>  
 	   
-	   <div> <font color="red"><b><center>${TaskSuccess}</center><br>
-	 
-	   <center>${TemplateSuccess}</center><br></b></font>
-	   	   
-	   </div> 
-	   
-        
-	   	   
-	 <div align="center">
-<ul>
-  <li><a href="CreateProject.do">Create New Project</a></li>
-  <li><a href="showAllProject.do">View Projects</a></li>
-  <li><a href="CreateTask.do">Create New Task</a></li>
-  <li><a href="CreateUser.do">Create New user</a></li>
-  <li><a href="CreateTaskTemplate.do">Create New Task Template</a></li>
- 
-  
-  <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-   
-   <li style="float:right"><a class="active"><%=name%></a></li>
-   <li style="float:right"><a class="active">Welcome</a></li>
-</ul>
-</div>
-   <br>
+  <%@include file="Header.jsp" %>  	   
+
    <div class="login-card">
        <div id="piechart" style="width: 900px; height: 500px;"></div>
    </div>

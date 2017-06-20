@@ -69,7 +69,7 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 	
         TempSession.setAttribute("TaskList", Tasklist);
               
-	return new ModelAndView("Test","AllTasks", Tasklist);
+	return new ModelAndView("AddTasksToTemplate","AllTasks", Tasklist);
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)
@@ -92,11 +92,11 @@ public ModelAndView AddTaskToTemplate(HttpServletRequest req){
                 return new ModelAndView("AddTasksToTemplate","Temperror", "Something went wrong during save" );
             }
             }
-            return new ModelAndView("Welcome","TemplateSuccess","Template Created Successfully");	
+            return new ModelAndView("CreateTaskTemplate","Message","Template Created Successfully");	
         }
         else
         {
-            return new ModelAndView("AddTasksToTemplate","Temperror", "Total weight is not 100% or something went wrong" );
+            return new ModelAndView("AddTasksToTemplate","Message", "Total weight is not 100% or something went wrong" );
         }
 	
     }
