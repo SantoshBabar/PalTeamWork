@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -81,6 +82,7 @@ public ModelAndView CreateProject()
 @RequestMapping(value="/AddProject",method=RequestMethod.POST)
     public Object CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req,Model E) throws Exception
     {
+        HttpSession sess= req.getSession(false);
            ModelAndView result = null;
            try{
 	            System.out.println("\n inside create Project POST method ");
@@ -105,7 +107,8 @@ public ModelAndView CreateProject()
            PSBList=  CU.setTaskHours(PRDATA, MTTB);
            PTW.setProjectlist(PSBList);
            result=new ModelAndView("AssignTaskToUsers");
-           result.addObject("AllEngineers",US.getUsersByRole("engineer"));
+           List<UserDataBean> Alleng=(List<UserDataBean>) sess.getAttribute("AllEngineers");
+           result.addObject("AllEngineers",Alleng);
         
            result.addObject("ProjectW",PTW);
            return result;
@@ -135,7 +138,7 @@ public ModelAndView CreateProject()
 	List <ProjectTransactionBean> PTBList=ProjectW.getProjectlist();
         List <ProjectTransactionBean> PTBList1=new ArrayList<ProjectTransactionBean>();
         CommonUtil cu=new CommonUtil();
-        PTBList1= cu.updateProjectTransaction(PTBList, PRDATA);
+        PTBList1= cu.updateProjectTransaction(PTBList, PRDATA,req.getSession(false));
         PS.insertProjectTransaction(PTBList1);
         ModelAndView result=new ModelAndView("DisplayProjectProgress");
         result.addObject("TaskDetails",PTBList1);

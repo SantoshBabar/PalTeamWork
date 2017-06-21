@@ -197,7 +197,8 @@ th {
 
 <table border="1" align="left">
     <tr>
-        <th width="20%">Task Name </th>
+        <th width="10%">Task Name </th>
+        <th width="10%">Engineer Name </th>
         <th width="10%">Task Start Date</th>
         <th width="10%">Start End Date</th>
         <th width="10%">Hours</th>
@@ -221,6 +222,7 @@ th {
         
         <tr> 
             <td width="21%" style="color: black">${Task.taskname}</td>
+            <td width="21%" style="color: black">${Task.engname}</td>
             <td width="10%" style="color: black">${SDate}</td>
 	    <td width="10%" style="color: black">${EDate}</td>
             <td width="10%" style="color: black">${Task.taskhours}</td>

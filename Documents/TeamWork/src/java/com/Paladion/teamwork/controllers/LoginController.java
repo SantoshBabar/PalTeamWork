@@ -8,6 +8,7 @@ package com.Paladion.teamwork.controllers;
 import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
+import com.Paladion.teamwork.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,9 @@ public class LoginController {
  @Qualifier(value="LoginService")
  LoginService LS;
  
- 
+ @Autowired
+@Qualifier(value="UserService")
+ UserService userService;
  
  UserDataBean lb=null;
  
@@ -154,7 +157,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
            if (lb!=null) {
                       HttpSession LoginSess=req.getSession(true);
                       LoginSess.setAttribute("Luser", lb);
-           
+                      LoginSess.setAttribute("AllEngineers", userService.getUsersByRole("engineer"));
 	            return new ModelAndView("redirect:/Welcome.do");
            }
            else {

@@ -195,7 +195,6 @@ th {
 		<form:select path="projectlist[${status.index}].userid">
 	           <c:forEach  items="${AllEngineers}" var="engineer"> 
 	           <form:option value="${engineer.userid}" name="userid"><c:out value="${engineer.username}" /></form:option>
-	          
                    </c:forEach></form:select> </td>	
             
              <h4> <input style="" type="hidden" name="projectlist[${status.index}].taskname" value="${task.taskname}"/></h4>

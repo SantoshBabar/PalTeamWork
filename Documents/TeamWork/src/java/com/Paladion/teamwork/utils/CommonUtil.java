@@ -10,6 +10,7 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
+import com.Paladion.teamwork.beans.UserDataBean;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -248,7 +249,7 @@ Date end = null;
     }
      
      
-     public List<ProjectTransactionBean> updateProjectTransaction(List<ProjectTransactionBean> PTBList, ProjectBean PB) throws ParseException{
+     public List<ProjectTransactionBean> updateProjectTransaction(List<ProjectTransactionBean> PTBList, ProjectBean PB, HttpSession sess) throws ParseException{
          
          HashMap<Integer, List<ProjectTransactionBean>> hashMap = new HashMap<Integer, List<ProjectTransactionBean>>();
          List <ProjectTransactionBean> ResultList=new ArrayList<ProjectTransactionBean>();
@@ -281,7 +282,7 @@ Date end = null;
                 if(null==TaskEndDate)
                   {
                     PTBean.setTaskstartdate(ProjectTime);
-                  //  PTBean.setEngname(getUserById(PTBean.getUserid()));
+                    PTBean.setEngname(this.getEngineerFromSession(PTBean.getUserid(),sess));
                     TaskEndDate=calculateResponseTime(ProjectTime, PTBean.getTaskhours());
                     PTBean.setTaskenddate(TaskEndDate);
                    }
@@ -290,6 +291,7 @@ Date end = null;
                     ProjectTime.setTime(TaskEndDate);
                     PTBean.setTaskstartdate(ProjectTime);
                     TaskEndDate=calculateResponseTime(ProjectTime,PTBean.getTaskhours());
+                    PTBean.setEngname(this.getEngineerFromSession(PTBean.getUserid(),sess));
                     PTBean.setTaskenddate(TaskEndDate);
                   }
                 ResultList.add(PTBean);
@@ -328,6 +330,19 @@ Date end = null;
 
     return workDays;
 }
+
+    private String getEngineerFromSession(int userid,HttpSession sess) 
+    
+    {
+        List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllEngineers");
+        for (UserDataBean ub:UDBean)
+        {
+        if(ub.getUserid()==userid)
+        return ub.getUsername();
+        }
+        return null;
+        
+    }
      
      
             
