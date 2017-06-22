@@ -1,14 +1,11 @@
 <%-- 
-    Document   : DisplayProjectStatus
-    Created on : May 10, 2017, 6:51:12 AM
-    Author     : user
+    Document   : Login
+    Created on : 12 Apr, 2017, 8:31:39 PM
+    Author     : Administrator
 --%>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
-    
 <style>
 ul {
     list-style-type: none;
@@ -74,17 +71,19 @@ body {
 }
 
 .login-card input[type=submit] {
-  width: 10%;
+  width: 20%;
   display: block;
   margin-bottom: 10px;
   position: relative;
   float: center;
 }
 
+
+
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: auto;
+  width: 30%;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -117,19 +116,9 @@ body {
   user-select: none; */
 }
 
-
-
-.login-submit:hover {
-  /* border: 1px solid #2f5bb7; */
-  border: 0px;
-  text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #ff8080;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-}
-
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 20%;
+  width: 50%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -169,47 +158,34 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 50%;
-    height:auto;
+    width: 100%;
+    color: #ff0000;
+    border-color: white;
+    align-items: center;
 }
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #F7F7F7}
 
 th {
-    background-color: #ff3333;
-    color: white;
+    text-align: center;
 }
 </style>
+
 </head>
-    
-<body>
-    <%@include file="Header.jsp" %>        
-    <div class="login-card">
-    <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Users</h2><br></div>
-    
-    <table border="2" >
-        <tr>
-            <th width="10%" >Delete user </th>
-            <th width="10%" >Update user info </th>
-            <th width="10%" >User Name </th>
-        </tr>
-    </table>
+    <body>
+          
+
+<%@include file="Header.jsp" %>
+        <div class="login-card">
+	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Update Template</h2></div>
+
+    <form:form action="UpdateTemplateDetails.do" method="POST" modelAttribute="MTTB">
+        <table>
+                  <c:forEach  items="${TemplateDetails}" var="template">
+           <tr><td align="center"><h4 >Task Name:</td><td><form:input placeHolder="Enter the username"  path="taskname" value="${template.taskname}" /></h4></td></tr>    
+ 
+                  </c:forEach>
+        </table>
+    </form:form>
            
-    <table border="2" id="headerTable">
-            
-        <c:forEach  items="${AllUsers}" var="user">     
-            <tr> 
-                <td width="10%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
-                <td width="10%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
-                <td width="10%"> ${user.username}</td>
-            </tr>
-        </c:forEach>
-    </table>
-    </div>
+        <center>${Lerror}</center>      
     </body>
 </html>

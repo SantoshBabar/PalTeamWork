@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ProjectService {
     public void addProject(ProjectBean pb);
-    public List<MapTemplateTaskBean> getAllWeights(int tempID);
+    
     public List<ProjectBean> getAllProjects();
     public ProjectBean getProjectById(int id);
     public void insertProjectTransaction(List <ProjectTransactionBean> PTBList);

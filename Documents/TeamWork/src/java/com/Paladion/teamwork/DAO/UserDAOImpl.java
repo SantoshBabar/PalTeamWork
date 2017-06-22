@@ -66,15 +66,15 @@ public class UserDAOImpl implements UserDAO{
 		tx = session1.beginTransaction();
 		
 		System.out.println("Get Users by Role UserDAO");
-	           String SQL_QUERY1= "from UserDataBean where role=?";
-                      Query query2 = session1.createQuery(SQL_QUERY1);
-	           query2.setParameter(0,role);
+	        String SQL_QUERY1= "from UserDataBean where role=?";
+                Query query2 = session1.createQuery(SQL_QUERY1);
+	        query2.setParameter(0,role);
          
-                      List list2 = query2.list();
-	           tx.commit();
-	           System.out.println("Query executed :)");
-	           Iterator it= list2.iterator();
-                      while(it.hasNext())
+                List list2 = query2.list();
+	        tx.commit();
+	        System.out.println("Query executed :)");
+	        Iterator it= list2.iterator();
+                    while(it.hasNext())
                       {
 		           ubean=(UserDataBean) it.next();
                            System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.getUsername());

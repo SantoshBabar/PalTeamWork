@@ -190,23 +190,25 @@ th {
 <body>
     <%@include file="Header.jsp" %>        
     <div class="login-card">
-    <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Users</h2><br></div>
+    <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Templates</h2><br></div>
     
     <table border="2" >
         <tr>
-            <th width="10%" >Delete user </th>
-            <th width="10%" >Update user info </th>
-            <th width="10%" >User Name </th>
+            <th width="10%" >Template Name </th>
+            <th width="10%" >Description </th>
+            <th width="10%" >Update</th>
+            <th width="10%" >Delete</th>
         </tr>
     </table>
            
     <table border="2" id="headerTable">
             
-        <c:forEach  items="${AllUsers}" var="user">     
-            <tr> 
-                <td width="10%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
-                <td width="10%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
-                <td width="10%"> ${user.username}</td>
+        <c:forEach  items="${AllTemplates}" var="template">     
+            <tr>
+                <td width="10%"> ${template.templatename}</td>
+                <td width="10%"> ${template.templateDesc}</td>
+                <td width="10%"><a href="GetTemplateDetails.do?id=${template.templateid}">UPDATE</a></td>
+                <td width="10%"><a href="DeleteTemplate.do?id=${template.templateid}">DELETE</td>
             </tr>
         </c:forEach>
     </table>

@@ -157,8 +157,12 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 80%;
-    
+    width:80%;
+}
+
+table1 {
+    border-collapse: collapse;
+    width:40%;
 }
 
 th, td {
@@ -178,32 +182,40 @@ th {
     
   <%@include file="Header.jsp" %>
         
-        <div class="login-card" >
-	   <div align="center">  <h3 style="color: #ff3333; font-family: sans-serif; font-style: normal">Project Details</h3></div>
+    <div class="login-card" >
+        <div align="center">  <h3 style="color: #ff3333; font-family: sans-serif; font-style: normal">Project Details</h3></div>
+	<div class="right">
+            <table class="table1" border="1">
+        <tr>
+            <td ><h4 style="color: red; font-size: 15px">Project Name: ${ProjectData.projectname}</h2></td>
+            <td ><h4 style="color: red; font-size: 15px">OPID: ${ProjectData.opid}</h4></h3></td>
+        </tr>
 	   
-	   <div class="right">
-	   <tr><h4 style="color: red; font-size: 15px">Project Name: ${ProjectData.projectname}</h2></tr>
-	   <tr><h4 style="color: red; font-size: 15px">OPID: ${ProjectData.opid}</h4></h3></tr>
-	   
-	   </div>
-	   <div class="left">
-	   <tr><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></tr>
-             
-              </tr><h4 style="color: red; font-size: 15px" >Start Date:
-                   <fmt:formatDate type = "date" value = "${ProjectData.startdate}"/></h4></tr>
-               </tr><h4 style="color: red; font-size: 15px" >End Date: 
-                   <fmt:formatDate type = "date"  value = "${ProjectData.enddate}"/></h4></tr>
-	   </div>
+	<tr>
+            <td><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></td>
+            <td><h4 style="color: red; font-size: 15px">Project Status: ${ProjectData.status}</h4></td>
+        </tr>
+        
+        <tr>
+            
+            <td> <h4 style="color: red; font-size: 15px" >Start Date:
+                   <fmt:formatDate type = "date" value = "${ProjectData.startdate}"/></h4></td>
+            <td> <h4 style="color: red; font-size: 15px" >End Date: 
+                   <fmt:formatDate type = "date"  value = "${ProjectData.enddate}"/></h4></td>
+        </tr>
+        </table>
+        <br>
+	</div>
 
 <table border="1" align="left">
     <tr>
-        <th width="10%">Task Name </th>
-        <th width="10%">Engineer Name </th>
-        <th width="10%">Task Start Date</th>
-        <th width="10%">Start End Date</th>
-        <th width="10%">Hours</th>
-        <th width="10%">Days</th>
-        <th width="10%">Status</th>
+        <th>Task Name </th>
+        <th>Engineer Name </th>
+        <th>Task Start Date</th>
+        <th>Start End Date</th>
+        <th>Hours</th>
+        <th>Days</th>
+        <th>Status</th>
         
     </tr>
 </table>
@@ -221,13 +233,13 @@ th {
         <fmt:formatDate value="${Task.taskenddate}" var="EDate" type="both" dateStyle = "short" timeStyle = "short" />
         
         <tr> 
-            <td width="21%" style="color: black">${Task.taskname}</td>
-            <td width="21%" style="color: black">${Task.engname}</td>
-            <td width="10%" style="color: black">${SDate}</td>
-	    <td width="10%" style="color: black">${EDate}</td>
-            <td width="10%" style="color: black">${Task.taskhours}</td>
-            <td width="10%" style="color: black">${Task.taskdays}</td>
-            <td width="10%" style="color: black">${Task.status}</td>
+            <td style="color: black">${Task.taskname}</td>
+            <td style="color: black">${Task.engname}</td>
+            <td style="color: black">${SDate}</td>
+	    <td style="color: black">${EDate}</td>
+            <td style="color: black">${Task.taskhours}</td>
+            <td style="color: black">${Task.taskdays}</td>
+            <td style="color: black">${Task.status}</td>
         </tr>
            
 </c:forEach>

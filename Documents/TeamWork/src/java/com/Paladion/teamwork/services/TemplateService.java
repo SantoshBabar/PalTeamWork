@@ -22,4 +22,6 @@ public interface TemplateService {
     public boolean addTaskToTemplate(MapTemplateTaskBean MTT);
     public List<TaskBean> getAllTasksforTemplate();
    public List<TemplateBean> getAllTemplates(); 
+   public boolean deleteTemplate(int id);
+   public List<MapTemplateTaskBean> getAllWeights(int tempID);
 }

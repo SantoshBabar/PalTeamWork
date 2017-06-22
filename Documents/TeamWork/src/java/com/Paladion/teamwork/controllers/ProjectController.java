@@ -103,7 +103,7 @@ public ModelAndView CreateProject()
            ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
            List<ProjectTransactionBean> PSBList;
            ProjectBean PRDATA=PS.getProjectById(PB.getProjectid());
-           List<MapTemplateTaskBean> MTTB=PS.getAllWeights(PRDATA.getTemplateid());
+           List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());
            PSBList=  CU.setTaskHours(PRDATA, MTTB);
            PTW.setProjectlist(PSBList);
            result=new ModelAndView("AssignTaskToUsers");

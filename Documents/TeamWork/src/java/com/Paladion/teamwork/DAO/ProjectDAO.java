@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ProjectDAO {
    public void addProjectDao(ProjectBean pb);
-   public List<MapTemplateTaskBean> getAllWeights(int tempID);
+   
    public List<ProjectBean> getAllProjects();
 
     public ProjectBean getProjectById(int id);

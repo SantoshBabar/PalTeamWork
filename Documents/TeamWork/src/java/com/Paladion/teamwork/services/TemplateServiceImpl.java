@@ -58,5 +58,17 @@ public class TemplateServiceImpl implements TemplateService{
         return TempD.getAllTemplates();
     }
     
+    
+    @Override
+    public boolean deleteTemplate(int id){
+        
+        return TempD.deleteTemplate(id);
+    }
+    
 	
+    	@Override
+	public List <MapTemplateTaskBean> getAllWeights(int tempID) {
+	
+	return TempD.getAllWeights(tempID);
+        }
 }

@@ -29,13 +29,7 @@ ProjectDAO PD;
 		
 		}
 
-	@Override
-	public List <MapTemplateTaskBean> getAllWeights(int tempID) {
-	
-	return PD.getAllWeights(tempID);
-	
-	
-	}
+
 
 	@Override
 	public List<ProjectBean> getAllProjects() {

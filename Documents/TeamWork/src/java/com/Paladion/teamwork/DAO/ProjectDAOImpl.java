@@ -45,30 +45,7 @@ public class ProjectDAOImpl implements ProjectDAO
             System.out.println("Project created successfully");
       }
 
-	@Override
-	public List<MapTemplateTaskBean> getAllWeights(int tempID) {
-		 
-           System.out.println("com.Paladion.teamwork.DAO.ProjectDAOImpl.getAllWeights()");
-           MapTemplateTaskBean MTTB;
-	   Session session1 = sessionFactory.getCurrentSession();
-	   Transaction tx = null;
-           tx = session1.beginTransaction();
-           String SQL_QUERY1= "from MapTemplateTaskBean as O where O.templateid=?";
-           Query query2 = session1.createQuery(SQL_QUERY1);
-           query2.setParameter(0,tempID);
-           
-           List list2 = query2.list();
-	   System.out.println("Query executed :)");
-	   Iterator it= list2.iterator();
-	   tx.commit();
-                while(it.hasNext())
-                  {
-                      MTTB=(MapTemplateTaskBean) it.next();
-                      System.out.print("Taskid from the DB"+MTTB.getTaskid());
-                  }
-	   return list2;
-        }
-
+	
 	@Override
 	public List<ProjectBean> getAllProjects() {
 		

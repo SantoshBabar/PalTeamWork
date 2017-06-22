@@ -123,7 +123,7 @@
             <button class="dropbtn">Project Template</button>
                 <div class="dropdown-content">
                 <a href="CreateTaskTemplate.do">Create Project Template</a>
-                <a href="#">View Project Templates</a>
+                <a href="GetAllTaskTemplates.do">View Project Templates</a>
                 </div>
         </div> 
          

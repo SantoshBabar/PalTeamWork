@@ -18,6 +18,8 @@ public interface TemplateDAO {
     public void addTemplateDao(TemplateBean tempb);
     public boolean addTaskToTemplate(MapTemplateTaskBean MTT);
     public List<TaskBean> getAllTasksforTemplate();
+    public List<MapTemplateTaskBean> getAllWeights(int tempID);
     public List<TemplateBean> getAllTemplates();
+    public boolean deleteTemplate(int id);
     
 }

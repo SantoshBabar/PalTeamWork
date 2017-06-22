@@ -11,6 +11,7 @@ import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import java.sql.Array;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -41,6 +43,11 @@ public TemplateBean populate()
 {
 	   return new TemplateBean();
 }
+
+
+
+        
+      
 	
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.GET)
 public String Template()
@@ -57,7 +64,6 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
         
         HttpSession TempSession=req.getSession(false);
         TempSession.setAttribute("Template", TempB);
-        //TempS.addTemplate(TempB); 	
 	System.out.println("Template Created with Template id  "+TempB.getTemplateid());
 	    
 	try
@@ -100,5 +106,70 @@ public ModelAndView AddTaskToTemplate(HttpServletRequest req){
         }
 	
     }
+
+
+
+
+@RequestMapping(value="/GetAllTaskTemplates",method=RequestMethod.GET)
+public ModelAndView GetAllTaskTemplates()
+{
+    ModelAndView result=new ModelAndView("DisplayTemplates");
+    List<TemplateBean> TBList= TempS.getAllTemplates();
+    result.addObject("AllTemplates",TBList);
+    return result;
+}
+
+
+@RequestMapping(value="/DeleteTemplate",method=RequestMethod.GET)
+    public ModelAndView DeleteTemplate(@RequestParam int id) throws ParseException
+    {
+           if(id!=0)
+           {
+               boolean value= TempS.deleteTemplate(id);
+               ModelAndView result=new ModelAndView("DisplayTemplates");
+               List<TemplateBean> TBList= TempS.getAllTemplates();
+               result.addObject("AllTemplates",TBList);
+               result.addObject("Message","Template Deleted Succefully");
+               return result; 
+           }
+           else{
+                return new ModelAndView("Error");
+            }
+    }
     
+
+@RequestMapping(value="/GetTemplateDetails",method=RequestMethod.GET)
+public ModelAndView GetTemplateDetails(@RequestParam int id)
+{
+           ModelAndView result=new ModelAndView("UpdateTemplateDetails");
+           if(id!=0)
+            {
+               List <MapTemplateTaskBean> MTTB=TempS.getAllWeights(id);
+                result.addObject("TemplateDetails",MTTB);
+                return result;
+            }
+           else{
+                result=new ModelAndView("fail");
+            }
+           return result;
+}
+//
+//@RequestMapping(value="/UpdateTemplateDetails",method=RequestMethod.GET)
+//public ModelAndView UpdateTemplateDetails(@ModelAttribute("TemplateTask")MapTemplateTaskBeanBean TempB)
+//{
+//           ModelAndView result=new ModelAndView("UpdateTemplateDetails");
+//           if(id!=0)
+//            {
+//               List <MapTemplateTaskBean> MTTB=TempS.getAllWeights(id);
+//                result.addObject("TemplateDetails",MTTB);
+//                return result;
+//            }
+//           else{
+//                result=new ModelAndView("fail");
+//            }
+//           return result;
+//}
+//
+
+
 }
