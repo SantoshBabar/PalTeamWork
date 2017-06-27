@@ -222,7 +222,7 @@ th {
            <br>   
            <br>
               
-    <div style="overflow: auto;height: 200px; width: auto;"> 
+    <div style="overflow: auto;height: 500px; width: auto;"> 
         
           
     <table border="1" align="left">
@@ -244,9 +244,9 @@ th {
             <div class="dropdown">
             <button class="dropbtn1">${ProjectTaskList.status}</button>
                 <div class="dropdown-content">
-                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=new">New</a>
-                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=progress">Progress</a>
-                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=completed">Completed</a> 
+                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=New">New</a>
+                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=Progress">Progress</a>
+                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=Completed">Completed</a> 
                 </div>
         </div> 
         </td>

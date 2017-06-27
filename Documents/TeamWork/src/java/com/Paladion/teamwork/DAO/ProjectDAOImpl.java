@@ -124,5 +124,47 @@ public class ProjectDAOImpl implements ProjectDAO
                return false;
            }
        }
+       
+       
+             @Override
+       public boolean updateTaskStatus(int projid){
+            Session session = this.sessionFactory.openSession();
+            Transaction tx;
+            tx = session.beginTransaction();
+            String sql = "UPDATE projects_transaction SET status=? WHERE projectid=?";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setParameter(0,"Completed");
+            query.setParameter(1,projid);
+            query.executeUpdate();
+            tx.commit();
+            return true;
+       }
+       
+       
+       
+       
+       
+       
+         @Override
+       public boolean updateProjectStatus(int projid, String status){
+           if(status.equalsIgnoreCase("new")||status.equalsIgnoreCase("progress")||status.equalsIgnoreCase("completed"))
+           {
+            Session session = this.sessionFactory.openSession();
+            Transaction tx;
+            tx = session.beginTransaction();
+            String sql = "UPDATE projects SET status=? WHERE projectid=?";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setParameter(0,status);
+            query.setParameter(1,projid);
+            query.executeUpdate();
+            tx.commit();
+            return true;
+           }           
+           
+           else{
+               System.out.println("Invalid option selected");
+               return false;
+           }
+       }
 
 }

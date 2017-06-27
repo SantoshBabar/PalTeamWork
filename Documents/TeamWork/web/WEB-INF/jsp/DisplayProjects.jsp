@@ -250,7 +250,16 @@ th {
                 <td width="9%">${SDate}</td>
                 <td width="10%">${EDate}</td>
                 <td width="10%">${project.mandays}</td>
-                <td width="10%">${project.status}</td>
+                <td width="10%">
+                    <div class="dropdown">
+                    <button class="dropbtn1">${project.status}</button>
+                      <div class="dropdown-content">
+                        <a href="updateProjectStatus.do?pid=${project.projectid}&status=New">New</a>
+                        <a href="updateProjectStatus.do?pid=${project.projectid}&status=Progress">Progress</a>
+                        <a href="updateProjectStatus.do?pid=${project.projectid}&status=Completed">Completed</a> 
+                      </div>
+                    </div> 
+                </td>
 	   </tr>
            
 </c:forEach>

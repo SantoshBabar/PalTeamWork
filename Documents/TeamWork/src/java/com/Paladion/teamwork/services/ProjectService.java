@@ -22,5 +22,6 @@ public interface ProjectService {
     public void insertProjectTransaction(List <ProjectTransactionBean> PTBList);
     public List<ProjectTransactionBean> getProjectTransaction(int projectid);
     public boolean updateTaskStatus(int transid, String status);
-
+    public boolean updateTaskStatus(int projid);
+    public boolean updateProjectStatus(int projid, String status);
 }

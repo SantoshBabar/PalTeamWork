@@ -182,4 +182,27 @@ public ModelAndView CreateProject()
         }
     }
     
+    
+    
+    
+    @RequestMapping(value="/updateProjectStatus",method=RequestMethod.GET)
+    public ModelAndView updateProjectStatus(@RequestParam int pid,@RequestParam String status) throws ParseException
+    {
+        boolean value= PS.updateProjectStatus(pid,status);
+        if(status.equalsIgnoreCase("completed")){
+          //  PS.updateTaskStatus(pid);
+        }
+        if(value==true){
+          ModelAndView result=new ModelAndView("DisplayProjects");
+	  result.addObject("AllProjects", PS.getAllProjects());
+	  return  result;
+        }
+        
+        else{
+            ModelAndView result=new ModelAndView("Customerror");
+            result.addObject("Message","Something Went Wrong");
+            return result;
+        }
+    }
+    
 }

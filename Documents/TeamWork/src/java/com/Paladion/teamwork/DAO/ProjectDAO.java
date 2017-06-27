@@ -24,4 +24,8 @@ public interface ProjectDAO {
     public List<ProjectTransactionBean> getProjectTransaction(int projectid);
     public boolean updateTaskStatus(int transid, String status);
     
+     public boolean updateProjectStatus(int projid, String status);
+      public boolean updateTaskStatus(int projid);
+     
+    
 }
