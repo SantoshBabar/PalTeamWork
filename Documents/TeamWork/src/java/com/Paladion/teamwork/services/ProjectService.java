@@ -15,10 +15,12 @@ import java.util.List;
  * @author Administrator
  */
 public interface ProjectService {
-    public void addProject(ProjectBean pb);
     
+    public void addProject(ProjectBean pb);
     public List<ProjectBean> getAllProjects();
     public ProjectBean getProjectById(int id);
     public void insertProjectTransaction(List <ProjectTransactionBean> PTBList);
     public List<ProjectTransactionBean> getProjectTransaction(int projectid);
+    public boolean updateTaskStatus(int transid, String status);
+
 }

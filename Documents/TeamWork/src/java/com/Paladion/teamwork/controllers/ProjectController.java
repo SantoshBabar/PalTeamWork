@@ -159,4 +159,27 @@ public ModelAndView CreateProject()
            result.addObject("TaskDetails",PSBList);
            return result;
     }
+    
+     @RequestMapping(value="/updateTaskStatus",method=RequestMethod.GET)
+    public ModelAndView updateTaskStatus(@RequestParam int pid,@RequestParam int tid, @RequestParam String status) throws ParseException
+    {
+        boolean value= PS.updateTaskStatus(tid,status);
+        if(value==true){
+           List<ProjectTransactionBean> PSBList;
+           ProjectBean PRDATA=PS.getProjectById(pid);
+           PSBList = PS.getProjectTransaction(pid);
+ 
+           ModelAndView result=new ModelAndView("DisplayProjectProgress");
+           result.addObject("ProjectData",PRDATA);
+           result.addObject("TaskDetails",PSBList);
+           return result;
+        }
+        
+        else{
+            ModelAndView result=new ModelAndView("Customerror");
+            result.addObject("Message","Something Went Wrong");
+            return result;
+        }
+    }
+    
 }

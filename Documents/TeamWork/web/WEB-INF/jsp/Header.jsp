@@ -40,6 +40,15 @@
     background-color: inherit;
 }
 
+.dropdown .dropbtn1 {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: red;
+}
+
 .container a:hover, .dropdown:hover .dropbtn {
     background-color: red;
 }

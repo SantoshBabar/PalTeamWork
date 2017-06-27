@@ -227,22 +227,31 @@ th {
           
     <table border="1" align="left">
    
-    <c:forEach  items="${TaskDetails}" var="Task">  
+    <c:forEach  items="${TaskDetails}" var="ProjectTaskList">  
         
-        <fmt:formatDate value="${Task.taskstartdate}" var="SDate" type="both" dateStyle = "short" timeStyle = "short"/>
-        <fmt:formatDate value="${Task.taskenddate}" var="EDate" type="both" dateStyle = "short" timeStyle = "short" />
+        <fmt:formatDate value="${ProjectTaskList.taskstartdate}" var="SDate" type="both" dateStyle = "short" timeStyle = "short"/>
+        <fmt:formatDate value="${ProjectTaskList.taskenddate}" var="EDate" type="both" dateStyle = "short" timeStyle = "short" />
         
         <tr> 
-            <td style="color: black">${Task.taskname}</td>
-            <td style="color: black">${Task.engname}</td>
+            <td style="color: black">${ProjectTaskList.taskname}</td>
+            <td style="color: black">${ProjectTaskList.engname}</td>
             <td style="color: black">${SDate}</td>
 	    <td style="color: black">${EDate}</td>
-            <td style="color: black">${Task.taskhours}</td>
-            <td style="color: black">${Task.taskdays}</td>
-            <td style="color: black">${Task.status}</td>
+            <td style="color: black">${ProjectTaskList.taskhours}</td>
+            <td style="color: black">${ProjectTaskList.taskdays}</td>
+       
+            <td style="color: black">
+            <div class="dropdown">
+            <button class="dropbtn1">${ProjectTaskList.status}</button>
+                <div class="dropdown-content">
+                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=new">New</a>
+                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=progress">Progress</a>
+                <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=completed">Completed</a> 
+                </div>
+        </div> 
+        </td>
         </tr>
-           
-</c:forEach>
+       </c:forEach>
 </table>
 </div>
     </body>

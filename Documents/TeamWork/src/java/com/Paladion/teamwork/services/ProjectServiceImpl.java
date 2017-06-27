@@ -56,6 +56,13 @@ ProjectDAO PD;
          return PD.getProjectTransaction(projectid);
         
     }
+    
+       @Override
+    public boolean updateTaskStatus(int transid, String status) {
+    
+          return PD.updateTaskStatus(transid, status);
+        
+    }
    
 	
 }
