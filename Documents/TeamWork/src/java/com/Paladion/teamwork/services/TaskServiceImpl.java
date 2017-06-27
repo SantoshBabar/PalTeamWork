@@ -25,25 +25,27 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public void addTask(TaskBean tb) {
 		TD.addTaskDao(tb);
-
-	}
+            }
 
 	@Override
 	public void editTask(TaskBean tb) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+            }
 
 	@Override
 	public void deleteTask(TaskBean tb) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+            }
 
 	@Override
-	public void getAllTask() {
-		
+	public List<TaskBean> getAllTasks() {
 		System.out.println("Inside TaskServiceImpl -getAllTaks method");
-	TD.getAllTasks();
-	
-		}
+	        return  TD.getAllTasks();
+            }
+        
+        @Override
+        public boolean deleteTask(int id) {
+                return TD.deleteTask(id);
+            }
 	
 }

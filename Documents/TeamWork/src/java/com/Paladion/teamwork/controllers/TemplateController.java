@@ -43,17 +43,12 @@ public TemplateBean populate()
 {
 	   return new TemplateBean();
 }
-
-
-
-        
-      
 	
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.GET)
 public String Template()
-{
-return "CreateTaskTemplate";
-}
+  {
+    return "CreateTaskTemplate";
+  }
 
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.POST)
 public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean TempB,HttpServletRequest req) 
@@ -106,8 +101,6 @@ public ModelAndView AddTaskToTemplate(HttpServletRequest req){
         }
 	
     }
-
-
 
 
 @RequestMapping(value="/GetAllTaskTemplates",method=RequestMethod.GET)

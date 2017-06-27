@@ -15,7 +15,8 @@ import java.util.List;
 public interface TaskDAO {
 	
 	public void addTaskDao(TaskBean tb);
-	public void getAllTasks();
+	public List<TaskBean> getAllTasks();
+        public boolean deleteTask(int id);
        
     
 }

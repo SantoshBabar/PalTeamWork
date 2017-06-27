@@ -124,7 +124,7 @@
             <button class="dropbtn">Tasks</button>
                 <div class="dropdown-content">
                 <a href="CreateTask.do">Create Task</a>
-                <a href="#">View Tasks</a>
+                <a href="GetAllTasks.do">View Tasks</a>
                 </div>
         </div> 
         

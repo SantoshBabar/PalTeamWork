@@ -17,6 +17,7 @@ public interface TaskService {
 	public void addTask(TaskBean tb);
     public void editTask(TaskBean tb);
     public void deleteTask(TaskBean tb);
-    public void getAllTask();
+    public List<TaskBean> getAllTasks();
+    public boolean deleteTask(int id);
     
 }

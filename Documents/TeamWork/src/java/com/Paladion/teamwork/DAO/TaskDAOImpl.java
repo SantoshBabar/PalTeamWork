@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -45,19 +46,29 @@ public class TaskDAOImpl implements TaskDAO{
 	}
 	
     @Override
-	public void getAllTasks()
+	public List<TaskBean> getAllTasks()
 	{
 	List <TaskBean> Tasklist=new ArrayList<TaskBean>();
-	System.out.println("Inside getAllTasks DAO");
-        Tasklist= sessionFactory.getCurrentSession().createQuery("from Tasks").list();
-	System.out.println("Inside Get all tasks method");
-	
-        Iterator<TaskBean> item= Tasklist.iterator();
-        while(item.hasNext())
-        {
-        TaskBean TB = item.next();
-        System.out.println(TB.getTaskname());
+	 Session session=sessionFactory.openSession();
+        String taskquery= "from TaskBean";
+        System.out.println("Get all tasks query");
+        Query query2 = session.createQuery(taskquery);
+       
+        Tasklist= query2.list();
+        return Tasklist;
         }
-    }
-	
+        
+        
+            @Override
+	public boolean deleteTask(int id)
+	{
+            Session session = this.sessionFactory.openSession();
+            String sql = "delete from tasks where taskid=?";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setParameter(0, id);
+            query.executeUpdate();
+	return true;
+        }
+  
+
 }
