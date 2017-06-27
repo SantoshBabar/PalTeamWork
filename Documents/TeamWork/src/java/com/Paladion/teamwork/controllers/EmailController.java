@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.EmailBean;
 import com.Paladion.teamwork.beans.EmailTemplateBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.services.EmailService;
@@ -57,8 +58,8 @@ public ModelAndView sendMail()
 public ModelAndView sendMail(String st)
 {
 	EmailUtil emailUtil=new EmailUtil();
-	
-	boolean b=emailUtil.sendEmail("EmailTo","EmailSubject","EmailMessage");
+	EmailBean ebean=new EmailBean();
+	boolean b=emailUtil.sendEmail(ebean);
 	
 	if(b==true){
 		return new ModelAndView( "Email","success","Email Sent Successfully"  );

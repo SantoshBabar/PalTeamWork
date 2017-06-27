@@ -5,10 +5,12 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.EmailBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
+import com.Paladion.teamwork.utils.EmailUtil;
 import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +62,16 @@ public class UserController {
     
 	  boolean result = userService.addUser(loginBean);
 	   if(result=true){
+               
+               //Send Email to user
+               EmailBean ebean=new EmailBean();
+               EmailUtil eutil=new EmailUtil();
+               ebean.setTo(loginBean.getEmail());
+               String subject="Paladion TeamWork- User Account Invitation";
+               String message="Dear "+loginBean.getUsername()+"\n\nYour account has been created in the Paladion Teamwork Application ( http://10.0.1.128/TeamWork/ ).\nPlease Log into your account using the following credentials\n\nUsername: "+loginBean.getEmail() +"\nPassword: "+loginBean.getPassword();
+               ebean.setSubject(subject);
+               ebean.setMessage(message);
+               eutil.sendEmail(ebean);
 	   return new ModelAndView("CreateUser","Message","User Created Successfully");
            }
            else{

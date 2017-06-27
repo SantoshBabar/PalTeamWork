@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.utils;
 
+import com.Paladion.teamwork.beans.EmailBean;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,7 +24,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailUtil {
 	
-	public boolean sendEmail(String emailTO,String emailSubject, String emailMessage){
+	public boolean sendEmail(EmailBean ebean){
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -44,12 +45,12 @@ public class EmailUtil {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("teamwork.codereview@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(emailTO));
-			message.setSubject(emailSubject);
+					InternetAddress.parse(ebean.getTo()));
+			message.setSubject(ebean.getSubject());
 			//message.setText("Dear Mail Crawler," +
 					//"\n\n No spam to my email, please!");
 			
-			message.setText(emailMessage);
+			message.setText(ebean.getMessage());
 
 			Transport.send(message);
 

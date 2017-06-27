@@ -87,7 +87,7 @@ public ModelAndView CreateProject()
            try{
 	            System.out.println("\n inside create Project POST method ");
                     PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
-                    PB.setStatus("new");
+                    PB.setStatus("New");
                     PS.addProject(PB); 	
 	            System.out.println("Project Created with Project id"+PB.getProjectid());
 	            System.out.println("Man days :"+PB.getMandays());

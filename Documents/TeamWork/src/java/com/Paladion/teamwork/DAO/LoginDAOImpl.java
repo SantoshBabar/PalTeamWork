@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.Paladion.teamwork.DAO;
+import com.Paladion.teamwork.beans.EmailBean;
 import java.util.UUID;
 import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.utils.EmailUtil;
@@ -83,7 +84,11 @@ public class LoginDAOImpl implements LoginDAO{
             System.out.println("uuid = " + uuid);
             String emailSubject="OTP";
             String emailMessage="Dear user \nYour OTP is: " +uuid+"";
-            email.sendEmail(SessUserBean.getEmail(), emailSubject,emailMessage);
+            EmailBean ebean=new EmailBean();
+            ebean.setTo(SessUserBean.getEmail());
+            ebean.setSubject(emailSubject);
+            ebean.setMessage(emailMessage);
+            email.sendEmail(ebean);
             
              System.out.print("i got your email id"+SessUserBean.getEmail());
              //update userdata set OTP=? where email=? email ge SessUserBean.getEmail()
