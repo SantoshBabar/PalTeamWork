@@ -84,9 +84,10 @@
 <body>
     <%-- Session Validation Code --%>
     <% 
-        if (null==session.getAttribute("Luser"))
+        if (session==null||null==session.getAttribute("Luser"))
            {
                response.sendRedirect("Login.do");
+               return;
            }
     %> <%-- Session Code Ends --%>
     

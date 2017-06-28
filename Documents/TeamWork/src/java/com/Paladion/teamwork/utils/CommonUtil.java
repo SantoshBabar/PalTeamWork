@@ -12,6 +12,8 @@ import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 import java.math.RoundingMode;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -265,7 +267,7 @@ Date end = null;
             hashMap.get(PTBean.getUserid()).add(PTBean);}
         }
          
-        System.out.println("No of users assigned to project : "+hashMap.size());
+        System.out.println("\nNo of users assigned to project : "+hashMap.size());
         
         for (Map.Entry<Integer, List<ProjectTransactionBean>> entry : hashMap.entrySet())
         {
@@ -344,7 +346,10 @@ Date end = null;
         
     }
      
-     
+
+
+
+    
             
  }
     

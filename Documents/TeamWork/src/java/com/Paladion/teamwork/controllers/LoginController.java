@@ -9,6 +9,7 @@ import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
+import com.Paladion.teamwork.utils.CommonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -151,7 +152,8 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
 		}
          //Captha code ends  
         
-        
+   
+    
         System.out.println("in login");
            lb=LS.Login(LB);
            if (lb!=null) {
@@ -168,6 +170,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
 @RequestMapping(value="/Welcome",method=RequestMethod.GET)
 public ModelAndView Welcome()
 {
+   
            return new ModelAndView("Welcome");
 }
 
