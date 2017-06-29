@@ -47,17 +47,35 @@ public class ProjectDAOImpl implements ProjectDAO
 
 	
 	@Override
-	public List<ProjectBean> getAllProjects() {
+	public List<ProjectBean> getAllProjects(int userid, String role) {
 		
             Session session1 = sessionFactory.getCurrentSession();
 	    Transaction tx = null;
+            List <ProjectBean> allProjects=null;
 	    tx = session1.beginTransaction();
-            Criteria criteria = session1.createCriteria(ProjectBean.class);
-	    List <ProjectBean>allProjects = criteria.list();
+            
+            if (role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin"))
+            {
+             Criteria criteria = session1.createCriteria(ProjectBean.class,"p");
+             allProjects= criteria.list();
+            }
+            else if(role.equalsIgnoreCase("Lead"))
+            {
+            Criteria criteria = session1.createCriteria(ProjectBean.class,"p");    
+            criteria.add(Restrictions.eq("lead", userid));
+            allProjects= criteria.list();
+            }   
+            else if(role.equalsIgnoreCase("Engineer"))
+            {
+            Query q=session1.createQuery("select distinct p.* from ProjectBean p join ProjectTransactionBean pt on (p.projectid=pt.projectid) and pt.userid=?");
+            q.setParameter(0,userid);
+            allProjects= q.list();
+            }
+            
 	    tx.commit();
 	    return allProjects;
         }
-
+        
         @Override
         public ProjectBean getProjectById(int id) {
 	   Transaction tx = null;
@@ -96,10 +114,10 @@ public class ProjectDAOImpl implements ProjectDAO
 	   Session session1 = sessionFactory.getCurrentSession();
            tx = session1.beginTransaction();
            Criteria criteria = session1.createCriteria(ProjectTransactionBean.class);
-         criteria.add(Restrictions.eq("projectid", projectid));
+           criteria.add(Restrictions.eq("projectid", projectid));
 //         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 	   PList = criteria.list();
-	 tx.commit();
+           tx.commit();
            return PList;
     }
   

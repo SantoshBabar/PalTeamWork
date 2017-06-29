@@ -32,8 +32,8 @@ ProjectDAO PD;
 
 
 	@Override
-	public List<ProjectBean> getAllProjects() {
-		return PD.getAllProjects();
+	public List<ProjectBean> getAllProjects(int userid, String role) {
+		return PD.getAllProjects(userid, role);
 	}
 
     @Override

@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
-        System.out.println("\nInside Authorization filter");
+      
         fc.doFilter(sr, sr1);
     }
 

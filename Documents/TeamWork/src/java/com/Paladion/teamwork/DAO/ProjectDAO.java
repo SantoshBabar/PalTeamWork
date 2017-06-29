@@ -17,7 +17,7 @@ import java.util.List;
 public interface ProjectDAO {
    public void addProjectDao(ProjectBean pb);
    
-   public List<ProjectBean> getAllProjects();
+   public List<ProjectBean> getAllProjects(int userid, String role);
 
     public ProjectBean getProjectById(int id);
     public void insertProjectTransaction(List<ProjectTransactionBean> PTBList);

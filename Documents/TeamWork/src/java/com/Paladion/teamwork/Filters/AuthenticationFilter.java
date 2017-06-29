@@ -35,7 +35,7 @@ int i=0;
         HttpServletResponse res=(HttpServletResponse)response;
         url = req.getRequestURL().toString();
         
-        if(url.contains("Login")||url.contains("Forgot")||!(url.endsWith(".do"))){
+        if(url.contains("Login")||url.contains("ForgotPassword")||!(url.endsWith(".do"))){
             fc.doFilter(request, response);
           }
         

@@ -113,14 +113,16 @@
                 </div>
         </div> 
         
-          <div class="dropdown">
+        <% if(b.getRole().equalsIgnoreCase("Manager"))
+        {%>
+        <div class="dropdown">
             <button class="dropbtn">Users</button>
                 <div class="dropdown-content">
                 <a href="CreateUser.do">Create User</a>
                 <a href="ViewAllUser.do">View Users</a>
                 </div>
         </div> 
-        
+        <%}%>
           <div class="dropdown">
             <button class="dropbtn">Tasks</button>
                 <div class="dropdown-content">

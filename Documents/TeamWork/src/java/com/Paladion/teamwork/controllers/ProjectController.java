@@ -121,10 +121,12 @@ public ModelAndView CreateProject()
     public String deleteProject(String id){return "";}
     
     @RequestMapping(value="/showAllProject",method=RequestMethod.GET)
-    public ModelAndView showAllProject()
+    public ModelAndView showAllProject(HttpServletRequest req)
     {
+        HttpSession sess= req.getSession(false);
+        UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
 	ModelAndView result=new ModelAndView("DisplayProjects");
-	result.addObject("AllProjects", PS.getAllProjects());
+	result.addObject("AllProjects", PS.getAllProjects(sessuser.getUserid(), sessuser.getRole()));
 	return  result;
     }
     
@@ -186,15 +188,17 @@ public ModelAndView CreateProject()
     
     
     @RequestMapping(value="/updateProjectStatus",method=RequestMethod.GET)
-    public ModelAndView updateProjectStatus(@RequestParam int pid,@RequestParam String status) throws ParseException
+    public ModelAndView updateProjectStatus(@RequestParam int pid,@RequestParam String status,HttpServletRequest req) throws ParseException
     {
+        HttpSession sess= req.getSession(false);
+        UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
         boolean value= PS.updateProjectStatus(pid,status);
         if(status.equalsIgnoreCase("completed")){
           //  PS.updateTaskStatus(pid);
         }
         if(value==true){
           ModelAndView result=new ModelAndView("DisplayProjects");
-	  result.addObject("AllProjects", PS.getAllProjects());
+	  result.addObject("AllProjects", PS.getAllProjects(sessuser.getUserid(), sessuser.getRole()));
 	  return  result;
         }
         
