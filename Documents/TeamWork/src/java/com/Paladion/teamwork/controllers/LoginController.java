@@ -159,7 +159,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
            if (lb!=null) {
                       HttpSession LoginSess=req.getSession(true);
                       LoginSess.setAttribute("Luser", lb);
-                      LoginSess.setAttribute("AllEngineers", userService.getUsersByRole("engineer"));
+                      LoginSess.setAttribute("AllUsers", userService.GetAllUser());
 	            return new ModelAndView("redirect:/Welcome.do");
            }
            else {

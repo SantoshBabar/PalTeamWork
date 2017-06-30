@@ -133,18 +133,30 @@ String status;
     public void setStatus(String status) {
         this.status = status;
     }
-	
-//@OneToMany(cascade = CascadeType.ALL)
-//@JoinTable(name = "projects_transaction", joinColumns = { @JoinColumn(name = "projectid") })
-//public Set <ProjectTransactionBean> projectstatusbean;
-//
-//public Set<ProjectTransactionBean> getProjectstatusbean() {
-//return projectstatusbean;
-//}
-//
-//public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
-//this.projectstatusbean = projectstatusbean;
-//}
+
+    @Column(name = "leadid")
+int leadid;
+    
+    public int getLeadid() {
+        return leadid;
+    }
+
+    public void setLeadid(int leadid) {
+        this.leadid = leadid;
+    }
+
+    
+@OneToMany(cascade = CascadeType.ALL)
+@JoinTable(name = "project_transaction", joinColumns = { @JoinColumn(name = "projectid") })
+public Set <ProjectTransactionBean> ptbean;
+
+public Set<ProjectTransactionBean> getProjectstatusbean() {
+return ptbean;
+}
+
+public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
+this.ptbean = projectstatusbean;
+}
 
    
 

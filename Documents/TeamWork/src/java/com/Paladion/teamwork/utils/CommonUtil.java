@@ -90,27 +90,7 @@ public class CommonUtil {
       else{return null;}
     }
     
-    
-//    public List<ProjectTransactionBean> assignEngineerToProject(HttpServletRequest req)
-//     {
-//	 List<ProjectTransactionBean> TransactionList=new ArrayList<ProjectTransactionBean>();
-//	 ProjectTransactionBean PTB=new ProjectTransactionBean();
-//	String[] strUserID=req.getParameterValues("userid");
-//	String[] taskName=req.getParameterValues("taskname");
-//	int i=0;
-//	int[] userid=new int[strUserID.length];
-//	
-//           for(String str:strUserID)
-//          {
-//               userid[i]=Integer.parseInt(str);//Exception in this line
-//                i++;
-//          }
-//	 return null;
-// }
-    
-    
-    
-    
+ 
     
     
     public List<ProjectTransactionBean> devideDaysfortasks(ProjectBean PB, List<MapTemplateTaskBean> MTTP) throws ParseException
@@ -169,9 +149,6 @@ int toHour = 19;//end time of the day usually 7 PM
 int toMinute = 0;
 Date end = null;
 
- 
-//    int hourOfDay = ProjectTime.get(Calendar.HOUR_OF_DAY);
-//    int dayOfWeek = ProjectTime.get(Calendar.DAY_OF_WEEK);
 
 //Check to get start time of the current day. If less than 10 AM make it 10 AM
 
@@ -284,7 +261,7 @@ Date end = null;
                 if(null==TaskEndDate)
                   {
                     PTBean.setTaskstartdate(ProjectTime);
-                    PTBean.setEngname(this.getEngineerFromSession(PTBean.getUserid(),sess));
+                    PTBean.setEngname(this.getUsernameFromSession(PTBean.getUserid(),sess));
                     TaskEndDate=calculateResponseTime(ProjectTime, PTBean.getTaskhours());
                     PTBean.setTaskenddate(TaskEndDate);
                    }
@@ -293,7 +270,7 @@ Date end = null;
                     ProjectTime.setTime(TaskEndDate);
                     PTBean.setTaskstartdate(ProjectTime);
                     TaskEndDate=calculateResponseTime(ProjectTime,PTBean.getTaskhours());
-                    PTBean.setEngname(this.getEngineerFromSession(PTBean.getUserid(),sess));
+                    PTBean.setEngname(this.getUsernameFromSession(PTBean.getUserid(),sess));
                     PTBean.setTaskenddate(TaskEndDate);
                   }
                 ResultList.add(PTBean);
@@ -333,10 +310,10 @@ Date end = null;
     return workDays;
 }
 
-    private String getEngineerFromSession(int userid,HttpSession sess) 
+    public String getUsernameFromSession(int userid,HttpSession sess) 
     
     {
-        List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllEngineers");
+        List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllUsers");
         for (UserDataBean ub:UDBean)
         {
         if(ub.getUserid()==userid)
@@ -345,6 +322,19 @@ Date end = null;
         return null;
         
     }
+    
+    public List<UserDataBean> getUsersByRole(String role, HttpSession sess){
+        List<UserDataBean> UserList=new ArrayList<UserDataBean>();
+        List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllUsers");
+        for(UserDataBean ub:UDBean){
+            if(role.equalsIgnoreCase(ub.getRole())){
+               UserList.add(ub);
+            }
+        }
+        return UserList;
+    }
+    
+    
      
 
 

@@ -62,16 +62,16 @@ public ProjectBean populate()
 
 	
 @RequestMapping(value="/CreateProject",method=RequestMethod.GET)
-public ModelAndView CreateProject()
+public ModelAndView CreateProject(HttpServletRequest req)
 {    
-	
+	HttpSession sess=req.getSession(false);
 	List <TemplateBean> TemplateList;
         List <UserDataBean> LeadList;
 	ModelAndView model=new ModelAndView("CreateProject");
 	System.out.println("Inside Project controller for get method");
 	try{
 	        TemplateList=TS.getAllTemplates();
-                LeadList=US.getUsersByRole("lead");
+                LeadList=CU.getUsersByRole("lead",sess);
 		model.addObject("AllTemplates", TemplateList);
                 model.addObject("AllLeads", LeadList);
 	    }catch(Exception ex){}
@@ -88,6 +88,7 @@ public ModelAndView CreateProject()
 	            System.out.println("\n inside create Project POST method ");
                     PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
                     PB.setStatus("New");
+                    PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
                     PS.addProject(PB); 	
 	            System.out.println("Project Created with Project id"+PB.getProjectid());
 	            System.out.println("Man days :"+PB.getMandays());
@@ -107,7 +108,7 @@ public ModelAndView CreateProject()
            PSBList=  CU.setTaskHours(PRDATA, MTTB);
            PTW.setProjectlist(PSBList);
            result=new ModelAndView("AssignTaskToUsers");
-           List<UserDataBean> Alleng=(List<UserDataBean>) sess.getAttribute("AllEngineers");
+           List<UserDataBean> Alleng=CU.getUsersByRole("engineer", sess);
            result.addObject("AllEngineers",Alleng);
         
            result.addObject("ProjectW",PTW);
@@ -126,10 +127,20 @@ public ModelAndView CreateProject()
         HttpSession sess= req.getSession(false);
         UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
 	ModelAndView result=new ModelAndView("DisplayProjects");
-	result.addObject("AllProjects", PS.getAllProjects(sessuser.getUserid(), sessuser.getRole()));
+        List<ProjectBean> PBList=(List<ProjectBean>)PS.getAllProjects(sessuser.getUserid(), sessuser.getRole());
+        
+	result.addObject("AllProjects",PBList );
 	return  result;
     }
-    
+      @RequestMapping(value="/AddProject", method=RequestMethod.GET)
+      public ModelAndView AssignTask(){
+          
+           ModelAndView result= new ModelAndView("AssignTaskToUsers");
+           result.addObject("AllEngineers",null);
+           result.addObject("ProjectW",null);
+           result.addObject("Message","Please Select A Project From the Project List");
+           return result;
+      }
     
     @RequestMapping(value="/AssignTaskToEngineers", method=RequestMethod.POST)
     public ModelAndView AssignTaskToEngineer(@ModelAttribute("ProjectW")ProjectTransactionWrapper ProjectW,HttpServletRequest req) throws Exception
@@ -150,16 +161,30 @@ public ModelAndView CreateProject()
     
 
     @RequestMapping(value="/showProgress",method=RequestMethod.GET)
-    public ModelAndView showProjectProgress(@RequestParam int id) throws ParseException
+    public ModelAndView showProjectProgress(@RequestParam int id,HttpServletRequest req) throws ParseException
     {
+           ModelAndView result;
            List<ProjectTransactionBean> PSBList;
            ProjectBean PRDATA=PS.getProjectById(id);
            PSBList = PS.getProjectTransaction(id);
- 
-           ModelAndView result=new ModelAndView("DisplayProjectProgress");
+           if(PSBList.size()==0){
+               HttpSession sess=req.getSession(false);
+           ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
+           List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());
+           PSBList=  CU.setTaskHours(PRDATA, MTTB);
+           PTW.setProjectlist(PSBList);
+           result=new ModelAndView("AssignTaskToUsers");
+           List<UserDataBean> Alleng=CU.getUsersByRole("engineer", sess);
+           result.addObject("AllEngineers",Alleng);
+           result.addObject("ProjectW",PTW);
+           return result;
+           }
+           else{
+           result=new ModelAndView("DisplayProjectProgress");
            result.addObject("ProjectData",PRDATA);
            result.addObject("TaskDetails",PSBList);
            return result;
+           }
     }
     
      @RequestMapping(value="/updateTaskStatus",method=RequestMethod.GET)

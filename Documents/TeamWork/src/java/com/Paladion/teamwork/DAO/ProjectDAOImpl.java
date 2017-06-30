@@ -62,14 +62,17 @@ public class ProjectDAOImpl implements ProjectDAO
             else if(role.equalsIgnoreCase("Lead"))
             {
             Criteria criteria = session1.createCriteria(ProjectBean.class,"p");    
-            criteria.add(Restrictions.eq("lead", userid));
+            criteria.add(Restrictions.eq("leadid", userid));
             allProjects= criteria.list();
             }   
             else if(role.equalsIgnoreCase("Engineer"))
             {
-            Query q=session1.createQuery("select distinct p.* from ProjectBean p join ProjectTransactionBean pt on (p.projectid=pt.projectid) and pt.userid=?");
-            q.setParameter(0,userid);
-            allProjects= q.list();
+//            Query q=session1.createSQLQuery("select distinct p.* from projects p join projects_transaction pt on (p.projectid=pt.projectid) and pt.userid=?");
+//            q.setParameter(0,userid);
+               // Criteria criteria = session1.createCriteria(ProjectBean.class,"p").createAlias("p.ptbean","pt");
+               // criteria.add(Restrictions.eq("p.projectid", "pt.projectid"));
+                //criteria.add(Restrictions.and(Restrictions.eq("pt.userid", userid)));
+            //    allProjects= criteria.list();
             }
             
 	    tx.commit();
