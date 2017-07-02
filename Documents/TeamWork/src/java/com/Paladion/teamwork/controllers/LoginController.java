@@ -177,7 +177,7 @@ public ModelAndView Welcome()
 @RequestMapping(value="/Logout",method=RequestMethod.GET)
 public String Logout(HttpServletRequest req)
    {
-           LS.Logout(req.getSession());
+           LS.Logout(req.getSession(false));
            return "redirect:Login.do";
    }
 

@@ -51,28 +51,37 @@ public class ProjectDAOImpl implements ProjectDAO
 		
             Session session1 = sessionFactory.getCurrentSession();
 	    Transaction tx = null;
-            List <ProjectBean> allProjects=null;
+            List <ProjectBean> allProjects=new ArrayList<>();
+            List<ProjectTransactionBean> PTbeanList=new ArrayList<>();
 	    tx = session1.beginTransaction();
             
             if (role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin"))
             {
-             Criteria criteria = session1.createCriteria(ProjectBean.class,"p");
+             Criteria criteria = session1.createCriteria(ProjectBean.class);
              allProjects= criteria.list();
             }
             else if(role.equalsIgnoreCase("Lead"))
             {
-            Criteria criteria = session1.createCriteria(ProjectBean.class,"p");    
+            Criteria criteria = session1.createCriteria(ProjectBean.class);    
             criteria.add(Restrictions.eq("leadid", userid));
             allProjects= criteria.list();
             }   
             else if(role.equalsIgnoreCase("Engineer"))
             {
-//            Query q=session1.createSQLQuery("select distinct p.* from projects p join projects_transaction pt on (p.projectid=pt.projectid) and pt.userid=?");
-//            q.setParameter(0,userid);
-               // Criteria criteria = session1.createCriteria(ProjectBean.class,"p").createAlias("p.ptbean","pt");
-               // criteria.add(Restrictions.eq("p.projectid", "pt.projectid"));
-                //criteria.add(Restrictions.and(Restrictions.eq("pt.userid", userid)));
-            //    allProjects= criteria.list();
+                       
+            Query query1 = session1.createQuery("from ProjectTransactionBean where userid=? group by projectid");
+            query1.setParameter(0, userid);
+            
+            PTbeanList=(List<ProjectTransactionBean>) query1.list();
+        
+            for(ProjectTransactionBean PTB:PTbeanList)
+            {
+            Criteria criteria2 = session1.createCriteria(ProjectBean.class); 
+            criteria2.add(Restrictions.eq("projectid", PTB.getProjectid()));
+            ProjectBean PB=(ProjectBean)criteria2.uniqueResult();
+            allProjects.add(PB);
+            }
+            
             }
             
 	    tx.commit();

@@ -134,7 +134,7 @@ String status;
         this.status = status;
     }
 
-    @Column(name = "leadid")
+@Column(name = "leadid")
 int leadid;
     
     public int getLeadid() {
