@@ -149,7 +149,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
            ModelAndView result= new ModelAndView("AssignTaskToUsers");
            result.addObject("AllEngineers",null);
            result.addObject("ProjectW",null);
-           result.addObject("Message","Please Select A Project From the Project List");
+           result.addObject("Message","Please Select a Project From the Project List");
            return result;
       }
     
@@ -179,7 +179,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
            ProjectBean PRDATA=PS.getProjectById(id);
            PSBList = PS.getProjectTransaction(id);
            if(PSBList.size()==0){
-               HttpSession sess=req.getSession(false);
+           HttpSession sess=req.getSession(false);
            ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
            List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());
            PSBList=  CU.setTaskHours(PRDATA, MTTB);

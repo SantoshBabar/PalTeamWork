@@ -14,6 +14,7 @@ import com.Paladion.teamwork.utils.EmailUtil;
 import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,12 @@ public class UserController {
                ebean.setSubject(subject);
                ebean.setMessage(message);
                eutil.sendEmail(ebean);
-	   return new ModelAndView("CreateUser","Message","User Created Successfully");
+               
+               //Update user list in session
+                HttpSession Sess=req.getSession(false);
+                Sess.setAttribute("AllUsers", userService.GetAllUser());
+                      
+                return new ModelAndView("CreateUser","Message","User Created Successfully");
            }
            else{
                return new ModelAndView("CreateUser","Message","User Creation Failed Due to Error");
@@ -92,13 +98,16 @@ public ModelAndView ViewAllUser( )
         }
 
 @RequestMapping(value="/DeleteUser",method=RequestMethod.GET)
-    public ModelAndView DeleteUser(@RequestParam int id) throws ParseException
+    public ModelAndView DeleteUser(@RequestParam int id, HttpServletRequest req) throws ParseException
     {
         ModelAndView result=new ModelAndView("ViewAllUser");
            if(id!=0)
            {
                userService.DeleteUser(id);
                List<UserDataBean> userList=userService.GetAllUser();
+               HttpSession Sess=req.getSession(false);
+               //update user list in session
+               Sess.setAttribute("AllUsers", userList);
 	       result.addObject("AllUsers",userList);
                result.addObject("Message","User deleted successfully");    
            }
