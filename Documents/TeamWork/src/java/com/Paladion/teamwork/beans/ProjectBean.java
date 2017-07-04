@@ -145,18 +145,18 @@ int leadid;
         this.leadid = leadid;
     }
 
-    
-@OneToMany(cascade = CascadeType.ALL)
-@JoinTable(name = "project_transaction", joinColumns = { @JoinColumn(name = "projectid") })
-public Set <ProjectTransactionBean> ptbean;
-
-public Set<ProjectTransactionBean> getProjectstatusbean() {
-return ptbean;
-}
-
-public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
-this.ptbean = projectstatusbean;
-}
+//    
+//@OneToMany(cascade = CascadeType.ALL)
+//@JoinTable(name = "project_transaction", joinColumns = { @JoinColumn(name = "projectid") })
+//public Set <ProjectTransactionBean> ptbean;
+//
+//public Set<ProjectTransactionBean> getProjectstatusbean() {
+//return ptbean;
+//}
+//
+//public void setProjectstatusbean(Set <ProjectTransactionBean> projectstatusbean ) {
+//this.ptbean = projectstatusbean;
+//}
 
    
 

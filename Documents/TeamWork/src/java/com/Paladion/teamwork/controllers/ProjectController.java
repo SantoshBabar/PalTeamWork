@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.EmailBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
@@ -15,6 +16,8 @@ import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
+import com.Paladion.teamwork.utils.EmailUtil;
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +92,15 @@ public ModelAndView CreateProject(HttpServletRequest req)
                     PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
                     PB.setStatus("New");
                     PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
-                    PS.addProject(PB); 	
+                    PS.addProject(PB);
+                    //send mail to lead                    
+                    EmailUtil EU=new EmailUtil();
+                    EmailBean ebean=new EmailBean();
+                    ebean.setTo(CU.getUserMailById(PB.getLeadid(), req.getSession(false)));
+                    ebean.setSubject("Project Scheduling Mail");
+                    String message="Dear "+PB.getLead()+"\n\nYou have been assigned to "+PB.getProjectname()+" as lead. Please find the below projet details.\n\n\nOPID:    "+PB.getOpid()+"\nStart Date:"+PB.getStartdate()+"\nEnd Date: "+PB.getEnddate()+"\n\n\nRegards\nTeam Paladion";
+                    ebean.setMessage(message);
+                    EU.sendEmail(ebean);
 	            System.out.println("Project Created with Project id"+PB.getProjectid());
 	            System.out.println("Man days :"+PB.getMandays());
                 }
@@ -232,6 +243,21 @@ public ModelAndView CreateProject(HttpServletRequest req)
             result.addObject("Message","Something Went Wrong");
             return result;
         }
+    }
+    
+    
+    
+    
+     @RequestMapping(value="/updateTaskDelay",method=RequestMethod.POST)
+    public ModelAndView updateTaskDelay(HttpServletRequest req) throws ParseException
+    {
+        //under progress
+        String transid=req.getParameter("transId");
+        String delay=req.getParameter("taskDelayTime");
+        
+        
+        
+        return new ModelAndView("Welcome");
     }
     
 }

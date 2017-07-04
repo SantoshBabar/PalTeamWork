@@ -334,17 +334,18 @@ Date end = null;
         return UserList;
     }
     
+    public String getUserMailById(int userid, HttpSession sess){
+        List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllUsers");
+        for(UserDataBean ub:UDBean){
+            if(userid==ub.getUserid()){
+               return ub.getEmail();
+               }
+             }
+        return null;
+    }
     
-     
-
-
-
     
-            
- }
-    
-    
-    
+}
 
  
  

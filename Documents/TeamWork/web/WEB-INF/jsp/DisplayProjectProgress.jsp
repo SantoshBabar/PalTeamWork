@@ -216,6 +216,7 @@ th {
         <th>Hours</th>
         <th>Days</th>
         <th>Status</th>
+        <th>Delay</th>
         
     </tr>
 </table>
@@ -239,7 +240,7 @@ th {
 	    <td style="color: black">${EDate}</td>
             <td style="color: black">${ProjectTaskList.taskhours}</td>
             <td style="color: black">${ProjectTaskList.taskdays}</td>
-       
+           
             <td style="color: black">
             <div class="dropdown">
             <button class="dropbtn1">${ProjectTaskList.status}</button>
@@ -250,7 +251,19 @@ th {
                 </div>
         </div> 
         </td>
+        
+         <td style="color: black">
+             <table>
+                 <tr>
+            <form action="updateTaskDelay.do" method="post">
+                <td>  <input type="text" name="taskDelayTime"/></td>
+               <input type="hidden" name="transId" value="${ProjectTaskList.transid}"/>
+               <td> <input type="submit" value="Update Delay"/></td>
+            </form> </tr>
+             </table>
+            </td>
         </tr>
+      
        </c:forEach>
 </table>
 </div>
