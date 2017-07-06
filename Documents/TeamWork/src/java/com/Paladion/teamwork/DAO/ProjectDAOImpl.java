@@ -197,4 +197,31 @@ public class ProjectDAOImpl implements ProjectDAO
            }
        }
 
+
+@Override
+    public void updateProjectTransaction(List <ProjectTransactionBean> PTBList){
+        
+        for(ProjectTransactionBean PTBean : PTBList){
+                Session session1 = sessionFactory.getCurrentSession();
+		Transaction tx = null;
+	        tx = session1.beginTransaction();
+                
+                String sql = "UPDATE projects_transaction SET taskstartdate=?, taskenddate=?, taskhours=?,taskdays=?, status=? WHERE transid=?";
+                SQLQuery query = session1.createSQLQuery(sql);
+                query.setParameter(0,PTBean.getTaskstartdate());
+                query.setParameter(1,PTBean.getTaskenddate());
+                query.setParameter(2,PTBean.getTaskhours());
+                query.setParameter(3,PTBean.getTaskdays());
+                query.setParameter(4,PTBean.getStatus());
+                query.setParameter(5,PTBean.getTransid());
+                query.executeUpdate();
+                tx.commit();
+		System.out.println("Project transaction updated successfully");
+        }
+        
+    }
+
+
+
+
 }

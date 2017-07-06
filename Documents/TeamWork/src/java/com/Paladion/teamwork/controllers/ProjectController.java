@@ -17,9 +17,10 @@ import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.EmailUtil;
-import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -94,13 +95,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
                     PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
                     PS.addProject(PB);
                     //send mail to lead                    
-                    EmailUtil EU=new EmailUtil();
-                    EmailBean ebean=new EmailBean();
-                    ebean.setTo(CU.getUserMailById(PB.getLeadid(), req.getSession(false)));
-                    ebean.setSubject("Project Scheduling Mail");
-                    String message="Dear "+PB.getLead()+"\n\nYou have been assigned to "+PB.getProjectname()+" as lead. Please find the below projet details.\n\n\nOPID:    "+PB.getOpid()+"\nStart Date:"+PB.getStartdate()+"\nEnd Date: "+PB.getEnddate()+"\n\n\nRegards\nTeam Paladion";
-                    ebean.setMessage(message);
-                    EU.sendEmail(ebean);
+                    CU.sendSchedulingMailToLead(PB, req.getSession(false));
 	            System.out.println("Project Created with Project id"+PB.getProjectid());
 	            System.out.println("Man days :"+PB.getMandays());
                 }
@@ -161,9 +156,10 @@ public ModelAndView CreateProject(HttpServletRequest req)
         ProjectBean PRDATA=PS.getProjectById(projectid);
 	List <ProjectTransactionBean> PTBList=ProjectW.getProjectlist();
         List <ProjectTransactionBean> PTBList1=new ArrayList<ProjectTransactionBean>();
-        CommonUtil cu=new CommonUtil();
-        PTBList1= cu.updateProjectTransaction(PTBList, PRDATA,req.getSession(false));
+        
+        PTBList1= CU.updateProjectTransaction(PTBList, PRDATA,req.getSession(false));
         PS.insertProjectTransaction(PTBList1);
+        CU.sendSchedulingMailToEngineers(PTBList1,req.getSession(false));
         ModelAndView result=new ModelAndView("DisplayProjectProgress");
         result.addObject("TaskDetails",PTBList1);
         result.addObject("ProjectData",PRDATA);
@@ -178,6 +174,8 @@ public ModelAndView CreateProject(HttpServletRequest req)
            List<ProjectTransactionBean> PSBList;
            ProjectBean PRDATA=PS.getProjectById(id);
            PSBList = PS.getProjectTransaction(id);
+           
+           //If engineers not assigned, redirect to assign engineers to tasks.
            if(PSBList.size()==0){
            HttpSession sess=req.getSession(false);
            ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
@@ -190,6 +188,8 @@ public ModelAndView CreateProject(HttpServletRequest req)
            result.addObject("ProjectW",PTW);
            return result;
            }
+           
+           
            else{
            result=new ModelAndView("DisplayProjectProgress");
            result.addObject("ProjectData",PRDATA);
@@ -221,8 +221,6 @@ public ModelAndView CreateProject(HttpServletRequest req)
     }
     
     
-    
-    
     @RequestMapping(value="/updateProjectStatus",method=RequestMethod.GET)
     public ModelAndView updateProjectStatus(@RequestParam int pid,@RequestParam String status,HttpServletRequest req) throws ParseException
     {
@@ -245,16 +243,35 @@ public ModelAndView CreateProject(HttpServletRequest req)
         }
     }
     
-    
-    
-    
      @RequestMapping(value="/updateTaskDelay",method=RequestMethod.POST)
     public ModelAndView updateTaskDelay(HttpServletRequest req) throws ParseException
     {
         //under progress
-        String transid=req.getParameter("transId");
+        String tid=req.getParameter("transId");
         String delay=req.getParameter("taskDelayTime");
-        
+        String pid=req.getParameter("projectid");
+        int delayHours=Integer.parseInt(delay);
+        int projectId=Integer.parseInt(pid);
+        int transid=Integer.parseInt(tid);
+        List<ProjectTransactionBean> PTBList=PS.getProjectTransaction(projectId);
+        List<ProjectTransactionBean> PTBList2=new ArrayList<>();
+        for(ProjectTransactionBean PTBean: PTBList )
+        {
+            if(PTBean.getTransid()==transid){
+                float hours= PTBean.getTaskhours()+delayHours;
+                PTBean.setTaskhours(hours);
+                PTBean.setTaskdays(hours/9);
+                PTBean.setStatus("Delayed");
+                PTBList2.add(PTBean);
+            }
+           if(PTBean.getTransid()>transid){
+                PTBList2.add(PTBean);
+            }
+            
+           
+        }
+        List<ProjectTransactionBean> PTBList3=CU.updateDelayForTasks(PTBList2, delayHours);
+        PS.updateProjectTransaction(PTBList3);
         
         
         return new ModelAndView("Welcome");

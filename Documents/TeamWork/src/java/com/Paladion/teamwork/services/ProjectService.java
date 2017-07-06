@@ -24,4 +24,5 @@ public interface ProjectService {
     public boolean updateTaskStatus(int transid, String status);
     public boolean updateTaskStatus(int projid);
     public boolean updateProjectStatus(int projid, String status);
+    public void updateProjectTransaction(List<ProjectTransactionBean>PTBList);
 }

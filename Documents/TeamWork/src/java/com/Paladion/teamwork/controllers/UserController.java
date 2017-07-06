@@ -62,7 +62,7 @@ public class UserController {
         System.out.println("in user controller create user post method");
     
 	  boolean result = userService.addUser(loginBean);
-	   if(result=true){
+	   if(result==true){
                
                //Send Email to user
                EmailBean ebean=new EmailBean();

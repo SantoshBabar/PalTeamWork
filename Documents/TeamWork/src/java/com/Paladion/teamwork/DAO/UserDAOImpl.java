@@ -37,52 +37,50 @@ public class UserDAOImpl implements UserDAO{
 		Transaction tx = null;
 	        tx = session.beginTransaction();
 		session.save(userBean);
-		System.out.println("done");
+		System.out.println("User added succefully ");
 				 
 	           tx.commit();
+                   return true;
 		}catch(Exception ex){
 			System.out.println("In catch block: Exception raised");
 			return false;
 		}
-		System.out.println("User created successfully");
-		return true;
-		
 	}
         
     
 
         
         
-        
-	
-	@Override
-	public List<UserDataBean> getUsersByRole(String role)
-	{
-		List<UserDataBean> UserList=new ArrayList<UserDataBean>();
-		UserDataBean ubean=new UserDataBean();
-		
-		Session session1 = sessionFactory.getCurrentSession();
-		Transaction tx;
-		tx = session1.beginTransaction();
-		
-		System.out.println("Get Users by Role UserDAO");
-	        String SQL_QUERY1= "from UserDataBean where role=?";
-                Query query2 = session1.createQuery(SQL_QUERY1);
-	        query2.setParameter(0,role);
-         
-                List list2 = query2.list();
-	        tx.commit();
-	        System.out.println("Query executed :)");
-	        Iterator it= list2.iterator();
-                    while(it.hasNext())
-                      {
-		           ubean=(UserDataBean) it.next();
-                           System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.getUsername());
-	                   UserList.add(ubean);
-                      }
-		
-	           return UserList;	
-	}
+//      Unused Code  
+//	
+//	@Override
+//	public List<UserDataBean> getUsersByRole(String role)
+//	{
+//		List<UserDataBean> UserList=new ArrayList<UserDataBean>();
+//		UserDataBean ubean=new UserDataBean();
+//		
+//		Session session1 = sessionFactory.getCurrentSession();
+//		Transaction tx;
+//		tx = session1.beginTransaction();
+//		
+//		System.out.println("Get Users by Role UserDAO");
+//	        String SQL_QUERY1= "from UserDataBean where role=?";
+//                Query query2 = session1.createQuery(SQL_QUERY1);
+//	        query2.setParameter(0,role);
+//         
+//                List list2 = query2.list();
+//	        tx.commit();
+//	        System.out.println("Query executed :)");
+//	        Iterator it= list2.iterator();
+//                    while(it.hasNext())
+//                      {
+//		           ubean=(UserDataBean) it.next();
+//                           System.out.print("\nUser retrived from DB based on Role: "+role+" User name: "+ubean.getUsername());
+//	                   UserList.add(ubean);
+//                      }
+//		
+//	           return UserList;	
+//	}
         
   
        @Override

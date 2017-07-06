@@ -18,7 +18,7 @@ import java.util.List;
 public interface UserDAO {
 
 	//public void addUserDao(UserBean Ubean);
-	public List<UserDataBean> getUsersByRole(String role);
+	//public List<UserDataBean> getUsersByRole(String role);
 
 	public boolean addUser(UserDataBean loginbean);
         

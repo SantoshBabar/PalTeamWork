@@ -28,10 +28,10 @@ UserDAO userDAO;
 	
 	
 	
-	@Override
-	public List<UserDataBean> getUsersByRole(String role) {
-		return userDAO.getUsersByRole(role);
-	}
+//	@Override
+//	public List<UserDataBean> getUsersByRole(String role) {
+//		return userDAO.getUsersByRole(role);
+//	}
         
         @Override
 	public List<UserDataBean> GetAllUser() {

@@ -19,7 +19,7 @@ import java.util.List;
 public interface UserService {
 
 	
-		   public List<UserDataBean> getUsersByRole(String role);
+		  // public List<UserDataBean> getUsersByRole(String role);
 		  
 
 	           public boolean addUser(UserDataBean loginBean);

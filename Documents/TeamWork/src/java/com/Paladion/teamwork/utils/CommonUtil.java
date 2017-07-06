@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.utils;
 
+import com.Paladion.teamwork.beans.EmailBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TaskBean;
@@ -268,6 +269,13 @@ Date end = null;
                 else
                   {
                     ProjectTime.setTime(TaskEndDate);
+                    
+                     if (ProjectTime.get(Calendar.HOUR_OF_DAY) == 19 || ProjectTime.get(Calendar.DAY_OF_WEEK) == 1) 
+                        {
+                              ProjectTime.add(Calendar.DATE, 1);
+                              ProjectTime.set(Calendar.HOUR_OF_DAY, 10);
+                              ProjectTime.set(Calendar.MINUTE, 00);
+                        }
                     PTBean.setTaskstartdate(ProjectTime);
                     TaskEndDate=calculateResponseTime(ProjectTime,PTBean.getTaskhours());
                     PTBean.setEngname(this.getUsernameFromSession(PTBean.getUserid(),sess));
@@ -334,17 +342,91 @@ Date end = null;
         return UserList;
     }
     
-    public String getUserMailById(int userid, HttpSession sess){
+    public UserDataBean getUserById(int userid, HttpSession sess){
         List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllUsers");
         for(UserDataBean ub:UDBean){
             if(userid==ub.getUserid()){
-               return ub.getEmail();
+               return ub;
                }
              }
         return null;
     }
     
+    public boolean sendSchedulingMailToEngineers(List<ProjectTransactionBean> PTBList, HttpSession sess){
+        
+        HashMap<Integer, List<ProjectTransactionBean>> hashMap = new HashMap<Integer, List<ProjectTransactionBean>>();
+         List <ProjectTransactionBean> ResultList=new ArrayList<ProjectTransactionBean>();
+         
+         for(ProjectTransactionBean PTBean : PTBList)
+         {
+            if (!hashMap.containsKey(PTBean.getUserid())) {
+            List<ProjectTransactionBean> list = new ArrayList<ProjectTransactionBean>();
+            list.add(PTBean);
+            hashMap.put(PTBean.getUserid(), list);
+           } 
+            else {
+            hashMap.get(PTBean.getUserid()).add(PTBean);}
+        }
+         
+          for (Map.Entry<Integer, List<ProjectTransactionBean>> entry : hashMap.entrySet())
+        {
+            int userid = entry.getKey();
+            EmailBean ebean=new EmailBean();
+            EmailUtil EU=new EmailUtil();
+            UserDataBean ubean=this.getUserById(userid, sess);
+            ebean.setTo(ubean.getEmail());
+            ebean.setSubject("Project Scheduling Mail");
+            String message="Dear "+ubean.getUsername()+"\n\nYou have been assigned.\n\n\nBest Regards\nTeam Paladion";
+            ebean.setMessage(message);
+            EU.sendEmail(ebean);
+        }
+        
+        
+        return true;
+    }
     
+    public boolean sendSchedulingMailToLead(ProjectBean PB, HttpSession sess) throws ParseException{
+        
+         EmailUtil EU=new EmailUtil();
+         EmailBean ebean=new EmailBean();
+         UserDataBean ub=this.getUserById(PB.getLeadid(), sess);
+         ebean.setTo(ub.getEmail());
+         ebean.setSubject("Project Scheduling Mail");
+         String message="Dear "+ub.getUsername()+"\n\nYou have been assigned to "+PB.getProjectname()+" as lead. Please find the below projet details.\n\n\nOPID:    "+PB.getOpid()+"\nStart Date:"+PB.getStartdate()+"\nEnd Date: "+PB.getEnddate()+"\n\n\nRegards\nTeam Paladion";
+         ebean.setMessage(message);
+         EU.sendEmail(ebean);
+        return true;
+    }
+    
+    
+    
+    
+    
+    
+    
+    public List<ProjectTransactionBean> updateDelayForTasks(List<ProjectTransactionBean> PTBList, int hours){
+        Date delayedTaskEndDate=null;
+        for(ProjectTransactionBean PTBean : PTBList)        
+        {
+            Calendar ProjectTime = Calendar.getInstance();
+            ProjectTime.setTime(PTBean.getTaskenddate());
+           
+            if(null==delayedTaskEndDate)
+                  {
+                    delayedTaskEndDate=calculateResponseTime(ProjectTime, hours);
+                    PTBean.setTaskenddate(delayedTaskEndDate);
+                   }
+                else
+                  {
+                    ProjectTime.setTime(delayedTaskEndDate);
+                    PTBean.setTaskstartdate(ProjectTime);
+                    delayedTaskEndDate=calculateResponseTime(ProjectTime,PTBean.getTaskhours());
+                    PTBean.setTaskenddate(delayedTaskEndDate);
+                  }
+            }
+        return PTBList;
+    }
+   
 }
 
  

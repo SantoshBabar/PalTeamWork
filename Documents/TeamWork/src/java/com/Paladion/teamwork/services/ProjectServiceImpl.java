@@ -78,6 +78,10 @@ ProjectDAO PD;
           return PD.updateProjectStatus(projid, status);
         
     }
-   
+    
+    @Override
+   public void updateProjectTransaction(List<ProjectTransactionBean> PTBList){
+        PD.updateProjectTransaction(PTBList);
+   }
 	
 }

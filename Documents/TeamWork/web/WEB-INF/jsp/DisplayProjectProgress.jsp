@@ -223,7 +223,7 @@ th {
            <br>   
            <br>
               
-    <div style="overflow: auto;height: 500px; width: auto;"> 
+    <div style="overflow: auto;height: auto; width: auto;"> 
         
           
     <table border="1" align="left">
@@ -258,6 +258,7 @@ th {
             <form action="updateTaskDelay.do" method="post">
                 <td>  <input type="text" name="taskDelayTime"/></td>
                <input type="hidden" name="transId" value="${ProjectTaskList.transid}"/>
+               <input type="hidden" name="projectid" value="${ProjectData.projectid}"/>
                <td> <input type="submit" value="Update Delay"/></td>
             </form> </tr>
              </table>
