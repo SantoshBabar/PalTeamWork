@@ -252,6 +252,7 @@ th {
         </div> 
         </td>
         
+        <%--Individual task delay form --%>
          <td style="color: black">
              <table>
                  <tr>

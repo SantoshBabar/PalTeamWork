@@ -409,11 +409,11 @@ Date end = null;
         for(ProjectTransactionBean PTBean : PTBList)        
         {
             Calendar ProjectTime = Calendar.getInstance();
-            ProjectTime.setTime(PTBean.getTaskenddate());
+            ProjectTime.setTime(PTBean.getTaskstartdate());
            
             if(null==delayedTaskEndDate)
                   {
-                    delayedTaskEndDate=calculateResponseTime(ProjectTime, hours);
+                    delayedTaskEndDate=calculateResponseTime(ProjectTime, PTBean.getTaskhours());
                     PTBean.setTaskenddate(delayedTaskEndDate);
                    }
                 else

@@ -5,7 +5,6 @@
  */
 package com.Paladion.teamwork.controllers;
 
-import com.Paladion.teamwork.beans.EmailBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
@@ -16,11 +15,8 @@ import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
-import com.Paladion.teamwork.utils.EmailUtil;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -65,64 +61,62 @@ public ProjectBean populate()
 }
 
 	
-@RequestMapping(value="/CreateProject",method=RequestMethod.GET)
-public ModelAndView CreateProject(HttpServletRequest req)
-{    
-	HttpSession sess=req.getSession(false);
-	List <TemplateBean> TemplateList;
+    @RequestMapping(value="/CreateProject",method=RequestMethod.GET)
+    public ModelAndView CreateProject(HttpServletRequest req)
+    {   
+        HttpSession sess=req.getSession(false);
+        List <TemplateBean> TemplateList;
         List <UserDataBean> LeadList;
 	ModelAndView model=new ModelAndView("CreateProject");
 	System.out.println("Inside Project controller for get method");
 	try{
-	        TemplateList=TS.getAllTemplates();
-                LeadList=CU.getUsersByRole("lead",sess);
-		model.addObject("AllTemplates", TemplateList);
-                model.addObject("AllLeads", LeadList);
-	    }catch(Exception ex){}
+	    TemplateList=TS.getAllTemplates();
+            LeadList=CU.getUsersByRole("lead",sess);
+            model.addObject("AllTemplates", TemplateList);
+            model.addObject("AllLeads", LeadList);
+	}
+        catch(Exception ex){}
 	return model;
-}
+    }
 
-
-@RequestMapping(value="/AddProject",method=RequestMethod.POST)
+    //Schedule a project
+    @RequestMapping(value="/AddProject",method=RequestMethod.POST)
     public Object CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req,Model E) throws Exception
     {
         HttpSession sess= req.getSession(false);
-           ModelAndView result = null;
-           try{
-	            System.out.println("\n inside create Project POST method ");
-                    PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
-                    PB.setStatus("New");
-                    PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
-                    PS.addProject(PB);
-                    //send mail to lead                    
-                    CU.sendSchedulingMailToLead(PB, req.getSession(false));
-	            System.out.println("Project Created with Project id"+PB.getProjectid());
-	            System.out.println("Man days :"+PB.getMandays());
-                }
-           catch(Exception ex){
-                      List <TemplateBean> TemplateList;
-                      TemplateList=TS.getAllTemplates();
-	              result = new ModelAndView("CreateProject","Message","Project Creation failed");
-                      result.addObject("AllTemplates", TemplateList);
-                      return result;
-            }
+        ModelAndView result = null;
+        try{
+	    System.out.println("\n inside create Project POST method ");
+            PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
+            PB.setStatus("New");
+            PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
+            PS.addProject(PB);
+            //send mail to lead                    
+            CU.sendSchedulingMailToLead(PB, req.getSession(false));
+	    System.out.println("Project Created with Project id"+PB.getProjectid());
+	    System.out.println("Man days :"+PB.getMandays());
+        }
+        catch(Exception ex){
+            List <TemplateBean> TemplateList;
+            TemplateList=TS.getAllTemplates();
+	    result = new ModelAndView("CreateProject","Message","Project Creation failed");
+            result.addObject("AllTemplates", TemplateList);
+            return result;
+        }
            
-           ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
-           List<ProjectTransactionBean> PSBList;
-           ProjectBean PRDATA=PS.getProjectById(PB.getProjectid());
-           List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());
-           PSBList=  CU.setTaskHours(PRDATA, MTTB);
-           PTW.setProjectlist(PSBList);
-           result=new ModelAndView("AssignTaskToUsers");
-           List<UserDataBean> Alleng=CU.getUsersByRole("engineer", sess);
-           result.addObject("AllEngineers",Alleng);
+        ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
+        List<ProjectTransactionBean> PSBList;
+        ProjectBean PRDATA=PS.getProjectById(PB.getProjectid());
+        List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());
+        PSBList=  CU.setTaskHours(PRDATA, MTTB);
+        PTW.setProjectlist(PSBList);
+        result=new ModelAndView("AssignTaskToUsers");
+        List<UserDataBean> Alleng=CU.getUsersByRole("engineer", sess);
+        result.addObject("AllEngineers",Alleng);
         
-           result.addObject("ProjectW",PTW);
-           return result;
-	    
+        result.addObject("ProjectW",PTW);
+        return result;
     }
-    
-    
     
     public String updateProject(ProjectBean pBean){return "";}
     public String deleteProject(String id){return "";}
@@ -134,20 +128,21 @@ public ModelAndView CreateProject(HttpServletRequest req)
         UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
 	ModelAndView result=new ModelAndView("DisplayProjects");
         List<ProjectBean> PBList=(List<ProjectBean>)PS.getAllProjects(sessuser.getUserid(), sessuser.getRole());
-        
-	result.addObject("AllProjects",PBList );
+        result.addObject("AllProjects",PBList );
 	return  result;
     }
-      @RequestMapping(value="/AddProject", method=RequestMethod.GET)
-      public ModelAndView AssignTask(){
-          
-           ModelAndView result= new ModelAndView("AssignTaskToUsers");
-           result.addObject("AllEngineers",null);
-           result.addObject("ProjectW",null);
-           result.addObject("Message","Please Select a Project From the Project List");
-           return result;
-      }
+      
+    @RequestMapping(value="/AddProject", method=RequestMethod.GET)
+    public ModelAndView AssignTask()
+    {
+        ModelAndView result= new ModelAndView("AssignTaskToUsers");
+        result.addObject("AllEngineers",null);
+        result.addObject("ProjectW",null);
+        result.addObject("Message","Please Select a Project From the Project List");
+        return result;
+    }
     
+    //To assign engineers to the tasks in the project
     @RequestMapping(value="/AssignTaskToEngineers", method=RequestMethod.POST)
     public ModelAndView AssignTaskToEngineer(@ModelAttribute("ProjectW")ProjectTransactionWrapper ProjectW,HttpServletRequest req) throws Exception
     {
@@ -166,7 +161,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
         return result;
     }
     
-
+    //To display individual project progress
     @RequestMapping(value="/showProgress",method=RequestMethod.GET)
     public ModelAndView showProjectProgress(@RequestParam int id,HttpServletRequest req) throws ParseException
     {
@@ -188,8 +183,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
            result.addObject("ProjectW",PTW);
            return result;
            }
-           
-           
+           //return project progress
            else{
            result=new ModelAndView("DisplayProjectProgress");
            result.addObject("ProjectData",PRDATA);
@@ -198,7 +192,8 @@ public ModelAndView CreateProject(HttpServletRequest req)
            }
     }
     
-     @RequestMapping(value="/updateTaskStatus",method=RequestMethod.GET)
+    //Update status of the individual task in the project
+    @RequestMapping(value="/updateTaskStatus",method=RequestMethod.GET)
     public ModelAndView updateTaskStatus(@RequestParam int pid,@RequestParam int tid, @RequestParam String status) throws ParseException
     {
         boolean value= PS.updateTaskStatus(tid,status);
@@ -212,7 +207,6 @@ public ModelAndView CreateProject(HttpServletRequest req)
            result.addObject("TaskDetails",PSBList);
            return result;
         }
-        
         else{
             ModelAndView result=new ModelAndView("Customerror");
             result.addObject("Message","Something Went Wrong");
@@ -220,7 +214,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
         }
     }
     
-    
+    //Update status of the individual project
     @RequestMapping(value="/updateProjectStatus",method=RequestMethod.GET)
     public ModelAndView updateProjectStatus(@RequestParam int pid,@RequestParam String status,HttpServletRequest req) throws ParseException
     {
@@ -235,7 +229,6 @@ public ModelAndView CreateProject(HttpServletRequest req)
 	  result.addObject("AllProjects", PS.getAllProjects(sessuser.getUserid(), sessuser.getRole()));
 	  return  result;
         }
-        
         else{
             ModelAndView result=new ModelAndView("Customerror");
             result.addObject("Message","Something Went Wrong");
@@ -243,10 +236,11 @@ public ModelAndView CreateProject(HttpServletRequest req)
         }
     }
     
-     @RequestMapping(value="/updateTaskDelay",method=RequestMethod.POST)
+    
+    //Update delay yo indivisual tasks in a project
+    @RequestMapping(value="/updateTaskDelay",method=RequestMethod.POST)
     public ModelAndView updateTaskDelay(HttpServletRequest req) throws ParseException
     {
-        //under progress
         String tid=req.getParameter("transId");
         String delay=req.getParameter("taskDelayTime");
         String pid=req.getParameter("projectid");
@@ -255,7 +249,7 @@ public ModelAndView CreateProject(HttpServletRequest req)
         int transid=Integer.parseInt(tid);
         List<ProjectTransactionBean> PTBList=PS.getProjectTransaction(projectId);
         List<ProjectTransactionBean> PTBList2=new ArrayList<>();
-        for(ProjectTransactionBean PTBean: PTBList )
+        for(ProjectTransactionBean PTBean: PTBList)
         {
             if(PTBean.getTransid()==transid){
                 float hours= PTBean.getTaskhours()+delayHours;
@@ -266,15 +260,18 @@ public ModelAndView CreateProject(HttpServletRequest req)
             }
            if(PTBean.getTransid()>transid){
                 PTBList2.add(PTBean);
-            }
-            
-           
+            }  
         }
         List<ProjectTransactionBean> PTBList3=CU.updateDelayForTasks(PTBList2, delayHours);
         PS.updateProjectTransaction(PTBList3);
-        
-        
-        return new ModelAndView("Welcome");
+        ModelAndView result;
+        List<ProjectTransactionBean> PSBList;
+        ProjectBean PRDATA=PS.getProjectById(projectId);
+        PSBList = PS.getProjectTransaction(projectId);   
+        result=new ModelAndView("DisplayProjectProgress");
+        result.addObject("ProjectData",PRDATA);
+        result.addObject("TaskDetails",PSBList);
+        return result;
     }
     
 }
