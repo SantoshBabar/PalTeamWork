@@ -5,34 +5,28 @@
  */
 package com.Paladion.teamwork.services;
 
-import com.Paladion.teamwork.DAO.LoginDAO;
+import com.Paladion.teamwork.DAO.PasswordDAO;
 import com.Paladion.teamwork.beans.UserDataBean;
-
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  *
- * @author Administrator
+ * @author santosh.babar
  */
-public class LoginServiceImpl implements LoginService{
+public class PasswordServiceImpl  implements PasswordService {
+    
     @Autowired
-    @Qualifier(value="LoginDAO")
-    LoginDAO LD;
+    @Qualifier(value="PasswordDAO")
+    PasswordDAO PD;
     
     @Override
-    public UserDataBean Login(UserDataBean LB) {
-         
-       return LD.Login(LB);
+    public boolean ForgotPassword(String email){
+	    return PD.ForgotPassword(email);
     }
-
+    
     @Override
-    public void Logout(HttpSession sess) {
-         sess.invalidate();
+    public boolean ResetPassword(String otp,String email,String password){
+	    return PD.ResetPassword(otp,email,password);
     }
-    
-    
-    
-    
 }

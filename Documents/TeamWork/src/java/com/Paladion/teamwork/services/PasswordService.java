@@ -7,15 +7,11 @@ package com.Paladion.teamwork.services;
 
 import com.Paladion.teamwork.beans.UserDataBean;
 
-import javax.servlet.http.HttpSession;
-
 /**
  *
- * @author Administrator
+ * @author santosh.babar
  */
-public interface LoginService {
-    
-    public UserDataBean Login(UserDataBean LB);
-    public void Logout(HttpSession sess);
-   
+public interface PasswordService {
+    public boolean ForgotPassword(String email);
+    public boolean ResetPassword(String otp,String email,String password);
 }

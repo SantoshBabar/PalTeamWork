@@ -15,6 +15,5 @@ import com.Paladion.teamwork.beans.UserDataBean;
 public interface LoginDAO {
     
     public UserDataBean Login(UserDataBean LB);
-    public UserDataBean ForgotPassword(UserDataBean LB);
-    public UserDataBean ResetPassword(UserDataBean LB);
+    
 }

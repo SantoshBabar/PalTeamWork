@@ -16,8 +16,8 @@
 
 body {
 
-	color:#6a6f8c;
-	background:#c8c8c8;
+  color:#6a6f8c;
+  background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -31,7 +31,7 @@ body {
   top: 30%;
   padding: 40px;
   width: 500px;
-  background-color: #F7F7F7;
+  background-color: #ddddbb;
   margin: 0 auto 10px;
   border-radius: 20px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -88,6 +88,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
+  width: 150px;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -124,7 +125,11 @@ body {
 }
 
 
+
 </style>
+
+
+
   <meta charset="UTF-8">
 
   <title>Forgot Password</title>
@@ -137,33 +142,33 @@ body {
 <br><br><br><br><br>
   <div class="login-card">
   <div align="center">
-<img src="PaladionLogo.png"/>
+    <img src="PaladionLogo.png"/>
     </div>
+    <center><h4 style="color: #ff0000">${Message}</h4></center>
     <h1>Forgot Password</h1><br>
     
-<!-- UI goes here-->
-    <form:form action="ForgotPassword.do" method="post" commandName="LoginM"> 
-    	Username:<form:input path="email" placeholder="Enter the email"/>
+    <!-- UI goes here-->
+    <form:form action="ForgotPassword.do" method="post"> 
+        Email ID: <input type="email" name="emailId">
         <%
           ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO", false);
           out.print(c.createRecaptchaHtml(null, null));
         %>
         <br>
-        <button type="submit" name=login value="Login"class="login login-submit">Reset</button><br>
-   
-	   
-    </body>
-    </form>
-  </form:form>
+        <button type="submit" class="login login-submit">Reset</button><br><br>
+           
+        </form:form>
     
-	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>
-  <!-- UI goes here-->
-<script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+       <form action="Login.do" method="GET">
+            <div align="left"><button type="submit" class="login login-submit">Go to Login</button></a></div>
+            </form>
+        <!-- UI goes here-->
+        <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
   </div>
   
  
-  
+</body>  
 </html>
-</body>
+
 
 

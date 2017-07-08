@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.Paladion.teamwork.services;
+package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.UserDataBean;
 
-import javax.servlet.http.HttpSession;
-
 /**
  *
- * @author Administrator
+ * @author santosh.babar
  */
-public interface LoginService {
-    
-    public UserDataBean Login(UserDataBean LB);
-    public void Logout(HttpSession sess);
-   
+public interface PasswordDAO {
+    public boolean ForgotPassword(String email);
+    public boolean ResetPassword(String otp, String email, String password);
 }

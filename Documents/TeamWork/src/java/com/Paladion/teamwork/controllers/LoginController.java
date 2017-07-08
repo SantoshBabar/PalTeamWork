@@ -9,7 +9,6 @@ import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
-import com.Paladion.teamwork.utils.CommonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -56,81 +55,9 @@ public class LoginController {
 public String Login()
 {
     // change to login
-return "Login";
+    return "Login";
 }
 
-
-
-@RequestMapping(value="/ForgotPassword",method=RequestMethod.GET)
-public String forgot()
-{
- 
-return "ForgotPassword";
-}
-
-@RequestMapping(value="/ResetPassword",method=RequestMethod.GET)
-public String Reset()
-{
- 
-return "ResetPassword";
-}
-
-@RequestMapping(value="/Forgot",method=RequestMethod.GET)
-public String forgot1()
-{
- 
-return "ForgotPassword";
-}
-
-
-
-//forgot password starts
-@RequestMapping(value="/ForgotPassword",method=RequestMethod.POST)
-public ModelAndView Forgot(@ModelAttribute("ForgotM")UserDataBean LB,HttpServletRequest req )
-    {
-        String remoteAddr = req.getRemoteAddr();
-		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-		reCaptcha.setPrivateKey("6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO");
-
-		String challenge = req.getParameter("recaptcha_challenge_field");
-		String uresponse = req.getParameter("recaptcha_response_field");
-		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-
-		if (reCaptchaResponse.isValid()) {
-			String user = req.getParameter("user");
-			               
-		} else {
-			 return new ModelAndView("ForgotPassword","Lerror", "Captcha failed");
-		}
-           System.out.println("forgotPassword");
-           lb=LS.ForgotPassword(LB);
-           if (lb!=null) {
-            HttpSession LoginSess=req.getSession(true);
-            LoginSess.setAttribute("Luser", lb);
-            return new ModelAndView("ResetPassword");
-           }
-           else {
-           return new ModelAndView("ForgotPassword","Lerror", "failed");
-           }
-}
-
-
-@RequestMapping(value="/ResetPassword",method=RequestMethod.POST)
-public ModelAndView ResetPassword(@ModelAttribute("ForgotM")UserDataBean LB,HttpServletRequest req )
-    {
-           System.out.println("ResetPassword");
-           lb=LS.ResetPassword(LB);
-           if (lb!=null) {
-            HttpSession LoginSess=req.getSession(true);
-            LoginSess.setAttribute("Luser", lb);
-            return new ModelAndView("Login","Lerror", "password updated successfully");
-           }
-           else {
-           return new ModelAndView("ResetPassword","Lerror", "incorrect OTP");
-           }
-}
-
-//forgot password ends
  
 @RequestMapping(value="/Login",method=RequestMethod.POST)
 public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRequest req )

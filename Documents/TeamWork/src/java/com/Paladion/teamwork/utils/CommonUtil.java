@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -427,6 +428,30 @@ Date end = null;
         return PTBList;
     }
    
+    
+    
+    public String otpGenetator(){
+        System.out.println("Generating password using random() : ");
+     
+        String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String Small_chars = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+        String symbols = "!@#$%&?^";
+        String values = Capital_chars + Small_chars + numbers + symbols;
+ 
+        // Using random method
+        SecureRandom rand=new SecureRandom();
+ 
+        char[] password = new char[8];
+ 
+        for (int i = 0; i < 8; i++)
+        {
+            password[i] = values.charAt(rand.nextInt(values.length()));
+        }
+        System.out.println("Generared OTP :"+new String(password));
+        return new String(password);
+    }
+    
 }
 
  

@@ -137,19 +137,23 @@ body {
   <div align="center">
 <img src="PaladionLogo.png"/>
     </div>
-    <h1>OTP</h1><br>
+       <center><h4 style="color: #ff0000">${Message}</h4></center>
+    <h1>Reset Password</h1><br>
     
 <!-- UI goes here-->
-    <form:form action="ResetPassword.do" method="post" commandName="LoginM"> 
-    	OTP:<form:input path="OTP" placeholder="Enter the OTP"/>
-        New Password:<form:input path="password" placeholder="Enter the password"/>
-        <button type="submit" name=login value="Login"class="login login-submit">Reset</button><br>
+    <form:form action="ResetPassword.do" method="post"> 
+        OTP:<input type="text" name="userOTP" placeholder="Enter the OTP">
+        New Password:<input type="password" name="newPassword" placeholder="Enter the password"/>
+        Confirm Password:<input type="password" name="conPassword" placeholder="Re-enter the password"/>
+        <input type="hidden" name="emailId" value="${email}"/>
+        <button type="submit" value="Reset Password"class="login login-submit">Reset</button><br>
 	   
 	   
     </body>
     </form>
   </form:form>
-	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>
+	  
+          
   <!-- UI goes here-->
 <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
   </div>

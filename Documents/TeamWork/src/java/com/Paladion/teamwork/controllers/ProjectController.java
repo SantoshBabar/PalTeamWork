@@ -237,6 +237,12 @@ public ProjectBean populate()
     }
     
     
+    @RequestMapping(value="/updateTaskDelay",method=RequestMethod.GET)
+    public ModelAndView updateTaskDelayGet(HttpServletRequest req) throws ParseException
+    {
+        return new ModelAndView("Customerror");
+    }
+    
     //Update delay yo indivisual tasks in a project
     @RequestMapping(value="/updateTaskDelay",method=RequestMethod.POST)
     public ModelAndView updateTaskDelay(HttpServletRequest req) throws ParseException
@@ -269,6 +275,7 @@ public ProjectBean populate()
         ProjectBean PRDATA=PS.getProjectById(projectId);
         PSBList = PS.getProjectTransaction(projectId);   
         result=new ModelAndView("DisplayProjectProgress");
+        result.addObject("Message","Delay updated successfully");
         result.addObject("ProjectData",PRDATA);
         result.addObject("TaskDetails",PSBList);
         return result;

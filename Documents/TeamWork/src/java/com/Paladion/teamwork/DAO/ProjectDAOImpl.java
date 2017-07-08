@@ -50,9 +50,9 @@ public class ProjectDAOImpl implements ProjectDAO
 	public List<ProjectBean> getAllProjects(int userid, String role) {
 		
             Session session1 = sessionFactory.getCurrentSession();
-	    Transaction tx = null;
-            List <ProjectBean> allProjects=new ArrayList<>();
+	    List <ProjectBean> allProjects=new ArrayList<>();
             List<ProjectTransactionBean> PTbeanList=new ArrayList<>();
+            Transaction tx = null;
 	    tx = session1.beginTransaction();
             
             if (role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin"))

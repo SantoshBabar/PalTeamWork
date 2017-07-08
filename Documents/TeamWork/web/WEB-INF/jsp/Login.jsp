@@ -157,7 +157,7 @@ body {
         
     </body>
     </form>
-    <form:form action="Forgot.do" method="GET">
+    <form:form action="ForgotPassword.do" method="GET">
         <div align="left">   <button type="submit" value="forgot" class="login login-submit">Forgot Password</button></a></div>
     </form:form>
   </form:form>
