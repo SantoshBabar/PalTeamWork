@@ -91,13 +91,12 @@ public class PasswordDAOImpl implements PasswordDAO {
         Iterator it= list1.iterator();
         while(it.hasNext())
         {
-            System.out.println("hello sumukh "+ otp);
             UserBean=(UserDataBean) it.next();
         }
                         
         if ( UserBean!=null) 
         {    
-            this.updatePasswordOtp(password, UserBean.getEmail());
+            this.updatePassword(password, UserBean.getEmail());
             return true;
         }
         else
@@ -119,8 +118,8 @@ public class PasswordDAOImpl implements PasswordDAO {
              tx.commit();
     }
     
-    
-    public void updatePasswordOtp(String password,String email){
+    @Override
+    public void updatePassword(String password,String email){
         Session session1 = this.sessionFactory.openSession();
         Transaction tx;
         tx=session1.beginTransaction();

@@ -78,6 +78,13 @@ body {
   float: center;
 }
 
+.login-card select[type=submit] {
+  width: 20%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  float: center;
+}
 
 
 .login-card input[type=text], input[type=password] {
@@ -171,40 +178,28 @@ th {
 
 </head>
     <body>
-          
-
-<%@include file="Header.jsp" %>
+    
+   <%@include file="Header.jsp" %>   
+   
         <div class="login-card">
-	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Update User</h2></div>
+	   <div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Change Password</h2></div>
+           <br>
+           <br>
+	   <form:form action="ChangePassword.do" method="POST">
+<table>
+   
+<tr><td align="center">Current Password:</td>
+    <td><input type="password" placeHolder="Enter the current password" name="currentPass"/></td></tr>    
+<tr><td align="center">New Password:</td>
+    <td><input type="password" placeHolder="Enter the new password" name="newPass"/></td></tr>  
+<tr><td align="center">Confirm Password</td>
+    <td><input type="password" placeHolder="Re-enter new password" name="confPass" /></td></tr>
 
-    <form:form action="UpdateUserDetails.do" method="POST" modelAttribute="UserM">
-        <table>
-           <tr><td align="center"><h4 >User Name:</td><td><form:input placeHolder="Enter the username"  path="username" value="${UserDetail.username}" /></td></tr>    
-            <tr><td align="center"><h4 >Email id</td><td><form:input placeHolder="Enter the email" path="email" value="${UserDetail.email}"/></td></tr>  
-            <tr><td align="center"><h4>Mobile</td><td><form:input placeHolder="Enter the mobile" path="phone" value="${UserDetail.phone}" /></td></tr>
-            <tr><td align="center"><h4 >Team</td><td><form:input placeHolder="Enter the team" path="team" value="${UserDetail.team}" /></td></tr>
-            <%-- <tr><td align="center"><h4 >Password</td><td><form:input type="password" placeHolder="Enter the password" path="password" /></td></tr> --%>
-            <tr><td align="center"><h4 >Change Role</td><td>
-                    
-                   
-                
-            <form:select path="role" value="${UserDetail.role}">
-            <form:option class="login login-submit" value="">Select</form:option>
-	    <form:option class="login login-submit" value="admin">Admin</form:option>
-	    <form:option class="login login-submit" value="manager">Manager</form:option>
-            <form:option class="login login-submit" value="lead">Lead</form:option>
-            <form:option class="login login-submit" value="engineer">Engineer</form:option>   
-            <form:option class="login login-submit" value="scheduling">Scheduling</form:option>
-            </form:select>
-                    
-                    
-                </td></tr>
-            <input type="hidden" name="userid" value="${UserDetail.userid}"/>
-            <tr><td align="center"><input type="submit" value="Update" class="login login-submit"/></td></tr>
-            
-        </table>
-    </form:form>
-           
-        <center>${Lerror}</center>      
+<tr><td align="center"><input type="submit" value="Update Password" class="login login-submit"/></td></tr>
+
+</table>
+</form:form>
+     
+<center>${Lerror}</center>      
     </body>
 </html>

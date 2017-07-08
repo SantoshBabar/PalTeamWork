@@ -157,9 +157,7 @@ body {
   <!-- UI goes here-->
 <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
   </div>
-  
  
-  
 </html>
 </body>
 

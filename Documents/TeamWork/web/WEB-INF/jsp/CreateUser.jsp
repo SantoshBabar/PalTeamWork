@@ -210,7 +210,8 @@ th {
 	    <form:option class="login login-submit" value="admin">Admin</form:option>
 	    <form:option class="login login-submit" value="manager">Manager</form:option>
             <form:option class="login login-submit" value="lead">Lead</form:option>
-            <form:option class="login login-submit" value="engineer">Engineer</form:option>       
+            <form:option class="login login-submit" value="engineer">Engineer</form:option>   
+             <form:option class="login login-submit" value="scheduling">Scheduling</form:option>
    </form:select></h4></td></tr>
 
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>

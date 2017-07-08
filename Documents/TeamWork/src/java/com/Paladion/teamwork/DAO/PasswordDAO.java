@@ -14,4 +14,5 @@ import com.Paladion.teamwork.beans.UserDataBean;
 public interface PasswordDAO {
     public boolean ForgotPassword(String email);
     public boolean ResetPassword(String otp, String email, String password);
+    public void updatePassword(String password, String email);
 }

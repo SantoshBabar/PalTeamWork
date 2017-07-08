@@ -93,10 +93,11 @@
     
      
     <%-- Fetch the UserName from the Session --%>
-    <%! UserDataBean b; String name;%>
+    <%! UserDataBean b; String name; String role;%>
     <% 
         b=(UserDataBean)session.getAttribute("Luser"); 
         name=b.getUsername().toString();
+        role=b.getRole().toString();
     %>
     
     <%-- Header Code Begins --%> 
@@ -108,12 +109,15 @@
         <div class="dropdown">
             <button class="dropbtn">Projects</button>
                 <div class="dropdown-content">
-                <a href="CreateProject.do">Schedule Project</a>
-                <a href="showAllProject.do">View All Projects</a>
+                    <% if(role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("scheduling"))
+                    {%>
+                    <a href="CreateProject.do">Schedule Project</a>
+                    <%}%>
+                    <a href="showAllProject.do">View All Projects</a>
                 </div>
         </div> 
         
-        <% if(b.getRole().equalsIgnoreCase("Manager"))
+        <% if(role.equalsIgnoreCase("Manager"))
         {%>
         <div class="dropdown">
             <button class="dropbtn">Users</button>
@@ -123,6 +127,9 @@
                 </div>
         </div> 
         <%}%>
+        
+        <% if(role.equalsIgnoreCase("lead")||role.equalsIgnoreCase("manager"))
+        {%>
           <div class="dropdown">
             <button class="dropbtn">Tasks</button>
                 <div class="dropdown-content">
@@ -130,7 +137,11 @@
                 <a href="GetAllTasks.do">View Tasks</a>
                 </div>
         </div> 
+        <%}%>
         
+        
+         <% if(role.equalsIgnoreCase("lead")||role.equalsIgnoreCase("manager"))
+        {%>
           <div class="dropdown">
             <button class="dropbtn">Project Template</button>
                 <div class="dropdown-content">
@@ -138,9 +149,17 @@
                 <a href="GetAllTaskTemplates.do">View Project Templates</a>
                 </div>
         </div> 
+          <%}%>
          
         <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
-        <li style="float:right"><a class="active"><%=name%></a></li>
+       
+        <div class="dropdown" style="float:right">
+            <button class="dropbtn"><%=name%></button>
+                <div class="dropdown-content">
+                <a href="ChangePassword.do">Change Password</a>
+                </div>
+        </div> 
+    
     </ul>
     </div>
          

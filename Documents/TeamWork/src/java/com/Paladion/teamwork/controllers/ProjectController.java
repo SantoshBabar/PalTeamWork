@@ -92,9 +92,13 @@ public ProjectBean populate()
             PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
             PS.addProject(PB);
             //send mail to lead                    
-            CU.sendSchedulingMailToLead(PB, req.getSession(false));
+            //CU.sendSchedulingMailToLead(PB, req.getSession(false));
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
 	    System.out.println("Man days :"+PB.getMandays());
+            UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
+            if(sessuser.getRole().equalsIgnoreCase("scheduling")){
+                return new ModelAndView("Welcome","Message","Project Created Successfully");
+            }
         }
         catch(Exception ex){
             List <TemplateBean> TemplateList;
@@ -154,7 +158,8 @@ public ProjectBean populate()
         
         PTBList1= CU.updateProjectTransaction(PTBList, PRDATA,req.getSession(false));
         PS.insertProjectTransaction(PTBList1);
-        CU.sendSchedulingMailToEngineers(PTBList1,req.getSession(false));
+        //Uncomment below line to send scheduling mail to lead
+       // CU.sendSchedulingMailToEngineers(PTBList1,req.getSession(false));
         ModelAndView result=new ModelAndView("DisplayProjectProgress");
         result.addObject("TaskDetails",PTBList1);
         result.addObject("ProjectData",PRDATA);

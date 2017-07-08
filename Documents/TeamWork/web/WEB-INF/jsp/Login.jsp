@@ -131,7 +131,7 @@ body {
   <meta charset="UTF-8">
 
   <title>Log-in</title>
-
+  
   <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
 
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
@@ -143,12 +143,12 @@ body {
 <img src="PaladionLogo.png"/>
     </div>
     <h1>Log-in</h1><br>
-    
+    <center><h4 style="color: #ff0000">${Message}</h4></center>
 <!-- UI goes here-->
     <form:form action="Login.do" method="post" commandName="LoginM"> 
     	Username:<form:input path="email" placeholder="Enter the username"/>
         Password:<form:password path="password" placeholder="Enter the password"/>
-       <%
+        <%
           ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdlHOsSAAAAACe2WYaGCjU2sc95EZqCI9wLcLXY", true);
           out.print(c.createRecaptchaHtml(null, null));
           %> 
@@ -161,7 +161,7 @@ body {
         <div align="left">   <button type="submit" value="forgot" class="login login-submit">Forgot Password</button></a></div>
     </form:form>
   </form:form>
-	   <center><h4 style="color: #ff0000">${Lerror}</h4></center>
+	   
   <!-- UI goes here-->
 <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
   </div>

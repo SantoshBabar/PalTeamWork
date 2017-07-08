@@ -43,14 +43,12 @@ public class LoginController {
  UserDataBean lb=null;
  
  
- @ModelAttribute("LoginM")
+@ModelAttribute("LoginM")
  public UserDataBean PopulateLoginBean() 
 {
    return new UserDataBean(); // populates form for the first time if its null
 }
- 
- 
- 
+
 @RequestMapping(value="/Login",method=RequestMethod.GET)
 public String Login()
 {
@@ -79,18 +77,18 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
 		}
          //Captha code ends  
         
-   
-    
         System.out.println("in login");
            lb=LS.Login(LB);
            if (lb!=null) {
                       HttpSession LoginSess=req.getSession(true);
                       LoginSess.setAttribute("Luser", lb);
+                      if(!lb.getRole().equalsIgnoreCase("engineer")){
                       LoginSess.setAttribute("AllUsers", userService.GetAllUser());
+                      }
 	            return new ModelAndView("redirect:/Welcome.do");
            }
            else {
-           return new ModelAndView("Login","Message", "Login Failed");
+           return new ModelAndView("Login","Message", "Incorrect Username or Password");
            }
  }
 
