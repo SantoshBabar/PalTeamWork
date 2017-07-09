@@ -44,8 +44,7 @@ public class CSRFValidationFilter implements Filter {
             System.out.println("csrfPreventionfromrequest :"+csrfPreventionfromrequest);
 
             // creating a new cache 
-//            csrfPreventionSaltCache = CacheBuilder.newBuilder().maximumSize(5000)
-//                    .expireAfterAccess(20, TimeUnit.MINUTES).build();
+           csrfPreventionSaltCache = CacheBuilder.newBuilder().maximumSize(5000).expireAfterAccess(20, TimeUnit.MINUTES).build();
 
             // Setting to gttpReq
             httpReq.getSession().setAttribute("csrfPreventionSaltCache", csrfPreventionSaltCache);
@@ -66,15 +65,19 @@ public class CSRFValidationFilter implements Filter {
 
         System.out.println("Before going to validate salt checking for salt in request");
         System.out.println(" httpReq.getAttribute(csrfPreventionSalt) ----:"+httpReq.getAttribute("csrfPreventionSalt"));
-       // System.out.println(" httpReq.getSession().getAttribute(csrfPreventionSalt) :----"+httpReq.getSession().getAttribute("csrfPreventionSalt"));
+        System.out.println(" httpReq.getSession().getAttribute(csrfPreventionSalt) :----"+httpReq.getSession().getAttribute("csrfPreventionSalt"));
 
 
         chain.doFilter(request, response);
     }
+    @Override
     public void init(FilterConfig arg0) throws ServletException {
 
     }
 
+    /**
+     *
+     */
     public void destroy() {
 
     }

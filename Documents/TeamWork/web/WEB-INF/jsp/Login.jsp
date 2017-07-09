@@ -148,6 +148,7 @@ body {
     <form:form action="Login.do" method="post" commandName="LoginM"> 
     	Username:<form:input path="email" placeholder="Enter the username"/>
         Password:<form:password path="password" placeholder="Enter the password"/>
+        <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
         <%
           ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdlHOsSAAAAACe2WYaGCjU2sc95EZqCI9wLcLXY", true);
           out.print(c.createRecaptchaHtml(null, null));

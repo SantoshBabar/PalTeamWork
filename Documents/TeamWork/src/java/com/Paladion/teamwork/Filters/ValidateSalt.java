@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ValidateSalt implements Filter  {
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
 
@@ -40,14 +41,17 @@ public class ValidateSalt implements Filter  {
         else
         {
             // Otherwise we throw an exception aborting the request flow
+            
             throw new ServletException("Potential CSRF detected!! Inform a scary sysadmin ASAP.");
         }
 
     }
 
+    @Override
     public void init(FilterConfig arg0) throws ServletException {
 
     }
+    @Override
     public void destroy() {
 
     }

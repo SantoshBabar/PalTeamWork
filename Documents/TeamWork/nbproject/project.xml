@@ -55,15 +55,151 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.guava-10.0.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.xss-filter-1.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.log4j-1.2.17.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.icu4j-3.4.4.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-1.9.2-lite.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-acegisecurity-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-acegisecurity-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-acegisecurity-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-hibernate3-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-hibernate3-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-hibernate3-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-hibernate4-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-hibernate4-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-hibernate4-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring2-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring2-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring2-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring3-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring3-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring3-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring31-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring31-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-spring31-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-springsecurity2-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-springsecurity2-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-springsecurity2-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-springsecurity3-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-springsecurity3-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-springsecurity3-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-wicket13-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-wicket13-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-wicket13-1.9.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-wicket15-1.9.2-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-wicket15-1.9.2-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jasypt-wicket15-1.9.2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
