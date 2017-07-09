@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>z
+<head>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
