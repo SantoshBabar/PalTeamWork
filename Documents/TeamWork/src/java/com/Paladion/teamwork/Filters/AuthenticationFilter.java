@@ -36,6 +36,9 @@ int i=0;
         url = req.getRequestURL().toString();
         
         if(url.contains("Login")||url.contains("ResetPassword")||url.contains("ForgotPassword")||!(url.endsWith(".do"))){
+            
+            
+            
             fc.doFilter(request, response);
           }
         
@@ -50,6 +53,8 @@ int i=0;
                 fc.doFilter(request, response);
             }
         }
+        
+        
     }
 
     @Override

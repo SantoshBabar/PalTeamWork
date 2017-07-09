@@ -193,6 +193,10 @@ th {
     <td><form:input placeHolder="Enter the Email ID" path="email" /></h4></td></tr>  
 <tr><td align="center"><h4>Mobile</td>
     <td><form:input placeHolder="Enter the Mobile Number" path="phone" /></h4></td></tr>
+
+<!--sumukh csrf  -->
+<input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
+<!--sumukh csrf  -->
 <tr><td align="center"><h4 >Team</td>
     <td><form:select path="team">
          <form:option class="login login-submit" value="">Select</form:option>

@@ -190,6 +190,7 @@ th {
    
 <tr><td align="center">Current Password:</td>
     <td><input type="password" placeHolder="Enter the current password" name="currentPass"/></td></tr>    
+
 <tr><td align="center">New Password:</td>
     <td><input type="password" placeHolder="Enter the new password" name="newPass"/></td></tr>  
 <tr><td align="center">Confirm Password</td>
