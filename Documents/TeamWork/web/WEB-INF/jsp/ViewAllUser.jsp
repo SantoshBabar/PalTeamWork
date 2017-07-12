@@ -193,19 +193,19 @@ th {
     <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Users</h2><br></div>
     
     <table border="2" >
-        <tr>
-            <th width="10%" >Delete user </th>
-            <th width="10%" >Update user info </th>
-            <th width="10%" >User Name </th>
-        </tr>
+        
     </table>
            
     <table border="2" id="headerTable">
-            
+            <tr>
+            <th width="9%" >Delete user </th>
+            <th width="9%" >Update user info </th>
+            <th width="11%" >User Name </th>
+        </tr>
         <c:forEach  items="${AllUsers}" var="user">     
             <tr> 
-                <td width="10%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
-                <td width="10%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
+                <td width="9%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
+                <td width="9%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
                 <td width="10%"> ${user.username}</td>
             </tr>
         </c:forEach>

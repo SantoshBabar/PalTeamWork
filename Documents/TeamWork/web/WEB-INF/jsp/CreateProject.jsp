@@ -206,7 +206,7 @@ th {
 <tr><td align="right"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="date" path="startdate" /></h4></td></tr>
 <tr><td align="right"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate"/></h4></td></tr>
 
-<tr><td align="right"><h4 >Template :</td>
+<tr><td align="right"><h4>Template :</td>
     <td ><form:select  path="templateid">  
 	  <c:forEach items="${AllTemplates}" var="template">     
 	  <option class="login login-submit" value="${template.templateid}">${template.templatename}</option>

@@ -149,7 +149,7 @@ body {
     
     <!-- UI goes here-->
     <form:form action="ForgotPassword.do" method="post"> 
-        Email ID: <input type="email" name="emailId">
+        Email ID: <input type="email" name="emailId"/>
         <%
           ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdILiQUAAAAAPJwovQaU6ezxtcIoa2FEFS70KgO", false);
           out.print(c.createRecaptchaHtml(null, null));

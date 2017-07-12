@@ -9,6 +9,7 @@ import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
+import com.Paladion.teamwork.utils.SystemInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 /**
  *
  * @author Administrator
@@ -80,6 +82,14 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
         System.out.println("in login");
            lb=LS.Login(LB);
            if (lb!=null) {
+               System.out.println("==================LOGS start========================");
+               System.out.println("use log4j to log these details for security reason");
+               System.out.println("system name:"+SystemInfo.getSystemName());
+               System.out.println("IP address: "+SystemInfo.getIPAddress());
+               System.out.println("MAC address: "+SystemInfo.getMAC());
+               System.out.println("==================LOGS end========================");
+               
+               
                       HttpSession LoginSess=req.getSession(true);
                       LoginSess.setAttribute("Luser", lb);
                       if(!lb.getRole().equalsIgnoreCase("engineer")){

@@ -17,43 +17,36 @@ import javax.servlet.http.HttpServletRequest;
 public class ValidateSalt implements Filter  {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws IOException, ServletException {
 
         // Assume its HTTP
         HttpServletRequest httpReq = (HttpServletRequest) request;
 
-        //String salt = (String) httpReq.getSession().getAttribute("csrfPreventionSalt");
-        String salt =(String) httpReq.getAttribute("csrfPreventionSalt");
-        System.out.println("I am in ValidateSalt : salt: "+salt);
+        // Get the salt sent with the request
+        String salt = (String) httpReq.getParameter("csrfPreventionSalt");
 
-     // Validate that the salt is in the cache
-        @SuppressWarnings("unchecked")
+        // Validate that the salt is in the cache
         Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>)
             httpReq.getSession().getAttribute("csrfPreventionSaltCache");
 
+        if (csrfPreventionSaltCache != null &&
+                salt != null &&
+                csrfPreventionSaltCache.getIfPresent(salt) != null){
 
-        if(csrfPreventionSaltCache !=null && salt !=null && csrfPreventionSaltCache.getIfPresent(salt)!=null)
-        {
             // If the salt is in the cache, we move on
             chain.doFilter(request, response);
-        }
-        else
-        {
+        } else {
             // Otherwise we throw an exception aborting the request flow
-            
             throw new ServletException("Potential CSRF detected!! Inform a scary sysadmin ASAP.");
         }
-
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException {
-
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
+
     @Override
     public void destroy() {
-
     }
-
 }
