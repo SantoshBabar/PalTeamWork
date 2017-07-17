@@ -73,7 +73,7 @@ body {
 }
 
 .login-card input[type=submit] {
-  width: 20%;
+  width: 100%;
   display: block;
   margin-bottom: 10px;
   position: relative;
@@ -185,6 +185,8 @@ th {
     <div class="login-card" >
         <div align="center">  <h3 style="color: #ff3333; font-family: sans-serif; font-style: normal">Project Details</h3></div>
 	<div class="right">
+            
+            
             <table class="table1" border="1">
         <tr>
             <td ><h4 style="color: red; font-size: 15px">Project Name: ${ProjectData.projectname}</h2></td>
@@ -207,8 +209,14 @@ th {
         <br>
 	</div>
 
-<table border="1" align="left">
-    <tr>
+
+        
+              
+    <div style="overflow: auto;height: 350px; width: auto;"> 
+        
+          
+    <table border="1" align="left">
+   <tr>
         <th>Task Name </th>
         <th>Engineer Name </th>
         <th>Task Start Date</th>
@@ -217,17 +225,6 @@ th {
         <th>Days</th>
         <th>Status</th>
         <th>Delay</th>
-        
-    </tr>
-</table>
-           <br>   
-           <br>
-              
-    <div style="overflow: auto;height: auto; width: auto;"> 
-        
-          
-    <table border="1" align="left">
-   
     <c:forEach  items="${TaskDetails}" var="ProjectTaskList">  
         
         <fmt:formatDate value="${ProjectTaskList.taskstartdate}" var="SDate" type="both" dateStyle = "short" timeStyle = "short"/>
@@ -256,12 +253,16 @@ th {
          <td style="color: black">
              <table>
                  <tr>
+                     <td>
             <form action="updateTaskDelay.do" method="post">
                 <td>  <input type="text" name="taskDelayTime"/></td>
                <input type="hidden" name="transId" value="${ProjectTaskList.transid}"/>
                <input type="hidden" name="projectid" value="${ProjectData.projectid}"/>
                <td> <input type="submit" value="Update Delay"/></td>
-            </form> </tr>
+            
+            </form>
+                     </td>
+                 </tr>
              </table>
             </td>
         </tr>

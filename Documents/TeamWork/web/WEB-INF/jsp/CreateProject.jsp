@@ -210,10 +210,11 @@ th {
     <td ><form:select  path="templateid">  
 	  <c:forEach items="${AllTemplates}" var="template">     
 	  <option class="login login-submit" value="${template.templateid}">${template.templatename}</option>
-	  </c:forEach></td>	  
+	  </c:forEach></td>	
+
 </form:select>
-	  
-<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>           
+	 <tr><td align="right"><input type="submit" value="Create" class="login login-submit"/></td></tr>   
+         
 </table >
 </div>
 </form:form>

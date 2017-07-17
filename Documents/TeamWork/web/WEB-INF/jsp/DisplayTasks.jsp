@@ -169,7 +169,7 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 50%;
+    width: 53%;
     height:auto;
 }
 
@@ -194,22 +194,23 @@ th {
     
     <table border="2" >
         <tr>
-            <th width="10%" >Task Name </th>
+            <th width="12%" >Task Name </th>
             <th width="10%" >Description </th>
-            <th width="10%" >Delete</th>
+            <th width="12%" >Delete</th>
         </tr>
     </table>
-           
+          <div style="overflow: auto;height: 350px; width: auto;"> 
     <table border="2" id="headerTable">
             
         <c:forEach  items="${AllTasks}" var="task">     
             <tr>
-                <td width="10%"> ${task.taskname}</td>
+                <td width="9%"> ${task.taskname}</td>
                 <td width="10%"> ${task.description}</td>
                 <td width="10%"><a href="DeleteTask.do?id=${task.taskid}">DELETE</td>
             </tr>
         </c:forEach>
     </table>
+          </div>
     </div>
     </body>
 </html>

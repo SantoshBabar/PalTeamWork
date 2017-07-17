@@ -98,7 +98,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
 	            return new ModelAndView("redirect:/Welcome.do");
            }
            else {
-           return new ModelAndView("Login","Message", "Incorrect Username or Password");
+           return new ModelAndView("Login","Lerror", "Incorrect Username or Password");
            }
  }
 

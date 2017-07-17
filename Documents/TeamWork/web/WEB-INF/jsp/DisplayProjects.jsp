@@ -222,13 +222,13 @@ th {
             
             <tr>
                 
-                <th width="13%" >OPID </th>
-                <th width="15%" >Project Title</th>
-                <th width="15%" >Lead</th>
+                <th width="8%" >OPID </th>
+                <th width="10%" >Project Title</th>
+                <th width="10%" >Lead</th>
                 <th width="11%" >Start Date</th>
-                <th width="9%" >End Date</th>
-                <th width="12%" >Man Days</th>
-                <th width="12%" >Status</th>
+                <th width="11%" >End Date</th>
+                <th width="10%" >Man Days</th>
+                <th width="10%" >Status</th>
            
             </tr>
  </table>
@@ -244,11 +244,11 @@ th {
 	   
             <tr> 
                 
-                <td width="12%"> <a href="showProgress.do?id=${project.projectid}"> ${project.opid}</a></td>
-	        <td width="14%">${project.projectname}</td>
-                <td width="13%">${project.lead}</td>
-                <td width="9%">${SDate}</td>
-                <td width="10%">${EDate}</td>
+                <td width="8%"> <a href="showProgress.do?id=${project.projectid}"> ${project.opid}</a></td>
+	        <td width="10%">${project.projectname}</td>
+                <td width="10%">${project.lead}</td>
+                <td width="11%">${SDate}</td>
+                <td width="11%">${EDate}</td>
                 <td width="10%">${project.mandays}</td>
                 <td width="10%">
                     <div class="dropdown">
