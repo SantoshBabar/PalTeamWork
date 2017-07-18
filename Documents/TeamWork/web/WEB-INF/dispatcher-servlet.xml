@@ -21,8 +21,11 @@
       class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
+       
     </bean>
+<mvc:resources mapping="/WEB-INF/css/**" location="/WEB-INF/css/"/>
 
+    <mvc:annotation-driven />
     
     <bean id="LoginService" class="com.Paladion.teamwork.services.LoginServiceImpl" />
     <bean id="PasswordService" class="com.Paladion.teamwork.services.PasswordServiceImpl" />

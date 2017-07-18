@@ -7,6 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
 <head>
     
 <style>
@@ -39,6 +42,8 @@ li a:hover:not(.active) {
 .active {
     background-color: #ff1a1a;
 }
+
+
 </style>
 <style>
 
@@ -167,24 +172,18 @@ body {
 
 
 
-table {
-    border-collapse: collapse;
-    width: 53%;
-    height:auto;
-}
 
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #F7F7F7}
-
-th {
-    background-color: #ff3333;
-    color: white;
-}
 </style>
+
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
 </head>
     
 <body>
@@ -192,23 +191,33 @@ th {
     <div class="login-card">
     <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Tasks</h2><br></div>
     
-    <table border="2" >
-        <tr>
-            <th width="12%" >Task Name </th>
-            <th width="10%" >Description </th>
-            <th width="12%" >Delete</th>
+    <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+        <thead>
+            <tr bgcolor="#ff6666">
+                <th style="color: #ffffff">Task Name </th>
+            <th  style="color: #ffffff">Description </th>
+            <th  style="color: #ffffff">Delete</th>
         </tr>
-    </table>
-          <div style="overflow: auto;height: 350px; width: auto;"> 
-    <table border="2" id="headerTable">
+        </thead>
+    <tfoot>
+            <tr bgcolor="#ff6666">
+            <th  style="color: #ffffff">Task Name </th>
+            <th  style="color: #ffffff">Description </th>
+            <th  style="color: #ffffff">Delete</th>
+        </tr>
+    </tfoot>
+    
+    <tbody>
             
         <c:forEach  items="${AllTasks}" var="task">     
-            <tr>
-                <td width="9%"> ${task.taskname}</td>
-                <td width="10%"> ${task.description}</td>
-                <td width="10%"><a href="DeleteTask.do?id=${task.taskid}">DELETE</td>
-            </tr>
+           <tr>
+                <td> ${task.taskname}</td>
+                <td> ${task.description}</td>
+                <td><a href="DeleteTask.do?id=${task.taskid}">DELETE</td>
+           </tr> 
         </c:forEach>
+                
+    </tbody>
     </table>
           </div>
     </div>
