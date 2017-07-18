@@ -8,6 +8,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);

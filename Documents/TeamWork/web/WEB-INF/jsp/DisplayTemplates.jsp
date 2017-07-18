@@ -7,6 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
     
 <style>
@@ -165,12 +169,9 @@ body {
   font-size: 12px;
 }
 
-
-
 table {
     border-collapse: collapse;
-    width: 50%;
-    height:auto;
+    width: 100%;
 }
 
 th, td {
@@ -185,6 +186,15 @@ th {
     color: white;
 }
 </style>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
 </head>
     
 <body>
@@ -192,25 +202,26 @@ th {
     <div class="login-card">
     <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Templates</h2><br></div>
     
-    <table border="2" >
-        <tr>
-            <th width="10%" >Template Name </th>
-            <th width="10%" >Description </th>
-            <th width="10%" >Update</th>
-            <th width="10%" >Delete</th>
-        </tr>
-    </table>
-           
-    <table border="2" id="headerTable">
-            
+    <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+        <thead>
+            <tr bgcolor="#ff6666">
+            <th>Template Name</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+            </tr>
+        </thead>
+    
+          <tbody>  
         <c:forEach  items="${AllTemplates}" var="template">     
             <tr>
-                <td width="10%"> ${template.templatename}</td>
-                <td width="10%"> ${template.templateDesc}</td>
-                <td width="10%"><a href="GetTemplateDetails.do?id=${template.templateid}">UPDATE</a></td>
-                <td width="10%"><a href="DeleteTemplate.do?id=${template.templateid}">DELETE</td>
+                <td> ${template.templatename}</td>
+                <td> ${template.templateDesc}</td>
+                <td><a href="GetTemplateDetails.do?id=${template.templateid}">UPDATE</a></td>
+                <td><a href="DeleteTemplate.do?id=${template.templateid}">DELETE</td>
             </tr>
         </c:forEach>
+          </tbody>
     </table>
     </div>
     </body>

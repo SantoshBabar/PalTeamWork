@@ -11,7 +11,11 @@
 <%@page import="com.Paladion.teamwork.beans.TaskBean"%>
 <%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
 <head>
 <style>
 ul {
@@ -159,20 +163,32 @@ body {
   font-size: 12px;
 }
 
-
-
 table {
     border-collapse: collapse;
     width: 100%;
-    color: #ff0000;
-    border-color: white;
-    align-items: center;
 }
 
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F7F7F7}
+
 th {
-    text-align: center;
+    background-color: #ff3333;
+    color: white;
 }
 </style>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
 </head>
     <body>
     
@@ -183,11 +199,15 @@ th {
       
            <form:form  action="AssignTaskToEngineers.do" method="post" modelAttribute="ProjectW">
 	   
-            <div style="overflow: auto;height: 350px; width: 700px;">
-            <table>
-            <div align="center">
-            <tr><th>Task Name </th>  <th> Engineer</th></tr>
-	   
+            
+                
+            <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+            <thead>
+            <tr bgcolor="#ff6666">
+            <th>Task Name </th>  <th> Engineer</th></tr>
+            </thead>
+            
+           <tbody>
              <c:forEach   varStatus="status"  items="${ProjectW.projectlist}"  var="task" >     
              <tr align="center"> <td><c:out value="${task.taskname}"/></td> 
 	
@@ -207,14 +227,15 @@ th {
               <input type="hidden" name="projectid" value="${task.projectid}"/>
 	   </tr>
            </c:forEach>
+           </tbody>
                
-	  <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
+	  
 	   </div>
 	   
 	   </table>
 	   </div>
 	  
-	  
+	  <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
 	   </form:form>
 	  
 	   <center>${Temperror}</center><br>

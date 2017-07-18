@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
 <style>
 ul {
@@ -157,7 +158,22 @@ body {
   font-size: 12px;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F7F7F7}
+
+th {
+    background-color: #ff3333;
+    color: white;
+}
 
 </style>
 </head>

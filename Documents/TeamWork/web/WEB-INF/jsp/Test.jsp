@@ -11,6 +11,7 @@
 <%@page import="com.Paladion.teamwork.beans.TaskBean"%>
 <%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
     

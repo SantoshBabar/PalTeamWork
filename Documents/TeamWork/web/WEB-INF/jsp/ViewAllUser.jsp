@@ -7,6 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
 <head>
     
 <style>
@@ -169,8 +173,7 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 50%;
-    height:auto;
+    width: 100%;
 }
 
 th, td {
@@ -185,23 +188,32 @@ th {
     color: white;
 }
 </style>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
 </head>
     
 <body>
     <%@include file="Header.jsp" %>        
     <div class="login-card">
     <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">All Users</h2><br></div>
-    
-    <table border="2" >
-        
-    </table>
            
-    <table border="2" id="headerTable">
-            <tr>
+    <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+        <thead>
+            <tr bgcolor="#ff6666">
             <th width="9%" >Delete user </th>
             <th width="9%" >Update user info </th>
             <th width="11%" >User Name </th>
-        </tr>
+            </tr>
+        </thead>
+        
+    <tbody>
         <c:forEach  items="${AllUsers}" var="user">     
             <tr> 
                 <td width="9%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
@@ -209,6 +221,7 @@ th {
                 <td width="10%"> ${user.username}</td>
             </tr>
         </c:forEach>
+       </tbody>
     </table>
     </div>
     </body>

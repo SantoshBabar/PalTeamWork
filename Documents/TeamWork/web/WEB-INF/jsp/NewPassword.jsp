@@ -5,6 +5,7 @@
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <!DOCTYPE html>
 <html>
 
