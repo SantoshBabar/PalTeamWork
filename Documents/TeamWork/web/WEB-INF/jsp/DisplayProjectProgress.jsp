@@ -212,11 +212,12 @@ body {
         <th style="color: white">Status</th>
         <th style="color: white">Delay</th>
         </thead>
+         <tbody>
     <c:forEach  items="${TaskDetails}" var="ProjectTaskList">  
         
         <fmt:formatDate value="${ProjectTaskList.taskstartdate}" var="SDate" type="both" dateStyle = "short" timeStyle = "short"/>
         <fmt:formatDate value="${ProjectTaskList.taskenddate}" var="EDate" type="both" dateStyle = "short" timeStyle = "short" />
-         <tbody>
+        
         <tr> 
             <td style="color: black">${ProjectTaskList.taskname}</td>
             <td style="color: black">${ProjectTaskList.engname}</td>
@@ -234,8 +235,7 @@ body {
                 <a href="updateTaskStatus.do?pid=${ProjectTaskList.projectid}&tid=${ProjectTaskList.transid}&status=Completed">Completed</a> 
                 </div>
         </div> 
-        </td>
-        
+        </td> 
         <%--Individual task delay form --%>
          <td style="color: black">
              <table>
@@ -254,9 +254,10 @@ body {
             </td>
             
         </tr>
-         </tbody>
+         
       
        </c:forEach>
+         </tbody>
 </table>
 </div>
     </body>
