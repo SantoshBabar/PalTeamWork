@@ -199,13 +199,7 @@ $(document).ready(function() {
             <th  style="color: #ffffff">Delete</th>
         </tr>
         </thead>
-    <tfoot>
-            <tr bgcolor="#ff6666">
-            <th  style="color: #ffffff">Task Name </th>
-            <th  style="color: #ffffff">Description </th>
-            <th  style="color: #ffffff">Delete</th>
-        </tr>
-    </tfoot>
+    
     
     <tbody>
             

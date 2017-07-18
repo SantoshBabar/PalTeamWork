@@ -7,6 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
 <head>
 <style>
 ul {
@@ -81,9 +84,9 @@ body {
 }
 
 .login-card input[type=text], input[type=password] {
-  height: 44px;
+  height: 30px;
   font-size: 16px;
-  width: 30%;
+  width: 50%;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -155,27 +158,7 @@ body {
 }
 
 
-table {
-    border-collapse: collapse;
-    width:80%;
-}
 
-table1 {
-    border-collapse: collapse;
-    width:40%;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #F7F7F7}
-
-th {
-    background-color: #ff3333;
-    color: white;
-}
 </style>
 </head>
     <body>
@@ -187,11 +170,13 @@ th {
 	<div class="right">
             
             
-            <table class="table1" border="1">
-        <tr>
-            <td ><h4 style="color: red; font-size: 15px">Project Name: ${ProjectData.projectname}</h2></td>
-            <td ><h4 style="color: red; font-size: 15px">OPID: ${ProjectData.opid}</h4></h3></td>
-        </tr>
+    <table border="1"  class="display" width="100%"  cellspacing="0">
+        <thead>
+            <tr bgcolor="#ff6666">
+            <td ><h4 style="color: white; font-size: 15px">Project Name: ${ProjectData.projectname}</h2></td>
+            <td ><h4 style="color: white; font-size: 15px">OPID: ${ProjectData.opid}</h4></h3></td>
+            </tr>
+        </thead>
 	   
 	<tr>
             <td><h4 style="color: red; font-size: 15px">Lead Assigned: ${ProjectData.lead}</h4></td>
@@ -215,21 +200,23 @@ th {
     <div style="overflow: auto;height: 350px; width: auto;"> 
         
           
-    <table border="1" align="left">
-   <tr>
-        <th>Task Name </th>
-        <th>Engineer Name </th>
-        <th>Task Start Date</th>
-        <th>Start End Date</th>
-        <th>Hours</th>
-        <th>Days</th>
-        <th>Status</th>
-        <th>Delay</th>
+    <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+        <thead>
+            <tr bgcolor="#ff6666">
+        <th style="color: white">Task Name </th>
+        <th style="color: white">Engineer Name </th>
+        <th style="color: white">Task Start Date</th>
+        <th style="color: white">Start End Date</th>
+        <th style="color: white">Hours</th>
+        <th style="color: white">Days</th>
+        <th style="color: white">Status</th>
+        <th style="color: white">Delay</th>
+        </thead>
     <c:forEach  items="${TaskDetails}" var="ProjectTaskList">  
         
         <fmt:formatDate value="${ProjectTaskList.taskstartdate}" var="SDate" type="both" dateStyle = "short" timeStyle = "short"/>
         <fmt:formatDate value="${ProjectTaskList.taskenddate}" var="EDate" type="both" dateStyle = "short" timeStyle = "short" />
-        
+         <tbody>
         <tr> 
             <td style="color: black">${ProjectTaskList.taskname}</td>
             <td style="color: black">${ProjectTaskList.engname}</td>
@@ -265,10 +252,21 @@ th {
                  </tr>
              </table>
             </td>
+            
         </tr>
+         </tbody>
       
        </c:forEach>
 </table>
 </div>
     </body>
+    <script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
 </html>
