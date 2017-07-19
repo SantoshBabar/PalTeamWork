@@ -236,13 +236,13 @@ $(document).ready(function() {
         <thead>
             <tr bgcolor="#ff6666">
                 
-                <th  >OPID </th>
-                <th  >Project Title</th>
-                <th  >Lead</th>
-                <th  >Start Date</th>
-                <th  >End Date</th>
-                <th  >Man Days</th>
-                <th  >Status</th>
+                <th>OPID </th>
+                <th>Project Title</th>
+                <th>Lead</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Man Days</th>
+                <th>Status</th>
            
             </tr>
         </thead>
@@ -256,13 +256,13 @@ $(document).ready(function() {
 	   
             <tr> 
                 
-                <td width="8%"> <a href="showProgress.do?id=${project.projectid}"> ${project.opid}</a></td>
-	        <td width="10%">${project.projectname}</td>
-                <td width="10%">${project.lead}</td>
-                <td width="11%">${SDate}</td>
-                <td width="11%">${EDate}</td>
-                <td width="10%">${project.mandays}</td>
-                <td width="10%">
+                <td > <a href="showProgress.do?id=${project.projectid}"> ${project.opid}</a></td>
+	        <td >${project.projectname}</td>
+                <td >${project.lead}</td>
+                <td >${SDate}</td>
+                <td >${EDate}</td>
+                <td >${project.mandays}</td>
+                <td >
                     <div class="dropdown">
                     <button class="dropbtn1">${project.status}</button>
                       <div class="dropdown-content">

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Login
-    Created on : 12 Apr, 2017, 8:31:39 PM
-    Author     : Administrator
---%>
+
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="icon" href="Network-Security.png" type="image/x-icon">
@@ -160,13 +156,18 @@ body {
 table {
     border-collapse: collapse;
     width: 100%;
-    color: #ff0000;
-    border-color: white;
-    align-items: center;
 }
 
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F7F7F7}
+
 th {
-    text-align: center;
+    background-color: #ff3333;
+    color: white;
 }
 </style>
 

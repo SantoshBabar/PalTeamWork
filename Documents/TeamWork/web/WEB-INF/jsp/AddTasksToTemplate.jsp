@@ -176,9 +176,7 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 50%;
-    height:auto;
-    border-spacing: 40px 0;
+    width: 100%;
 }
 
 th, td {

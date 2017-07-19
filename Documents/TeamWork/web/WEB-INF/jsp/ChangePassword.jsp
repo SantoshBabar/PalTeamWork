@@ -167,13 +167,18 @@ body {
 table {
     border-collapse: collapse;
     width: 100%;
-    color: #ff0000;
-    border-color: white;
-    align-items: center;
 }
 
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F7F7F7}
+
 th {
-    text-align: center;
+    background-color: #ff3333;
+    color: white;
 }
 </style>
 
