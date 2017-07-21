@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -87,30 +88,29 @@ this.lead = lead;
 }
 
 @Column(name = "startdate")
-@DateTimeFormat (pattern="dd/MM/yyyy")
+@DateTimeFormat (pattern="MM/dd/yyyy")
+@Temporal(javax.persistence.TemporalType.DATE)
 Date startdate;
         
         
 public Date getStartdate() throws ParseException {
-           
-return startdate;
+    return startdate;
 }
 
 public void setStartdate(Date startdate) throws ParseException {
-            this.startdate = startdate;
+    this.startdate = startdate;
 }
 @Column(name = "enddate")
-@DateTimeFormat(pattern="dd/MM/yyyy")
+@DateTimeFormat(pattern="MM/dd/yyyy")
+@Temporal(javax.persistence.TemporalType.DATE)
 Date enddate;
 
 public Date getEnddate() throws ParseException {
-     
-return enddate;
+    return enddate;
 }
 
 public void setEnddate(Date enddate) throws ParseException {
-         
-            this.enddate = enddate;
+    this.enddate = enddate;
 }
 @Column(name = "templateid")
 int templateid;

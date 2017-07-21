@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -174,18 +173,13 @@ body {
 table {
     border-collapse: collapse;
     width: 100%;
+    color: #ff0000;
+    border-color: white;
+    align-items: center;
 }
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #F7F7F7}
 
 th {
-    background-color: #ff3333;
-    color: white;
+    text-align: center;
 }
 </style>
 
@@ -196,7 +190,7 @@ th {
 <%@include file="Header.jsp"%>
 	   <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create New Project</h2><br></div>
-<form:form action="AddProject.do" method="post" commandName="ProjectM">
+<form:form action="ScheduleProject.do" method="post" commandName="ProjectM">
 <div align="center">
     <table  align="center" border="0">
 
@@ -216,11 +210,10 @@ th {
     <td ><form:select  path="templateid">  
 	  <c:forEach items="${AllTemplates}" var="template">     
 	  <option class="login login-submit" value="${template.templateid}">${template.templatename}</option>
-	  </c:forEach></td>	
-
+	  </c:forEach></td>	  
 </form:select>
-	 <tr><td align="right"><input type="submit" value="Create" class="login login-submit"/></td></tr>   
-         
+
+<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>           
 </table >
 </div>
 </form:form>

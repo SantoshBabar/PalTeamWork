@@ -35,16 +35,19 @@ public class CrossScriptingFilter implements Filter {
         @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
-        //cache control headers start
-        HttpServletResponse httpResp = (HttpServletResponse) response;
-        httpResp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        httpResp.setHeader("Pragma", "no-cache");
-        httpResp.setHeader("X-Frame-Options", "DENY");
-        httpResp.setHeader("Expires", "0");
-        //cache control headers end
-    	logger.info("Inlter CrossScriptingFilter  ...............");
-        chain.doFilter(new RequestWrapper((HttpServletRequest) request), response);
-        logger.info("Outlter CrossScriptingFilter ...............");
+//        //cache control headers start
+//        HttpServletResponse httpResp = (HttpServletResponse) response;
+//        httpResp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+//        httpResp.setHeader("Pragma", "no-cache");
+//        httpResp.setHeader("X-Frame-Options", "DENY");
+//        httpResp.setHeader("Expires", "0");
+//        //cache control headers end
+//    	logger.info("Inlter CrossScriptingFilter  ...............");
+//        chain.doFilter(new RequestWrapper((HttpServletRequest) request), response);
+//        logger.info("Outlter CrossScriptingFilter ...............");
+        
+        
+        chain.doFilter(request, response);
     }
 
 }

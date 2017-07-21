@@ -80,7 +80,7 @@ public ProjectBean populate()
     }
 
     //Schedule a project
-    @RequestMapping(value="/AddProject",method=RequestMethod.POST)
+    @RequestMapping(value="/ScheduleProject",method=RequestMethod.POST)
     public Object CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req,Model E) throws Exception
     {
         HttpSession sess= req.getSession(false);
@@ -136,7 +136,7 @@ public ProjectBean populate()
 	return  result;
     }
       
-    @RequestMapping(value="/AddProject", method=RequestMethod.GET)
+    @RequestMapping(value="/AssignTaskToEngineers", method=RequestMethod.GET)
     public ModelAndView AssignTask()
     {
         ModelAndView result= new ModelAndView("AssignTaskToUsers");
