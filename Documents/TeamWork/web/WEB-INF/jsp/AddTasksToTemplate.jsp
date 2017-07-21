@@ -283,7 +283,7 @@ $(c).prop('checked', true);
 	   </div>     
 	   </table>
 	   </div>
-               
+             <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/>   
            <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
 	   </form:form>
 </div>

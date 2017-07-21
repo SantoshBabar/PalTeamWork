@@ -189,7 +189,7 @@ th {
             <tr><td align="center"><h4 >Change Role</td><td>
                     
                    
-                
+            <form:label path=""> ${UserDetail.role} </form:label>
             <form:select path="role" value="${UserDetail.role}">
             <form:option class="login login-submit" value="">Select</form:option>
 	    <form:option class="login login-submit" value="admin">Admin</form:option>
@@ -202,6 +202,9 @@ th {
                     
                 </td></tr>
             <input type="hidden" name="userid" value="${UserDetail.userid}"/>
+            
+            <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
+            
             <tr><td align="center"><input type="submit" value="Update" class="login login-submit"/></td></tr>
             
         </table>

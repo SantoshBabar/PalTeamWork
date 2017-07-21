@@ -230,6 +230,8 @@ $(document).ready(function() {
            </c:forEach>
            </tbody>
 	   </table>
+               
+               <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
                <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
 	   </div>
 	  

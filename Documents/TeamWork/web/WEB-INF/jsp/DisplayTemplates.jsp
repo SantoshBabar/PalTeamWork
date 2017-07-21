@@ -207,7 +207,7 @@ $(document).ready(function() {
             <tr bgcolor="#ff6666">
             <th>Template Name</th>
             <th>Description</th>
-            <th>Update</th>
+           
             <th>Delete</th>
             </tr>
         </thead>
@@ -217,7 +217,7 @@ $(document).ready(function() {
             <tr>
                 <td> ${template.templatename}</td>
                 <td> ${template.templateDesc}</td>
-                <td><a href="GetTemplateDetails.do?id=${template.templateid}">UPDATE</a></td>
+               
                 <td><a href="DeleteTemplate.do?id=${template.templateid}">DELETE</td>
             </tr>
         </c:forEach>

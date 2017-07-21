@@ -209,7 +209,7 @@ th {
 	 <form:option class="login login-submit" value="codereview">Code Review</form:option>
 	 <form:option class="login login-submit" value="appsec">App Sec</form:option>
          <form:option class="login login-submit" value="netpt">Network PT</form:option>
-    </form:select></h4></td></tr>
+    </form:select></td></tr>
       
 <tr><td align="center"><h4 >Password</td>
     <td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
@@ -224,6 +224,7 @@ th {
              <form:option class="login login-submit" value="scheduling">Scheduling</form:option>
    </form:select></h4></td></tr>
 
+<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>
 
 

@@ -194,6 +194,8 @@ form.reset();
 <tr></tr>
 <tr></tr>
 <tr></tr>
+
+<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>            
 </table>
 <center>${TaskSuccess}</center>

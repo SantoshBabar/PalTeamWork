@@ -186,6 +186,8 @@ th {
 
 <tr><td align="center"><h4 >Template Name:</td><td><form:input placeholder="Enter template name"   path="templatename" /></h4></td></tr>    
 <tr><td align="center"><h4 >Description:</td><td><form:input placeholder="Enter description"   path="templateDesc" /></h4></td></tr> 
+
+<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr> 
 </table>
 </form:form>

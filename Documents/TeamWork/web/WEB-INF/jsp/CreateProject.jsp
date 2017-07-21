@@ -212,7 +212,7 @@ th {
 	  <option class="login login-submit" value="${template.templateid}">${template.templatename}</option>
 	  </c:forEach></td>	  
 </form:select>
-
+<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>           
 </table >
 </div>

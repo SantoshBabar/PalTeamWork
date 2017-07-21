@@ -258,9 +258,10 @@ th {
                  <tr>
                      <td>
             <form action="updateTaskDelay.do" method="post">
-                <td>  <input type="text" name="taskDelayTime"/></td>
+                <td>  <input type="text" placeholder="Delay Hours" name="taskDelayTime"/></td>
                <input type="hidden" name="transId" value="${ProjectTaskList.transid}"/>
                <input type="hidden" name="projectid" value="${ProjectData.projectid}"/>
+               <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
                <td> <input type="submit" value="Update Delay"/></td>
             
             </form>
