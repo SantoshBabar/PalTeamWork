@@ -233,12 +233,12 @@ Date end = null;
      public List<ProjectTransactionBean> updateProjectTransaction(List<ProjectTransactionBean> PTBList, ProjectBean PB, HttpSession sess) throws ParseException{
          
          HashMap<Integer, List<ProjectTransactionBean>> hashMap = new HashMap<Integer, List<ProjectTransactionBean>>();
-         List <ProjectTransactionBean> ResultList=new ArrayList<ProjectTransactionBean>();
+         List <ProjectTransactionBean> ResultList=new ArrayList();
          
          for(ProjectTransactionBean PTBean : PTBList)
          {
             if (!hashMap.containsKey(PTBean.getUserid())) {
-            List<ProjectTransactionBean> list = new ArrayList<ProjectTransactionBean>();
+            List<ProjectTransactionBean> list = new ArrayList();
             list.add(PTBean);
             hashMap.put(PTBean.getUserid(), list);
            } 
@@ -333,7 +333,7 @@ Date end = null;
     }
     
     public List<UserDataBean> getUsersByRole(String role, HttpSession sess){
-        List<UserDataBean> UserList=new ArrayList<UserDataBean>();
+        List<UserDataBean> UserList=new ArrayList();
         List<UserDataBean> UDBean=(List<UserDataBean>) sess.getAttribute("AllUsers");
         for(UserDataBean ub:UDBean){
             if(role.equalsIgnoreCase(ub.getRole())){
@@ -353,34 +353,42 @@ Date end = null;
         return null;
     }
     
-    public boolean sendSchedulingMailToEngineers(List<ProjectTransactionBean> PTBList, HttpSession sess){
+    public boolean sendSchedulingMailToEngineers(List<ProjectTransactionBean> PTBList, HttpSession sess, String projectname){
         
-        HashMap<Integer, List<ProjectTransactionBean>> hashMap = new HashMap<Integer, List<ProjectTransactionBean>>();
-         List <ProjectTransactionBean> ResultList=new ArrayList<ProjectTransactionBean>();
-         
-         for(ProjectTransactionBean PTBean : PTBList)
-         {
+        HashMap<Integer, List<ProjectTransactionBean>> hashMap = new HashMap();
+        // List <ProjectTransactionBean> ResultList=new ArrayList();
+        PTBList.forEach((PTBean) -> {
             if (!hashMap.containsKey(PTBean.getUserid())) {
-            List<ProjectTransactionBean> list = new ArrayList<ProjectTransactionBean>();
-            list.add(PTBean);
-            hashMap.put(PTBean.getUserid(), list);
-           } 
+                List<ProjectTransactionBean> list = new ArrayList();
+                list.add(PTBean);
+                hashMap.put(PTBean.getUserid(), list);
+            } 
             else {
-            hashMap.get(PTBean.getUserid()).add(PTBean);}
-        }
+                hashMap.get(PTBean.getUserid()).add(PTBean);}
+        });
          
-          for (Map.Entry<Integer, List<ProjectTransactionBean>> entry : hashMap.entrySet())
-        {
-            int userid = entry.getKey();
-            EmailBean ebean=new EmailBean();
-            EmailUtil EU=new EmailUtil();
-            UserDataBean ubean=this.getUserById(userid, sess);
-            ebean.setTo(ubean.getEmail());
-            ebean.setSubject("Project Scheduling Mail");
-            String message="Dear "+ubean.getUsername()+"\n\nYou have been assigned.\n\n\nBest Regards\nTeam Paladion";
-            ebean.setMessage(message);
-            EU.sendEmail(ebean);
-        }
+         hashMap.entrySet().forEach((entry) -> {
+             int userid = entry.getKey();
+             List <ProjectTransactionBean> PTBlist =entry.getValue();
+             EmailBean ebean=new EmailBean();
+             EmailUtil EU=new EmailUtil();
+             UserDataBean ubean=this.getUserById(userid, sess);
+             ebean.setTo(ubean.getEmail());
+             ebean.setSubject("Project Scheduling Mail");
+             int i=0;
+             StringBuilder mess=new StringBuilder();
+             mess.append("Dear ").append(ubean.getUsername()).append("\n\nYou have been assigned to the following tasks in the ").append(projectname).append(" project.\n\n");
+             
+             for(ProjectTransactionBean task:PTBlist){
+                 i++;
+                 mess.append(i).append(". ").append(task.getTaskname()).append("\n");
+             }
+             
+             mess.append("\n\nBest Regards\nTeam Paladion");
+             String message=mess.toString();
+             ebean.setMessage(message);
+             EU.sendEmail(ebean);
+        });
         
         
         return true;
@@ -398,11 +406,6 @@ Date end = null;
          EU.sendEmail(ebean);
         return true;
     }
-    
-    
-    
-    
-    
     
     
     public List<ProjectTransactionBean> updateDelayForTasks(List<ProjectTransactionBean> PTBList, int hours){

@@ -92,7 +92,7 @@ public ProjectBean populate()
             PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
             PS.addProject(PB);
             //send mail to lead                    
-            //CU.sendSchedulingMailToLead(PB, req.getSession(false));
+            CU.sendSchedulingMailToLead(PB, req.getSession(false));
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
 	    System.out.println("Man days :"+PB.getMandays());
             UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
@@ -159,7 +159,7 @@ public ProjectBean populate()
         PTBList1= CU.updateProjectTransaction(PTBList, PRDATA,req.getSession(false));
         PS.insertProjectTransaction(PTBList1);
         //Uncomment below line to send scheduling mail to lead
-       // CU.sendSchedulingMailToEngineers(PTBList1,req.getSession(false));
+        CU.sendSchedulingMailToEngineers(PTBList1,req.getSession(false),PRDATA.getProjectname());
         ModelAndView result=new ModelAndView("DisplayProjectProgress");
         result.addObject("TaskDetails",PTBList1);
         result.addObject("ProjectData",PRDATA);
@@ -176,7 +176,7 @@ public ProjectBean populate()
            PSBList = PS.getProjectTransaction(id);
            
            //If engineers not assigned, redirect to assign engineers to tasks.
-           if(PSBList.size()==0){
+           if(PSBList.isEmpty()){
            HttpSession sess=req.getSession(false);
            ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
            List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());

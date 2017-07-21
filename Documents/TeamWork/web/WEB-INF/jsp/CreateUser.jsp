@@ -222,6 +222,7 @@ th {
             <form:option class="login login-submit" value="lead">Lead</form:option>
             <form:option class="login login-submit" value="engineer">Engineer</form:option>   
              <form:option class="login login-submit" value="scheduling">Scheduling</form:option>
+             
    </form:select></h4></td></tr>
 
 <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
