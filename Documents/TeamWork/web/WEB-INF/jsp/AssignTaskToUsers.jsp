@@ -204,7 +204,8 @@ $(document).ready(function() {
             <table border="1" id="example" class="display" width="100%"  cellspacing="0">
             <thead>
             <tr bgcolor="#ff6666">
-            <th>Task Name </th>  <th> Engineer</th></tr>
+            <th>Task Name </th>  <th> Engineer</th>
+            </tr>
             </thead>
             
            <tbody>
@@ -228,14 +229,11 @@ $(document).ready(function() {
 	   </tr>
            </c:forEach>
            </tbody>
-               
-	  
-	   </div>
-	   
 	   </table>
+               <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
 	   </div>
 	  
-	  <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
+	  
 	   </form:form>
 	  
 	   <center>${Temperror}</center><br>
