@@ -17,7 +17,7 @@
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
     
-<!--    <filter>
+    <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.Paladion.teamwork.Filters.AuthenticationFilter</filter-class>
         <init-param>
@@ -43,7 +43,35 @@
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
         <url-pattern>*.do</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>CSRFTokenGenerator</filter-name>
+        <filter-class>com.Paladion.teamwork.Filters.CSRFTokenGenerator</filter-class>
+        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>CSRF Token Generation</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CSRFTokenGenerator</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>CSRFTokenValidator</filter-name>
+        <filter-class>com.Paladion.teamwork.Filters.CSRFTokenValidator</filter-class>
+        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>CSRF Token Validator</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CSRFTokenValidator</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
    
 
     
