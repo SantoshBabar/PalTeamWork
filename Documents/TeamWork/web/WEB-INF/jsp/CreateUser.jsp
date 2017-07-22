@@ -194,15 +194,12 @@ th {
 <table>
    
 <tr><td align="center"><h4 >User Name:</td>
-    <td><form:input placeHolder="Enter the Username"  path="username" /></h4></td></tr>    
+    <td><form:input placeHolder="Enter the Username"  path="username" htmlEscape="true" autocomplete="false"/></h4></td></tr>    
 <tr><td align="center"><h4 >Email id</td>
-    <td><form:input placeHolder="Enter the Email ID" path="email" /></h4></td></tr>  
+    <td><form:input placeHolder="Enter the Email ID" path="email" htmlEscape="true" autocomplete="false"/></h4></td></tr>  
 <tr><td align="center"><h4>Mobile</td>
-    <td><form:input placeHolder="Enter the Mobile Number" path="phone" /></h4></td></tr>
+    <td><form:input placeHolder="Enter the Mobile Number" path="phone" htmlEscape="true" autocomplete="false" /></h4></td></tr>
 
-<!--sumukh csrf  -->
-<input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
-<!--sumukh csrf  -->
 <tr><td align="center"><h4 >Team</td>
     <td><form:select path="team">
          <form:option class="login login-submit" value="">Select</form:option>
@@ -212,7 +209,7 @@ th {
     </form:select></td></tr>
       
 <tr><td align="center"><h4 >Password</td>
-    <td><form:input type="password" placeHolder="Enter the password" path="password" /></h4></td></tr>
+    <td><form:input type="password" placeHolder="Enter the password" path="password" htmlEscape="true" autocomplete="false" /></h4></td></tr>
 <tr><td align="center"><h4 >Enter the Role</td>
     <td>
    <form:select path="role">

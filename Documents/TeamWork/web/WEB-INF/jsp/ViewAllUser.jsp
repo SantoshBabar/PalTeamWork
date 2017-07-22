@@ -207,18 +207,18 @@ $(document).ready(function() {
     <table border="1" id="example" class="display" width="100%"  cellspacing="0">
         <thead>
             <tr bgcolor="#ff6666">
-            <th width="9%" >Delete user </th>
-            <th width="9%" >Update user info </th>
             <th width="11%" >User Name </th>
+            <th width="9%" >Update user info </th>
+            <th width="9%" >Delete user </th>
             </tr>
         </thead>
         
     <tbody>
         <c:forEach  items="${AllUsers}" var="user">     
             <tr> 
-                <td width="9%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
-                <td width="9%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
                 <td width="10%"> ${user.username}</td>
+                <td width="9%"><a href="GetUserDetails.do?id=${user.userid}">UPDATE</a></td>
+                <td width="9%"><a href="DeleteUser.do?id=${user.userid}">DELETE</a></td>
             </tr>
         </c:forEach>
        </tbody>

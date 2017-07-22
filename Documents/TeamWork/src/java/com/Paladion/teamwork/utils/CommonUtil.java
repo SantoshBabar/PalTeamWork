@@ -432,7 +432,7 @@ Date end = null;
     }
    
     
-    
+    //code not used any where
     public String randomGenetator(int size){
         System.out.println("Generating password using random() : ");
      

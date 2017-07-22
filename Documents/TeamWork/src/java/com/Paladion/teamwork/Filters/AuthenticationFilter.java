@@ -34,27 +34,26 @@ int i=0;
         HttpServletRequest req=(HttpServletRequest)request;
         HttpServletResponse res=(HttpServletResponse)response;
         url = req.getRequestURL().toString();
+        HttpSession sess=req.getSession(false);
         
         if(url.contains("Login")||url.contains("ResetPassword")||url.contains("ForgotPassword")||!(url.endsWith(".do"))){
-            
-            
-            
             fc.doFilter(request, response);
           }
         
         else{
             //Check for logged in user session
-            HttpSession sess=req.getSession(false);
+           
             if(sess==null||null==sess.getAttribute("Luser")){
                 res.sendRedirect("Login.do");
                 return;
             }
             else{
+                //Assign CSRF token to request
+                String token=sess.getAttribute("AntiCsrfToken").toString();
+                req.setAttribute("csrfPreventionSalt", token);
                 fc.doFilter(request, response);
             }
-        }
-        
-        
+        }   
     }
 
     @Override

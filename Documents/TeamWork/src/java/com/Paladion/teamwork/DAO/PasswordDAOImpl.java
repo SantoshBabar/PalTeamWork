@@ -9,8 +9,10 @@ import com.Paladion.teamwork.beans.EmailBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.EmailUtil;
+import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -56,7 +58,7 @@ public class PasswordDAOImpl implements PasswordDAO {
         
         if ((list1 != null) && UserBean!=null) 
         {
-            String otp=CU.randomGenetator(8);
+            String otp= RandomStringUtils.random(8, 0, 0, true, true, null, new SecureRandom());
             this.insertOtp(otp, UserBean.getEmail());
             
             EmailUtil eUtil= new EmailUtil();
