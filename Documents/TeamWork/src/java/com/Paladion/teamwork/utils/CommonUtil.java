@@ -433,7 +433,7 @@ Date end = null;
    
     
     
-    public String otpGenetator(){
+    public String randomGenetator(int size){
         System.out.println("Generating password using random() : ");
      
         String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -445,9 +445,9 @@ Date end = null;
         // Using random method
         SecureRandom rand=new SecureRandom();
  
-        char[] password = new char[8];
+        char[] password = new char[size];
  
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < size; i++)
         {
             password[i] = values.charAt(rand.nextInt(values.length()));
         }

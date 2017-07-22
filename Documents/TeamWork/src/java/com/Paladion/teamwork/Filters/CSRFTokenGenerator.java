@@ -4,17 +4,10 @@
  * and open the template in the editor.
  */
 package com.Paladion.teamwork.Filters;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import java.io.IOException;
-import java.security.SecureRandom;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang.RandomStringUtils;
+import javax.servlet.http.HttpSession;
 
 public class CSRFTokenGenerator implements Filter {
 
@@ -22,27 +15,17 @@ public class CSRFTokenGenerator implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
 
-HttpServletRequest httpReq = (HttpServletRequest)request;
+        HttpServletRequest httpReq = (HttpServletRequest)request;
         String url = httpReq.getRequestURL().toString();
         
         if(url.contains("Login")||url.contains("ResetPassword")||url.contains("ForgotPassword")||!(url.endsWith(".do"))){
-            System.out.println("CSRF Token not generated -------------\n");
             chain.doFilter(request, response);
           }
         
         else{
-            @SuppressWarnings("unchecked")
-            Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>)httpReq.getSession().getAttribute("csrfPreventionSaltCache");
-            
-                if(csrfPreventionSaltCache == null)
-                {
-                    csrfPreventionSaltCache = CacheBuilder.newBuilder().maximumSize(5000).expireAfterAccess(20, TimeUnit.MINUTES).build();
-                    httpReq.getSession().setAttribute("csrfPreventionSaltCache", csrfPreventionSaltCache);
-                }
-                System.out.println("CSRF Token generated -----------\n");
-            String salt = RandomStringUtils.random(30, 0, 0, true, true, null, new SecureRandom());
-            csrfPreventionSaltCache.put(salt, Boolean.TRUE);
-            httpReq.setAttribute("csrfPreventionSalt", salt);
+            HttpSession sess= httpReq.getSession(false);
+            String token=sess.getAttribute("AntiCsrfToken").toString();
+            httpReq.setAttribute("csrfPreventionSalt", token);
             chain.doFilter(request, response);
         }
     }

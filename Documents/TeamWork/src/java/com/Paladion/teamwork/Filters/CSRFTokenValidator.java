@@ -9,7 +9,6 @@ package com.Paladion.teamwork.Filters;
  *
  * @author sumukh.r
  */
-import com.google.common.cache.Cache;
 import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -32,27 +31,22 @@ public class CSRFTokenValidator implements Filter  {
             chain.doFilter(request, response);
           }
         
-        else{ 
-            String salt =(String) httpReq.getParameter("AntiCSRFToken");
-            @SuppressWarnings("unchecked")
-            Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>)httpReq.getSession().getAttribute("csrfPreventionSaltCache");
-
-            if(csrfPreventionSaltCache !=null && salt !=null && csrfPreventionSaltCache.getIfPresent(salt)!=null)
-            {
-                System.out.println("CSRF Token Validated ----------------\n");
+        else{            
+            HttpSession sess= httpReq.getSession(false);
+            String token=sess.getAttribute("AntiCsrfToken").toString();
+            String reqToken =(String)httpReq.getParameter("AntiCSRFToken");
+            
+            if(reqToken!=null&&reqToken.equals(token)){
                 chain.doFilter(request, response);
             }
-            else
+             else
             {
                 System.out.println("Invalid CSRF Token ------------\n");
-                HttpSession sess= httpReq.getSession(false);
                 sess.invalidate();
                 res.sendRedirect("Login.do");
             }
         }
-        
-        
-    }
+     }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

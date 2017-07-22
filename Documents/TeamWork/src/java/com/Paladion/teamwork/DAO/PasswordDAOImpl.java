@@ -56,7 +56,7 @@ public class PasswordDAOImpl implements PasswordDAO {
         
         if ((list1 != null) && UserBean!=null) 
         {
-            String otp=CU.otpGenetator();
+            String otp=CU.randomGenetator(8);
             this.insertOtp(otp, UserBean.getEmail());
             
             EmailUtil eUtil= new EmailUtil();

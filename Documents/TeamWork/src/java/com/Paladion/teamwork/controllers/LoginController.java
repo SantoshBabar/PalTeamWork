@@ -9,12 +9,15 @@ import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
+import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.SystemInfo;
+import java.security.SecureRandom;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -37,6 +40,10 @@ public class LoginController {
  @Autowired
  @Qualifier(value="LoginService")
  LoginService LS;
+ 
+ @Autowired
+@Qualifier(value="CommonUtil")
+ CommonUtil CU;
  
  @Autowired
 @Qualifier(value="UserService")
@@ -92,6 +99,9 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
                
                       HttpSession LoginSess=req.getSession(true);
                       LoginSess.setAttribute("Luser", lb);
+                      
+                      String token = RandomStringUtils.random(30, 0, 0, true, true, null, new SecureRandom());
+                      LoginSess.setAttribute("AntiCsrfToken",token);
                       if(!lb.getRole().equalsIgnoreCase("engineer")){
                       LoginSess.setAttribute("AllUsers", userService.GetAllUser());
                       }
