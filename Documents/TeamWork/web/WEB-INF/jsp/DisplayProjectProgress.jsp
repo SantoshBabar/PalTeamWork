@@ -238,7 +238,7 @@ th {
             <td style="color: black">${ProjectTaskList.taskname}</td>
             <td style="color: black">${ProjectTaskList.engname}</td>
             <td style="color: black">${SDate}</td>
-	    <td style="color: black">${EDate}</td>
+	        <td style="color: black">${EDate}</td>
             <td style="color: black">${ProjectTaskList.taskhours}</td>
             <td style="color: black">${ProjectTaskList.taskdays}</td>
            
@@ -278,13 +278,5 @@ th {
 </table>
 </div>
     </body>
-    <script>
-$(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollY":"200px",
-        "scrollCollapse": true,
-        "paging":         false
-    } );
-} );
-</script>
+
 </html>
