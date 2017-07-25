@@ -1,6 +1,5 @@
   
-<%@page import="com.Paladion.teamwork.beans.UserDataBean"%>
-<%@page import="com.Paladion.teamwork.beans.UserDataBean"%>
+
 <%-- 
     Document   : Welcome
     Created on : 13 Apr, 2017, 8:45:16 PM
@@ -204,6 +203,16 @@ th {
       }
     </script>
 	   
+    <body>
+        
+        <h3>Total projects : ${All_proj}</h3>
+         <h3>Projects Completed : ${Completed_proj}</h3>
+          <h3>Projects In Progress : ${Progress_proj}</h3>
+           <h3>New Projects : ${New_proj}</h3>       
+        
+    </body>
+    
+</html>
 	   
         
 

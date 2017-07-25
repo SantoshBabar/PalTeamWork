@@ -9,9 +9,13 @@ import com.Paladion.teamwork.DAO.ProjectDAO;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
+import com.Paladion.teamwork.beans.UserDataBean;
 import java.util.List;
+import javax.servlet.http.HttpSession;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -83,5 +87,41 @@ ProjectDAO PD;
    public void updateProjectTransaction(List<ProjectTransactionBean> PTBList){
         PD.updateProjectTransaction(PTBList);
    }
+
+    @Override
+    public int[] getProjectsCount(javax.servlet.http.HttpServletRequest req) {
+         HttpSession sess= req.getSession(false);
+        UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
+	ModelAndView result=new ModelAndView("Welcome");
+        List<ProjectBean> PBList=(List<ProjectBean>)this.getAllProjects(sessuser.getUserid(), sessuser.getRole());
+        int total_projects=PBList.size();
+        int project_new=0;
+        int project_progress=0;
+        int project_completed=0;
+        for(ProjectBean PB:PBList){
+            if(PB.getStatus().equalsIgnoreCase("new")){
+                project_new++;
+               
+            }
+            if(PB.getStatus().equalsIgnoreCase("progress")){
+                project_progress++;
+              
+            }
+            if(PB.getStatus().equalsIgnoreCase("completed")){
+                project_completed++;
+              
+            }
+        }
+        System.out.println("No of completed projects : "+project_completed);
+        System.out.println("No of on going projects : "+project_progress);
+        System.out.println("No of new projects : "+project_new);
+         int [] counts = new int[4];
+         counts[0]=total_projects;
+         counts[1]=project_completed;
+         counts[2]=project_progress;
+         counts[3]=project_new;
+         
+         return counts;
+    }
 	
 }

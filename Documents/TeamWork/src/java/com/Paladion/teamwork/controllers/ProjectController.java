@@ -133,6 +133,7 @@ public ProjectBean populate()
 	ModelAndView result=new ModelAndView("DisplayProjects");
         List<ProjectBean> PBList=(List<ProjectBean>)PS.getAllProjects(sessuser.getUserid(), sessuser.getRole());
         result.addObject("AllProjects",PBList );
+        this.getAllProjectsDetails(req);
 	return  result;
     }
       
@@ -285,5 +286,40 @@ public ProjectBean populate()
         result.addObject("TaskDetails",PSBList);
         return result;
     }
+    
+    
+    
+    
+    @RequestMapping(value="/GetAllProjectDetails",method=RequestMethod.GET)
+    public void getAllProjectsDetails(HttpServletRequest req)
+    {
+        HttpSession sess= req.getSession(false);
+        UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
+	ModelAndView result=new ModelAndView("Welcome");
+        List<ProjectBean> PBList=(List<ProjectBean>)PS.getAllProjects(sessuser.getUserid(), sessuser.getRole());
+        int total_projects=PBList.size();
+        int project_new=0;
+        int project_progress=0;
+        int project_completed=0;
+        for(ProjectBean PB:PBList){
+            if(PB.getStatus().equalsIgnoreCase("new")){
+                project_new++;
+               
+            }
+            if(PB.getStatus().equalsIgnoreCase("progress")){
+                project_progress++;
+              
+            }
+            if(PB.getStatus().equalsIgnoreCase("completed")){
+                project_completed++;
+              
+            }
+        }
+        System.out.println("No of completed projects : "+project_completed);
+        System.out.println("No of on going projects : "+project_progress);
+        System.out.println("No of new projects : "+project_new);
+	
+    }
+      
     
 }

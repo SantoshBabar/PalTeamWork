@@ -8,6 +8,7 @@ package com.Paladion.teamwork.controllers;
 import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
+import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.SystemInfo;
@@ -48,6 +49,10 @@ public class LoginController {
  @Autowired
 @Qualifier(value="UserService")
  UserService userService;
+ 
+ @Autowired
+@Qualifier(value="ProjectService")
+ ProjectService PS;
  
  UserDataBean lb=null;
  
@@ -113,10 +118,16 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
  }
 
 @RequestMapping(value="/Welcome",method=RequestMethod.GET)
-public ModelAndView Welcome()
+public ModelAndView Welcome(HttpServletRequest req)
 {
-   
-           return new ModelAndView("Welcome");
+            ModelAndView result=new ModelAndView("Welcome");
+            int [] counts = new int[3];
+            counts = PS.getProjectsCount(req);
+            result.addObject("All_proj",counts[0]);
+            result.addObject("New_proj",counts[3]);
+            result.addObject("Progress_proj",counts[2]);
+            result.addObject("Completed_proj",counts[1]);
+            return result;
 }
 
 @RequestMapping(value="/Logout",method=RequestMethod.GET)

@@ -9,6 +9,7 @@ import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -25,4 +26,5 @@ public interface ProjectService {
     public boolean updateTaskStatus(int projid);
     public boolean updateProjectStatus(int projid, String status);
     public void updateProjectTransaction(List<ProjectTransactionBean>PTBList);
+    public int[] getProjectsCount(HttpServletRequest req);
 }
