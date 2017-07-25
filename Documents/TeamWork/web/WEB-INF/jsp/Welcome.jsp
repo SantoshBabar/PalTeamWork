@@ -174,43 +174,55 @@ th {
   <%@include file="Header.jsp" %>  	   
 
    <div class="login-card">
-       <div id="piechart" style="width: 900px; height: 500px;"></div>
+       <div id="chartContainer" style="height: 550px; width: 130%;"></div>
    </div>
 <title>Home</title>
 </head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+<script type="text/javascript">
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: "Project Status graph"
+		},
+                animationEnabled: true,
+		legend:{
+			verticalAlign: "center",
+			horizontalAlign: "left",
+			fontSize: 20,
+			fontFamily: "Helvetica"        
+		},
+		theme: "theme2",
+		data: [
+		{        
+			type: "pie",       
+			indexLabelFontFamily: "Garamond",       
+			indexLabelFontSize: 20,
+			indexLabel: "{label} {y}",
+			startAngle:-20,      
+			showInLegend: true,
+			toolTipContent:"{legendText} {y}",
+			dataPoints: [
+				{  y: "${All_proj}", legendText:"Total projects", label: "Total projects" },
+				{  y: "${Completed_proj}", legendText:"Projects Completed", label: "Projects Completed" },
+				{  y: "${Completed_proj}", legendText:"Projects In Progress", label: "Projects In Progress" },
+				{  y: "${New_proj}", legendText:"New Projects" , label: "New Projects"},       
+				
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
+</head>
+<body>
+     
 
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
-
-        var options = {
-          title: 'My Daily Activities'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
-	   
-    <body>
         
-        <h3>Total projects : ${All_proj}</h3>
-         <h3>Projects Completed : ${Completed_proj}</h3>
-          <h3>Projects In Progress : ${Progress_proj}</h3>
-           <h3>New Projects : ${New_proj}</h3>       
-        
+              
+     </div>
     </body>
     
 </html>
