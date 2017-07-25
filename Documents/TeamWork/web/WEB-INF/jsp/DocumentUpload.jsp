@@ -183,6 +183,8 @@ $(document).ready(function() {
     } );
 } );
 </script>
+
+<title>Upload Document</title>
 </head>
     <body>
     

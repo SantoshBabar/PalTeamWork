@@ -138,7 +138,7 @@ body {
   <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
 
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
-
+<title>Forgot Password</title>
 </head>
 <br><br><br><br><br>
   <div class="login-card">

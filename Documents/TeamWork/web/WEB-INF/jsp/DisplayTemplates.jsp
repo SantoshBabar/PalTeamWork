@@ -195,6 +195,8 @@ $(document).ready(function() {
     } );
 } );
 </script>
+
+<title>All Task-Templates</title>
 </head>
     
 <body>

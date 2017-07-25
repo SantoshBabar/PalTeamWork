@@ -181,7 +181,7 @@ th {
     color: white;
 }
 </style>
-
+<title>Change Password</title>
 </head>
     <body>
     

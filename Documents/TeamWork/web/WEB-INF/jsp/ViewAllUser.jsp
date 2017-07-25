@@ -197,6 +197,8 @@ $(document).ready(function() {
     } );
 } );
 </script>
+
+<title>All Users</title>
 </head>
     
 <body>

@@ -172,6 +172,7 @@ th {
     color: white;
 }
 </style>
+<title>New Task-Template</title>
 </head>
     <body>
     

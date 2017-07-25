@@ -186,6 +186,9 @@ $(document).ready(function() {
     } );
 } );
 </script>-->
+
+<title>Project Progress</title>
+
 </head>
     <body>
     

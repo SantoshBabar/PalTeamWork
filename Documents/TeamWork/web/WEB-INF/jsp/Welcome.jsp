@@ -176,6 +176,7 @@ th {
    <div class="login-card">
        <div id="piechart" style="width: 900px; height: 500px;"></div>
    </div>
+<title>Home</title>
 </head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">

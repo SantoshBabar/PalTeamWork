@@ -200,6 +200,8 @@ $(document).ready(function() {
     } );
 } );
 </script>
+
+<title>All Tasks</title>
 </head>
     
 <body>

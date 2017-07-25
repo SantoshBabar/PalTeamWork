@@ -170,7 +170,7 @@ th {
     color: white;
 }
 </style>
-
+<title>Update User</title>
 </head>
     <body>
           

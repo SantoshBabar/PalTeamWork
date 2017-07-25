@@ -177,7 +177,7 @@ th {
     var form = document.getElementById('taskform');
 form.reset();
 </script>
-
+<title>Create Task</title>
 </head>
     <body>
       

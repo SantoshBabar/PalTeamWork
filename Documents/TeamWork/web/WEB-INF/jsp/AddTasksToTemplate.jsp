@@ -246,6 +246,8 @@ $(c).prop('checked', true);
 }
 }
 </script>
+
+<title>Assign Tasks to Template</title>
 </head>
 
 

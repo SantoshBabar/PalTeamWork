@@ -181,7 +181,7 @@ th {
     color: white;
 }
 </style>
-
+<title>New User</title>
 </head>
     <body>
     

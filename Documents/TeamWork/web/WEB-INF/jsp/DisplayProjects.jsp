@@ -222,7 +222,7 @@ $(document).ready(function() {
     return (sa);
 }
         </script>
-
+<title>All Projects</title>
 </head>
     <body>
          

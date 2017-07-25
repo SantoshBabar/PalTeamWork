@@ -183,7 +183,7 @@ th {
 }
 </style>
 
-  
+  <title>Schedule Project</title>
     </head>
     <body>
 
