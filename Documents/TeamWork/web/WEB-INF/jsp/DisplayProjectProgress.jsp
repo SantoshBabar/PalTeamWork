@@ -176,7 +176,8 @@ th {
 }
 
 </style>
-<script>
+
+<!--<script>
 $(document).ready(function() {
     $('#example').DataTable( {
         "scrollY":"200px",
@@ -184,7 +185,7 @@ $(document).ready(function() {
         "paging":         false
     } );
 } );
-</script>
+</script>-->
 </head>
     <body>
     
