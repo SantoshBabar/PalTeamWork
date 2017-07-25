@@ -23,7 +23,13 @@
         <property name="suffix" value=".jsp" />
        
     </bean>
-<mvc:resources mapping="/WEB-INF/css/**" location="/WEB-INF/css/"/>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="20848820" />
+    </bean>
+    <mvc:resources mapping="/WEB-INF/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/upfiles/**" location="/upfiles/" /> 
+    
 
     <mvc:annotation-driven />
     
@@ -43,7 +49,7 @@
 
         <property name="url" value="jdbc:mysql://localhost/teamwork" /> 
         <property name="username" value="root" />
-        <property name="password" value="admin" />
+        <property name="password" value="root" />
 
        
 
