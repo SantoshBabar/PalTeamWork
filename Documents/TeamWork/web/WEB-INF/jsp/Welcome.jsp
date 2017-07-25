@@ -205,7 +205,7 @@ window.onload = function () {
 			dataPoints: [
 				{  y: "${All_proj}", legendText:"Total projects", label: "Total projects" },
 				{  y: "${Completed_proj}", legendText:"Projects Completed", label: "Projects Completed" },
-				{  y: "${Completed_proj}", legendText:"Projects In Progress", label: "Projects In Progress" },
+				{  y: "${Progress_proj}", legendText:"Projects In Progress", label: "Projects In Progress" },
 				{  y: "${New_proj}", legendText:"New Projects" , label: "New Projects"},       
 				
 			]
