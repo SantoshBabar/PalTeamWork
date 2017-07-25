@@ -122,7 +122,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 50%;
+  width: 150px;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -176,6 +176,15 @@ th {
 }
 
 </style>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
 </head>
     <body>
     
@@ -212,8 +221,7 @@ th {
 
 
         
-              
-    <div style="overflow: auto;height: 350px; width: auto;"> 
+             
         
           
     <table border="1" id="example" class="display" width="100%"  cellspacing="0">
@@ -276,10 +284,9 @@ th {
        </c:forEach>
          </tbody>
 </table>
-        <br>       
-<a href="uploadfiles.do">upload project documents</a>  
-<br>
-<br>
+       
+        <a href="uploadfiles.do"><h4>upload project documents<h4></a>  
+       
 </div>
 
     </body>
