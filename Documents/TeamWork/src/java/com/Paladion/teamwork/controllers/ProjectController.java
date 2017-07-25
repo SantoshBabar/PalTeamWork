@@ -11,10 +11,13 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import com.Paladion.teamwork.beans.ProjectTransactionWrapper;
+import com.Paladion.teamwork.beans.fileuploadBean;
 import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -58,6 +62,11 @@ UserService US;
 public ProjectBean populate()
 {
 	   return new ProjectBean();
+}
+@ModelAttribute("filebean")
+public fileuploadBean populate1()
+{
+	   return new fileuploadBean();
 }
 
 	
@@ -249,7 +258,7 @@ public ProjectBean populate()
         return new ModelAndView("Customerror");
     }
     
-    //Update delay yo indivisual tasks in a project
+    //Update delay to individual tasks in a project
     @RequestMapping(value="/updateTaskDelay",method=RequestMethod.POST)
     public ModelAndView updateTaskDelay(HttpServletRequest req) throws ParseException
     {
@@ -263,14 +272,16 @@ public ProjectBean populate()
         List<ProjectTransactionBean> PTBList2=new ArrayList<>();
         for(ProjectTransactionBean PTBean: PTBList)
         {
-            if(PTBean.getTransid()==transid){
-                float hours= PTBean.getTaskhours()+delayHours;
+            if(PTBean.getTransid()==transid)
+            {
+                float hours= PTBean.getTaskhours()+ delayHours;
                 PTBean.setTaskhours(hours);
                 PTBean.setTaskdays(hours/9);
                 PTBean.setStatus("Delayed");
                 PTBList2.add(PTBean);
             }
-           if(PTBean.getTransid()>transid){
+           if(PTBean.getTransid()>transid)
+           {
                 PTBList2.add(PTBean);
             }  
         }
@@ -286,6 +297,40 @@ public ProjectBean populate()
         result.addObject("TaskDetails",PSBList);
         return result;
     }
+
+@RequestMapping(value="/uploadfiles",method=RequestMethod.POST)    
+public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute fileuploadBean filebean,Model model)
+    {
+    List<MultipartFile> upfiles = filebean.getFiles();    
+    List<String> fileNames = new ArrayList<String>();    
+    
+    if (null != upfiles && upfiles.size() > 0) 
+        {
+            for (MultipartFile multipartFile : upfiles) {
+ 
+                String fileName = multipartFile.getOriginalFilename();
+                fileNames.add(fileName);
+ 
+                File imageFile = new File(req.getServletContext().getRealPath("/files"), fileName);
+                try
+                {
+                    multipartFile.transferTo(imageFile);
+                } catch (IOException e) 
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+ 
+     return new ModelAndView("DocumentUpload");
+    
+    }
+
+@RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
+public ModelAndView uploaddocs()
+{
+return new ModelAndView("DocumentUpload");
+}
     
     
     

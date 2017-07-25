@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ExceptionHandler {
     
-@org.springframework.web.bind.annotation.ExceptionHandler
-public ModelAndView handleException(Exception ex) 
-{
-return new ModelAndView("Customerror");
-}
+//@org.springframework.web.bind.annotation.ExceptionHandler
+//public ModelAndView handleException(Exception ex) 
+//{
+//return new ModelAndView("Customerror");
+//}
     
 }
