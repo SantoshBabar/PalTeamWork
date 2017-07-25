@@ -177,15 +177,17 @@ th {
 
 </style>
 
-<!--<script>
+<script>
 $(document).ready(function() {
     $('#example').DataTable( {
         "scrollY":"200px",
         "scrollCollapse": true,
-        "paging":         false
+        "paging":         false,
+        "sorting": false,
+        
     } );
 } );
-</script>-->
+</script>
 
 <title>Project Progress</title>
 
