@@ -12,6 +12,9 @@
 <%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
 <link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
     
@@ -192,60 +195,35 @@ th {
 }
 </style>
     
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
 
-$('table').on('change', '[type=checkbox]', function() {
-  var $this = $(this);
-  var row = $this.closest('tr');
-  if ($this.prop('checked')) { // move to top
-    row.insertBefore(row.parent().find('tr:last-child'))
-      .find('label').html('move to bottom');
-  } else { // move to bottom
-    row.insertAfter(row.parent().find('tr:last-child'))
-      .find('label').html('move to top');
-  }
-});
-
-
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":  false,
+        "sorting": true,
+    } );
+} );
 </script>
 <script>
-var intermediate="";
-var checked='';
-jQuery(function($) {
-  $('#t1 :checkbox').on('change', function() {
-    var tr = $(this).closest('tr');
-    var tbody = $('#t1 tbody');
-    if (this.checked) {
-		child=tr.children("td");
-		intermediate=intermediate +"<tr>"+tr.html()+"</tr>";
-		tr.html('');
-		checked=checked +","+this.id;
-		
-		approve(this);
-    } else {
-      tbody.prepend(tr);
+$(function () {
+	$('.badges').hide();
+	$('.rule').on('click', reorder);
+    $('.sortable').sortable().droppable({
+		drop: function(ev, ui){ setTimeout(reorder,10); }
+	});
+    
+    function reorder(e, el) {
+        $('.badges').hide();
+        var selected = $('.box [type=checkbox]:checked');
+        selected.each(function(i, cb) {
+            $(cb).next('.badges').text(i+1).show();
+        });
     }
-  });
 });
-
-function approve(child)
-{
-
-var tab=$("#t2");
-
-tab.html(intermediate);
-
-var ch="#"+child.id;
-$(ch).prop('checked', true);
-all_ids=checked.split(",");
-for (var i=0;i<all_ids.length;i++)
-{
-var c="#"+all_ids[i];
-$(c).prop('checked', true);
-}
-}
 </script>
+    
 
 <title>Assign Tasks to Template</title>
 </head>
@@ -264,29 +242,37 @@ $(c).prop('checked', true);
 	   <h4 >List of All the Tasks </h4>  
 	   
 	   <form:form  action="AddTaskTemplate.do" method="post">
-	   
-            <table> <tr> <th>Task Name</th><th> Check/Uncheck</th> <th> Weight(%)</th></tr></table>    
-             <div style="overflow:auto; height:auto; width:auto;">  
-            <table id="t2">
+               
+	   <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+        <thead>
+            <tr bgcolor="#ff6666">
+             <th>Task Name</th>
+             <th> Check/Uncheck</th> 
+             <th> Weight(%)</th>
+            </tr>  
+            </thead>
+            
+             <tbody> 
+              
+            <c:forEach  items="${AllTasks}" var="task"> 
                 
-            </table>
-             </div>
-            <div style="overflow:auto; height:350px; width:700px;">
-	    <table id="t1">
-            <c:forEach  items="${AllTasks}" var="task">     
-              <tr align="center"> 
+              <tr> 
                
-                <td  style="padding:0 15px 0 45px;"><c:out  value="${task.taskname}"/></td>
-                <td  style="padding:0 75px 0 75px;"><input type="checkbox" id="one"  name="task" value="${task.taskid}"></td>
+                <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskname}"/></td>
+                
+             <td  style="padding:0 75px 0 75px;"><input type="checkbox" class="rule" id="one"  name="task" value="${task.taskid}"></td>
+               
                 <td  style="padding:0 75px 0 75px;"><input type="text" id="textfield" name="${task.taskid}"></td>
-               
+              
               </tr>
+             
             </c:forEach>
-	   </div>     
-	   </table>
-	   </div>
-             <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/>   
-           <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
+              
+               </table>
+               <input type="submit" value="Create" class="login login-submit"/>
+    </div>
+    
+           <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/>
 	   </form:form>
-</div>
+</body>
 </html>

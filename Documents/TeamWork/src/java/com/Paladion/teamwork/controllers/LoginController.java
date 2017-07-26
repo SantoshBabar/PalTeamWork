@@ -137,6 +137,13 @@ public String Logout(HttpServletRequest req)
            return "redirect:Login.do";
    }
 
+@RequestMapping(value="/index",method=RequestMethod.GET)
+public String index(HttpServletRequest req)
+   {
+           
+           return "redirect:index.do";
+   }
+
 }
 
    

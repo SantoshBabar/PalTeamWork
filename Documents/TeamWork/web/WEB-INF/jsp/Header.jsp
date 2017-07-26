@@ -151,7 +151,7 @@
                 </div>
         </div> 
           <%}%>
-         
+        <li style="float:right"><a class="active" href="index.do">knowledge base</a></li> 
         <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
        
         <div class="dropdown" style="float:right">

@@ -174,7 +174,7 @@ th {
   <%@include file="Header.jsp" %>  	   
 
    <div class="login-card">
-       <div id="chartContainer" style="height: 550px; width: 130%;"></div>
+       <div id="chartContainer" style="height: 450px; width: 80%;"></div>
    </div>
 <title>Home</title>
 </head>
