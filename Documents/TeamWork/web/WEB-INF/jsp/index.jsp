@@ -384,6 +384,7 @@ table tr td
           <li><a href="page.html">Information Gathering Sheet</a></li>
           <li><a href="another_page.html">Test plans</a></li>
           <li><a href="contact.html">Code review guidelines</a></li>
+          <li><a href="logout.do">Logout</a></li>
         </ul>
       </div>
     </div>

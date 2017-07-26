@@ -138,12 +138,10 @@ public String Logout(HttpServletRequest req)
    }
 
 @RequestMapping(value="/index",method=RequestMethod.GET)
-public String index(HttpServletRequest req)
-   {
-           
-           return "redirect:index.do";
-   }
-
+public String index()
+{
+    // change to login
+    return "index";
 }
 
-   
+}
