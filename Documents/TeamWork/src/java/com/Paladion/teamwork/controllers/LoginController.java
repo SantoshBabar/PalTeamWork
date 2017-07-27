@@ -144,4 +144,11 @@ public String index()
     return "index";
 }
 
+@RequestMapping(value="/threatProfile",method=RequestMethod.GET)
+public String threatProfile()
+{
+    // change to login
+    return "threatProfile";
+}
+
 }

@@ -1,18 +1,20 @@
 <%-- 
-    Document   : index
-    Created on : 26-Jul-2017, 18:43:49
+    Document   : threatProfile
+    Created on : 27-Jul-2017, 13:38:22
     Author     : sumukh.r
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.Paladion.teamwork.beans.UserDataBean"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
+
+<head>
   <title>Code Review Knowledge Base</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
   
 <style>
 html
@@ -118,7 +120,7 @@ ol li
   height: 177px;}
   
 #banner
-{ background: transparent url(banner.jpg) no-repeat;
+{ background: transparent url(threadprofile.png) no-repeat;
   width: 870px;
   height: 180px;
   margin-bottom: 20px;
@@ -349,8 +351,10 @@ table tr td
   border-top: 1px solid #FFF;}
 
 </style>
-    <body>
-        <% 
+</head>
+
+<body>
+    <% 
         if (session==null||null==session.getAttribute("Luser"))
            {
                response.sendRedirect("Login.do");
@@ -366,14 +370,14 @@ table tr td
         name=b.getUsername().toString();
         role=b.getRole().toString();
     %>
-    
-    <div id="main">
+  <div id="main">
     <div id="header">
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="index.html">Code Review <span class="logo_colour">Knowledge Base</span></a></h1>
-          <h2>Code reviews made simple…</h2>
+          <h1><a href="index.html">Code Review<span class="logo_colour">Knowledge Base</span></a></h1>
+          <h2>Code reviews made simple…
+</h2>
         </div>
       </div>
       <div id="menubar">
@@ -385,25 +389,25 @@ table tr td
           <li><a href="another_page.html">Test plans</a></li>
           <li><a href="logout.do">Logout</a></li>
           <li><a href="contact.html">Code review guidelines</a></li>
+          
         </ul>
       </div>
     </div>
     <div id="content_header"></div>
     <div id="site_content">
-      <div id="banner"></div>
-	  <div id="sidebar_container">
-        <div class="sidebar">
+      <div id="sidebar_container">
+<!--        <div class="sidebar">
           <div class="sidebar_top"></div>
           <div class="sidebar_item">
-            <!-- insert your sidebar items here -->
+             insert your sidebar items here 
             <h3>Latest News</h3>
             <h4>contents here</h4>
             <h5>contents here</h5>
             <p>contents here.<br /><a href="#">Read more</a></p>
           </div>
           <div class="sidebar_base"></div>
-        </div>
-        <div class="sidebar">
+        </div>-->
+<!--        <div class="sidebar">
           <div class="sidebar_top"></div>
           <div class="sidebar_item">
             <h3>Useful Links</h3>
@@ -415,8 +419,8 @@ table tr td
             </ul>
           </div>
           <div class="sidebar_base"></div>
-        </div>
-        <div class="sidebar">
+        </div>-->
+<!--        <div class="sidebar">
           <div class="sidebar_top"></div>
           <div class="sidebar_item">
             <h3>Search</h3>
@@ -428,30 +432,24 @@ table tr td
             </form>
           </div>
           <div class="sidebar_base"></div>
-        </div>
+        </div>-->
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Welcome to elearning portal</h1>
-        <p>This site is simple and has documents related to code review process, </p>
-        <!--<p>This template is written entirely in <strong>HTML5</strong> and <strong>CSS</strong>, and can be validated using the links in the footer.</p>
-        <p>You can view more free HTML5 web templates <a href="http://www.html5webtemplates.co.uk">here</a>.</p>
-        <p>This template is a fully functional 5 page website, with an <a href="examples.html">examples</a> page that gives examples of all the styles available with this design.</p>
-        <h2>Browser Compatibility</h2>-->
-        <p>This knowledge base has information about code review process</p>
-        <ul>
-          <li>how to fill information gathering sheet</li>
-          <li>how to understand code layout</li>
-          
-        </ul>
+        <h1>Threat Profile</h1>
+        <div style="text-align:justify">  <p style="text-indent: 50px;width: 880px ">Threat profile is a very interesting concept that identifies the complete set of threats in a given application context and it is a structured approach that enables you to identify, quantify, and address the security risks associated with an application.</p></div>
+        <div style="text-align:justify"><p style="width: 880px"><b style="color:black">Step 1:</b> Decompose the Application. The first step in the threat profile process is concerned with gaining an understanding of the application and how it interacts with external entities. This involves creating use-cases to understand how the application is used, identifying entry points to see where a potential attacker could interact with the application, identifying assets i.e. items/areas that the attacker would be interested in, and identifying trust levels which represent the access rights that the application will grant to external entities.</p></div>
+        <div style="text-align:justify"><p style="width: 880px"><b style="color:black">Step 2:</b> Creating a threat profile, this is shown below</p></div>
+        <div id="banner"></div>
+        <div style="text-align:justify"><p style="width: 880px"><b style="color:black">Example:<br></b><b style="color:brown"> Tabs:</b> Fund Transfer<br> <b style="color:brown">Sub Tab:</b> Transfer to other accounts<br><b style="color:brown">User roles:</b> Normal user<br><b style="color:brown">Threat:</b> An adversary can do negative transactions</p></div>
+        
       </div>
     </div>
     <div id="content_footer"></div>
     <div id="footer">
-     
       <p>Copyright &copy; <a href="https://www.paladion.net">Paladion Networks | </a></p>
     </div>
   </div>
 </body>
-    </body>
 </html>
+
