@@ -173,12 +173,6 @@ body {
   font-size: 12px;
 }
 
-tr:nth-child(even){background-color: #F7F7F7}
-
-th {
-    background-color: #ff3333;
-    color: white;
-}
 table.dataTable.select tbody tr,
 table.dataTable thead th:first-child {
   cursor: pointer;
@@ -197,7 +191,7 @@ function updateDataTableSelectAllCtrl(table){
    var $table             = table.table().node();
    var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
    var $chkbox_checked    = $('tbody input[type="checkbox"]:checked', $table);
-   var chkbox_select_all  = $('thead input[name="select_all"]', $table).get(0);
+   var chkbox_select_all  = $('thead input[name="task"]', $table).get(0);
 
    // If none of the checkboxes are checked
    if($chkbox_checked.length === 0){
@@ -291,7 +285,7 @@ $(document).ready(function (){
    });
 
    // Handle click on "Select all" control
-   $('thead input[name="select_all"]', table.table().container()).on('click', function(e){
+   $('thead input[name="task"]', table.table().container()).on('click', function(e){
       if(this.checked){
          $('#example tbody input[type="checkbox"]:not(:checked)').trigger('click');
       } else {
@@ -373,7 +367,7 @@ $(document).ready(function (){
                
                 <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskname}"/></td>
                 
-                <td  style="padding:0 75px 0 75px;"><input type="checkbox" class="rule" id="one"  name="task" value="${task.taskid}"></td>
+                <td  style="padding:0 75px 0 75px;"><input  type="checkbox" class="rule" id="one"  name="task" value="${task.taskid}"></td>
                
                 <td  style="padding:0 75px 0 75px;"><input type="text" id="textfield" name="${task.taskid}"></td>
               
