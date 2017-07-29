@@ -12,9 +12,7 @@
 <%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
+
 <link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
     
@@ -175,56 +173,171 @@ body {
   font-size: 12px;
 }
 
-
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
 tr:nth-child(even){background-color: #F7F7F7}
 
 th {
     background-color: #ff3333;
     color: white;
 }
+table.dataTable.select tbody tr,
+table.dataTable thead th:first-child {
+  cursor: pointer;
+}
 </style>
     
 
-<script>
-$(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollY":"200px",
-        "scrollCollapse": true,
-        "paging":  false,
-        "sorting": true,
-    } );
-} );
-</script>
-<script>
-$(function () {
-	$('.badges').hide();
-	$('.rule').on('click', reorder);
-    $('.sortable').sortable().droppable({
-		drop: function(ev, ui){ setTimeout(reorder,10); }
-	});
-    
-    function reorder(e, el) {
-        $('.badges').hide();
-        var selected = $('.box [type=checkbox]:checked');
-        selected.each(function(i, cb) {
-            $(cb).next('.badges').text(i+1).show();
-        });
-    }
-});
-</script>
-    
 
+
+    
+<script>
+    //
+// Updates "Select all" control in a data table
+//
+function updateDataTableSelectAllCtrl(table){
+   var $table             = table.table().node();
+   var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
+   var $chkbox_checked    = $('tbody input[type="checkbox"]:checked', $table);
+   var chkbox_select_all  = $('thead input[name="select_all"]', $table).get(0);
+
+   // If none of the checkboxes are checked
+   if($chkbox_checked.length === 0){
+      chkbox_select_all.checked = false;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+      }
+
+   // If all of the checkboxes are checked
+   } else if ($chkbox_checked.length === $chkbox_all.length){
+      chkbox_select_all.checked = true;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+      }
+
+   // If some of the checkboxes are checked
+   } else {
+      chkbox_select_all.checked = true;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = true;
+      }
+   }
+}
+
+$(document).ready(function (){
+   // Array holding selected row IDs
+   var rows_selected = [];
+   var table = $('#example').DataTable({
+      'ajax': 'https://api.myjson.com/bins/1us28',
+      'columnDefs': [{
+         'targets': 0,
+         'searchable':false,
+         'orderable':false,
+         'width':'1%',
+         'className': 'dt-body-center',
+         'render': function (data, type, full, meta){
+             return '<input type="checkbox">';
+         }
+      }],
+      'order': [1, 'asc'],
+      'rowCallback': function(row, data, dataIndex){
+         // Get row ID
+         var rowId = data[0];
+
+         // If row ID is in the list of selected row IDs
+         if($.inArray(rowId, rows_selected) !== -1){
+            $(row).find('input[type="checkbox"]').prop('checked', true);
+            $(row).addClass('selected');
+         }
+      }
+   });
+
+   // Handle click on checkbox
+   $('#example tbody').on('click', 'input[type="checkbox"]', function(e){
+      var $row = $(this).closest('tr');
+
+      // Get row data
+      var data = table.row($row).data();
+
+      // Get row ID
+      var rowId = data[0];
+
+      // Determine whether row ID is in the list of selected row IDs 
+      var index = $.inArray(rowId, rows_selected);
+
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl(table);
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+   // Handle click on table cells with checkboxes
+   $('#example').on('click', 'tbody td, thead th:first-child', function(e){
+      $(this).parent().find('input[type="checkbox"]').trigger('click');
+   });
+
+   // Handle click on "Select all" control
+   $('thead input[name="select_all"]', table.table().container()).on('click', function(e){
+      if(this.checked){
+         $('#example tbody input[type="checkbox"]:not(:checked)').trigger('click');
+      } else {
+         $('#example tbody input[type="checkbox"]:checked').trigger('click');
+      }
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+   // Handle table draw event
+   table.on('draw', function(){
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl(table);
+   });
+    
+   // Handle form submission event 
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element 
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY     
+      
+      // Output form data to a console     
+      $('#example-console').text($(form).serialize());
+      console.log("Form submission", $(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+      e.preventDefault();
+   });
+});
+    
+</script>
 <title>Assign Tasks to Template</title>
 </head>
 
@@ -241,9 +354,9 @@ $(function () {
 	   
 	   <h4 >List of All the Tasks </h4>  
 	   
-	   <form:form  action="AddTaskTemplate.do" method="post">
+	   <form:form id="frm-example"  action="AddTaskTemplate.do" method="post">
                
-	   <table border="1" id="example" class="display" width="100%"  cellspacing="0">
+	   <table id="example" class="display select" cellspacing="0" width="100%">
         <thead>
             <tr bgcolor="#ff6666">
              <th>Task Name</th>
@@ -260,7 +373,7 @@ $(function () {
                
                 <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskname}"/></td>
                 
-             <td  style="padding:0 75px 0 75px;"><input type="checkbox" class="rule" id="one"  name="task" value="${task.taskid}"></td>
+                <td  style="padding:0 75px 0 75px;"><input type="checkbox" class="rule" id="one"  name="task" value="${task.taskid}"></td>
                
                 <td  style="padding:0 75px 0 75px;"><input type="text" id="textfield" name="${task.taskid}"></td>
               
