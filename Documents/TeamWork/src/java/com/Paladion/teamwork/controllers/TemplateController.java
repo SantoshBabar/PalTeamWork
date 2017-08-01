@@ -70,7 +70,7 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 	
         TempSession.setAttribute("TaskList", Tasklist);
               
-	return new ModelAndView("AddTasksToTemplate","AllTasks", Tasklist);
+	return new ModelAndView("AddTasksToTemplatev1","AllTasks", Tasklist);
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)

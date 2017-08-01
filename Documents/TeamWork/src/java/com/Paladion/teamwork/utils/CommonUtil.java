@@ -35,20 +35,20 @@ import javax.servlet.http.HttpSession;
  */
 public class CommonUtil {
     
-    public List<MapTemplateTaskBean> Maptasktotemplate(HttpServletRequest req,HttpSession session)
+    public List<MapTemplateTaskBean> Maptasktotemplate(HttpServletRequest req, HttpSession session) 
     {
-           List<MapTemplateTaskBean> mTTBList=new ArrayList<MapTemplateTaskBean>();
-	List<TaskBean> tasklist = null;
-           TemplateBean TempB=null;
-           int Tempid,i,j=0;
-        
+        List<MapTemplateTaskBean> mTTBList = new ArrayList<MapTemplateTaskBean>();
+        List<TaskBean> tasklist = null;
+        TemplateBean TempB = null;
+        int Tempid, i, j = 0;
+
         //retrieving tasks and templates from session stored in controller
-	TempB=(TemplateBean)session.getAttribute("Template"); 
-            tasklist=(List<TaskBean>)session.getAttribute("TaskList");
-        
-           Tempid=TempB.getTemplateid();
-           System.out.println("The templateid to which tasks will be added: "+Tempid);
-		 
+        TempB = (TemplateBean) session.getAttribute("Template");
+        tasklist = (List<TaskBean>) session.getAttribute("TaskList");
+
+        Tempid = TempB.getTemplateid();
+        System.out.println("The templateid to which tasks will be added: " + Tempid);
+
 	String[] taskID=req.getParameterValues("task");
 	
            int[] taskid=new int[taskID.length];
