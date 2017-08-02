@@ -16,7 +16,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #ff6666;
+    background-color: #a6a6a6;
     width:1500px;
    
 }
@@ -38,7 +38,7 @@ li a:hover:not(.active) {
 }
 
 .active {
-    background-color: #ff1a1a;
+    background-color: #cc0000;
 }
 </style>
 <style>
@@ -47,8 +47,7 @@ li a:hover:not(.active) {
 
 body {
 
-	color:#6a6f8c;
-	background:#c8c8c8;
+	background-image: url("grey.jpg");
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -61,7 +60,7 @@ body {
   padding: 40px;
   width: 1420px;
   height: 550px;
-  background-color: #F7F7F7;
+  background-color: white;
   margin: 0 auto 10px;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -124,7 +123,7 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #ff3333;
+  background-color: #a6a6a6;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -169,7 +168,7 @@ th, td {
 tr:nth-child(even){background-color: #F7F7F7}
 
 th {
-    background-color: #ff3333;
+    background-color: #a6a6a6;
     color: white;
 }
 
@@ -191,7 +190,7 @@ $(document).ready(function() {
   <%@include file="Header.jsp" %>
         
     <div class="login-card" >
-        <div align="center">  <h3 style="color: #ff3333; font-family: sans-serif; font-style: normal">Upload Project Documents</h3></div>
+        <div align="center">  <h3 style="color: #a6a6a6; font-family: sans-serif; font-style: normal">Upload Project Documents</h3></div>
 	<div class="right">
             
         <form:form commandName="filebean" action="uploadfiles.do?AntiCSRFToken=${csrfPreventionSalt}" method="post" enctype="multipart/form-data">

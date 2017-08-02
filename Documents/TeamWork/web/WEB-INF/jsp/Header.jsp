@@ -47,17 +47,17 @@
     outline: none;
     color: white;
     padding: 14px 16px;
-    background-color: red;
+    background-color: #cc0000;
 }
 
 .container a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+    background-color: #cc0000;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #999966;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;

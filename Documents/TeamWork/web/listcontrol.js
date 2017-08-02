@@ -18,7 +18,7 @@
                 $(origin).find(':selected').appendTo(dest);
                 $("#test").html("");
                 $("#sbTwo > option").each(function(){
-                $('<input type="text" name="'+this.value+'" style="height:20px"/>').appendTo("#test");
+                $('<input type="text" name="'+this.value+'" style="height:22px"/>').appendTo("#test");
    // $("#test").appendTo("#frm");
     
      
@@ -31,7 +31,7 @@
                 $(origin).find(':selected').appendTo(dest);
                 $("#test").html("");
                 $("#sbTwo > option").each(function(){
-    $("#test").append('<input type="text" name='+this.value+' style="height:20px"/>')
+    $("#test").append('<input type="text" name='+this.value+' style="height:22px"/>')
     $("#test").append("<br/>");
 });
 

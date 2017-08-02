@@ -15,7 +15,7 @@
 
 body {
  
-  background-image: url(new.jpg);
+ background-image: url("grey.jpg");
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -35,7 +35,7 @@ border-bottom-color: black;
   padding: 40px;
   width: 430px;
   height: 500px;
-  background-color: #F7F7F7;
+   background-color: white;
   margin: 0 auto 10px;
   border-radius: 20px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -97,7 +97,7 @@ border-bottom-color: black;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #ff3333;
+  background-color: #a6a6a6;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -143,7 +143,7 @@ border-bottom-color: black;
 
 
 <div class="login-card">
-<div align="center">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create email template</h2><br></div>
+<div align="center">  <h2 style="color: #a6a6a6; font-family: sans-serif; font-style: normal">Create email template</h2><br></div>
 <form:form action="createEmailTemp.do" method="POST" modelAttribute="EmailBean">
 <table>
 
