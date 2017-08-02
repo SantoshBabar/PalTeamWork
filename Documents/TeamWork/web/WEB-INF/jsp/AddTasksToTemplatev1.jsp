@@ -10,7 +10,8 @@
 <style> 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 30%;
+    height: 40%;
     float:left;
     max-height: 100px;
 }
@@ -93,7 +94,7 @@ body {
 }
 
 .login-card input[type=submit] {
-  width: 10%;
+  width: 20.2%;
   display: block;
   margin-bottom: 10px;
   position: relative;
@@ -148,7 +149,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 20%;
+  width: 10%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -214,7 +215,7 @@ $(document).ready(function() {
         
         <h2>Select tasks to the template</h2>
         <h3>List of all the tasks</h3>
-        <table id="example" border="2">
+        <table id="example" >
             <tr><td width="50%">
         <select id="sbOne" multiple="multiple" style="width: 400px;" >
 	<Option value = "select">SELECT</Option>
@@ -228,7 +229,7 @@ $(document).ready(function() {
 
         <form:form action="AddTaskTemplate.do" method="post" id="frm">
         
-            <table border="2">
+            <table >
                 <tr>
                     <td style="vertical-align:top;overflow:scroll;max-height: 400px">
                         <select id="sbTwo" multiple="multiple" name="task" style="width:400px">
@@ -240,10 +241,11 @@ $(document).ready(function() {
                 </tr>   
             </table>
             <br><br>     <br><br>     <br><br>
-        <input type="button" id="left" value="<" align="center"/>
-        <input type="button" id="right" value=">" align="cener"/>
-        <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/>     
-        <input type="submit" id="tt" value="submit" />
+        <input class="login login-submit" type="button" id="left" value="<" align="center"/>
+        <input class="login login-submit" type="button" id="right" value=">" align="cener"/>
+        <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
+        <br><br>
+        <input class="login login-submit" type="submit" id="tt" value="submit" />
         </form:form>
         <br>
         
