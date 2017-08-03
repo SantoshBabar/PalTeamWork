@@ -291,7 +291,7 @@ $(document).ready(function() {
          </tbody>
 </table>
        
-        <a href="uploadfiles.do"><h4>upload project documents<h4></a>  
+        <a href="uploadfiles.do?pid=${ProjectData.projectid}"><h4>upload project documents<h4></a>  
        
 </div>
 
