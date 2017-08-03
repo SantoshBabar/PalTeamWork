@@ -15,21 +15,15 @@ table {
     float:left;
     max-height: 100px;
 }
-
 th, td {
     text-align: left;
     padding: 8px;
 }
-
 tr:nth-child(even){background-color: #F7F7F7}
-
 th {
     background-color: #a6a6a6;
     color: white;
 }
-
-
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -39,11 +33,9 @@ ul {
     width:1500px;
    
 }
-
 li {
     float: left;
 }
-
 li a {
     display: block;
     color: white;
@@ -51,21 +43,16 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
 li a:hover:not(.active) {
     background-color: #b30000;
 }
-
 .active {
     background-color: #cc0000;
 }
 </style>
 <style>
-
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
-
 body {
-
 	background-image: url("grey.jpg");
   background-repeat: repeat-y;
   -webkit-background-size: cover;
@@ -74,7 +61,6 @@ body {
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
-
 .login-card {
   padding: 40px;
   width: 1420px;
@@ -85,21 +71,18 @@ body {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
-
 .login-card h1 {
   font-weight: 1;
   text-align: center;
   font-size: 2.3em;
 }
-
 .login-card input[type=submit] {
-  width: 20.2%;
+  width: 10%;
   display: block;
   margin-bottom: 10px;
   position: relative;
   float: center;
 }
-
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
@@ -114,7 +97,6 @@ body {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-
 .login-card input[type=text]:hover, input[type=password]:hover {
   border: 2px solid #b9b9b9;
   
@@ -123,7 +105,6 @@ body {
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
-
 .login {
   text-align: center;
   font-size: 14px;
@@ -135,9 +116,6 @@ body {
 /* -webkit-user-select: none;
   user-select: none; */
 }
-
-
-
 .login-submit:hover {
   /* border: 1px solid #2f5bb7; */
   border: 0px;
@@ -145,17 +123,15 @@ body {
   background-color: #ff8080;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
-
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 10%;
+  width: 5%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
   background-color: #a6a6a6;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
-
 .login-submit:hover {
   /* border: 1px solid #2f5bb7; */
   border: 0px;
@@ -163,7 +139,6 @@ body {
   background-color: #ff8080;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
-
 .login-card a {
   text-decoration: none;
   color: #666;
@@ -173,17 +148,14 @@ body {
   opacity: 0.6;
   transition: opacity ease 0.5s;
 }
-
 .login-card a:hover {
   opacity: 1;
 }
-
 .login-help {
   width: 100%;
   text-align: center;
   font-size: 12px;
 }
-
 table.dataTable.select tbody tr,
 table.dataTable thead th:first-child {
   cursor: pointer;
@@ -192,14 +164,13 @@ table.dataTable thead th:first-child {
   position:relative;
 }
 #table-scroll {
-  height:120px;
-  overflow:auto;  
+  height:100px;
+  overflow:200px;  
   margin-top:5px;
 }
 #table-wrapper table {
   width:100%;
  
-
 }
 #table-wrapper table * {
   
@@ -209,7 +180,7 @@ table.dataTable thead th:first-child {
   position:absolute;   
   top:-20px;
   z-index:2;
-  height:20px;
+  height:80px;
   
   border:1px solid red;
 }        
@@ -242,9 +213,9 @@ $(document).ready(function() {
   
             <tr><td  style="vertical-align:top;overflow:scroll;max-height: 400px">
         <select id="sbOne" multiple="multiple" style="width: 500px;height:130px" >
-	<Option value = "select">SELECT</Option>
+	
 	<c:forEach items="${AllTasks}" var="task">
-	<option value="${task.taskid}">${task.taskname}</option>
+	<option value="${task.taskid}" style="height:28px">${task.taskname}</option>
 	</c:forEach>
 	</select>
                 </td>
@@ -252,7 +223,10 @@ $(document).ready(function() {
         </tr></table>
       
 
-        <form:form action="AddTaskTemplate.do" method="post" id="frm">
+        
+        <form:form action="AddTaskTemplate.do" method="post" id="frm"><br><br>
+            <input class="login login-submit" type="button" id="left" value="<" align="left"/>
+        <input class="login login-submit" type="button" id="right" value=">" align="left"/>
             <div id="table-wrapper">
         <div id="table-scroll">
         <table id="example" >
@@ -272,8 +246,7 @@ $(document).ready(function() {
         </div>
        
             
-        <input class="login login-submit" type="button" id="left" value="<" align="left"/>
-        <input class="login login-submit" type="button" id="right" value=">" align="left"/>
+        
         <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
         <br><br>
         <input class="login login-submit" type="submit" id="tt" value="submit" />
@@ -287,4 +260,4 @@ $(document).ready(function() {
 
 
         </body>
-        </html>
+</html>
