@@ -24,7 +24,7 @@ th, td {
 tr:nth-child(even){background-color: #F7F7F7}
 
 th {
-    background-color: #ff3333;
+    background-color: #a6a6a6;
     color: white;
 }
 
@@ -35,7 +35,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #ff6666;
+    background-color: #a6a6a6;
     width:1500px;
    
 }
@@ -57,7 +57,7 @@ li a:hover:not(.active) {
 }
 
 .active {
-    background-color: #ff1a1a;
+    background-color: #cc0000;
 }
 </style>
 <style>
@@ -66,8 +66,7 @@ li a:hover:not(.active) {
 
 body {
 
-	color:#6a6f8c;
-	background:#c8c8c8;
+	background-image: url("grey.jpg");
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -80,7 +79,7 @@ body {
   padding: 40px;
   width: 1420px;
   height: auto;
-  background-color: #F7F7F7;
+   background-color: white;
   margin: 0 auto 10px;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -153,7 +152,7 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #ff3333;
+  background-color: #a6a6a6;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -189,7 +188,31 @@ table.dataTable.select tbody tr,
 table.dataTable thead th:first-child {
   cursor: pointer;
 }
-        
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:120px;
+  overflow:auto;  
+  margin-top:5px;
+}
+#table-wrapper table {
+  width:100%;
+ 
+
+}
+#table-wrapper table * {
+  
+  color:black;
+}
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  
+  border:1px solid red;
+}        
 </style>
         
         <script>
@@ -215,9 +238,10 @@ $(document).ready(function() {
         
         <h2>Select tasks to the template</h2>
         <h3>List of all the tasks</h3>
-        <table id="example" >
-            <tr><td width="50%">
-        <select id="sbOne" multiple="multiple" style="width: 400px;" >
+        
+  
+            <tr><td  style="vertical-align:top;overflow:scroll;max-height: 400px">
+        <select id="sbOne" multiple="multiple" style="width: 500px;height:130px" >
 	<Option value = "select">SELECT</Option>
 	<c:forEach items="${AllTasks}" var="task">
 	<option value="${task.taskid}">${task.taskname}</option>
@@ -226,23 +250,30 @@ $(document).ready(function() {
                 </td>
       
         </tr></table>
+      
 
         <form:form action="AddTaskTemplate.do" method="post" id="frm">
-        
+            <div id="table-wrapper">
+        <div id="table-scroll">
+        <table id="example" >
             <table >
                 <tr>
                     <td style="vertical-align:top;overflow:scroll;max-height: 400px">
-                        <select id="sbTwo" multiple="multiple" name="task" style="width:400px">
+                        <select id="sbTwo" multiple="multiple" name="task" style="width: 500px;height:130px">
                         </select>
                     </td>
                     
-                    <td id="test" style="vertical-align:top;overflow:scroll;max-height: 400px">    
+                    <td id="test" style="vertical-align:top;overflow:scroll;max-height: 400px">   
+                        
                     </td>
                 </tr>   
             </table>
-            <br><br>     <br><br>     <br><br>
-        <input class="login login-submit" type="button" id="left" value="<" align="center"/>
-        <input class="login login-submit" type="button" id="right" value=">" align="cener"/>
+             </div>
+        </div>
+       
+            
+        <input class="login login-submit" type="button" id="left" value="<" align="left"/>
+        <input class="login login-submit" type="button" id="right" value=">" align="left"/>
         <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
         <br><br>
         <input class="login login-submit" type="submit" id="tt" value="submit" />

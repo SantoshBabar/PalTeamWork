@@ -23,7 +23,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #ff6666;
+    background-color: #a6a6a6;
     width:1500px;
    
 }
@@ -45,7 +45,7 @@ li a:hover:not(.active) {
 }
 
 .active {
-    background-color: #ff1a1a;
+    background-color: #cc0000;
 }
 </style>
 <style>
@@ -54,8 +54,7 @@ li a:hover:not(.active) {
 
 body {
 
-	color:#6a6f8c;
-	background:#c8c8c8;
+	background-image: url("grey.jpg");
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -141,7 +140,7 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #ff3333;
+  background-color: #a6a6a6;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -352,7 +351,7 @@ $(document).ready(function (){
                
 	   <table id="example" class="display select" cellspacing="0" width="100%">
         <thead>
-            <tr bgcolor="#ff6666">
+            <tr bgcolor="#a6a6a6">
              <th>Task Name</th>
              <th> Check/Uncheck</th> 
              <th> Weight(%)</th>
