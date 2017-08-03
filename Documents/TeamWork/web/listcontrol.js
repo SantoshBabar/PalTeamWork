@@ -18,7 +18,7 @@
                 $(origin).find(':selected').appendTo(dest);
                 $("#test").html("");
                 $("#sbTwo > option").each(function(){
-                $('<input type="text" name="'+this.value+'" style="height:22px"/>').appendTo("#test");
+                $('jghg<input type="text" name="'+this.value+'" style="height:22px"/>').appendTo("#test");
    // $("#test").appendTo("#frm");
     
      
