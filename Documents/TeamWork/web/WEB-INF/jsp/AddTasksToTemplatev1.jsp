@@ -215,7 +215,7 @@ $(document).ready(function() {
         <select id="sbOne" multiple="multiple" style="width: 500px;height:130px" >
 	
 	<c:forEach items="${AllTasks}" var="task">
-	<option value="${task.taskid}" style="height:28px">${task.taskname}</option>
+	<option value="${task.taskid}" style="height:30px">${task.taskname}</option>
 	</c:forEach>
 	</select>
                 </td>
@@ -228,12 +228,12 @@ $(document).ready(function() {
             <input class="login login-submit" type="button" id="left" value="<" align="left"/>
         <input class="login login-submit" type="button" id="right" value=">" align="left"/>
             <div id="table-wrapper">
-        <div id="table-scroll">
+       
         <table id="example" >
             <table >
                 <tr>
-                    <td style="vertical-align:top;overflow:scroll;max-height: 400px">
-                        <select id="sbTwo" multiple="multiple" name="task" style="width: 500px;height:130px">
+                    <td style="vertical-align:top;overflow:scroll;max-height: 400px;max-width:100px">
+                        <select id="sbTwo" multiple="multiple" name="task" style="width: 500px;height:200px">
                         </select>
                     </td>
                     
@@ -243,7 +243,7 @@ $(document).ready(function() {
                 </tr>   
             </table>
              </div>
-        </div>
+       
        
             
         
