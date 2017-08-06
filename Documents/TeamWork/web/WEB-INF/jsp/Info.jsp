@@ -387,7 +387,7 @@ table tr td
           <li><a href="CodeUnderstanding.do">Code Understanding</a></li>
           <li><a href="Info.do">Information Gathering Sheet</a></li>
           <li><a href="another_page.html">Test plans</a></li>
-          <li><a href="logout.do">Logout</a></li>
+          <li><a href="Logout.do">Logout</a></li>
           <li><a href="contact.html">Code review guidelines</a></li>
           
         </ul>
@@ -436,13 +436,10 @@ table tr td
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Threat Profile</h1>
-        <div style="text-align:justify">  <p style="text-indent: 50px;width: 874px ">Threat profile is a very interesting concept that identifies the complete set of threats in a given application context and it is a structured approach that enables you to identify, quantify, and address the security risks associated with an application.</p></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Step 1:</b> Decompose the Application. The first step in the threat profile process is concerned with gaining an understanding of the application and how it interacts with external entities. This involves creating use-cases to understand how the application is used, identifying entry points to see where a potential attacker could interact with the application, identifying assets i.e. items/areas that the attacker would be interested in, and identifying trust levels which represent the access rights that the application will grant to external entities.</p></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Step 2:</b> Creating a threat profile, this is shown below</p></div>
-        <div id="banner"></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Example:<br></b><b style="color:brown"> Tabs:</b> Fund Transfer<br> <b style="color:brown">Sub Tab:</b> Transfer to other accounts<br><b style="color:brown">User roles:</b> Normal user<br><b style="color:brown">Threat:</b> An adversary can do negative transactions</p></div>
-        
+        <h1>How to fill Information Gathering Sheet?</h1>
+        <div style="text-align:justify">  <p style="text-indent: 50px;width: 874px ">The Information Gathering Sheet is very important process, We need to fill this sheet so that Technical Lead can understand the application functionality, here we will be filling few information related to application like
+                application name, which programming language they are using for backend code, server version, how many user roles are present in the application and also a brief information about application architecture.</p></div>
+        <a href="https://docs.google.com/spreadsheets/d/1A79dUkhvkiKHC58myE0s_lDGJ7fq3Xb9lTLSsnccepw/export?format=xlsx&authuser=0">Download Information Gathering sheet</a>
       </div>
     </div>
     <div id="content_footer"></div>

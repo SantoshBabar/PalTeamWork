@@ -387,7 +387,7 @@ table tr td
           <li><a href="CodeUnderstanding.do">Code Understanding</a></li>
           <li><a href="Info.do">Information Gathering Sheet</a></li>
           <li><a href="another_page.html">Test plans</a></li>
-          <li><a href="logout.do">Logout</a></li>
+          <li><a href="Logout.do">Logout</a></li>
           <li><a href="contact.html">Code review guidelines</a></li>
           
         </ul>
@@ -436,12 +436,14 @@ table tr td
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Threat Profile</h1>
-        <div style="text-align:justify">  <p style="text-indent: 50px;width: 874px ">Threat profile is a very interesting concept that identifies the complete set of threats in a given application context and it is a structured approach that enables you to identify, quantify, and address the security risks associated with an application.</p></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Step 1:</b> Decompose the Application. The first step in the threat profile process is concerned with gaining an understanding of the application and how it interacts with external entities. This involves creating use-cases to understand how the application is used, identifying entry points to see where a potential attacker could interact with the application, identifying assets i.e. items/areas that the attacker would be interested in, and identifying trust levels which represent the access rights that the application will grant to external entities.</p></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Step 2:</b> Creating a threat profile, this is shown below</p></div>
-        <div id="banner"></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Example:<br></b><b style="color:brown"> Tabs:</b> Fund Transfer<br> <b style="color:brown">Sub Tab:</b> Transfer to other accounts<br><b style="color:brown">User roles:</b> Normal user<br><b style="color:brown">Threat:</b> An adversary can do negative transactions</p></div>
+        <h1>Code Understanding</h1>
+        
+        <div style="text-align:justify">  <p style="text-indent: 50px;width: 874px ">Code Understanding is very important step in the Source Code Review process, it provides a complete architecture of the application and code flow. Code Understanding has following steps:</p></div>
+        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Code walk through:</b>  Sit with the developers to get the code understanding this will help to understand the code layout and code architecture.</p></div>
+        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Listing the features:</b>  Understand the application flow and list all the functionalities eg: If it is a bank application then the features will be: Fund transfer, Balance enquiry, Last few transactions.</p></div>
+        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Mapping code files to features:</b>  In this step map all the applications features with the code files eg: if Fund transfer is a feature then FundTransfer.java class file will be the back end code.</p></div>
+        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Listing technology related details:</b>  Here list down the technology use in the application like backend programming language, framework used, version details, server details with version.</p></div>
+        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Filling Information Gathering sheet:</b>  This is an important step in Code Review: <a href="Info.do">Click here </a>to know the process.</p></div><br><br><br><br><br>
         
       </div>
     </div>
