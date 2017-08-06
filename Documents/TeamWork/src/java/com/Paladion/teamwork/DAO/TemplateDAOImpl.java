@@ -97,10 +97,14 @@ public class TemplateDAOImpl implements TemplateDAO{
 	public boolean deleteTemplate(int id)
 	{
             Session session = this.sessionFactory.openSession();
+            
+            Transaction tx = null;
+            tx = session.beginTransaction();
             String sql = "delete from templates where templateid=?";
             SQLQuery query = session.createSQLQuery(sql);
             query.setParameter(0, id);
             query.executeUpdate();
+            tx.commit();
             
             Session session1 = this.sessionFactory.openSession();
             String sql1 = "delete from template_task where templateid=?";
