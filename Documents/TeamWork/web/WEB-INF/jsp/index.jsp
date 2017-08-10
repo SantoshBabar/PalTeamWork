@@ -16,7 +16,9 @@
   
 <style>
 html
-{ height: 100%;}
+{ height: 100%;
+  
+}
 
 *
 { margin: 0;
@@ -25,7 +27,8 @@ html
 body
 { font: normal .80em 'trebuchet ms', arial, sans-serif;
   background: #FFF;
-  color: #555;}
+  color: #555;
+}
 
 p
 { padding: 0 0 20px 0;
