@@ -13,40 +13,32 @@
 //                $("#test").append(textbox);
 //               }
      
-            function moveLRItems(origin, dest) {
+            function moveLRItems(origin, dest) 
+            {
               
-                $(origin).find(':selected').appendTo(dest);
                 $("#test").html("");
-                $("#sbTwo > option").each(function(){
-                $('jghg<input type="text" name="'+this.value+'" style="height:22px"/>').appendTo("#test");
-   // $("#test").appendTo("#frm");
-    
-     
-});
-
-            }
+           }
             
-                    function moveRLItems(origin, dest) {
-              
-                $(origin).find(':selected').appendTo(dest);
-                $("#test").html("");
-                $("#sbTwo > option").each(function(){
-    $("#test").append('<input type="text" name='+this.value+' style="height:22px"/>')
-    $("#test").append("<br/>");
-});
+    function moveRLItems(origin, dest) 
+    {
 
-            }
+        $(origin).find(':selected').each(function ()
+        {
+            $('<tr><td><input type="text" name="' + this.value + '" value="' + this.text + '" disabled style="height:22px;background-color:Black;color:white"/></td><td><input type="text" name="' + this.value + '" style="height:22px"/></td></tr>').appendTo("#test");
+             });
+
+    }
 
 //            function moveAllItems(origin, dest) {
 //                $(origin).children().appendTo(dest);
 //            }
 
             $('#left').click(function () {
-                moveLRItems('#sbTwo', '#sbOne');
+                moveLRItems('#test0', '#sbOne');
             });
 
             $('#right').on('click', function () {
-                moveRLItems('#sbOne', '#sbTwo');
+                moveRLItems('#sbOne', '#test0');
             });
 
             $('#leftall').on('click', function () {

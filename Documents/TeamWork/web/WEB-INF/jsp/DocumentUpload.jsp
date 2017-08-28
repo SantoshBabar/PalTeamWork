@@ -193,20 +193,15 @@ $(document).ready(function() {
         <div align="center">  <h3 style="color: #a6a6a6; font-family: sans-serif; font-style: normal">Upload Project Documents</h3></div>
 	<div class="right">
             
-        <form:form commandName="filebean" action="uploadfiles.do?AntiCSRFToken=${csrfPreventionSalt}" method="post" enctype="multipart/form-data">
+<form:form commandName="filebean" action="uploadfiles.do?AntiCSRFToken=${csrfPreventionSalt}" method="post" enctype="multipart/form-data">
             
                 
                
                     <table>
    
 <tr>
-    <td align="center"><h4 >Document Name: </td>
-                 <td>   <form:input id="name" path="name" cssErrorClass="error" />
-                     <form:errors path="name" cssClass="error" /></td></tr>
-                
-                 <tr><td align="center"><h4 >Description: </td>
-                   <td> <form:input id="description" path="description" /></h4></td></tr>
-                
+   
+                 
                   <tr><td align="center">  Project Documents:  </td>
                    <td>  <input type="file" name="files" multiple="multiple"/></h4></td></tr>
                

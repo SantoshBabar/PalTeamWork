@@ -41,7 +41,7 @@
     <bean id="UserService" class="com.Paladion.teamwork.services.UserServiceImpl" />
     <bean id="EmailService" class="com.Paladion.teamwork.services.EmailServiceImpl" />
     <bean id="CommonUtil" class="com.Paladion.teamwork.utils.CommonUtil" />
-    
+    <bean id="AdminService" class="com.Paladion.teamwork.services.AdminServiceImpl" />
    
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
@@ -68,6 +68,7 @@
                 <value>com.Paladion.teamwork.beans.MapTemplateTaskBean</value>
                 <value>com.Paladion.teamwork.beans.ProjectTransactionBean</value>
                 <value>com.Paladion.teamwork.beans.EmailTemplateBean</value>
+                <value>com.Paladion.teamwork.beans.SystemBean</value>
             </list>
         </property>
 
@@ -112,4 +113,7 @@
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
         </bean>
 
+        <bean id="AdminDAO" class="com.Paladion.teamwork.DAO.AdminDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+        </bean>
     </beans>

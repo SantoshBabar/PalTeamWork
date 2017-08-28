@@ -181,6 +181,7 @@ body {
         <div class="login-card">
         
         <h2>Select tasks to the template</h2>
+<<<<<<< HEAD
         <h3>Task List. Click on the task to select</h3>
  
 
@@ -205,6 +206,40 @@ body {
     <br>
     <input type="submit" value="submit">
     <form>    
+=======
+        <h3>List of all the tasks</h3>
+        
+  
+            <tr><td  style="vertical-align:top;overflow:scroll;max-height: 400px">
+        <select id="sbOne" multiple="multiple" style="width: 500px;height:130px" >
+	
+	<c:forEach items="${AllTasks}" var="task">
+	<option value="${task.taskid}" style="height:30px">${task.taskname}</option>
+	</c:forEach>
+	</select>
+                </td>
+      
+        </tr></table>
+              
+        <form:form action="AddTaskTemplate.do" method="post" id="frm"><br><br>
+            <input class="login login-submit" type="button" id="left" value="<" align="left"/>
+        <input class="login login-submit" type="button" id="right" value=">" align="left"/>
+           
+             <table border="2" id="test">
+     
+            </table>
+     
+        <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
+        <br><br>
+        <input class="login login-submit" type="submit" id="tt" value="submit" />
+        </form:form>
+        <br>
+        
+        </div>
+        
+<!--        <input type="button" id="leftall" value="<<" />
+        <input type="button" id="rightall" value=">>" />-->
+>>>>>>> origin/LatestBranch
 
 
 </body>
