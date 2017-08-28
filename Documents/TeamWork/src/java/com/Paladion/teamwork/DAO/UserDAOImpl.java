@@ -129,6 +129,7 @@ public class UserDAOImpl implements UserDAO{
             String sql = "UPDATE users SET username=?,email=?,team=?,phone=?,role=? WHERE userid=?";
             SQLQuery query = session.createSQLQuery(sql);
             query.setParameter(0,UB.getUsername());
+            System.out.println("usrname is "+UB.getUsername());
             query.setParameter(1,UB.getEmail());
             query.setParameter(2,UB.getTeam());
             query.setParameter(3,UB.getPhone());

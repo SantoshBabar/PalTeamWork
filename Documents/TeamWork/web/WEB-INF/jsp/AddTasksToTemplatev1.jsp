@@ -7,19 +7,15 @@
 <script src="http://prog.linkstraffic.net/jquery/jquery-2.1.1.js"></script>
 
 <script type="text/javascript">
-
 var addedrows = new Array();
-
 $(document).ready(function() {
     $( "#sourcetable tbody tr" ).on( "click", function( event ) {
   
     var ok = 0;
     var theid = $( this ).attr('id').replace("sour","");	
-
 	var newaddedrows = new Array();
 	
     for	(index = 0; index < addedrows.length; ++index) {
-
 		// if already selected then remove
 		if (addedrows[index] == theid) {
 			   
@@ -61,7 +57,6 @@ $(document).ready(function() {
 		                               + '</td></tr>');		  
 		
 	}
-
 	
     });
 });		
@@ -77,11 +72,9 @@ $(document).ready(function() {
     width:1500px;
    
 }
-
 li {
     float: left;
 }
-
 li a {
     display: block;
     color: white;
@@ -89,11 +82,9 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
 li a:hover:not(.active) {
     background-color: #b30000;
 }
-
 .active {
     background-color: #cc0000;
 }
@@ -244,7 +235,6 @@ body {
   background-color: #c0c0c0;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
-
 .login-help {
   width: 100%;
   text-align: center;
