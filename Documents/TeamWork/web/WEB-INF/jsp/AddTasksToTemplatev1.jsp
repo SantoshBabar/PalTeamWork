@@ -241,9 +241,7 @@ body {
   font-size: 12px;
 }
      
-</style>
-        
-              
+</style>          
         </head>
 	<body>
         <%@include file="Header.jsp" %>
@@ -256,49 +254,30 @@ body {
         <div class="login-card">
         
         <h2>Select tasks to the template</h2>
-        <h3>The source table</h3>
+        <h3>Task List. Click on the task to select</h3>
  
 <table id="sourcetable">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>Task ID</th>
             <th>Task</th>
             <th>Weight</th>
-                                  
         </tr>
     </thead>
  
     <tbody>
-        <tr id="sour0">
-            <td>1</td>
-            <td>Name 1</td>
+        <c:forEach  items="${AllTasks}" var="task">
+        <tr id="sour+${task.taskid}">
+            <td>${task.taskid}</td>
+            <td>${task.taskname}</td>
             <td><input type="text"></td>
         </tr>
-        <tr id="sour1">
-            <td>2</td>
-            <td>Name 2</td>
-            <td><input type="text"></td>
-        </tr>
-        <tr id="sour2">
-            <td>3</td>
-            <td>Name 3</td>
-            <td><input type="text"></td>
-        </tr>
-        <tr id="sour3">
-            <td>4</td>
-            <td>Name 4</td>
-            <td><input type="text"></td>
-        </tr>
-        <tr id="sour4">
-            <td>5</td>
-            <td>Name 5</td>
-            <td><input type="text"></td>
-        </tr>     
+        </c:forEach>
     </tbody>
 </table>
  
  
-<h3>The second table :</h3>
+<h3>Selected Tasks. Assign weights to selected task</h3>
  
 <form method="POST" action="">
 <table id="destinationtable">

@@ -49,7 +49,7 @@
 
         <property name="url" value="jdbc:mysql://localhost/teamwork" /> 
         <property name="username" value="root" />
-        <property name="password" value="root" />
+        <property name="password" value="admin" />
 
        
 
