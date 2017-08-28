@@ -12,10 +12,12 @@ import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import com.Paladion.teamwork.beans.ProjectTransactionWrapper;
 import com.Paladion.teamwork.beans.fileuploadBean;
+import com.Paladion.teamwork.services.AdminService;
 import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
+import com.sun.scenario.Settings;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -57,6 +59,11 @@ ProjectService PS;
 @Autowired
 @Qualifier(value="UserService")
 UserService US;
+
+@Autowired()
+@Qualifier(value = "AdminService")
+AdminService Aservice;
+
 	
 @ModelAttribute("ProjectM")
 public ProjectBean populate()
@@ -301,6 +308,8 @@ public fileuploadBean populate1()
 @RequestMapping(value="/uploadfiles",method=RequestMethod.POST)    
 public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute fileuploadBean filebean,Model model)
     {
+    HttpSession sess=req.getSession();    
+    String PID=(String) sess.getAttribute("uploadPID");    
     List<MultipartFile> upfiles = filebean.getFiles();    
     List<String> fileNames = new ArrayList<String>();    
     
@@ -310,11 +319,12 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
  
                 String fileName = multipartFile.getOriginalFilename();
                 fileNames.add(fileName);
- 
-                File imageFile = new File(req.getServletContext().getRealPath("/files"), fileName);
+                String filepath=Aservice.getSystemSettings().getUploadpath();
+                File uploadFile = new File(filepath+File.separator+"files"+File.separator+PID, fileName);
+                if(!uploadFile.exists())uploadFile.mkdirs();
                 try
                 {
-                    multipartFile.transferTo(imageFile);
+                multipartFile.transferTo(uploadFile);
                 } catch (IOException e) 
                 {
                     e.printStackTrace();
@@ -327,9 +337,11 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
     }
 
 @RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
-public ModelAndView uploaddocs()
+public ModelAndView uploaddocs(@RequestParam String pid,HttpServletRequest req)
 {
-return new ModelAndView("DocumentUpload");
+HttpSession sess=req.getSession();
+sess.setAttribute("uploadPID", pid);
+return new ModelAndView("DocumentUpload","SysSettings",Aservice.getSystemSettings());
 }
     
     
@@ -338,6 +350,7 @@ return new ModelAndView("DocumentUpload");
     @RequestMapping(value="/GetAllProjectDetails",method=RequestMethod.GET)
     public void getAllProjectsDetails(HttpServletRequest req)
     {
+        
         HttpSession sess= req.getSession(false);
         UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
 	ModelAndView result=new ModelAndView("Welcome");

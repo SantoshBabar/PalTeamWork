@@ -221,32 +221,15 @@ $(document).ready(function() {
                 </td>
       
         </tr></table>
-      
-
-        
+              
         <form:form action="AddTaskTemplate.do" method="post" id="frm"><br><br>
             <input class="login login-submit" type="button" id="left" value="<" align="left"/>
         <input class="login login-submit" type="button" id="right" value=">" align="left"/>
-            <div id="table-wrapper">
-       
-        <table id="example" >
-            <table >
-                <tr>
-                    <td style="vertical-align:top;overflow:scroll;max-height: 400px;max-width:100px">
-                        <select id="sbTwo" multiple="multiple" name="task" style="width: 500px;height:200px">
-                        </select>
-                    </td>
-                    
-                    <td id="test" style="vertical-align:top;overflow:scroll;max-height: 400px">   
-                        
-                    </td>
-                </tr>   
+           
+             <table border="2" id="test">
+     
             </table>
-             </div>
-       
-       
-            
-        
+     
         <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
         <br><br>
         <input class="login login-submit" type="submit" id="tt" value="submit" />

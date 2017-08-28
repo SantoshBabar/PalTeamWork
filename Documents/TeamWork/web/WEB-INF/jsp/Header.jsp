@@ -118,13 +118,14 @@
                 </div>
         </div> 
         
-        <% if(role.equalsIgnoreCase("Manager"))
+        <% if(role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin"))
         {%>
         <div class="dropdown">
-            <button class="dropbtn">Users</button>
+            <button class="dropbtn">Administration</button>
                 <div class="dropdown-content">
                 <a href="CreateUser.do">Create User</a>
                 <a href="ViewAllUser.do">View Users</a>
+                <a href="Administration.do">System Properties</a>
                 </div>
         </div> 
         <%}%>
