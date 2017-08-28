@@ -6,118 +6,45 @@
 	<head>
 <script src="http://prog.linkstraffic.net/jquery/jquery-2.1.1.js"></script>
 
-<script type="text/javascript">
-var addedrows = new Array();
-$(document).ready(function() {
-    $( "#sourcetable tbody tr" ).on( "click", function( event ) {
-  
-    var ok = 0;
-    var theid = $( this ).attr('id').replace("sour","");	
-	var newaddedrows = new Array();
-	
-    for	(index = 0; index < addedrows.length; ++index) {
-		// if already selected then remove
-		if (addedrows[index] == theid) {
-			   
-			$( this ).css( "background-color", "#ffccff" );
-			
-			// remove from second table :
-			var tr = $( "#dest" + theid );
-            tr.css("background-color","#FF3700");
-            tr.fadeOut(400, function(){
-                tr.remove();
-            });
-			
-	        //addedrows.splice(theid, 1);	
-    		
-			//the boolean
-			ok = 1;
-		} else {
-		
-		    newaddedrows.push(addedrows[index]);
-		} 
-    }   
+<style type="text/css">
+    select {
+        width: 200px;
+        float: left;
+    }
+    .controls {
+        width: 40px;
+        float: left;
+        margin: 10px;
+    }
+    .controls a {
+        background-color: #222222;
+        border-radius: 4px;
+        border: 2px solid #000;
+        color: #ffffff;
+        padding: 2px;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        margin: 5px;
+        width: 20px;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+    </script>
+    <script>
+    function moveAll(from, to) {
+        $('#'+from+' option').remove().appendTo('#'+to); 
+    }
     
-	addedrows = newaddedrows;
-	
-	// if no match found then add the row :
-	if (!ok) {
-		// retrieve the id of the element to match the id of the new row :
-		
-		
-		addedrows.push( theid);
-		
-		$( this ).css( "background-color", "#cacaca" );
-				
-     	$('#destinationtable tr:last').after('<tr id="dest' + theid + '"><td>' 
-		                               + $(this).find("td").eq(0).html() + '</td><td>' 
-		                               + $(this).find("td").eq(1).html() + '</td><td>' 
-		                               + $(this).find("td").eq(2).html() + '</td><td>' 
-		                               
-		                               + '</td></tr>');		  
-		
-	}
-	
-    });
-});		
-</script>	
-               
-<style> 
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #a6a6a6;
-    width:1500px;
-   
-}
-li {
-    float: left;
-}
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-li a:hover:not(.active) {
-    background-color: #b30000;
-}
-.active {
-    background-color: #cc0000;
-}
-table {
-        border     : 1px solid gray;
-    width      : 60%;
-    text-align : center;
-}
- 
-table#sourcetable tbody tr {
-    background-color : #a6a6a6;
-}
- 
-table#sourcetable tbody  tr {
-    cursor : pointer;
-}
-li {
-    float: left;
-}
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-li a:hover:not(.active) {
-    background-color: #a6a6a6;
-}
-.active {
-    background-color: #a6a6a6;
-}
-</style>
+    function moveSelected(from, to) {
+        $('#'+from+' option:selected').remove().appendTo('#'+to); 
+    }
+    function selectAll() {
+        $("select option").attr("selected","selected");
+    }
+    </script>
+       
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 body {
@@ -256,46 +183,28 @@ body {
         <h2>Select tasks to the template</h2>
         <h3>Task List. Click on the task to select</h3>
  
-<table id="sourcetable">
-    <thead>
-        <tr>
-            <th>Task ID</th>
-            <th>Task</th>
-            <th>Weight</th>
-        </tr>
-    </thead>
- 
-    <tbody>
-        <c:forEach  items="${AllTasks}" var="task">
-        <tr id="sour+${task.taskid}">
-            <td>${task.taskid}</td>
-            <td>${task.taskname}</td>
-            <td><input type="text"></td>
-        </tr>
-        </c:forEach>
-    </tbody>
-</table>
+
  
  
 <h3>Selected Tasks. Assign weights to selected task</h3>
  
-<form method="POST" action="">
-<table id="destinationtable">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Task</th>
-            <th>Weight</th>                   
-        </tr>
-    </thead>
- 
-     
-     
-</table>
+<form name="selection" method="post" onSubmit="return selectAll()"> 
+    <select multiple size="10" id="from">
+        <c:forEach  items="${AllTasks}" var="task">
+            <option> ${task.taskname}</option>
+      
+       </c:forEach>
+    </select>
+    <div class="controls"> 
+        <a href="javascript:moveAll('from', 'to')">&gt;&gt;</a> 
+        <a href="javascript:moveSelected('from', 'to')">&gt;</a> 
+        <a href="javascript:moveSelected('to', 'from')">&lt;</a> 
+        <a href="javascript:moveAll('to', 'from')" href="#">&lt;&lt;</a> </div>
+    <select multiple id="to" size="10" name="topics[]"></select>
+    <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
     <br>
-    <br>
-<input type="submit" value="submit"/> 
-</form>   
+    <input type="submit" value="submit">
+    <form>    
 
 
 </body>
