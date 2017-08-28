@@ -12,7 +12,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Error Page</title>
     </head>
-    <body>
-        <h1>Something went wrong</h1>
+    <body><br><br><br>
+        <div> 
+            <h1>
+                <center>
+                <font color="red">
+                <h2>Opps!! Something went wrong.</h2>
+                <h2>${Message}</h2>
+                </font>
+                </center>
+            </h1> 
+        </div>
     </body>
 </html>

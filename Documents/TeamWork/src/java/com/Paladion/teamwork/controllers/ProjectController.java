@@ -240,20 +240,27 @@ public fileuploadBean populate1()
     @RequestMapping(value="/updateProjectStatus",method=RequestMethod.GET)
     public ModelAndView updateProjectStatus(@RequestParam int pid,@RequestParam String status,HttpServletRequest req) throws ParseException
     {
+        boolean value=false;
         HttpSession sess= req.getSession(false);
         UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
-        boolean value= PS.updateProjectStatus(pid,status);
-        if(status.equalsIgnoreCase("completed")){
-          //  PS.updateTaskStatus(pid);
+        String role=sessuser.getRole();
+        if(role.equalsIgnoreCase("manager")||role.equalsIgnoreCase("lead")){
+        value= PS.updateProjectStatus(pid,status);
+//        if(status.equalsIgnoreCase("completed")){
+//          //  PS.updateTaskStatus(pid);
+//        }
         }
+        
+       
         if(value==true){
           ModelAndView result=new ModelAndView("DisplayProjects");
-	  result.addObject("AllProjects", PS.getAllProjects(sessuser.getUserid(), sessuser.getRole()));
+	  result.addObject("AllProjects", PS.getAllProjects(sessuser.getUserid(), role));
 	  return  result;
         }
+        
         else{
             ModelAndView result=new ModelAndView("Customerror");
-            result.addObject("Message","Something Went Wrong");
+            result.addObject("Message","You are not authorized to perform the action.");
             return result;
         }
     }

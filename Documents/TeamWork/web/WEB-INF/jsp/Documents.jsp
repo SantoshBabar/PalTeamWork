@@ -387,7 +387,7 @@ table tr td
           <li><a href="CodeUnderstanding.do">Code Understanding</a></li>
           <li><a href="Info.do">Information Gathering Sheet</a></li>
           <li><a href="another_page.html">Test plans</a></li>
-          <li><a href="logout.do">Logout</a></li>
+          <li><a href="Logout.do">Logout</a></li>
           <li><a href="contact.html">Code review guidelines</a></li>
           
         </ul>
@@ -436,13 +436,30 @@ table tr td
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Threat Profile</h1>
-        <div style="text-align:justify">  <p style="text-indent: 50px;width: 874px ">Threat profile is a very interesting concept that identifies the complete set of threats in a given application context and it is a structured approach that enables you to identify, quantify, and address the security risks associated with an application.</p></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Step 1:</b> Decompose the Application. The first step in the threat profile process is concerned with gaining an understanding of the application and how it interacts with external entities. This involves creating use-cases to understand how the application is used, identifying entry points to see where a potential attacker could interact with the application, identifying assets i.e. items/areas that the attacker would be interested in, and identifying trust levels which represent the access rights that the application will grant to external entities.</p></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Step 2:</b> Creating a threat profile, this is shown below</p></div>
-        <div id="banner"></div>
-        <div style="text-align:justify"><p style="width: 874px"><b style="color:black">Example:<br></b><b style="color:brown"> Tabs:</b> Fund Transfer<br> <b style="color:brown">Sub Tab:</b> Transfer to other accounts<br><b style="color:brown">User roles:</b> Normal user<br><b style="color:brown">Threat:</b> An adversary can do negative transactions</p></div>
+        <h1>Code Review Documents</h1>
         
+        <b style="color: black">1).</b><a href="https://docs.google.com/spreadsheets/d/1A79dUkhvkiKHC58myE0s_lDGJ7fq3Xb9lTLSsnccepw/export?format=xlsx&authuser=0">Download Information Gathering sheet</a><br><br>
+        <b style="color: black">2).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgWDhJYXJNQV9zZDg&authuser=0&export=download">Code_Review_Reporting_Checklist_Ver1.1</a><br><br>
+        <b style="color: black">3).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgQ2FQTXl5aHhEQ2c&authuser=0&export=download">Threat Profile</a><br><br>
+        <b style="color: black">4).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgSTRWWElLRWQ1WWM&authuser=0&export=download">Plynt Certification Criteria</a><br><br>
+        <b style="color: black">5).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgRldCRTdoSkRlUzg&authuser=0&export=download">Application Issue Log</a><br><br>
+      <b style="color: black">6).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgRldCRTdoSkRlUzg&authuser=0&export=download">Project Signoff document</a><br><br>
+      <b style="color: black">7).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgbWY4TmFaRlJJbnc&authuser=0&export=download">Project data backup document</a><br><br>
+      <b style="color: black">8).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgYjF5OGhHQVhmQUE&authuser=0&export=download">Project Leads feedback document</a><br><br>
+      <b style="color: black">9).</b><a href="https://docs.google.com/uc?id=0B2mAlxxqoBSgMnNtSGZwWGJGcTg&authuser=0&export=download">Team members feedback document</a><br><br>
+      <br>
+      <br>
+      <br><br>
+      <br>
+      <br>
+      <br>
+     
+    
+      
+      
+      
+      
+      
       </div>
     </div>
     <div id="content_footer"></div>

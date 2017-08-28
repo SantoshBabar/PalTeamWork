@@ -151,4 +151,32 @@ public String threatProfile()
     return "threatProfile";
 }
 
+@RequestMapping(value="/Videos",method=RequestMethod.GET)
+public String Videos()
+{
+    // change to login
+    return "Videos";
+}
+
+@RequestMapping(value="/CodeUnderstanding",method=RequestMethod.GET)
+public String CodeUnderstanding()
+{
+    // change to login
+    return "CodeUnderstanding";
+}
+
+@RequestMapping(value="/Info",method=RequestMethod.GET)
+public String Info()
+{
+    // change to login
+    return "Info";
+}
+
+@RequestMapping(value="/Documents",method=RequestMethod.GET)
+public String Documents()
+{
+    // change to login
+    return "Documents";
+}
+
 }

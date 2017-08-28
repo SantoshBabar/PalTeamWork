@@ -16,7 +16,9 @@
   
 <style>
 html
-{ height: 100%;}
+{ height: 100%;
+  
+}
 
 *
 { margin: 0;
@@ -25,7 +27,8 @@ html
 body
 { font: normal .80em 'trebuchet ms', arial, sans-serif;
   background: #FFF;
-  color: #555;}
+  color: #555;
+}
 
 p
 { padding: 0 0 20px 0;
@@ -372,7 +375,7 @@ table tr td
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="index.html">Code Review <span class="logo_colour">Knowledge Base</span></a></h1>
+          <h1><a href="index.do">Code Review <span class="logo_colour">Knowledge Base</span></a></h1>
           <h2>Code reviews made simple…</h2>
         </div>
       </div>
@@ -380,26 +383,26 @@ table tr td
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
           <li class="selected"><a href="threatProfile.do">Threat Profile</a></li>
-          <li><a href="examples.html">Code Understanding</a></li>
-          <li><a href="page.html">Information Gathering Sheet</a></li>
+          <li><a href="CodeUnderstanding.do">Code Understanding</a></li>
+          <li><a href="Info.do">Information Gathering Sheet</a></li>
           <li><a href="another_page.html">Test plans</a></li>
-          <li><a href="logout.do">Logout</a></li>
+          <li><a href="Logout.do">Logout</a></li>
           <li><a href="contact.html">Code review guidelines</a></li>
         </ul>
       </div>
     </div>
     <div id="content_header"></div>
     <div id="site_content">
-      <div id="banner"></div>
+      
 	  <div id="sidebar_container">
         <div class="sidebar">
           <div class="sidebar_top"></div>
           <div class="sidebar_item">
             <!-- insert your sidebar items here -->
             <h3>Latest News</h3>
-            <h4>contents here</h4>
-            <h5>contents here</h5>
-            <p>contents here.<br /><a href="#">Read more</a></p>
+            
+            <p>Scanner videos here.<br /><a href="Videos.do">Click here</a></p>
+            <p>Code Review Documents.<br /><a href="Documents.do">Click here</a></p>
           </div>
           <div class="sidebar_base"></div>
         </div>
@@ -408,41 +411,39 @@ table tr td
           <div class="sidebar_item">
             <h3>Useful Links</h3>
             <ul>
-              <li><a href="#">link 1</a></li>
-              <li><a href="#">link 2</a></li>
-              <li><a href="#">link 3</a></li>
-              <li><a href="#">link 4</a></li>
+              <li><a href="https://connect.plynt.com/">Client Connect</a></li>
+              <li><a href="#">Checkmarx Server</a></li>
+              <li><a href="#">Zing HR</a></li>
+              <li><a href="#">Outlook</a></li>
             </ul>
           </div>
           <div class="sidebar_base"></div>
         </div>
-        <div class="sidebar">
-          <div class="sidebar_top"></div>
-          <div class="sidebar_item">
-            <h3>Search</h3>
-            <form method="post" action="#" id="search_form">
-              <p>
-                <input class="search" type="text" name="search_field" value="Enter keywords....." />
-                <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
-              </p>
-            </form>
-          </div>
-          <div class="sidebar_base"></div>
-        </div>
+        
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Welcome to elearning portal</h1>
-        <p>This site is simple and has documents related to code review process, </p>
-        <!--<p>This template is written entirely in <strong>HTML5</strong> and <strong>CSS</strong>, and can be validated using the links in the footer.</p>
-        <p>You can view more free HTML5 web templates <a href="http://www.html5webtemplates.co.uk">here</a>.</p>
-        <p>This template is a fully functional 5 page website, with an <a href="examples.html">examples</a> page that gives examples of all the styles available with this design.</p>
-        <h2>Browser Compatibility</h2>-->
-        <p>This knowledge base has information about code review process</p>
+        <h1>What is a Security Code Review?</h1>
+        <p>Source Code review discovers hidden vulnerabilities, design flaws, and verifies if key security controls are implemented. Paladion uses a combination of scanning tools and manual review to detect insecure coding practices, backdoors, injection flaws, cross site scripting flaws, insecure handling of external resources, weak cryptography, etc. </p>
+        
+        <p><b style="color: #E7746F">Preparation:</b> The first step of a security code review is to conduct a through study of the application followed by the creation of a comprehensive threat profile.</p>
+        <p><b style="color: #E7746F">Analysis:</b> Our experts study the code layout to develop a specific code reviewer plan, and uses a hybrid approach where automated scans are verified and a custom manual review is performed.</p>
+        <p><b style="color: #E7746F">Solutions:</b> Once the code is analyzed, the next step in the security code review process is to verify existing flaws and generate reports that provide solutions.</p>
+        
         <ul>
-          <li>how to fill information gathering sheet</li>
-          <li>how to understand code layout</li>
-          
+            <li ><b style="color: #E7746F">Faster Results:</b>Easily detect flaws through code analysis and avoid the need to send test data to the application or software
+since access to the entire code base of the application is available.</li>
+          <li><b style="color: #E7746F">Thorough Analysis:</b>Evaluate the entire code layout of the application including areas that wouldn’t be analyzed in an application
+security test such as entry points for different inputs, internal interfaces and integrations, data handling and
+validation logic, and the use of external API’s and frameworks.</li>
+          <li><b style="color: #E7746F">Overcome Testing Limitations:</b>Uncover vulnerabilities and detect attack surfaces that automated code scans miss using security code
+reviews to detect weak algorithms, identify design flaws, find insecure configurations and spot insecure
+coding practices.</li>
+          <li><b style="color: #E7746F">Create Reports:</b>Produce security code review reports that include an executive summary that lists strengths and
+weaknesses and provides detailed findings that include precise code based solutions and fixes.</li>
+          <li><b style="color: #E7746F">Provide Solutions</b>Secure sensitive data storage and suggest precise solutions customized for your developers with code
+level suggestions that include more exhaustive checks to find all instances of common vulnerabilities.</li>
+          <li><b style="color: #E7746F">Meet Compliance Standards</b>Satisfy industry regulations and compliance standards including PCI DSS standards.</li>
         </ul>
       </div>
     </div>

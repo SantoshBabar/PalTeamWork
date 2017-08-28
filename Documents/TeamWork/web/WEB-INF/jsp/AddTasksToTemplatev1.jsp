@@ -4,27 +4,71 @@
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="listcontrol.js"></script>
+<script src="http://prog.linkstraffic.net/jquery/jquery-2.1.1.js"></script>
+
+<script type="text/javascript">
+
+var addedrows = new Array();
+
+$(document).ready(function() {
+    $( "#sourcetable tbody tr" ).on( "click", function( event ) {
+  
+    var ok = 0;
+    var theid = $( this ).attr('id').replace("sour","");	
+
+	var newaddedrows = new Array();
+	
+    for	(index = 0; index < addedrows.length; ++index) {
+
+		// if already selected then remove
+		if (addedrows[index] == theid) {
+			   
+			$( this ).css( "background-color", "#ffccff" );
+			
+			// remove from second table :
+			var tr = $( "#dest" + theid );
+            tr.css("background-color","#FF3700");
+            tr.fadeOut(400, function(){
+                tr.remove();
+            });
+			
+	        //addedrows.splice(theid, 1);	
+    		
+			//the boolean
+			ok = 1;
+		} else {
+		
+		    newaddedrows.push(addedrows[index]);
+		} 
+    }   
+    
+	addedrows = newaddedrows;
+	
+	// if no match found then add the row :
+	if (!ok) {
+		// retrieve the id of the element to match the id of the new row :
+		
+		
+		addedrows.push( theid);
+		
+		$( this ).css( "background-color", "#cacaca" );
+				
+     	$('#destinationtable tr:last').after('<tr id="dest' + theid + '"><td>' 
+		                               + $(this).find("td").eq(0).html() + '</td><td>' 
+		                               + $(this).find("td").eq(1).html() + '</td><td>' 
+		                               + $(this).find("td").eq(2).html() + '</td><td>' 
+		                               
+		                               + '</td></tr>');		  
+		
+	}
+
+	
+    });
+});		
+</script>	
                
 <style> 
-table {
-    border-collapse: collapse;
-    width: 30%;
-    height: 40%;
-    float:left;
-    max-height: 100px;
-}
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-tr:nth-child(even){background-color: #F7F7F7}
-th {
-    background-color: #a6a6a6;
-    color: white;
-}
-ul {
+    ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -32,6 +76,39 @@ ul {
     background-color: #a6a6a6;
     width:1500px;
    
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #b30000;
+}
+
+.active {
+    background-color: #cc0000;
+}
+table {
+        border     : 1px solid gray;
+    width      : 60%;
+    text-align : center;
+}
+ 
+table#sourcetable tbody tr {
+    background-color : #a6a6a6;
+}
+ 
+table#sourcetable tbody  tr {
+    cursor : pointer;
 }
 li {
     float: left;
@@ -44,10 +121,10 @@ li a {
     text-decoration: none;
 }
 li a:hover:not(.active) {
-    background-color: #b30000;
+    background-color: #a6a6a6;
 }
 .active {
-    background-color: #cc0000;
+    background-color: #a6a6a6;
 }
 </style>
 <style>
@@ -84,9 +161,9 @@ body {
   float: center;
 }
 .login-card input[type=text], input[type=password] {
-  height: 44px;
+  height: 25px;
   font-size: 16px;
-  width: auto;
+  width: 65px;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -151,51 +228,30 @@ body {
 .login-card a:hover {
   opacity: 1;
 }
+.submit {
+  /* border: 1px solid #3079ed; */
+  width: 150px;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #c0c0c0;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+.submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #c0c0c0;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
 .login-help {
   width: 100%;
   text-align: center;
   font-size: 12px;
 }
-table.dataTable.select tbody tr,
-table.dataTable thead th:first-child {
-  cursor: pointer;
-}
-#table-wrapper {
-  position:relative;
-}
-#table-scroll {
-  height:100px;
-  overflow:200px;  
-  margin-top:5px;
-}
-#table-wrapper table {
-  width:100%;
- 
-}
-#table-wrapper table * {
-  
-  color:black;
-}
-#table-wrapper table thead th .text {
-  position:absolute;   
-  top:-20px;
-  z-index:2;
-  height:80px;
-  
-  border:1px solid red;
-}        
-</style>
-        
-        <script>
-$(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollY":"200px",
-        "scrollCollapse": true,
-        "paging":         false
-    } );
-} );
-</script>
-                   
+     
+</style>          
         </head>
 	<body>
         <%@include file="Header.jsp" %>
@@ -242,5 +298,5 @@ $(document).ready(function() {
         <input type="button" id="rightall" value=">>" />-->
 
 
-        </body>
+</body>
 </html>
