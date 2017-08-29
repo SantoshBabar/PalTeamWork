@@ -19,11 +19,16 @@ import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.sun.scenario.Settings;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -345,25 +350,31 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
     }
 
 
-//file download
+//download files start
 @RequestMapping(value="/Downloadfiles",method=RequestMethod.POST)    
-public ModelAndView Downloadfiles(HttpServletRequest req,Model model)
+public ModelAndView Downloadfiles(HttpServletRequest req,Model model,HttpServletResponse response) throws FileNotFoundException, IOException
     {
     HttpSession sess=req.getSession();    
     String PID=(String) sess.getAttribute("DownloadPID");    
-    System.out.println("id"+PID);    
+    System.out.println("projectid"+PID);    
     String filepath=Aservice.getSystemSettings().getUploadpath();
-    System.out.println(filepath);
+    
     File downloadfile = new File(filepath+File.separator+"files"+File.separator+PID);
- System.out.println(downloadfile);
- 
- 
- 
- 
+    System.out.println("folder " + downloadfile);
+
+    File[] listOfFiles = downloadfile.listFiles();
+
+    for (File listOfFile : listOfFiles) {
+        if (listOfFile.isFile()) {
+            System.out.println("File " + listOfFile.getName());
+        } else if (listOfFile.isDirectory()) {
+            System.out.println("Directory " + listOfFile.getName());
+        }
+    }  
      return new ModelAndView("downloadDocuments");
     
     }
-
+//download files end
 @RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
 public ModelAndView uploaddocs(@RequestParam String pid,HttpServletRequest req)
 {
