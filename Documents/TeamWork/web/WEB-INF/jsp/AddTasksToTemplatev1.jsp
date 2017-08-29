@@ -4,51 +4,56 @@
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
-<script src="http://prog.linkstraffic.net/jquery/jquery-2.1.1.js"></script>
-
-<style type="text/css">
-    select {
-        width: 200px;
-        float: left;
-    }
-    .controls {
-        width: 40px;
-        float: left;
-        margin: 10px;
-    }
-    .controls a {
-        background-color: #222222;
-        border-radius: 4px;
-        border: 2px solid #000;
-        color: #ffffff;
-        padding: 2px;
-        font-size: 14px;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
-        margin: 5px;
-        width: 20px;
-    }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
-    </script>
-    <script>
-    function moveAll(from, to) {
-        $('#'+from+' option').remove().appendTo('#'+to); 
-    }
-    
-    function moveSelected(from, to) {
-        $('#'+from+' option:selected').remove().appendTo('#'+to); 
-    }
-    function selectAll() {
-        $("select option").attr("selected","selected");
-    }
-    </script>
-       
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="listcontrol.js"></script>
+               
+<style> 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    float:left;
+    max-height: 100px;
+}
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even){background-color: #F7F7F7}
+th {
+    background-color: #ff3333;
+    color: white;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ff6666;
+    width:1500px;
+   
+}
+li {
+    float: left;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover:not(.active) {
+    background-color: #b30000;
+}
+.active {
+    background-color: #ff1a1a;
+}
+</style>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 body {
-	background-image: url("grey.jpg");
+	color:#6a6f8c;
+	background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -60,7 +65,7 @@ body {
   padding: 40px;
   width: 1420px;
   height: auto;
-   background-color: white;
+  background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -79,9 +84,9 @@ body {
   float: center;
 }
 .login-card input[type=text], input[type=password] {
-  height: 25px;
+  height: 44px;
   font-size: 16px;
-  width: 65px;
+  width: auto;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -120,11 +125,11 @@ body {
 }
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 5%;
+  width: 20%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #a6a6a6;
+  background-color: #ff3333;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 .login-submit:hover {
@@ -146,29 +151,53 @@ body {
 .login-card a:hover {
   opacity: 1;
 }
-.submit {
-  /* border: 1px solid #3079ed; */
-  width: 150px;
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #c0c0c0;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
-}
-.submit:hover {
-  /* border: 1px solid #2f5bb7; */
-  border: 0px;
-  text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #c0c0c0;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-}
 .login-help {
   width: 100%;
   text-align: center;
   font-size: 12px;
 }
-     
-</style>          
+table.dataTable.select tbody tr,
+table.dataTable thead th:first-child {
+  cursor: pointer;
+}
+  .black_overlay {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: .80;
+  filter: alpha(opacity=80);
+}
+.white_content {
+  display: none;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  padding: 16px;
+  border: 16px solid orange;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+}      
+</style>
+        
+        <script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>
+                   
         </head>
 	<body>
         <%@include file="Header.jsp" %>
@@ -181,66 +210,56 @@ body {
         <div class="login-card">
         
         <h2>Select tasks to the template</h2>
-<<<<<<< HEAD
-        <h3>Task List. Click on the task to select</h3>
- 
-
- 
- 
-<h3>Selected Tasks. Assign weights to selected task</h3>
- 
-<form name="selection" method="post" onSubmit="return selectAll()"> 
-    <select multiple size="10" id="from">
-        <c:forEach  items="${AllTasks}" var="task">
-            <option> ${task.taskname}</option>
-      
-       </c:forEach>
-    </select>
-    <div class="controls"> 
-        <a href="javascript:moveAll('from', 'to')">&gt;&gt;</a> 
-        <a href="javascript:moveSelected('from', 'to')">&gt;</a> 
-        <a href="javascript:moveSelected('to', 'from')">&lt;</a> 
-        <a href="javascript:moveAll('to', 'from')" href="#">&lt;&lt;</a> </div>
-    <select multiple id="to" size="10" name="topics[]"></select>
-    <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
-    <br>
-    <input type="submit" value="submit">
-    <form>    
-=======
         <h3>List of all the tasks</h3>
-        
-  
-            <tr><td  style="vertical-align:top;overflow:scroll;max-height: 400px">
-        <select id="sbOne" multiple="multiple" style="width: 500px;height:130px" >
-	
+        <table id="example">
+            <tr><td width="50%">
+        <select id="sbOne" multiple="multiple" style="width: 400px;" >
+	<Option value = "select">SELECT</Option>
 	<c:forEach items="${AllTasks}" var="task">
-	<option value="${task.taskid}" style="height:30px">${task.taskname}</option>
+	<option value="${task.taskid}">${task.taskname}</option>
 	</c:forEach>
 	</select>
                 </td>
       
         </tr></table>
-              
-        <form:form action="AddTaskTemplate.do" method="post" id="frm"><br><br>
-            <input class="login login-submit" type="button" id="left" value="<" align="left"/>
-        <input class="login login-submit" type="button" id="right" value=">" align="left"/>
-           
-             <table border="2" id="test">
-     
+
+        <form:form action="AddTaskTemplate.do" method="post" id="frm">
+        
+            <table>
+                <tr>
+                    <td style="vertical-align:top;overflow:scroll;max-height: 400px">
+                        
+                        
+                        <select id="sbTwo" multiple="multiple" name="task" style="width:400px">
+                        </select>
+                    </td>
+                    <div id="light" class="white_content">
+                        
+                    <td id="test" style="vertical-align:top;overflow:scroll;max-height: 400px">    
+                    </td> 
+                    <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+                        Close</a>
+                    
+                    <div>
+                </tr>   
             </table>
-     
-        <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
-        <br><br>
-        <input class="login login-submit" type="submit" id="tt" value="submit" />
+            <br><br>     <br><br>     <br><br>
+        <input type="button" id="left" value="<" align="center"/>
+        <input type="button" id="right" value=">" align="cener"/>
+        <input type="hidden" id="ACRF" name="AntiCSRFToken" value="${csrfPreventionSalt}"/>     
+        <input type="submit" id="tt" value="submit" />
         </form:form>
         <br>
         
         </div>
+        <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">here</a>
+<div id="light" class="white_content">This is the lightbox content. <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+  </div>
         
-<!--        <input type="button" id="leftall" value="<<" />
+        <!--      
+<input type="button" id="leftall" value="<<" />
         <input type="button" id="rightall" value=">>" />-->
->>>>>>> origin/LatestBranch
 
 
-</body>
+        </body>
 </html>

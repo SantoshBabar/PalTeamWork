@@ -45,9 +45,17 @@ public TemplateBean populate()
 }
 	
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.GET)
-public String Template()
+public ModelAndView Template()
   {
-    return "CreateTaskTemplate";
+      List <TaskBean> Tasklist = null;
+      try
+        {
+            Tasklist =TempS.getAllTasksforTemplate();
+	}
+        catch(Exception ex){}
+	    
+	return new ModelAndView("CreateTaskTemplate","AllTasks", Tasklist);
+   
   }
 
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.POST)
@@ -70,7 +78,7 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 	
         TempSession.setAttribute("TaskList", Tasklist);
               
-	return new ModelAndView("AddTasksToTemplatev1","AllTasks", Tasklist);
+	return new ModelAndView("CreateTaskTemplate","AllTasks", Tasklist);
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)

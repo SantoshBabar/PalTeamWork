@@ -1,27 +1,79 @@
-<%-- 
-    Document   : CreateTaskTemplate
-    Created on : 24 Apr, 2017, 5:29:06 PM
-    Author     : Administrator
---%>
+<%@page import="com.Paladion.teamwork.beans.TemplateBean"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="icon" href="Network-Security.png" type="image/x-icon">
-<head>
-<style>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+<script src="http://prog.linkstraffic.net/jquery/jquery-2.1.1.js"></script>
+
+<style type="text/css">
+    select {
+        width: 200px;
+        float: left;
+    }
+    .controls {
+        width: 40px;
+        float: left;
+        margin: 10px;
+    }
+    .controls a {
+        background-color: #222222;
+        border-radius: 4px;
+        border: 2px solid #000;
+        color: #ffffff;
+        padding: 2px;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        margin: 5px;
+        width: 20px;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+    </script>
+    <script>
+    function moveAll(from, to) {
+        $('#'+from+' option').remove().appendTo('#'+to); 
+    }
+    
+    function moveSelected(from, to) {
+        $('#'+from+' option:selected').remove().appendTo('#'+to); 
+    }
+    function selectAll() {
+        $("select option").attr("selected","selected");
+    }
+    </script>
+       
+<style> 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    float:left;
+    max-height: 100px;
+}
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even){background-color: #F7F7F7}
+th {
+    background-color: #ff3333;
+    color: white;
+}
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #a6a6a6;
+    background-color: #ff6666;
     width:1500px;
    
 }
-
 li {
     float: left;
 }
-
 li a {
     display: block;
     color: white;
@@ -29,22 +81,18 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
 li a:hover:not(.active) {
     background-color: #b30000;
 }
-
 .active {
-    background-color: #cc0000;
+    background-color: #ff1a1a;
 }
 </style>
 <style>
-
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
-
 body {
-
-	background-image: url("grey.jpg");
+	color:#6a6f8c;
+	background:#c8c8c8;
   background-repeat: repeat-y;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -52,36 +100,32 @@ body {
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
-
 .login-card {
   padding: 40px;
   width: 1420px;
-  height: 550px;
-   background-color: white;
+  height: auto;
+  background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
-
 .login-card h1 {
   font-weight: 1;
   text-align: center;
   font-size: 2.3em;
 }
-
 .login-card input[type=submit] {
-  width: 20%;
+  width: 10%;
   display: block;
   margin-bottom: 10px;
   position: relative;
   float: center;
 }
-
 .login-card input[type=text], input[type=password] {
   height: 44px;
   font-size: 16px;
-  width: 30%;
+  width: auto;
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
@@ -92,7 +136,6 @@ body {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-
 .login-card input[type=text]:hover, input[type=password]:hover {
   border: 2px solid #b9b9b9;
   
@@ -101,7 +144,6 @@ body {
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
-
 .login {
   text-align: center;
   font-size: 14px;
@@ -113,17 +155,6 @@ body {
 /* -webkit-user-select: none;
   user-select: none; */
 }
-
-.login-submit {
-  /* border: 1px solid #3079ed; */
-  width: 50%;
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #a6a6a6;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
-}
-
 .login-submit:hover {
   /* border: 1px solid #2f5bb7; */
   border: 0px;
@@ -131,7 +162,22 @@ body {
   background-color: #ff8080;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
-
+.login-submit {
+  /* border: 1px solid #3079ed; */
+  width: 20%;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #ff3333;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+.login-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #ff8080;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
 .login-card a {
   text-decoration: none;
   color: #666;
@@ -141,56 +187,77 @@ body {
   opacity: 0.6;
   transition: opacity ease 0.5s;
 }
-
 .login-card a:hover {
   opacity: 1;
 }
-
 .login-help {
   width: 100%;
   text-align: center;
   font-size: 12px;
 }
-
-
-
-table {
-    border-collapse: collapse;
-    width: 100%;
+table.dataTable.select tbody tr,
+table.dataTable thead th:first-child {
+  cursor: pointer;
 }
-
-th, td {
-    text-align: left;
-    padding: 8px;
+  .black_overlay {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: .80;
+  filter: alpha(opacity=80);
 }
-
-tr:nth-child(even){}
-
-th {
-    background-color: #a6a6a6;
-    color: white;
-}
-</style>
-<title>New Task-Template</title>
-</head>
-    <body>
-    
-       <%@include file="Header.jsp" %>
+.white_content {
+  display: none;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  padding: 16px;
+  border: 16px solid orange;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+}      
+</style>        
+        </head>
+	<body>
+        <%@include file="Header.jsp" %>
+        
         
         <div class="login-card">
-	   <div align="left">  <h2 style="color: #a6a6a6; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
+        
+        <h2>Select tasks to the template</h2>
+<h3>Selected Tasks. Assign weights to selected task</h3>
+ 
+<form:form name="selection" action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM" onSubmit="return selectAll()"> 
+Template Name:<form:input placeholder="Enter template name" name="t1"  path="templatename" />   
+Description:<form:input placeholder="Enter description" name="t2"  path="templateDesc" />
+    <select multiple size="10" id="from">
+        <c:forEach  items="${AllTasks}" var="task">
+            <option> ${task.taskname}</option>
+      
+       </c:forEach>
+    </select>
+    <div class="controls"> 
+        <a href="javascript:moveAll('from', 'to')">&gt;&gt;</a> 
+        <a href="javascript:moveSelected('from', 'to')">&gt;</a> 
+        <a href="javascript:moveSelected('to', 'from')">&lt;</a> 
+        <a href="javascript:moveAll('to', 'from')" href="#">&lt;&lt;</a> </div>
+    <select multiple id="to" size="10" name="topics"></select>
+    <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
+    
+    <br>
+    <input type="submit" value="submit">
+    </form:form>    
+        
 
 
-	   <form:form action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM">
-<table >
-
-<tr><td align="center"><h4 >Template Name:</td><td><form:input placeholder="Enter template name"   path="templatename" /></h4></td></tr>    
-<tr><td align="center"><h4 >Description:</td><td><form:input placeholder="Enter description"   path="templateDesc" /></h4></td></tr> 
-
-<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
-<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr> 
-</table>
-</form:form>
-<center>${Lerror}</center><br>     
-    </body>
+</body>
 </html>
