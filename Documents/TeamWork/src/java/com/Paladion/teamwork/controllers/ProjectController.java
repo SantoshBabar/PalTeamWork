@@ -328,6 +328,7 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
                 fileNames.add(fileName);
                 String filepath=Aservice.getSystemSettings().getUploadpath();
                 File uploadFile = new File(filepath+File.separator+"files"+File.separator+PID, fileName);
+                System.out.println(uploadFile);
                 if(!uploadFile.exists())uploadFile.mkdirs();
                 try
                 {
@@ -343,12 +344,41 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
     
     }
 
+
+//file download
+@RequestMapping(value="/Downloadfiles",method=RequestMethod.POST)    
+public ModelAndView Downloadfiles(HttpServletRequest req,Model model)
+    {
+    HttpSession sess=req.getSession();    
+    String PID=(String) sess.getAttribute("DownloadPID");    
+    System.out.println("id"+PID);    
+    String filepath=Aservice.getSystemSettings().getUploadpath();
+    System.out.println(filepath);
+    File downloadfile = new File(filepath+File.separator+"files"+File.separator+PID);
+ System.out.println(downloadfile);
+ 
+ 
+ 
+ 
+     return new ModelAndView("downloadDocuments");
+    
+    }
+
 @RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
 public ModelAndView uploaddocs(@RequestParam String pid,HttpServletRequest req)
 {
 HttpSession sess=req.getSession();
 sess.setAttribute("uploadPID", pid);
 return new ModelAndView("DocumentUpload","SysSettings",Aservice.getSystemSettings());
+}
+
+//download files
+@RequestMapping(value="/Downloadfiles",method=RequestMethod.GET)
+public ModelAndView Downloadfiles(@RequestParam String pid,HttpServletRequest req)
+{
+HttpSession sess=req.getSession();
+sess.setAttribute("DownloadPID", pid);
+return new ModelAndView("downloadDocuments","SysSettings",Aservice.getSystemSettings());
 }
     
     
