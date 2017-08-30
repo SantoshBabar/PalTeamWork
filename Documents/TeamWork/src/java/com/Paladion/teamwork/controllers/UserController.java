@@ -76,6 +76,7 @@ public class UserController {
                
                //Update user list in session
                 HttpSession Sess=req.getSession(false);
+                //important get current user deatils
                 Sess.setAttribute("AllUsers", userService.GetAllUser());
                       
                 return new ModelAndView("CreateUser","Message","User Created Successfully");

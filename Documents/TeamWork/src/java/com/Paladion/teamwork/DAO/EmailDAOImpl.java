@@ -48,7 +48,7 @@ public class EmailDAOImpl implements EmailDAO{
 	@Override
 	public boolean updateEmailTemplate(EmailTemplateBean emailTempBean) {
 		try{
-		Session session=sessionFactory.openSession();
+		Session session=sessionFactory.getCurrentSession();
 		Transaction tx = null;
 	            tx = session.beginTransaction();
 	           session.update(emailTempBean );
@@ -64,7 +64,7 @@ public class EmailDAOImpl implements EmailDAO{
 	public List<EmailTemplateBean> listEmailTemplate() {
 		List <EmailTemplateBean> emailTemplateBean=null;
 		try{
-		Session session=sessionFactory.openSession();
+		Session session=sessionFactory.getCurrentSession();
 		Transaction tx = null;
 	            tx = session.beginTransaction();
 	           Criteria criteria = session.createCriteria(EmailTemplateBean.class);
@@ -89,7 +89,7 @@ public class EmailDAOImpl implements EmailDAO{
 	@Override
 	public boolean deleteEmailTemplate(EmailTemplateBean emailTempBean) {
 		try{
-		Session session=sessionFactory.openSession();
+		Session session=sessionFactory.getCurrentSession();
 		Transaction tx = null;
 	            tx = session.beginTransaction();
 	           session.delete(emailTempBean);

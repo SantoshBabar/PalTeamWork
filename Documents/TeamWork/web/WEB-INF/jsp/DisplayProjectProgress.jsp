@@ -61,7 +61,7 @@ body {
 .login-card {
   padding: 40px;
   width: 1420px;
-  height: 550px;
+  height: 650px;
   background-color: white;
   margin: 0 auto 10px;
   border-radius: 2px;
@@ -290,8 +290,8 @@ $(document).ready(function() {
          </tbody>
 </table>
        
-        <a href="uploadfiles.do"><h4>upload project documents<h4></a>  
-       
+        <a href="uploadfiles.do?pid=${ProjectData.projectid}"><h4>upload project documents<h4></a>  
+        <a href="Downloadfiles.do?pid=${ProjectData.projectid}"><h4>download project documents<h4></a> 
 </div>
 
     </body>

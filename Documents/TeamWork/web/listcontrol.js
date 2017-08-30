@@ -18,7 +18,7 @@
                 $(origin).find(':selected').appendTo(dest);
                 $("#test").html("");
                 $("#sbTwo > option").each(function(){
-                $('jghg<input type="text" name="'+this.value+'" style="height:22px"/>').appendTo("#test");
+                $('<input type="text" name="'+this.value+'" style="height:10px"/>').appendTo("#test");
    // $("#test").appendTo("#frm");
     
      
@@ -31,7 +31,7 @@
                 $(origin).find(':selected').appendTo(dest);
                 $("#test").html("");
                 $("#sbTwo > option").each(function(){
-    $("#test").append('<input type="text" name='+this.value+' style="height:22px"/>')
+    $("#test").append('<input type="text" name='+this.value+' style="height:10px"/>')
     $("#test").append("<br/>");
 });
 
@@ -77,5 +77,3 @@
     });
 });
         });
-        
-        

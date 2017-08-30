@@ -248,7 +248,7 @@ $(document).ready(function() {
             
             <tbody>
             
-<c:forEach  items="${AllProjects}" var="project">     
+<c:forEach items="${AllProjects}" var="project">     
     
 <fmt:formatDate value="${project.startdate}" var="SDate" type="date" pattern="dd-MMM-yyyy" />
 <fmt:formatDate value="${project.enddate}" var="EDate" type="date" pattern="dd-MMM-yyyy" />

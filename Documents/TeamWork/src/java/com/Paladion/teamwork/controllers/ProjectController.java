@@ -12,16 +12,26 @@ import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import com.Paladion.teamwork.beans.ProjectTransactionWrapper;
 import com.Paladion.teamwork.beans.fileuploadBean;
+import com.Paladion.teamwork.services.AdminService;
 import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
+import com.sun.scenario.Settings;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import static java.lang.System.out;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -57,6 +67,11 @@ ProjectService PS;
 @Autowired
 @Qualifier(value="UserService")
 UserService US;
+
+@Autowired()
+@Qualifier(value = "AdminService")
+AdminService Aservice;
+
 	
 @ModelAttribute("ProjectM")
 public ProjectBean populate()
@@ -308,6 +323,8 @@ public fileuploadBean populate1()
 @RequestMapping(value="/uploadfiles",method=RequestMethod.POST)    
 public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute fileuploadBean filebean,Model model)
     {
+    HttpSession sess=req.getSession();    
+    String PID=(String) sess.getAttribute("uploadPID");    
     List<MultipartFile> upfiles = filebean.getFiles();    
     List<String> fileNames = new ArrayList<String>();    
     
@@ -317,11 +334,13 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
  
                 String fileName = multipartFile.getOriginalFilename();
                 fileNames.add(fileName);
- 
-                File imageFile = new File(req.getServletContext().getRealPath("/files"), fileName);
+                String filepath=Aservice.getSystemSettings().getUploadpath();
+                File uploadFile = new File(filepath+File.separator+"files"+File.separator+PID, fileName);
+                System.out.println(uploadFile);
+                if(!uploadFile.exists())uploadFile.mkdirs();
                 try
                 {
-                    multipartFile.transferTo(imageFile);
+                multipartFile.transferTo(uploadFile);
                 } catch (IOException e) 
                 {
                     e.printStackTrace();
@@ -333,10 +352,75 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
     
     }
 
+
+@RequestMapping(value="/Downloadfiles",method=RequestMethod.POST)    
+public void  Downloadfiles(HttpServletRequest req,Model model,HttpServletResponse response) throws FileNotFoundException, IOException
+    {
+    HttpSession sess=req.getSession();    
+    String PID=(String) sess.getAttribute("DownloadPID");    
+    System.out.println("projectid"+PID);    
+    String filepath=Aservice.getSystemSettings().getUploadpath();
+    
+    File downloadfile = new File(filepath+File.separator+"files"+File.separator+PID);
+   // System.out.println("folder " + downloadfile);
+
+    File[] listOfFiles = downloadfile.listFiles();
+    
+String files=null ;
+    for (File listOfFile : listOfFiles) {
+        if (listOfFile.isFile()) {
+           // System.out.println("File " + downloadfile+"\\"+listOfFile.getName());
+             files = downloadfile.toString();
+            System.out.println("Folder path"+files); 
+            //System.out.println("File name:"+listOfFile.getName());
+            String filename = listOfFile.getName();   
+            String filepath1 = downloadfile.toString();   
+            //System.out.println("file path:"+filepath1);
+            System.out.println("filename"+filename);
+  String downloadFolder = files;
+  Path file = Paths.get(downloadFolder, filename);
+  // Check if file exists
+  if (Files.exists(file)) {
+   // set content type 
+   response.setContentType("application/vnd.ms-excel");
+   // add response header
+   response.addHeader("Content-Disposition", "attachment; filename=" + filename);
+   try {
+    //copies all bytes from a file to an output stream
+    Files.copy(file, response.getOutputStream());
+    //flushes output stream
+    response.getOutputStream().flush();
+   } catch (IOException e) {
+    System.out.println("Error :- " + e.getMessage());
+   }
+  } else {
+   System.out.println("Sorry File not found!!!!");
+  }
+            
+            
+        } else if (listOfFile.isDirectory()) {
+            //System.out.println("Directory " + listOfFile.getName());
+        }
+    }  
+    //System.out.println("Files:"+files);
+     //return new ModelAndView("downloadDocuments");  
+}
+//download files end
 @RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
-public ModelAndView uploaddocs()
+public ModelAndView uploaddocs(@RequestParam String pid,HttpServletRequest req)
 {
-return new ModelAndView("DocumentUpload");
+HttpSession sess=req.getSession();
+sess.setAttribute("uploadPID", pid);
+return new ModelAndView("DocumentUpload","SysSettings",Aservice.getSystemSettings());
+}
+
+//download files
+@RequestMapping(value="/Downloadfiles",method=RequestMethod.GET)
+public ModelAndView Downloadfiles(@RequestParam String pid,HttpServletRequest req)
+{
+HttpSession sess=req.getSession();
+sess.setAttribute("DownloadPID", pid);
+return new ModelAndView("downloadDocuments","SysSettings",Aservice.getSystemSettings());
 }
     
     
@@ -345,6 +429,7 @@ return new ModelAndView("DocumentUpload");
     @RequestMapping(value="/GetAllProjectDetails",method=RequestMethod.GET)
     public void getAllProjectsDetails(HttpServletRequest req)
     {
+        
         HttpSession sess= req.getSession(false);
         UserDataBean sessuser=(UserDataBean) sess.getAttribute("Luser");
 	ModelAndView result=new ModelAndView("Welcome");
