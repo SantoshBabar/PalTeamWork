@@ -352,21 +352,22 @@ $(document).ready(function (){
 	   <table id="example" class="display select" cellspacing="0" width="100%">
         <thead>
             <tr bgcolor="#a6a6a6">
+                <th> Task ID </th>
              <th>Task Name</th>
-             <th> Check/Uncheck</th> 
+              
              <th> Weight(%)</th>
             </tr>  
             </thead>
             
              <tbody> 
               
-            <c:forEach  items="${AllTasks}" var="task"> 
+            <c:forEach  items="${SelectedTaskList}" var="task"> 
                 
               <tr> 
                
-                <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskname}"/></td>
+                <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskid}"/></td>
                 
-                <td  style="padding:0 75px 0 75px;"><input  type="checkbox" class="rule" id="one"  name="task" value="${task.taskid}"></td>
+                <td  style="padding:0 75px 0 75px;"><input  type="checkbox" class="rule" id="one"  name="task" value="${task.taskname}"></td>
                
                 <td  style="padding:0 75px 0 75px;"><input type="text" id="textfield" name="${task.taskid}"></td>
               

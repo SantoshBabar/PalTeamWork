@@ -265,48 +265,30 @@ body {
         
         <h2>Select tasks to the template</h2>
         <h3>Task List. Click on the task to select</h3>
- 
-<table id="sourcetable">
-    <thead>
-        <tr>
-            <th>Task ID</th>
-            <th>Task</th>
-            <th>Weight</th>
-        </tr>
-    </thead>
- 
-    <tbody>
-        <c:forEach  items="${AllTasks}" var="task">
-        <tr id="sour+${task.taskid}">
-            <td>${task.taskid}</td>
-            <td>${task.taskname}</td>
-            <td><input type="text"></td>
-        </tr>
-        </c:forEach>
-    </tbody>
-</table>
- 
- 
-<h3>Selected Tasks. Assign weights to selected task</h3>
- 
-<form method="POST" action="">
-<table id="destinationtable">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Task</th>
-            <th>Weight</th>                   
-        </tr>
-    </thead>
- 
-     
-     
-</table>
-    <br>
-    <br>
-<input type="submit" value="submit"/> 
-</form>   
+  
 
+	   <form:form action="AddTaskTemplate.do" method="post" modelAttribute="TaskW">
+           <table>
+                
+              <c:forEach  varStatus="status" items="${taskwrapper.mttblist}" var="task"> 
+                
+              <tr> 
+               
+                <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskid}"/></td>
+                
+                <td  style="padding:0 75px 0 75px;"><c:out value="${task.taskname}"/></td>
+               
+                <td  style="padding:0 75px 0 75px;"><input type="text" name="mttblist[${status.index}].weight"></td>
+               
+              </tr>
+             <input type="hidden" name="mttblist[${status.index}].taskname" value="${task.taskname}"/>
+               <input type="hidden" name="mttblist[${status.index}].taskid" value="${task.taskid}"/>
+            </c:forEach>
+
+<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
+<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>            
+</table>
+</form:form>
 
 </body>
 </html>

@@ -7,11 +7,13 @@ package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.TaskBean;
+import com.Paladion.teamwork.beans.TaskTemplateWrapper;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import java.sql.Array;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -43,11 +45,24 @@ public TemplateBean populate()
 {
 	   return new TemplateBean();
 }
+
+@ModelAttribute("TaskW")
+public TaskTemplateWrapper populatetask()
+{
+	   return new TaskTemplateWrapper();
+}
 	
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.GET)
-public String Template()
+public ModelAndView Template()
   {
-    return "CreateTaskTemplate";
+      List <TaskBean> Tasklist = null;
+      try
+        {
+            Tasklist =TempS.getAllTasksforTemplate();
+	}
+        catch(Exception ex){}
+      return new ModelAndView("CreateTaskTemplate","AllTasks", Tasklist);
+   
   }
 
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.POST)
@@ -67,41 +82,66 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")TemplateBean Temp
 	}
         catch(Exception ex){}
 	    
+        List<MapTemplateTaskBean> MTTBList = new ArrayList<MapTemplateTaskBean>();
 	
-        TempSession.setAttribute("TaskList", Tasklist);
-              
-	return new ModelAndView("AddTasksToTemplatev1","AllTasks", Tasklist);
+       String []taskid= new String[20];
+       TaskTemplateWrapper ttw=new TaskTemplateWrapper();
+               taskid=req.getParameterValues("taskid");
+               for(int i=0;i<taskid.length;i++){
+               System.out.println(taskid[i]);
+               MapTemplateTaskBean mttb=new MapTemplateTaskBean();
+               int taskId=Integer.parseInt(taskid[i]);
+               mttb.setTaskid(taskId);
+               String taskname=getTaskName(taskId,Tasklist);
+               mttb.setTaskname(taskname);
+               MTTBList.add(mttb);
+               }
+               ttw.setMttblist(MTTBList);
+	return new ModelAndView("AddTasksToTemplatev1","taskwrapper", ttw);
+}
+
+public String getTaskName(int taskid, List<TaskBean> Tasklist){
+     String name=null;
+    for(TaskBean tb:Tasklist)
+    {
+    if (taskid==tb.getTaskid()){
+        name=tb.getTaskname();
+       }
+    }
+    return name;
 }
 
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)
-public ModelAndView AddTaskToTemplate(HttpServletRequest req){
+public ModelAndView AddTaskToTemplate(@ModelAttribute("TaskW")TaskTemplateWrapper TaskW, HttpServletRequest req)
+{
     System.out.println("Inside Add Task to template controller");
     HttpSession session=req.getSession();
     TemplateBean TempB=(TemplateBean)session.getAttribute("Template"); 
-   
-    CommonUtil CUtil=new CommonUtil();
-    List<MapTemplateTaskBean> MTTB=null;
-    TempS.addTemplate(TempB);
-    MTTB = CUtil.Maptasktotemplate(req, session);
     
-        if(null!=MTTB)
-        {
-            for(MapTemplateTaskBean MTT:MTTB)
-            {
-            if(!TempS.addTaskToTemplate(MTT))
-            {
-                return new ModelAndView("AddTasksToTemplate","Temperror", "Something went wrong during save" );
-            }
-            }
-            return new ModelAndView("CreateTaskTemplate","Message","Template Created Successfully");	
-        }
-        else
-        {
-            return new ModelAndView("AddTasksToTemplate","Message", "Total weight is not 100% or something went wrong" );
-        }
-	
+    List <MapTemplateTaskBean> MttbList = new ArrayList<MapTemplateTaskBean>();
+    MttbList=TaskW.getMttblist();
+   
+    int weight=0;
+    for(MapTemplateTaskBean mttb: MttbList){
+        weight=weight+mttb.getWeight();
+       }
+    
+    if(weight!=100 || MttbList==null){
+          return new ModelAndView("AddTasksToTemplate","Message", "Total weight is not 100% or something went wrong" );
     }
-
+    else
+    {
+        TempS.addTemplate(TempB);
+        for(MapTemplateTaskBean MTT:MttbList)
+           { MTT.setTemplateid(TempB.getTemplateid());
+            if(!TempS.addTaskToTemplate(MTT))
+                {
+                    return new ModelAndView("AddTasksToTemplate","Temperror", "Something went wrong during save" );
+                }
+            }	
+    }
+    return new ModelAndView("CreateTaskTemplate","Message","Template Created Successfully");
+ }
 
 @RequestMapping(value="/GetAllTaskTemplates",method=RequestMethod.GET)
 public ModelAndView GetAllTaskTemplates()
