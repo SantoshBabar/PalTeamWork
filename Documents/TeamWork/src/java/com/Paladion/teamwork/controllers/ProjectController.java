@@ -22,6 +22,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -350,9 +353,8 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
     }
 
 
-//download files start
 @RequestMapping(value="/Downloadfiles",method=RequestMethod.POST)    
-public ModelAndView Downloadfiles(HttpServletRequest req,Model model,HttpServletResponse response) throws FileNotFoundException, IOException
+public void  Downloadfiles(HttpServletRequest req,Model model,HttpServletResponse response) throws FileNotFoundException, IOException
     {
     HttpSession sess=req.getSession();    
     String PID=(String) sess.getAttribute("DownloadPID");    
@@ -360,20 +362,49 @@ public ModelAndView Downloadfiles(HttpServletRequest req,Model model,HttpServlet
     String filepath=Aservice.getSystemSettings().getUploadpath();
     
     File downloadfile = new File(filepath+File.separator+"files"+File.separator+PID);
-    System.out.println("folder " + downloadfile);
+   // System.out.println("folder " + downloadfile);
 
     File[] listOfFiles = downloadfile.listFiles();
-
+    
+String files=null ;
     for (File listOfFile : listOfFiles) {
         if (listOfFile.isFile()) {
-            System.out.println("File " + listOfFile.getName());
+           // System.out.println("File " + downloadfile+"\\"+listOfFile.getName());
+             files = downloadfile.toString();
+            System.out.println("Folder path"+files); 
+            //System.out.println("File name:"+listOfFile.getName());
+            String filename = listOfFile.getName();   
+            String filepath1 = downloadfile.toString();   
+            //System.out.println("file path:"+filepath1);
+            System.out.println("filename"+filename);
+  String downloadFolder = files;
+  Path file = Paths.get(downloadFolder, filename);
+  // Check if file exists
+  if (Files.exists(file)) {
+   // set content type 
+   response.setContentType("application/vnd.ms-excel");
+   // add response header
+   response.addHeader("Content-Disposition", "attachment; filename=" + filename);
+   try {
+    //copies all bytes from a file to an output stream
+    Files.copy(file, response.getOutputStream());
+    //flushes output stream
+    response.getOutputStream().flush();
+   } catch (IOException e) {
+    System.out.println("Error :- " + e.getMessage());
+   }
+  } else {
+   System.out.println("Sorry File not found!!!!");
+  }
+            
+            
         } else if (listOfFile.isDirectory()) {
-            System.out.println("Directory " + listOfFile.getName());
+            //System.out.println("Directory " + listOfFile.getName());
         }
     }  
-     return new ModelAndView("downloadDocuments");
-    
-    }
+    //System.out.println("Files:"+files);
+     //return new ModelAndView("downloadDocuments");  
+}
 //download files end
 @RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
 public ModelAndView uploaddocs(@RequestParam String pid,HttpServletRequest req)
