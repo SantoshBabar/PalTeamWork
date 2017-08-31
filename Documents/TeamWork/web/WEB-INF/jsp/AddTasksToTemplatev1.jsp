@@ -209,32 +209,27 @@ $(document).ready(function() {
         
         <div class="login-card">
         
-        <h2>Select tasks to the template</h2>
-        <h3>Task List. Click on the task to select</h3>
-  
-
-	   <form:form action="AddTaskTemplate.do" method="post" modelAttribute="TaskW">
+        <h2>Assign Weights To Selected Tasks</h2>
+        
+        <form:form action="AddTaskTemplate.do" method="post" modelAttribute="TaskW">
            <table>
-                
+               <tr><th>Task ID</th> <th>Task Name</th>  <th>Weight</th>  
               <c:forEach  varStatus="status" items="${taskwrapper.mttblist}" var="task"> 
-                
               <tr> 
-               
                 <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskid}"/></td>
-                
                 <td  style="padding:0 75px 0 75px;"><c:out value="${task.taskname}"/></td>
-               
                 <td  style="padding:0 75px 0 75px;"><input type="text" name="mttblist[${status.index}].weight"></td>
-               
               </tr>
-             <input type="hidden" name="mttblist[${status.index}].taskname" value="${task.taskname}"/>
-               <input type="hidden" name="mttblist[${status.index}].taskid" value="${task.taskid}"/>
-            </c:forEach>
+             
+              <input type="hidden" name="mttblist[${status.index}].taskname" value="${task.taskname}"/>
+              <input type="hidden" name="mttblist[${status.index}].taskid" value="${task.taskid}"/>
+              </c:forEach>
 
-<input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
-<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>            
-</table>
-</form:form>
+            <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
+           <td align="center"><input type="submit" value="Create" class="login login-submit"/>
+            
+           </table>
+        </form:form>
 
-        </body>
+    </body>
 </html>

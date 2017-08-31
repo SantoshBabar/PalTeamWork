@@ -233,28 +233,28 @@ table.dataTable thead th:first-child {
         
         <div class="login-card">
         
-        <h2>Select tasks to the template</h2>
-<h3>Selected Tasks. Assign weights to selected task</h3>
+        <h2>Create Task Template</h2>
  
 <form:form name="selection" action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM" onSubmit="return selectAll()"> 
-Template Name:<form:input placeholder="Enter template name" name="t1"  path="templatename" />   
-Description:<form:input placeholder="Enter description" name="t2"  path="templateDesc" />
-    <select multiple size="10" id="from">
+    Template Name:   <form:input placeholder="Enter template name" name="t1"  path="templatename" />   
+    <br><br>
+    Description:     <form:input placeholder="Enter description" name="t2"  path="templateDesc" />
+    <br><br>
+    <select  multiple size="10" id="from">
         <c:forEach  items="${AllTasks}" var="task">
             <option value="${task.taskid}"> ${task.taskname}</option>
-      
-       </c:forEach>
+        </c:forEach>
     </select>
     <div class="controls"> 
         <a href="javascript:moveAll('from', 'to')">&gt;&gt;</a> 
         <a href="javascript:moveSelected('from', 'to')">&gt;</a> 
         <a href="javascript:moveSelected('to', 'from')">&lt;</a> 
         <a href="javascript:moveAll('to', 'from')" href="#">&lt;&lt;</a> </div>
-    <select multiple id="to" size="10" name="taskid"></select>
+    <select multiple id="to" size="10" name="taskid"></select><br><br><br><br><br><br><br><br><br>
     <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
     
     <br>
-    <input type="submit" value="submit">
+   <td align="center"><input type="submit" value="Create" class="login login-submit"/>
     </form:form>    
         
 

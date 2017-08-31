@@ -200,7 +200,7 @@ th {
     <td><form:input placeHolder="Enter the Mobile Number" path="phone" htmlEscape="true" autocomplete="false" /></h4></td></tr>
 
 <tr><td align="center"><h4 >Team</td>
-    <td><form:select path="team">
+    <td><form:select class="login login-submit" path="team">
          <form:option class="login login-submit" value="">Select</form:option>
 	 <form:option class="login login-submit" value="codereview">Code Review</form:option>
 	 <form:option class="login login-submit" value="appsec">App Sec</form:option>
@@ -211,15 +211,14 @@ th {
     <td><form:input type="password" placeHolder="Enter the password" path="password" htmlEscape="true" autocomplete="false" /></h4></td></tr>
 <tr><td align="center"><h4 >Enter the Role</td>
     <td>
-   <form:select path="role">
-            <form:option class="login login-submit" value="">Select</form:option>
-	    <form:option class="login login-submit" value="admin">Admin</form:option>
-	    <form:option class="login login-submit" value="manager">Manager</form:option>
-            <form:option class="login login-submit" value="lead">Lead</form:option>
-            <form:option class="login login-submit" value="engineer">Engineer</form:option>   
-             <form:option class="login login-submit" value="scheduling">Scheduling</form:option>
-             
-   </form:select></h4></td></tr>
+    <form:select class="login login-submit" path="role">
+        <form:option class="login login-submit" value="">Select</form:option>
+	<form:option class="login login-submit" value="admin">Admin</form:option>
+	<form:option class="login login-submit" value="manager">Manager</form:option>
+        <form:option class="login login-submit" value="lead">Lead</form:option>
+        <form:option class="login login-submit" value="engineer">Engineer</form:option>   
+        <form:option class="login login-submit" value="scheduling">Scheduling</form:option>
+    </form:select></h4></td></tr>
 
 <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
 <tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>
