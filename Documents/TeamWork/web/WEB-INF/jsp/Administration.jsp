@@ -184,15 +184,15 @@ th {
     <body>
          <%@include file="Header.jsp" %>
          <div class="login-card">
-	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">Create Task</h2><br></div>
+	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">System Settings</h2><br></div>
 <form:form action="Administration.do" method="post" modelAttribute="AdminModel" id="Adminform">
 <table>
     <form:hidden path="setid" value="${SysSettings.setid}" />
-<tr><td><form:input placeholder="Enter upload path" path="mailserver" value="${SysSettings.mailserver}" /></h4></td></tr>    
-<tr><td><form:input placeholder="Enter upload path" path="port" value="${SysSettings.port}" /></h4></td></tr>    
-<tr><td><form:input placeholder="Enter upload path" path="mailuser" value="${SysSettings.mailuser}" /></h4></td></tr>    
-<tr><td><form:input placeholder="Enter upload path" path="mailpass" value="${SysSettings.mailpass}" /></h4></td></tr>    
-<tr><td><form:input placeholder="Enter upload path" path="uploadpath" value="${SysSettings.uploadpath}" /></h4></td></tr>    
+<tr><td>Email Server &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;    <form:input placeholder="Enter upload path" path="mailserver" value="${SysSettings.mailserver}" /></h4></td></tr>    
+<tr><td>Email Server Port&nbsp; <form:input placeholder="Enter upload path" path="port" value="${SysSettings.port}" /></h4></td></tr>    
+<tr><td>Email Username  &nbsp;&nbsp;  <form:input placeholder="Enter upload path" path="mailuser" value="${SysSettings.mailuser}" /></h4></td></tr>    
+<tr><td>Email Password  &nbsp; &nbsp; <form:input placeholder="Enter upload path" path="mailpass" value="${SysSettings.mailpass}" /></h4></td></tr>    
+<tr><td>File upload path  &nbsp;&nbsp;&nbsp;&nbsp;<form:input placeholder="Enter upload path" path="uploadpath" value="${SysSettings.uploadpath}" /></h4></td></tr>    
 
 
 <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 

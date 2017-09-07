@@ -290,8 +290,10 @@ $(document).ready(function() {
          </tbody>
 </table>
        
-        <a href="uploadfiles.do?pid=${ProjectData.projectid}"><h4>upload project documents<h4></a>  
-        <a href="Downloadfiles.do?pid=${ProjectData.projectid}"><h4>download project documents<h4></a> 
+         
+<a href='#' onclick='javascript:window.open("http://localhost:8888/TeamWork/uploadfiles.do?pid=${ProjectData.projectid}", "_blank", "scrollbars=1,resizable=1,height=600,width=950");' title='Pop Up'>Document Upload</a>
+<br>
+<a href='#' onclick='javascript:window.open("http://localhost:8888/TeamWork/Downloadfiles.do?pid=${ProjectData.projectid}", "_blank", "scrollbars=1,resizable=1,height=600,width=950");' title='Pop Up'>Document download</a> 
 </div>
 
     </body>

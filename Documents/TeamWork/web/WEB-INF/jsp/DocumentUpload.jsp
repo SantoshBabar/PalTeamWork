@@ -187,10 +187,10 @@ $(document).ready(function() {
 </head>
     <body>
     
-  <%@include file="Header.jsp" %>
+  
         
     <div class="login-card" >
-        <div align="center">  <h3 style="color: #a6a6a6; font-family: sans-serif; font-style: normal">Upload Project Documents</h3></div>
+        <div align="left">  <h3 style="color: #a6a6a6; font-family: sans-serif; font-style: normal">Upload Project Documents</h3></div>
 	<div class="right">
             
 <form:form commandName="filebean" action="uploadfiles.do?AntiCSRFToken=${csrfPreventionSalt}" method="post" enctype="multipart/form-data">

@@ -77,7 +77,7 @@ body {
   font-size: 2.3em;
 }
 .login-card input[type=submit] {
-  width: 10%;
+  width: 15%;
   display: block;
   margin-bottom: 10px;
   position: relative;
@@ -213,12 +213,12 @@ $(document).ready(function() {
         
         <form:form action="AddTaskTemplate.do" method="post" modelAttribute="TaskW">
            <table>
-               <tr><th>Task ID</th> <th>Task Name</th>  <th>Weight</th>  
+               <tr> <th>Task Name</th>  <th>Weight</th>  
               <c:forEach  varStatus="status" items="${taskwrapper.mttblist}" var="task"> 
               <tr> 
-                <td  style="padding:0 15px 0 35px;"><c:out  value="${task.taskid}"/></td>
-                <td  style="padding:0 75px 0 75px;"><c:out value="${task.taskname}"/></td>
-                <td  style="padding:0 75px 0 75px;"><input type="text" name="mttblist[${status.index}].weight"></td>
+                
+                <td  ><c:out value="${task.taskname}"/></td>
+                <td  ><input type="text" name="mttblist[${status.index}].weight"></td>
               </tr>
              
               <input type="hidden" name="mttblist[${status.index}].taskname" value="${task.taskname}"/>

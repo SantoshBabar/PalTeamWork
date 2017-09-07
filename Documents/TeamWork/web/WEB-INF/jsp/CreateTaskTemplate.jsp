@@ -52,9 +52,10 @@ table {
     width: 100%;
     float:left;
     max-height: 100px;
+    align-content: center;
 }
 th, td {
-    text-align: left;
+   
     padding: 8px;
 }
 tr:nth-child(even){background-color: #F7F7F7}
@@ -236,11 +237,13 @@ table.dataTable thead th:first-child {
         <h2>Create Task Template</h2>
  
 <form:form name="selection" action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM" onSubmit="return selectAll()"> 
-    Template Name:   <form:input placeholder="Enter template name" name="t1"  path="templatename" />   
+    <table>
+    <tr><td ><h4>Template Name:</td><td>   <form:input placeholder="Enter template name" name="t1"  path="templatename" /> </h4></td></tr>     
     <br><br>
-    Description:     <form:input placeholder="Enter description" name="t2"  path="templateDesc" />
+     <tr><td ><h4>Description:  </td><td>   <form:input placeholder="Enter description" name="t2"  path="templateDesc" /></h4></td></tr>
     <br><br>
-    <select  multiple size="10" id="from">
+    
+   <tr><td> <select  multiple size="10" id="from">
         <c:forEach  items="${AllTasks}" var="task">
             <option value="${task.taskid}"> ${task.taskname}</option>
         </c:forEach>
@@ -252,9 +255,11 @@ table.dataTable thead th:first-child {
         <a href="javascript:moveAll('to', 'from')" href="#">&lt;&lt;</a> </div>
     <select multiple id="to" size="10" name="taskid"></select><br><br><br><br><br><br><br><br><br>
     <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
-    
+   </td></tr>
     <br>
-   <td align="center"><input type="submit" value="Create" class="login login-submit"/>
+    <br>
+   <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
+    </table>
     </form:form>    
         
 
