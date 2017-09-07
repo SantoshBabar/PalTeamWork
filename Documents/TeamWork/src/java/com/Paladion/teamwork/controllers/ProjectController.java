@@ -5,6 +5,14 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.beans.MapTemplateTaskBean;
 import com.Paladion.teamwork.beans.ProjectBean;
@@ -354,7 +362,7 @@ public ModelAndView uploaddocstoProject(HttpServletRequest req,@ModelAttribute f
 
 
 @RequestMapping(value="/Downloadfiles",method=RequestMethod.POST)    
-public void  Downloadfiles(HttpServletRequest req,Model model,HttpServletResponse response) throws FileNotFoundException, IOException
+public void  Downloadfiles(HttpServletRequest req,Model model,HttpServletResponse response) throws FileNotFoundException, IOException, Exception
     {
     HttpSession sess=req.getSession();    
     String PID=(String) sess.getAttribute("DownloadPID");    
@@ -362,33 +370,31 @@ public void  Downloadfiles(HttpServletRequest req,Model model,HttpServletRespons
     String filepath=Aservice.getSystemSettings().getUploadpath();
     
     File downloadfile = new File(filepath+File.separator+"files"+File.separator+PID);
-   // System.out.println("folder " + downloadfile);
-
-    File[] listOfFiles = downloadfile.listFiles();
-    
-String files=null ;
-    for (File listOfFile : listOfFiles) {
-        if (listOfFile.isFile()) {
-           // System.out.println("File " + downloadfile+"\\"+listOfFile.getName());
-             files = downloadfile.toString();
-            System.out.println("Folder path"+files); 
-            //System.out.println("File name:"+listOfFile.getName());
-            String filename = listOfFile.getName();   
-            String filepath1 = downloadfile.toString();   
-            //System.out.println("file path:"+filepath1);
-            System.out.println("filename"+filename);
-  String downloadFolder = files;
-  Path file = Paths.get(downloadFolder, filename);
-  // Check if file exists
+    System.out.println("folder " + downloadfile.toString());
+   String sourceFolderName =  downloadfile.toString();
+        String outputFileName = downloadfile.toString()+".zip";
+ 
+        FileOutputStream fos = new FileOutputStream(outputFileName);
+        ZipOutputStream zos = new ZipOutputStream(fos);
+        //level - the compression level (0-9)
+        zos.setLevel(9);
+ 
+        System.out.println("Begin to compress folder : " + sourceFolderName + " to " + outputFileName);
+        addFolder(zos, sourceFolderName, sourceFolderName);
+ 
+        zos.close();
+        System.out.println("Program ended successfully!");
+        //file download
+        
+        
+String downloadFolder = downloadfile.toString();
+String filename1=downloadfile.toString()+".zip";
+Path file = Paths.get(filename1);
   if (Files.exists(file)) {
-   // set content type 
-   response.setContentType("application/vnd.ms-excel");
-   // add response header
-   response.addHeader("Content-Disposition", "attachment; filename=" + filename);
+   response.setContentType("application/zip");
+   response.addHeader("Content-Disposition", "attachment; filename=" + filename1);
    try {
-    //copies all bytes from a file to an output stream
     Files.copy(file, response.getOutputStream());
-    //flushes output stream
     response.getOutputStream().flush();
    } catch (IOException e) {
     System.out.println("Error :- " + e.getMessage());
@@ -396,14 +402,56 @@ String files=null ;
   } else {
    System.out.println("Sorry File not found!!!!");
   }
-            
-            
-        } else if (listOfFile.isDirectory()) {
-            //System.out.println("Directory " + listOfFile.getName());
+        
+        
+        //file download
+        
+        
+        
+        
+    }
+ 
+    private static void addFolder(ZipOutputStream zos,String folderName,String baseFolderName)throws Exception{
+        File f = new File(folderName);
+        if(f.exists()){
+ 
+            if(f.isDirectory()){
+                //Thank to peter 
+                //For pointing out missing entry for empty folder
+                if(!folderName.equalsIgnoreCase(baseFolderName)){
+                    String entryName = folderName.substring(baseFolderName.length()+1,folderName.length()) + File.separatorChar;
+                    System.out.println("Adding folder entry " + entryName);
+                    ZipEntry ze= new ZipEntry(entryName);
+                    zos.putNextEntry(ze);    
+                }
+                File f2[] = f.listFiles();
+                for(int i=0;i<f2.length;i++){
+                    addFolder(zos,f2[i].getAbsolutePath(),baseFolderName);    
+                }
+            }else{
+                //add file
+                //extract the relative name for entry purpose
+                String entryName = folderName.substring(baseFolderName.length()+1,folderName.length());
+                System.out.print("Adding file entry " + entryName + "...");
+                ZipEntry ze= new ZipEntry(entryName);
+                zos.putNextEntry(ze);
+                FileInputStream in = new FileInputStream(folderName);
+                int len;
+                byte buffer[] = new byte[1024];
+                while ((len = in.read(buffer)) > 0) {
+                    zos.write(buffer, 0, len);
+                }
+                in.close();
+                zos.closeEntry();
+                System.out.println("OK!");
+ 
+            }
+        }else{
+            System.out.println("File or directory not found " + folderName);
         }
-    }  
-    //System.out.println("Files:"+files);
-     //return new ModelAndView("downloadDocuments");  
+        
+        
+     
 }
 //download files end
 @RequestMapping(value="/uploadfiles",method=RequestMethod.GET)
