@@ -116,4 +116,22 @@
         <bean id="AdminDAO" class="com.Paladion.teamwork.DAO.AdminDAOImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
         </bean>
+        
+        <bean id="Validator" class="com.Paladion.teamwork.utils.Validator">
+         </bean>
+         
+        <bean id="TaskValidator" class="com.Paladion.teamwork.utils.TaskValidator">
+         </bean>
+         
+        <bean id="userValidator" class="com.Paladion.teamwork.utils.userValidator">
+         </bean>
+         
+<!--         <bean id="ProjectValidator" class="com.Paladion.teamwork.utils.ProjectValidator">
+         </bean>-->
+         
+         
+         
+         <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+       <property name="basename"  value="/WEB-INF/classes/messages" />
+       </bean>
     </beans>

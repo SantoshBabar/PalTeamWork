@@ -125,7 +125,7 @@ body {
 
 .login-submit {
   /* border: 1px solid #3079ed; */
-  width: 50%;
+  width: 30%;
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
@@ -193,12 +193,15 @@ th {
 <table>
    
 <tr><td align="center"><h4 >User Name:</td>
+    <form:errors path="username" cssClass="error"/><br>
     <td><form:input placeHolder="Enter the Username"  path="username" htmlEscape="true" autocomplete="false"/></h4></td></tr>    
+<form:errors path="email" cssClass="error"/>
 <tr><td align="center"><h4 >Email id</td>
     <td><form:input placeHolder="Enter the Email ID" path="email" htmlEscape="true" autocomplete="false"/></h4></td></tr>  
+<form:errors path="phone" cssClass="error"/>
 <tr><td align="center"><h4>Mobile</td>
     <td><form:input placeHolder="Enter the Mobile Number" path="phone" htmlEscape="true" autocomplete="false" /></h4></td></tr>
-
+<form:errors path="team" cssClass="error"/>
 <tr><td align="center"><h4 >Team</td>
     <td><form:select class="login login-submit" path="team">
          <form:option class="login login-submit" value="">Select</form:option>
@@ -206,9 +209,10 @@ th {
 	 <form:option class="login login-submit" value="appsec">App Sec</form:option>
          <form:option class="login login-submit" value="netpt">Network PT</form:option>
     </form:select></td></tr>
-      
+      <form:errors path="password" cssClass="error"/><br>
 <tr><td align="center"><h4 >Password</td>
     <td><form:input type="password" placeHolder="Enter the password" path="password" htmlEscape="true" autocomplete="false" /></h4></td></tr>
+ <form:errors path="role" cssClass="error"/>
 <tr><td align="center"><h4 >Enter the Role</td>
     <td>
     <form:select class="login login-submit" path="role">

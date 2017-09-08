@@ -25,6 +25,8 @@ import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
+
+import com.Paladion.teamwork.utils.Validator;
 import com.sun.scenario.Settings;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,6 +47,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,7 +65,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProjectController {
 	
-
+//@Autowired
+//@Qualifier(value="ProjectValidator")
+//ProjectValidator PV;
+//
+//@InitBinder
+//protected void initBinder(WebDataBinder binder) {
+//      binder.addValidators(PV);
+//}
+    
 @Autowired
 @Qualifier(value="TemplateService")
 TemplateService TS;
@@ -113,10 +127,16 @@ public fileuploadBean populate1()
 
     //Schedule a project
     @RequestMapping(value="/ScheduleProject",method=RequestMethod.POST)
-    public Object CreateNewProject(@ModelAttribute("ProjectM")ProjectBean PB,HttpServletRequest req,Model E) throws Exception
+    public Object CreateNewProject(@ModelAttribute("ProjectM") ProjectBean PB,HttpServletRequest req,Model E) throws Exception
     {
+//        if (result.hasErrors()) {
+//            //validates the user input, this is server side validation
+//            System.out.println("error!!!!!!!!");
+//            
+//         return new ModelAndView("CreateProject");
+//      }
         HttpSession sess= req.getSession(false);
-        ModelAndView result = null;
+        ModelAndView results = null;
         try{
 	    System.out.println("\n inside create Project POST method ");
             PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
@@ -135,9 +155,9 @@ public fileuploadBean populate1()
         catch(Exception ex){
             List <TemplateBean> TemplateList;
             TemplateList=TS.getAllTemplates();
-	    result = new ModelAndView("CreateProject","Message","Project Creation failed");
-            result.addObject("AllTemplates", TemplateList);
-            return result;
+	    results = new ModelAndView("CreateProject","Message","Project Creation failed");
+            results.addObject("AllTemplates", TemplateList);
+            return results;
         }
            
         ProjectTransactionWrapper PTW=new ProjectTransactionWrapper();
@@ -146,12 +166,12 @@ public fileuploadBean populate1()
         List<MapTemplateTaskBean> MTTB=TS.getAllWeights(PRDATA.getTemplateid());
         PSBList=  CU.setTaskHours(PRDATA, MTTB);
         PTW.setProjectlist(PSBList);
-        result=new ModelAndView("AssignTaskToUsers");
+        results=new ModelAndView("AssignTaskToUsers");
         List<UserDataBean> Alleng=CU.getUsersByRole("engineer", sess);
-        result.addObject("AllEngineers",Alleng);
+        results.addObject("AllEngineers",Alleng);
         
-        result.addObject("ProjectW",PTW);
-        return result;
+        results.addObject("ProjectW",PTW);
+        return results;
     }
     
     public String updateProject(ProjectBean pBean){return "";}

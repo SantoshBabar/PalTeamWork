@@ -7,6 +7,8 @@ package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.services.TaskService;
+import com.Paladion.teamwork.utils.TaskValidator;
+import com.Paladion.teamwork.utils.Validator;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +34,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TaskController {
 	
+    
+@Autowired
+@Qualifier(value="TaskValidator")
+TaskValidator TV;
+   
+
+
+@InitBinder
+protected void initBinder(WebDataBinder binder) {
+      binder.addValidators(TV);
+}    
+
+    
 @Autowired
 @Qualifier(value="TaskService")
 TaskService TS;
@@ -52,8 +71,14 @@ public TaskBean populate()
 
 
 @RequestMapping(value="/CreateTask",method=RequestMethod.POST)
-    public ModelAndView createTask(@ModelAttribute("TaskM")TaskBean TB,HttpServletRequest req) 
+    public ModelAndView createTask(@ModelAttribute("TaskM")@Validated TaskBean TB,BindingResult result,HttpServletRequest req) 
     {
+        if (result.hasErrors()) {
+            //validates the user input, this is server side validation
+            System.out.println("error!!!!!!!!");
+            
+         return new ModelAndView("CreateTask");
+      }
 	System.out.println("\n inside create Task method ");
 	
            TS.addTask(TB); 	

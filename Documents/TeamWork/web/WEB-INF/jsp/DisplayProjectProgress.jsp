@@ -179,7 +179,7 @@ th {
 <script>
 $(document).ready(function() {
     $('#example').DataTable( {
-        "scrollY":"200px",
+        "scrollY":"300px",
         "scrollCollapse": true,
         "paging":         false,
         "sorting": false,

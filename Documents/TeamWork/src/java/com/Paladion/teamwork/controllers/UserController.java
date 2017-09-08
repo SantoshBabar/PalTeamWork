@@ -11,6 +11,8 @@ import com.Paladion.teamwork.beans.UserDataBean;
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.EmailUtil;
+import com.Paladion.teamwork.utils.Validator;
+import com.Paladion.teamwork.utils.userValidator;
 import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +20,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 /**
  *
  * @author user
@@ -31,6 +38,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 	
+ @Autowired
+@Qualifier(value="userValidator")
+userValidator UV;
+   
+
+
+@InitBinder
+protected void initBinder(WebDataBinder binder) {
+      binder.addValidators(UV);
+}   
+    
     @Autowired
  @Qualifier(value="LoginService")
  LoginService LS;
@@ -57,12 +75,19 @@ public class UserController {
     }
 	
 	@RequestMapping(value="/CreateUser",method=RequestMethod.POST)
-    public ModelAndView createUser(@ModelAttribute("UserM")UserDataBean loginBean,HttpServletRequest req )
+    public ModelAndView createUser(@ModelAttribute("UserM")@Validated UserDataBean loginBean,BindingResult result,HttpServletRequest req )
     {
+        
+        if (result.hasErrors()) {
+            //validates the user input, this is server side validation
+            System.out.println("error!!!!!!!!");
+            
+         return new ModelAndView("CreateUser");
+      }
         System.out.println("in user controller create user post method");
     
-	  boolean result = userService.addUser(loginBean);
-	   if(result==true){
+	  boolean results = userService.addUser(loginBean);
+	   if(results==true){
                
                //Send Email to user
                EmailBean ebean=new EmailBean();

@@ -5,8 +5,9 @@
 --%>
 <%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
 <%@page import="net.tanesha.recaptcha.ReCaptcha"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="icon" href="Network-Security.png" type="image/x-icon">
 
 
@@ -33,7 +34,7 @@ body {
   top: 30%;
   padding: 40px;
   width: 500px;
-  height:560px;
+  height:600px;
   background-image: url("2.jpg");
   margin: 0 auto 10px;
   border-radius: 0px;
@@ -126,9 +127,13 @@ body {
   text-align: center;
   font-size: 12px;
 }
-
+.error {
+color: black;
+font-style: italic;
+}
 
 </style>
+
   <meta charset="UTF-8">
 
   <title>Log-in</title>
@@ -147,8 +152,11 @@ body {
     <center><h4 style="color: #ff0000">${Message}</h4></center>
 <!-- UI goes here-->
     <form:form action="Login.do" method="post" commandName="LoginM"> 
-    	Username:<form:input path="email" placeholder="Enter the username"/>
-        Password:<form:password path="password" placeholder="Enter the password"/>
+        <form:errors path="email" cssClass="error"/><br>
+        email id:<form:input path="email" placeholder="Enter the username"/><br>
+        
+        Password:<form:password path="password" placeholder="Enter the password"/><br>
+        <form:errors path="password" cssClass="error"/>
         <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
         <%
           ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdILiQUAAAAADnLG0a6cHtsTag3ey10y652yvGK", "6LdlHOsSAAAAACe2WYaGCjU2sc95EZqCI9wLcLXY", true);

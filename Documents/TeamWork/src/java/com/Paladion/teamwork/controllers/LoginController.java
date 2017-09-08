@@ -12,6 +12,7 @@ import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.SystemInfo;
+import com.Paladion.teamwork.utils.Validator;
 import java.security.SecureRandom;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +24,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 /**
  *
  * @author Administrator
@@ -37,6 +48,17 @@ public class LoginController {
     
  public LoginController() 
  {   }
+ 
+@Autowired
+@Qualifier(value="Validator")
+Validator SV;
+   
+
+
+@InitBinder
+protected void initBinder(WebDataBinder binder) {
+      binder.addValidators(SV);
+}
  
  @Autowired
  @Qualifier(value="LoginService")
@@ -70,10 +92,19 @@ public String Login()
     return "Login";
 }
 
- 
+
+
+
 @RequestMapping(value="/Login",method=RequestMethod.POST)
-public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRequest req )
+public ModelAndView Login(@ModelAttribute("LoginM")@Validated UserDataBean LB, BindingResult result,HttpServletRequest req )
     {
+        if (result.hasErrors()) {
+            //validates the user input, this is server side validation
+            System.out.println("error!!!!!!!!");
+            
+         return new ModelAndView("Login");
+      }
+        
         //Captcha code begins
         String remoteAddr = req.getRemoteAddr();
         ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
@@ -115,7 +146,8 @@ public ModelAndView Login(@ModelAttribute("LoginM")UserDataBean LB,HttpServletRe
            else {
            return new ModelAndView("Login","Lerror", "Incorrect Username or Password");
            }
- }
+ 
+    }
 
 @RequestMapping(value="/Welcome",method=RequestMethod.GET)
 public ModelAndView Welcome(HttpServletRequest req)

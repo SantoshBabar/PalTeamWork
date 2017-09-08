@@ -4,10 +4,15 @@
     Author     : Administrator
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="icon" href="Network-Security.png" type="image/x-icon">
 <head>
 <style>
+.error {
+color: black;
+font-style: italic;
+}
 ul {
     list-style-type: none;
     margin: 0;
@@ -189,7 +194,9 @@ form.reset();
 <table>
 
 <tr><td align="center"><h4>Task Name:</td><td><form:input placeholder="Enter Task Name" path="taskname" /></h4></td></tr>    
+<form:errors path="taskname" cssClass="error"/><br>
 <tr><td align="center"><h4>Description:</td><td><form:input placeholder="Enter Description" path="Description" /></h4></td></tr>  
+<form:errors path="Description" cssClass="error"/><br>
 <tr></tr>
 <tr></tr>
 <tr></tr>
