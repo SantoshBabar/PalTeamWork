@@ -7,7 +7,8 @@ package com.Paladion.teamwork.utils;
 
 import com.Paladion.teamwork.beans.UserDataBean;
 import org.springframework.validation.Errors;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author sumukh.r
@@ -21,12 +22,16 @@ public class Validator implements org.springframework.validation.Validator{
 
     @Override
     public void validate(Object target, Errors errors) {
-        
+        UserDataBean sbean = (UserDataBean) target;
+        Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$");
+Matcher m = p.matcher(sbean.getEmail());
+
+
       
 	
-		UserDataBean sbean = (UserDataBean) target;
+		
                 
-		if(sbean.getEmail().length() == 0)
+		if(m.find())
 		{
 		    errors.rejectValue("email","email.required");
 		}

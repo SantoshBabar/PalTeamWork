@@ -1,458 +1,270 @@
 <%-- 
-    Document   : index
-    Created on : 26-Jul-2017, 18:43:49
-    Author     : sumukh.r
+    Document   : Administration
+    Created on : 2 Aug, 2017, 8:47:07 PM
+    Author     : Lenovo
 --%>
 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.Paladion.teamwork.beans.UserDataBean"%>
-<!DOCTYPE html>
-<html>
-    <head>
-  <title>Code Review Knowledge Base</title>
-  <meta name="description" content="website description" />
-  <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
-  
+<link rel="icon" href="Network-Security.png" type="image/x-icon">
+<head>
 <style>
-html
-{ height: 100%;
-  
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #a6a6a6;
+    width:1420px;
+   
 }
 
-*
-{ margin: 0;
-  padding: 0;}
-
-body
-{ font: normal .80em 'trebuchet ms', arial, sans-serif;
-  background: #FFF;
-  color: #555;
+li {
+    float: left;
 }
 
-p
-{ padding: 0 0 20px 0;
-  line-height: 1.7em;}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 
-img
-{ border: 0;}
+li a:hover:not(.active) {
+    background-color: #b30000;
+}
 
-h1, h2, h3, h4, h5, h6 
-{ color: #E7746F;
-  letter-spacing: 0em;
-  padding: 0 0 5px 0;}
-
-h1, h2, h3
-{ font: normal 170% 'century gothic', arial;
-  margin: 0 0 15px 0;
-  padding: 15px 0 5px 0;}
-
-h2
-{ font-size: 160%;
-  padding: 9px 0 5px 0;}
-
-h3
-{ font-size: 140%;
-  padding: 5px 0 0 0;}
-
-h4, h6
-{ color: #009FBC;
-  padding: 0 0 5px 0;
-  font: normal 110% arial;
-  text-transform: uppercase;}
-
-h5, h6
-{ color: #888;
-  font: normal 95% arial;
-  letter-spacing: normal;
-  padding: 0 0 15px 0;}
-
-a, a:hover
-{ outline: none;
-  text-decoration: underline;
-  color: #009FBC;}
-
-a:hover
-{ text-decoration: none;}
-
-blockquote
-{ margin: 20px 0; 
-  padding: 10px 20px 0 20px;
-  border: 1px solid #E5E5DB;
-  background: #FFF;}
-
-ul
-{ margin: 2px 0 22px 17px;}
-
-ul li
-{ list-style-type: circle;
-  margin: 0 0 6px 0; 
-  padding: 0 0 4px 5px;
-  line-height: 1.5em;}
-
-ol
-{ margin: 8px 0 22px 20px;}
-
-ol li
-{ margin: 0 0 11px 0;}
-
-.left
-{ float: left;
-  width: auto;
-  margin-right: 10px;}
-
-.right
-{ float: right; 
-  width: auto;
-  margin-left: 10px;}
-
-.center
-{ display: block;
-  text-align: center;
-  margin: 20px auto;}
-
-#main, #logo, #menubar, #site_content, #footer
-{ margin-left: auto; 
-  margin-right: auto;}
-
-#header
-{ background: #1d1d1d url(pattern.png) repeat;
-  border-bottom: 2px solid #E7746F;
-  height: 177px;}
-  
-#banner
-{ background: transparent url(banner.jpg) no-repeat;
-  width: 870px;
-  height: 180px;
-  margin-bottom: 20px;
-  border: 5px solid #E7746F;}
-
-#logo
-{ width: 880px;
-  position: relative;
-  height: 140px;
-  background: transparent;}
-
-#logo #logo_text 
-{ position: absolute; 
-  top: 10px;
-  left: 0;}
-
-#logo h1, #logo h2
-{ font: normal 300% 'century gothic', arial, sans-serif;
-  border-bottom: 0;
-  text-transform: none;
-  margin: 0 0 0 9px;}
-
-#logo_text h1, #logo_text h1 a, #logo_text h1 a:hover 
-{ padding: 22px 0 0 0;
-  color: #FFF;
-  letter-spacing: 0.1em;
-  text-decoration: none;}
-
-#logo_text h1 a .logo_colour
-{ color: #E7746F;}
-
-#logo_text a:hover .logo_colour
-{ color: #FFF;}
-
-#logo_text h2
-{ font-size: 120%;
-  padding: 4px 0 0 0;
-  color: #FFF;}
-
-#menubar
-{ width: 880px;
-  height: 46px;} 
-
-ul#menu
-{ float: right;
-  margin: 0;}
-
-ul#menu li
-{ float: left;
-  padding: 0 0 0 9px;
-  list-style: none;
-  margin: 1px 2px 0 0;
-  background: transparent;}
-
-ul#menu li a
-{ font: normal 100% 'trebuchet ms', sans-serif;
-  display: block; 
-  float: left; 
-  height: 20px;
-  padding: 6px 35px 5px 28px;
-  text-align: center;
-  color: #FFF;
-  text-decoration: none;
-  background: transparent;} 
-
-ul#menu li.selected a
-{ height: 20px;
-  padding: 6px 35px 5px 28px;}
-
-ul#menu li.selected
-{ margin: 1px 2px 0 0;
-  background: #E7746F;}
-
-ul#menu li.selected a, ul#menu li.selected a:hover
-{ background: #E7746F;
-  color: #FFF;}
-
-ul#menu li a:hover
-{ color: #FFF;
-  background: #E7746F;}
-
-#site_content
-{ width: 880px;
-  overflow: hidden;
-  margin: 20px auto 0 auto;
-  padding: 0 0 10px 0;} 
-
-#sidebar_container
-{ float: right;
-  width: 224px;}
-
-.sidebar_top
-{ width: 222px;
-  height: 14px;
-  background: transparent url(side_top.png) no-repeat;}
-
-.sidebar_base
-{ width: 222px;
-  height: 14px;
-  background: url(side_base.png) no-repeat;}
-
-.sidebar
-{ float: right;
-  width: 222px;
-  padding: 0;
-  margin: 0 0 16px 0;}
-
-.sidebar_item
-{ background: url(side_back.png) repeat-y;
-  padding: 0 15px;
-  width: 192px;}
-
-.sidebar li a.selected
-{ color: #444;} 
-
-.sidebar ul
-{ margin: 0;} 
-
-#content
-{ text-align: left;
-  width: 620px;
-  padding: 0 0 0 5px;
-  float: left;}
-  
-#content ul
-{ margin: 2px 0 22px 0px;}
-
-#content ul li, .sidebar ul li
-{ list-style-type: none;
-  background: url(bullet.png) no-repeat;
-  margin: 0 0 0 0; 
-  padding: 0 0 4px 25px;
-  line-height: 1.5em;}
-
-#footer
-{ width: 100%;
-  font-family: 'trebuchet ms', sans-serif;
-  font-size: 100%;
-  height: 80px;
-  padding: 28px 0 5px 0;
-  text-align: center; 
-  background: transparent url(pattern.png) repeat;
-  border-top: 2px solid #E7746F;
-  color: #FFF;}
-
-#footer p
-{ line-height: 1.7em;
-  padding: 0 0 10px 0;}
-
-#footer a
-{ color: #E7746F;
-  text-decoration: none;}
-
-#footer a:hover
-{ color: #FFF;
-  text-decoration: none;}
-
-.search
-{ color: #5D5D5D; 
-  border: 1px solid #BBB; 
-  width: 134px; 
-  padding: 4px; 
-  font: 100% arial, sans-serif;}
-
-.form_settings
-{ margin: 15px 0 0 0;}
-
-.form_settings p
-{ padding: 0 0 4px 0;}
-
-.form_settings span
-{ float: left; 
-  width: 200px; 
-  text-align: left;}
-  
-.form_settings input, .form_settings textarea
-{ padding: 5px; 
-  width: 299px; 
-  font: 100% arial; 
-  border: 1px solid #E5E5DB; 
-  background: #FFF; 
-  color: #47433F;}
-  
-.form_settings .submit
-{ font: 100% arial; 
-  border: 0; 
-  width: 99px; 
-  margin: 0 0 0 212px; 
-  height: 33px;
-  padding: 2px 0 3px 0;
-  cursor: pointer; 
-  background: #E7746F; 
-  color: #FFF;}
-
-.form_settings textarea, .form_settings select
-{ font: 100% arial; 
-  width: 299px;}
-
-.form_settings select
-{ width: 310px;}
-
-.form_settings .checkbox
-{ margin: 4px 0; 
-  padding: 0; 
-  width: 14px;
-  border: 0;
-  background: none;}
-
-.separator
-{ width: 100%;
-  height: 0;
-  border-top: 1px solid #D9D5CF;
-  border-bottom: 1px solid #FFF;
-  margin: 0 0 20px 0;}
-  
-table
-{ margin: 10px 0 30px 0;}
-
-table tr th, table tr td
-{ background: #E7746F;
-  color: #FFF;
-  padding: 7px 4px;
-  text-align: left;}
-  
-table tr td
-{ background: #E5E5DB;
-  color: #47433F;
-  border-top: 1px solid #FFF;}
-
+.active {
+    background-color: #cc0000;
+}
 </style>
+<style>
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+
+body {
+
+	background-image: url("grey.jpg");
+  background-repeat: repeat-y;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+}
+
+.login-card {
+  padding: 40px;
+  width: 1420px;
+  height: 550px;
+  background-color: white;
+  margin: 0 auto 10px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.login-card h1 {
+  font-weight: 1;
+  text-align: center;
+  font-size: 2.3em;
+}
+
+.login-card input[type=submit] {
+  width: 20%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  float: center;
+}
+
+.login-card select[type=submit] {
+  width: 20%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  float: center;
+}
+
+
+.login-card input[type=text], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 30%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.login-card input[type=text]:hover, input[type=password]:hover {
+  border: 2px solid #b9b9b9;
+  
+  border-top: 5px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.login {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.login-submit {
+  /* border: 1px solid #3079ed; */
+  width: 30%;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #a6a6a6;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.login-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #ff8080;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.login-card a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+}
+
+.login-card a:hover {
+  opacity: 1;
+}
+
+.login-help {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F7F7F7}
+
+th {
+    background-color: #a6a6a6;
+    color: white;
+}
+</style>
+ <style>
+.container {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+}
+
+.container a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.dropdown .dropbtn1 {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: #cc0000;
+}
+
+.container a:hover, .dropdown:hover .dropbtn {
+    background-color: #cc0000;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #999966;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+<script type="text/javascript">
+    var form = document.getElementById('Adminform');
+    form.reset();
+</script>
+       <title>Administration</title>
+    </head>
     <body>
-        <% 
-        if (session==null||null==session.getAttribute("Luser"))
-           {
-               response.sendRedirect("Login.do");
-               return;
-           }
-    %> <%-- Session Code Ends --%>
-    
-     
-    <%-- Fetch the UserName from the Session --%>
-    <%! UserDataBean b; String name; String role;%>
-    <% 
-        b=(UserDataBean)session.getAttribute("Luser"); 
-        name=b.getUsername().toString();
-        role=b.getRole().toString();
-    %>
-    
-    <div id="main">
-    <div id="header">
-      <div id="logo">
-        <div id="logo_text">
-          <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="index.do">Code Review <span class="logo_colour">Knowledge Base</span></a></h1>
-          <h2>Code reviews made simple…</h2>
-        </div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="selected"><a href="threatProfile.do">Threat Profile</a></li>
-          <li><a href="CodeUnderstanding.do">Code Understanding</a></li>
-          <li><a href="Info.do">Information Gathering Sheet</a></li>
-          <li><a href="another_page.html">Test plans</a></li>
-          <li><a href="Logout.do">Logout</a></li>
-          <li><a href="contact.html">Code review guidelines</a></li>
-        </ul>
-      </div>
-    </div>
-    <div id="content_header"></div>
-    <div id="site_content">
-      
-	  <div id="sidebar_container">
-        <div class="sidebar">
-          <div class="sidebar_top"></div>
-          <div class="sidebar_item">
-            <!-- insert your sidebar items here -->
-            <h3>Latest News</h3>
-            
-            <p>Scanner videos here.<br /><a href="Videos.do">Click here</a></p>
-            <p>Code Review Documents.<br /><a href="Documents.do">Click here</a></p>
-          </div>
-          <div class="sidebar_base"></div>
-        </div>
-        <div class="sidebar">
-          <div class="sidebar_top"></div>
-          <div class="sidebar_item">
-            <h3>Useful Links</h3>
-            <ul>
-              <li><a href="https://connect.plynt.com/">Client Connect</a></li>
-              <li><a href="#">Checkmarx Server</a></li>
-              <li><a href="#">Zing HR</a></li>
-              <li><a href="#">Outlook</a></li>
-            </ul>
-          </div>
-          <div class="sidebar_base"></div>
-        </div>
+         <%@include file="Header.jsp" %>
+         <div align="center">
         
-      </div>
-      <div id="content">
-        <!-- insert the page content here -->
-        <h1>What is a Security Code Review?</h1>
-        <p>Source Code review discovers hidden vulnerabilities, design flaws, and verifies if key security controls are implemented. Paladion uses a combination of scanning tools and manual review to detect insecure coding practices, backdoors, injection flaws, cross site scripting flaws, insecure handling of external resources, weak cryptography, etc. </p>
-        
-        <p><b style="color: #E7746F">Preparation:</b> The first step of a security code review is to conduct a through study of the application followed by the creation of a comprehensive threat profile.</p>
-        <p><b style="color: #E7746F">Analysis:</b> Our experts study the code layout to develop a specific code reviewer plan, and uses a hybrid approach where automated scans are verified and a custom manual review is performed.</p>
-        <p><b style="color: #E7746F">Solutions:</b> Once the code is analyzed, the next step in the security code review process is to verify existing flaws and generate reports that provide solutions.</p>
-        
-        <ul>
-            <li ><b style="color: #E7746F">Faster Results:</b>Easily detect flaws through code analysis and avoid the need to send test data to the application or software
-since access to the entire code base of the application is available.</li>
-          <li><b style="color: #E7746F">Thorough Analysis:</b>Evaluate the entire code layout of the application including areas that wouldn’t be analyzed in an application
-security test such as entry points for different inputs, internal interfaces and integrations, data handling and
-validation logic, and the use of external API’s and frameworks.</li>
-          <li><b style="color: #E7746F">Overcome Testing Limitations:</b>Uncover vulnerabilities and detect attack surfaces that automated code scans miss using security code
-reviews to detect weak algorithms, identify design flaws, find insecure configurations and spot insecure
-coding practices.</li>
-          <li><b style="color: #E7746F">Create Reports:</b>Produce security code review reports that include an executive summary that lists strengths and
-weaknesses and provides detailed findings that include precise code based solutions and fixes.</li>
-          <li><b style="color: #E7746F">Provide Solutions</b>Secure sensitive data storage and suggest precise solutions customized for your developers with code
-level suggestions that include more exhaustive checks to find all instances of common vulnerabilities.</li>
-          <li><b style="color: #E7746F">Meet Compliance Standards</b>Satisfy industry regulations and compliance standards including PCI DSS standards.</li>
-        </ul>
-      </div>
+         </div>
+         <div class="login-card">
+	   
     </div>
-    <div id="content_footer"></div>
-    <div id="footer">
-     
-      <p>Copyright &copy; <a href="https://www.paladion.net">Paladion Networks | </a></p>
-    </div>
-  </div>
-</body>
+<br> 
     </body>
 </html>

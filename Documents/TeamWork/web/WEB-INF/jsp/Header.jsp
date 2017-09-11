@@ -152,7 +152,15 @@
                 </div>
         </div> 
           <%}%>
-        <li><a href="index.do">knowledge base</a></li> 
+        <div class="dropdown">
+            <button class="dropbtn">Knowledge Base</button>
+                <div class="dropdown-content">
+                <a href="threatProfile.do">Threat Profile</a>
+                <a href="CodeUnderstanding.do">Code Understanding</a>
+                <a href="Info.do">Information Gathering Sheet</a>
+                <a href="CodeUnderstanding.do">Code Understanding</a>
+                </div>
+        </div> 
         <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
        
         <div class="dropdown" style="float:right">
