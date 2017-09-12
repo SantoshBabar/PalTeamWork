@@ -10,13 +10,9 @@ import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TaskTemplateWrapper;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.services.TemplateService;
-import com.Paladion.teamwork.utils.CommonUtil;
-import java.sql.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,11 +132,16 @@ public ModelAndView AddTaskToTemplate(@ModelAttribute("TaskW")TaskTemplateWrappe
            { MTT.setTemplateid(TempB.getTemplateid());
             if(!TempS.addTaskToTemplate(MTT))
                 {
-                    return new ModelAndView("AddTasksToTemplate","Temperror", "Something went wrong during save" );
+                    return new ModelAndView("AddTasksToTemplate","Message", "Something went wrong during save" );
                 }
             }	
     }
-    return new ModelAndView("CreateTaskTemplate","Message","Template Created Successfully");
+    List <TaskBean> Tasklist = null;
+    Tasklist =TempS.getAllTasksforTemplate();
+    ModelAndView result=new ModelAndView("CreateTaskTemplate");
+    result.addObject("AllTasks",Tasklist);
+    result.addObject("Message","Template Created Successfully");
+    return result;
  }
 
 @RequestMapping(value="/GetAllTaskTemplates",method=RequestMethod.GET)

@@ -6,11 +6,13 @@
 package com.Paladion.teamwork.beans;
 
 import java.io.Serializable;
+import java.sql.Time;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -25,6 +27,11 @@ public class SystemBean {
     int setid;
     String mailserver, port, mailuser, mailpass;
     String uploadpath;
+    
+
+    
+
+   
 
     public int getSetid() {
         return setid;
@@ -76,5 +83,7 @@ public class SystemBean {
         this.uploadpath = uploadpath;
     }
 
-   
+
+
+  
 }

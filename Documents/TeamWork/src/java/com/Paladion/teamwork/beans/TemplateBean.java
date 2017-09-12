@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
+
 /**
  *
  * @author Administrator
@@ -36,6 +37,8 @@ public class TemplateBean implements Serializable{
 
 	
 	@Column(name = "templatename")
+       
+       
 	String templatename;
 	public void setTemplatename(String templatename) {
 		this.templatename = templatename;

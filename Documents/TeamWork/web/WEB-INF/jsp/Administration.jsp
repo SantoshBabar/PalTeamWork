@@ -183,6 +183,18 @@ th {
 }
 </style>
 
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":"300px",
+        "scrollCollapse": true,
+        "paging":         false,
+        "sorting": false       
+    } );
+} );
+</script>
+
+
 <script type="text/javascript">
     var form = document.getElementById('Adminform');
     form.reset();
@@ -194,17 +206,19 @@ th {
          <div class="login-card">
 	   <div align="left">  <h2 style="color: #ff3333; font-family: sans-serif; font-style: normal">System Settings</h2><br></div>
 <form:form action="Administration.do" method="post" modelAttribute="AdminModel" id="Adminform">
-<table>
+<table class="display" id="example">
     <form:hidden path="setid" value="${SysSettings.setid}" />
 <tr><td>Email Server &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;    <form:input placeholder="Enter upload path" path="mailserver" value="${SysSettings.mailserver}" /></h4></td></tr>    
 <tr><td>Email Server Port&nbsp; <form:input placeholder="Enter upload path" path="port" value="${SysSettings.port}" /></h4></td></tr>    
 <tr><td>Email Username  &nbsp;&nbsp;  <form:input placeholder="Enter upload path" path="mailuser" value="${SysSettings.mailuser}" /></h4></td></tr>    
 <tr><td>Email Password  &nbsp; &nbsp; <form:input placeholder="Enter upload path" path="mailpass" value="${SysSettings.mailpass}" /></h4></td></tr>    
-<tr><td>File upload path  &nbsp;&nbsp;&nbsp;&nbsp;<form:input placeholder="Enter upload path" path="uploadpath" value="${SysSettings.uploadpath}" /></h4></td></tr>    
-
+<tr><td>File upload path  &nbsp;&nbsp;&nbsp;&nbsp;<form:input placeholder="Enter upload path" path="uploadpath" value="${SysSettings.uploadpath}" /></h4></td></tr> 
+<tr><td>Working Hours  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input placeholder="Enter working hours" path="" value="${SysSettings.uploadpath}" /></h4></td></tr> 
+<tr><td>Day Start Time(HH:MM)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input placeholder="Enter Day Start time" path="" value="${SysSettings.uploadpath}" /></h4></td></tr> 
+<tr><td>Day End Time(HH:MM)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input placeholder="Enter Day End Time" path="" value="${SysSettings.uploadpath}" /></h4></td></tr> 
 
 <input type="hidden" name="AntiCSRFToken" value="${csrfPreventionSalt}"/> 
-<tr><td align="center"><input type="submit" value="Create" class="login login-submit"/></td></tr>            
+<tr><td align="center"><input type="submit" value="Update" class="login login-submit"/></td></tr>            
 </table>
 <center>${TaskSuccess}</center>
 </form:form>
