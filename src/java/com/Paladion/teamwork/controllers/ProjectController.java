@@ -25,6 +25,7 @@ import com.Paladion.teamwork.services.ProjectService;
 import com.Paladion.teamwork.services.TemplateService;
 import com.Paladion.teamwork.services.UserService;
 import com.Paladion.teamwork.utils.CommonUtil;
+import com.Paladion.teamwork.utils.ProjectValidator;
 
 import com.Paladion.teamwork.utils.Validator;
 import com.sun.scenario.Settings;
@@ -94,6 +95,14 @@ UserService US;
 @Qualifier(value = "AdminService")
 AdminService Aservice;
 
+@Autowired
+@Qualifier(value="ProjectValidator")
+ProjectValidator projectBeanValidator;
+   
+@InitBinder("ProjectM")
+protected void initProjectBeanBinder(WebDataBinder binder) {
+      binder.addValidators(projectBeanValidator);
+} 
 	
 @ModelAttribute("ProjectM")
 public ProjectBean populate()
@@ -127,9 +136,9 @@ public fileuploadBean populate1()
 
     //Schedule a project
     @RequestMapping(value="/ScheduleProject",method=RequestMethod.POST)
-    public Object CreateNewProject(@ModelAttribute("ProjectM") ProjectBean PB,HttpServletRequest req,Model E) throws Exception
+    public Object CreateNewProject(@ModelAttribute("ProjectM")@Validated ProjectBean PB,BindingResult result,HttpServletRequest req,Model E) throws Exception
     {
-//        if (result.hasErrors()) {
+//       if (result.hasErrors()) {
 //            //validates the user input, this is server side validation
 //            System.out.println("error!!!!!!!!");
 //            
@@ -138,6 +147,12 @@ public fileuploadBean populate1()
         HttpSession sess= req.getSession(false);
         ModelAndView results = null;
         try{
+            if (result.hasErrors()) {
+            //validates the user input, this is server side validation
+            System.out.println("error!!!!!!!!");
+            
+         return new ModelAndView("CreateProject");
+      }
 	    System.out.println("\n inside create Project POST method ");
             PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
             PB.setStatus("New");

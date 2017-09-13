@@ -91,6 +91,10 @@ li a:hover:not(.active) {
 </style>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+    .error {
+color: black;
+font-style: italic;
+}
 body {
 color:#6a6f8c;
 background:#c8c8c8;
@@ -238,9 +242,9 @@ table.dataTable thead th:first-child {
  
 <form:form name="selection" action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM" onSubmit="return selectAll()"> 
     <table>
-    <tr><td ><h4>Template Name:</td><td>   <form:input placeholder="Enter template name" name="t1"  path="templatename" /> </h4></td></tr>     
+    <tr><td ><h4>Template Name:</td><form:errors path="templatename" cssClass="error"/><td><form:input placeholder="Enter template name" name="t1"  path="templatename" /> </h4></td></tr>     
     <br><br>
-     <tr><td ><h4>Description:  </td><td>   <form:input placeholder="Enter description" name="t2"  path="templateDesc" /></h4></td></tr>
+     <tr><td ><h4>Description:  </td><form:errors path="templateDesc" cssClass="error"/><td><form:input placeholder="Enter description" name="t2"  path="templateDesc" /></h4></td></tr>
     <br><br>
     
    <tr><td> <select  multiple size="10" id="from">

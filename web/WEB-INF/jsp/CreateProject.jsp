@@ -7,6 +7,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -199,20 +200,19 @@ font-style: italic;
 <div align="center">
     <table  align="center" border="0">
 
-<tr><td align="right"><h4>OPID :</td><td><form:input placeholder="Enter OPID" path="opid" /></h4></td></tr>
-<form:errors path="opid" cssClass="error"/>
-<tr><td align="right"><h4>Project Name :</td><td><form:input placeholder="Enter Project Name" path="projectname" /></h4></td></tr>  
-<tr><td align="right"><h4>Lead :</td>
+<tr><td align="right"><h4>OPID :</td><form:errors path="opid" cssClass="error"/><td><form:input placeholder="Enter OPID" path="opid" /></h4></td></tr>
+<tr><td align="right"><h4>Project Name :</td><form:errors path="projectname" cssClass="error"/><td><form:input placeholder="Enter Project Name" path="projectname" /></h4></td></tr>  
+<tr><td align="right"><h4>Lead :</td><form:errors path="leadid" cssClass="error"/>
     <td><form:select path="leadid">
 	           <c:forEach  items="${AllLeads}" var="lead"> 
 	           <form:option class="login login-submit" value="${lead.userid}">${lead.username}</form:option>
 	           </c:forEach></form:select>
     </td>
 </tr>
-<tr><td align="right"><h4>Start Date :</td><td><form:input placeholder="Enter Start Date" id="date" path="startdate" /></h4></td></tr>
-<tr><td align="right"><h4>End Date :</td><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate"/></h4></td></tr>
+<tr><td align="right"><h4>Start Date :</td><form:errors path="startdate" cssClass="error"/><td><form:input placeholder="Enter Start Date" id="date" path="startdate" /></h4></td></tr>
+<tr><td align="right"><h4>End Date :</td><form:errors path="enddate" cssClass="error"/><td><form:input placeholder="Enter Project Name" id="datepicker" path="enddate"/></h4></td></tr>
 
-<tr><td align="right"><h4>Template :</td>
+<tr><td align="right"><h4>Template :</td><form:errors path="templateid" cssClass="error"/>
     <td ><form:select  path="templateid">  
 	  <c:forEach items="${AllTemplates}" var="template">     
 	  <option class="login login-submit" value="${template.templateid}">${template.templatename}</option>

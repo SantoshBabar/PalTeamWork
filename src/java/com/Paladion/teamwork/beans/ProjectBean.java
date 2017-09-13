@@ -36,7 +36,7 @@ public class ProjectBean implements Serializable{
 @GenericGenerator(name="gen",strategy="increment")
 @GeneratedValue(generator="gen")
 @Column(name = "projectid", unique = true, nullable = false, precision = 15, scale = 0)
-int projectid;  
+        int projectid;  
 
 public int getProjectid() {
 return projectid;
