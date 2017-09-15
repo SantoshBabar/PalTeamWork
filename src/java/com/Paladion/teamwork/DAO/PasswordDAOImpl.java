@@ -6,7 +6,9 @@
 package com.Paladion.teamwork.DAO;
 
 import com.Paladion.teamwork.beans.EmailBean;
+import com.Paladion.teamwork.beans.SystemBean;
 import com.Paladion.teamwork.beans.UserDataBean;
+import com.Paladion.teamwork.services.AdminService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.EmailUtil;
 import java.security.SecureRandom;
@@ -39,6 +41,10 @@ public class PasswordDAOImpl implements PasswordDAO {
     @Qualifier(value="CommonUtil")
     CommonUtil CU;
     
+    @Autowired
+    @Qualifier(value="AdminService")
+    AdminService AS;
+    
     @Override
     public boolean ForgotPassword(String email){
 	UserDataBean UserBean=null;
@@ -68,8 +74,12 @@ public class PasswordDAOImpl implements PasswordDAO {
             Ebean.setMessage(emailMessage);
             Ebean.setTo(UserBean.getEmail());
             System.out.print("i got your email id "+UserBean.getEmail());
+            
+            SystemBean sysBean = AS.getSystemSettings();
+            
+            System.out.println("Forgot password");
             //update userdata set OTP=? where email=? email ge SessUserBean.getEmail()
-            eUtil.sendEmail(Ebean); 
+            eUtil.sendEmail(Ebean, sysBean); 
             return true;
         }
         else

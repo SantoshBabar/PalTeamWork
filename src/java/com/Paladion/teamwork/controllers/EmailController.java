@@ -54,21 +54,6 @@ public ModelAndView sendMail()
 	
 	}
 
-@RequestMapping(value="/sendMail",method=RequestMethod.POST)
-public ModelAndView sendMail(String st)
-{
-	EmailUtil emailUtil=new EmailUtil();
-	EmailBean ebean=new EmailBean();
-	boolean b=emailUtil.sendEmail(ebean);
-	
-	if(b==true){
-		return new ModelAndView( "Email","success","Email Sent Successfully"  );
-	}else{
-		return new ModelAndView( "Email","success","Email Not Sent Successfully"  );
-	}
-
-}
-
 @RequestMapping(value="/createEmailTemp",method=RequestMethod.POST)
 public String createEmailTemplate(@ModelAttribute("EmailBean")EmailTemplateBean emailBean,HttpServletRequest req)
 {

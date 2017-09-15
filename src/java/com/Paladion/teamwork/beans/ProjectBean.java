@@ -91,8 +91,6 @@ this.lead = lead;
 @DateTimeFormat (pattern="MM/dd/yyyy")
 @Temporal(javax.persistence.TemporalType.DATE)
 Date startdate;
-        
-        
 public Date getStartdate() throws ParseException {
     return startdate;
 }
@@ -100,11 +98,12 @@ public Date getStartdate() throws ParseException {
 public void setStartdate(Date startdate) throws ParseException {
     this.startdate = startdate;
 }
+
+
 @Column(name = "enddate")
 @DateTimeFormat(pattern="MM/dd/yyyy")
 @Temporal(javax.persistence.TemporalType.DATE)
 Date enddate;
-
 public Date getEnddate() throws ParseException {
     return enddate;
 }
@@ -112,6 +111,8 @@ public Date getEnddate() throws ParseException {
 public void setEnddate(Date enddate) throws ParseException {
     this.enddate = enddate;
 }
+
+
 @Column(name = "templateid")
 int templateid;
 

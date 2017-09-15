@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.EmailBean;
+import com.Paladion.teamwork.beans.SystemBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
@@ -97,10 +98,12 @@ protected void initBinder(WebDataBinder binder) {
                String message="Dear "+loginBean.getUsername()+"\n\nYour account has been created in the Paladion Teamwork Application ( http://10.0.1.128/TeamWork/ ).\nPlease Log into your account using the following credentials\n\nUsername: "+loginBean.getEmail() +"\nPassword: "+loginBean.getPassword()+"\n\n\n\nBest Regards\nTeam Paladion";
                ebean.setSubject(subject);
                ebean.setMessage(message);
-               eutil.sendEmail(ebean);
+               HttpSession Sess=req.getSession(false);
+                SystemBean syssetting = (SystemBean)Sess.getAttribute("SysConfig");
+               eutil.sendEmail(ebean, syssetting);
                
                //Update user list in session
-                HttpSession Sess=req.getSession(false);
+                
                 //important get current user deatils
                 Sess.setAttribute("AllUsers", userService.GetAllUser());
                       

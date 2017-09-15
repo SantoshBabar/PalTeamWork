@@ -19,6 +19,7 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
 import com.Paladion.teamwork.beans.ProjectTransactionWrapper;
+import com.Paladion.teamwork.beans.SystemBean;
 import com.Paladion.teamwork.beans.fileuploadBean;
 import com.Paladion.teamwork.services.AdminService;
 import com.Paladion.teamwork.services.ProjectService;
@@ -123,7 +124,6 @@ public fileuploadBean populate1()
         List <TemplateBean> TemplateList;
         List <UserDataBean> LeadList;
 	ModelAndView model=new ModelAndView("CreateProject");
-	System.out.println("Inside Project controller for get method");
 	try{
 	    TemplateList=TS.getAllTemplates();
             LeadList=CU.getUsersByRole("lead",sess);
@@ -146,19 +146,29 @@ public fileuploadBean populate1()
 //      }
         HttpSession sess= req.getSession(false);
         ModelAndView results = null;
+        List <TemplateBean> TemplateList;
+            List <UserDataBean> LeadList;
         try{
             if (result.hasErrors()) {
             //validates the user input, this is server side validation
             System.out.println("error!!!!!!!!");
             
-         return new ModelAndView("CreateProject");
+            ModelAndView model=new ModelAndView("CreateProject");
+            try{
+                TemplateList=TS.getAllTemplates();
+                LeadList=CU.getUsersByRole("lead",sess);
+                model.addObject("AllTemplates", TemplateList);
+                model.addObject("AllLeads", LeadList);
+            }
+            catch(Exception ex){}
+	return model;
       }
 	    System.out.println("\n inside create Project POST method ");
             PB.setMandays(CU.getWorkingDays(PB.getStartdate(),PB.getEnddate()));
             PB.setStatus("New");
             PB.setLead(CU.getUsernameFromSession(PB.getLeadid(), sess));
             PS.addProject(PB);
-            //send mail to lead                    
+            SystemBean sys=Aservice.getSystemSettings();
             CU.sendSchedulingMailToLead(PB, req.getSession(false));
 	    System.out.println("Project Created with Project id"+PB.getProjectid());
 	    System.out.println("Man days :"+PB.getMandays());
@@ -168,10 +178,12 @@ public fileuploadBean populate1()
             }
         }
         catch(Exception ex){
-            List <TemplateBean> TemplateList;
+           ex.printStackTrace();
             TemplateList=TS.getAllTemplates();
-	    results = new ModelAndView("CreateProject","Message","Project Creation failed");
+            LeadList=CU.getUsersByRole("lead",sess);   
+	    results = new ModelAndView("CreateProject","Message","Project Creation failed due to an error");
             results.addObject("AllTemplates", TemplateList);
+            results.addObject("AllLeads", LeadList);
             return results;
         }
            

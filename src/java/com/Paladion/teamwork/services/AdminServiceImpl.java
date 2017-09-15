@@ -9,16 +9,23 @@ import com.Paladion.teamwork.beans.SystemBean;
 import com.Paladion.teamwork.DAO.AdminDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class AdminServiceImpl implements AdminService
 {
     @Autowired
+    @Qualifier(value = "AdminDAO")        
     AdminDAO AdminDAO;
-
-    @Override
+    
+    public void setAdminDAO(AdminDAO AdminDAO) {
+        this.AdminDAO = AdminDAO;
+    }
+    
+        @Override
     public boolean SaveSettings(SystemBean SysModel) {
         
         return AdminDAO.SaveSettings(SysModel);
+        
     }
 
     @Override

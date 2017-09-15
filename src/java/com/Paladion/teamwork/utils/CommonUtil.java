@@ -11,12 +11,13 @@ import com.Paladion.teamwork.beans.ProjectBean;
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.beans.TemplateBean;
 import com.Paladion.teamwork.beans.ProjectTransactionBean;
+import com.Paladion.teamwork.beans.SystemBean;
 import com.Paladion.teamwork.beans.UserDataBean;
 import java.math.RoundingMode;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -24,7 +25,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -377,17 +377,24 @@ Date end = null;
              ebean.setSubject("Project Scheduling Mail");
              int i=0;
              StringBuilder mess=new StringBuilder();
-             mess.append("Dear ").append(ubean.getUsername()).append("\n\nYou have been assigned to the following tasks in the ").append(projectname).append(" project.\n\n");
+                    mess.append("Dear ")
+                     .append(ubean.getUsername())
+                     .append("\n\nYou have been assigned to the following tasks in the ")
+                     .append(projectname)
+                     .append(" project.\n\n");
              
              for(ProjectTransactionBean task:PTBlist){
                  i++;
-                 mess.append(i).append(". ").append(task.getTaskname()).append("\n");
+                 mess.append(i)
+                         .append(". ")
+                         .append(task.getTaskname()).append("\n");
              }
              
              mess.append("\n\nBest Regards\nTeam Paladion");
              String message=mess.toString();
              ebean.setMessage(message);
-             EU.sendEmail(ebean);
+              SystemBean syssetting = (SystemBean)sess.getAttribute("SysConfig");
+             EU.sendEmail(ebean, syssetting);
         });
         
         
@@ -401,9 +408,26 @@ Date end = null;
          UserDataBean ub=this.getUserById(PB.getLeadid(), sess);
          ebean.setTo(ub.getEmail());
          ebean.setSubject("Project Scheduling Mail");
-         String message="Dear "+ub.getUsername()+"\n\nYou have been assigned to "+PB.getProjectname()+" as lead. Please find the below projet details.\n\n\nOPID:    "+PB.getOpid()+"\nStart Date:"+PB.getStartdate()+"\nEnd Date: "+PB.getEnddate()+"\n\n\nRegards\nTeam Paladion";
+         
+         SimpleDateFormat sm = new SimpleDateFormat("dd-MM-yyyy");
+         String sDate = sm.format(PB.getStartdate());
+         String eDate = sm.format(PB.getEnddate());
+         
+         StringBuilder mess=new StringBuilder();
+         mess.append("Dear ").append(ub.getUsername()).append("\n\nYou have been assigned to the below project as lead")
+                  .append(" Please assign Engineers to execute the project")
+                  .append("\n\nProject : ").append(PB.getProjectname())
+                  .append("\nOPID : ").append(PB.getOpid())
+                  .append("\nStart Date : ").append(sDate)
+                  .append("\nEnd Date : ").append(eDate)
+                  .append("\nNo Of Days : ").append(PB.getMandays())
+                  .append("\n\n\nBest Regards,").append("\nTeam Paladion");
+         
+         String message=mess.toString();
+         
          ebean.setMessage(message);
-         EU.sendEmail(ebean);
+         SystemBean syssetting = (SystemBean)sess.getAttribute("SysConfig");
+         EU.sendEmail(ebean, syssetting);
         return true;
     }
     
@@ -454,6 +478,8 @@ Date end = null;
         System.out.println("Generared OTP :"+new String(password));
         return new String(password);
     }
+    
+   
     
 }
 

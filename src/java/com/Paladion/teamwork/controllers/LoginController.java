@@ -6,6 +6,7 @@
 package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.UserDataBean;
+import com.Paladion.teamwork.services.AdminService;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.ProjectService;
@@ -76,6 +77,10 @@ protected void initBinder(WebDataBinder binder) {
 @Qualifier(value="ProjectService")
  ProjectService PS;
  
+ @Autowired
+ @Qualifier(value="AdminService")
+ AdminService AS;
+ 
  UserDataBean lb=null;
  
  
@@ -139,6 +144,7 @@ public ModelAndView Login(@ModelAttribute("LoginM")@Validated UserDataBean LB, B
                       String token = RandomStringUtils.random(30, 0, 0, true, true, null, new SecureRandom());
                       LoginSess.setAttribute("AntiCsrfToken",token);
                       if(!lb.getRole().equalsIgnoreCase("engineer")){
+                      LoginSess.setAttribute("SysConfig", AS.getSystemSettings());
                       LoginSess.setAttribute("AllUsers", userService.GetAllUser());
                       }
 	            return new ModelAndView("redirect:/Welcome.do");

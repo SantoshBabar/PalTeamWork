@@ -17,11 +17,13 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("#date").datepicker();
+    format: 'dd/mm/yyyy'
   });
   </script>
   <script type="text/javascript">
   $(document).ready(function() {
     $("#datepicker").datepicker();
+    format: 'dd/mm/yyyy'
   });
   </script>
 <style>
@@ -229,11 +231,13 @@ font-style: italic;
 	   <script>
   $(document).ready(function() {
     $("#datepicker").datepicker();
+    format: 'dd/mm/yyyy';
   });
   </script>
   <script>
   $(document).ready(function() {
     $("#datepickers").datepicker();
+    format: 'dd/mm/yyyy';
   });
   </script>
     </body>
