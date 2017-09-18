@@ -5,6 +5,7 @@
  */
 package com.Paladion.teamwork.controllers;
 
+import com.Paladion.teamwork.beans.EmailBean;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -99,6 +100,10 @@ AdminService Aservice;
 @Autowired
 @Qualifier(value="ProjectValidator")
 ProjectValidator projectBeanValidator;
+
+@Autowired
+@Qualifier(value="EmailBean")
+EmailBean eBean;
    
 @InitBinder("ProjectM")
 protected void initProjectBeanBinder(WebDataBinder binder) {

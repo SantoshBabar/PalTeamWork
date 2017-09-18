@@ -7,6 +7,7 @@ package com.Paladion.teamwork.controllers;
 
 import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.services.TaskService;
+import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.TaskValidator;
 import com.Paladion.teamwork.utils.Validator;
 import java.text.ParseException;
@@ -32,30 +33,29 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Administrator
  */
 @Controller
-public class TaskController {
-	
+public class TaskController {	
     
 @Autowired
 @Qualifier(value="TaskValidator")
 TaskValidator TV;
+
+@Autowired
+@Qualifier(value="CommonUtil")
+CommonUtil CU;
    
-
-
 @InitBinder
 protected void initBinder(WebDataBinder binder) {
-      binder.addValidators(TV);
+    binder.addValidators(TV);
 }    
-
     
 @Autowired
 @Qualifier(value="TaskService")
 TaskService TS;
-	
-	
+		
 @ModelAttribute("TaskM")
 public TaskBean populate()
 {
-	   return new TaskBean();
+    return new TaskBean();
 }
 
 	
@@ -65,43 +65,56 @@ public TaskBean populate()
 	    return "CreateTask";
     }
 	
-
-
-	
-
-
 @RequestMapping(value="/CreateTask",method=RequestMethod.POST)
     public ModelAndView createTask(@ModelAttribute("TaskM")@Validated TaskBean TB,BindingResult result,HttpServletRequest req) 
     {
         if (result.hasErrors()) {
             //validates the user input, this is server side validation
             System.out.println("error!!!!!!!!");
-            
-         return new ModelAndView("CreateTask");
-      }
+            return new ModelAndView("CreateTask");
+        }
+        
+        String[] authorizedRoles = {"admin","manager","lead"};
+        boolean authorized =CU.checkUserAuthorization(authorizedRoles, req);
+        
+        if(authorized == true){
 	System.out.println("\n inside create Task method ");
-	
-           TS.addTask(TB); 	
-	    System.out.println("Task Created with Taskid"+TB.getTaskid());
-	 
-	    return new ModelAndView( "CreateTask","Message","Task Created Successfully"  );
+	TS.addTask(TB); 	
+	System.out.println("Task Created with Taskid"+TB.getTaskid());
+	return new ModelAndView( "CreateTask","Message","Task Created Successfully"  );
+        }
+        
+        else{
+            return new ModelAndView( "CreateTask","Message","You are not authorized."  );
+        }
     }	
     
     
 @RequestMapping(value="/GetAllTasks",method=RequestMethod.GET)
-public ModelAndView GetAllTasks()
+public ModelAndView GetAllTasks(HttpServletRequest req)
 {
-    ModelAndView result=new ModelAndView("DisplayTasks");
-    List<TaskBean> TBList= TS.getAllTasks();
-    result.addObject("AllTasks",TBList);
-    return result;
+    String[] authorizedRoles = {"admin","manager","lead","engineer"};
+        
+    boolean authorized =CU.checkUserAuthorization(authorizedRoles, req);
+        
+    if(authorized == true){
+        ModelAndView result=new ModelAndView("DisplayTasks");
+        List<TaskBean> TBList= TS.getAllTasks();
+        result.addObject("AllTasks",TBList);
+        return result;
+    }
+    else{
+        return new ModelAndView( "DisplayTasks","Message","You are not authorized."  );
+    }
 }
 
 
 @RequestMapping(value="/DeleteTask",method=RequestMethod.GET)
-    public ModelAndView DeleteTask(@RequestParam int id) throws ParseException
+    public ModelAndView DeleteTask(@RequestParam int id, HttpServletRequest req) throws ParseException
     {
-           if(id!=0)
+        String[] authorizedRoles = {"admin","manager","lead"};
+        boolean authorized =CU.checkUserAuthorization(authorizedRoles, req);   
+        if(id!=0 && authorized == true)
            {
                boolean value= TS.deleteTask(id);
                ModelAndView result=new ModelAndView("DisplayTasks");
@@ -113,7 +126,5 @@ public ModelAndView GetAllTasks()
            else{
                 return new ModelAndView("Error");
             }
-    }
-    
-    
+    }  
 }

@@ -95,11 +95,21 @@ protected void initBinder(WebDataBinder binder) {
                EmailUtil eutil=new EmailUtil();
                ebean.setTo(loginBean.getEmail());
                String subject="Paladion TeamWork- User Account Invitation";
-               String message="Dear "+loginBean.getUsername()+"\n\nYour account has been created in the Paladion Teamwork Application ( http://10.0.1.128/TeamWork/ ).\nPlease Log into your account using the following credentials\n\nUsername: "+loginBean.getEmail() +"\nPassword: "+loginBean.getPassword()+"\n\n\n\nBest Regards\nTeam Paladion";
+                StringBuilder mess=new StringBuilder();
+                
+                mess.append("Dear ").append(loginBean.getUsername())
+                        .append("\n\nYour account has been created in the Paladion Teamwork Protal ")
+                        .append("(http://10.0.1.128/TeamWork/).\nPlease Log into your account using the following credentials.\n\n")
+                        .append("UserName : ").append(loginBean.getEmail()).append("\nPassword : ").append(loginBean.getPassword())
+                        .append("\n\nBest Regards,\nTeam Paladion");
+               
+                String message=mess.toString();
+                
+               //String message="Dear "+loginBean.getUsername()+"\n\nYour account has been created in the Paladion Teamwork Application ( http://10.0.1.128/TeamWork/ ).\nPlease Log into your account using the following credentials\n\nUsername: "+loginBean.getEmail() +"\nPassword: "+loginBean.getPassword()+"\n\n\n\nBest Regards\nTeam Paladion";
                ebean.setSubject(subject);
                ebean.setMessage(message);
                HttpSession Sess=req.getSession(false);
-                SystemBean syssetting = (SystemBean)Sess.getAttribute("SysConfig");
+               SystemBean syssetting = (SystemBean)Sess.getAttribute("SysConfig");
                eutil.sendEmail(ebean, syssetting);
                
                //Update user list in session
@@ -177,7 +187,7 @@ public ModelAndView GetUserDetails(@RequestParam int id)
            result.addObject("AllUsers",userList);
            result.addObject("Message","User Details Updated Successfully");
 	   return result;
-	   
+   
 	   
         }
     

@@ -414,14 +414,14 @@ Date end = null;
          String eDate = sm.format(PB.getEnddate());
          
          StringBuilder mess=new StringBuilder();
-         mess.append("Dear ").append(ub.getUsername()).append("\n\nYou have been assigned to the below project as lead")
-                  .append(" Please assign Engineers to execute the project")
+         mess.append("Dear ").append(ub.getUsername()).append("\n\nYou have been assigned to the below project as delivery lead.")
+                  .append(" Please assign Engineers to execute the project.")
                   .append("\n\nProject : ").append(PB.getProjectname())
                   .append("\nOPID : ").append(PB.getOpid())
                   .append("\nStart Date : ").append(sDate)
                   .append("\nEnd Date : ").append(eDate)
                   .append("\nNo Of Days : ").append(PB.getMandays())
-                  .append("\n\n\nBest Regards,").append("\nTeam Paladion");
+                  .append("\n\nBest Regards,").append("\nTeam Paladion");
          
          String message=mess.toString();
          
@@ -430,6 +430,8 @@ Date end = null;
          EU.sendEmail(ebean, syssetting);
         return true;
     }
+    
+
     
     
     public List<ProjectTransactionBean> updateDelayForTasks(List<ProjectTransactionBean> PTBList, int hours){
@@ -479,7 +481,18 @@ Date end = null;
         return new String(password);
     }
     
-   
+    public boolean checkUserAuthorization(String[] roles, HttpServletRequest req ){
+        HttpSession sess=req.getSession(true);
+        UserDataBean uBean=(UserDataBean)sess.getAttribute("Luser");
+        String userRole = uBean.getRole();
+        
+        for(String role : roles){
+            if(userRole.equalsIgnoreCase(role)){
+                return true;
+            }
+        }
+        return false;
+    }
     
 }
 
