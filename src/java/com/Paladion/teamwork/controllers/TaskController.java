@@ -9,15 +9,12 @@ import com.Paladion.teamwork.beans.TaskBean;
 import com.Paladion.teamwork.services.TaskService;
 import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.TaskValidator;
-import com.Paladion.teamwork.utils.Validator;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -60,52 +57,43 @@ public TaskBean populate()
 
 	
 @RequestMapping(value="/CreateTask",method=RequestMethod.GET)
-     public String CreateTask()
+     public ModelAndView CreateTask(HttpServletRequest req)
     {   
-	    return "CreateTask";
+        String[] authorizedRoles = {"admin","manager","lead"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
+	return new ModelAndView("CreateTask");
     }
 	
 @RequestMapping(value="/CreateTask",method=RequestMethod.POST)
     public ModelAndView createTask(@ModelAttribute("TaskM")@Validated TaskBean TB,BindingResult result,HttpServletRequest req) 
     {
+        String[] authorizedRoles = {"admin","manager","lead"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
         if (result.hasErrors()) {
             //validates the user input, this is server side validation
             System.out.println("error!!!!!!!!");
             return new ModelAndView("CreateTask");
         }
         
-        String[] authorizedRoles = {"admin","manager","lead"};
-        boolean authorized =CU.checkUserAuthorization(authorizedRoles, req);
-        
-        if(authorized == true){
 	System.out.println("\n inside create Task method ");
 	TS.addTask(TB); 	
 	System.out.println("Task Created with Taskid"+TB.getTaskid());
-	return new ModelAndView( "CreateTask","Message","Task Created Successfully"  );
-        }
-        
-        else{
-            return new ModelAndView( "CreateTask","Message","You are not authorized."  );
-        }
+	return new ModelAndView( "CreateTask","Message","Task Created Successfully"  );  
     }	
     
     
 @RequestMapping(value="/GetAllTasks",method=RequestMethod.GET)
 public ModelAndView GetAllTasks(HttpServletRequest req)
-{
-    String[] authorizedRoles = {"admin","manager","lead","engineer"};
-        
-    boolean authorized =CU.checkUserAuthorization(authorizedRoles, req);
-        
-    if(authorized == true){
-        ModelAndView result=new ModelAndView("DisplayTasks");
-        List<TaskBean> TBList= TS.getAllTasks();
-        result.addObject("AllTasks",TBList);
-        return result;
-    }
-    else{
-        return new ModelAndView( "DisplayTasks","Message","You are not authorized."  );
-    }
+{ 
+    String[] authorizedRoles = {"admin","manager","lead"};
+    if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+    
+    ModelAndView result=new ModelAndView("DisplayTasks");
+    List<TaskBean> TBList= TS.getAllTasks();
+    result.addObject("AllTasks",TBList);
+    return result; 
 }
 
 
@@ -113,8 +101,9 @@ public ModelAndView GetAllTasks(HttpServletRequest req)
     public ModelAndView DeleteTask(@RequestParam int id, HttpServletRequest req) throws ParseException
     {
         String[] authorizedRoles = {"admin","manager","lead"};
-        boolean authorized =CU.checkUserAuthorization(authorizedRoles, req);   
-        if(id!=0 && authorized == true)
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
+        if(id!=0)
            {
                boolean value= TS.deleteTask(id);
                ModelAndView result=new ModelAndView("DisplayTasks");

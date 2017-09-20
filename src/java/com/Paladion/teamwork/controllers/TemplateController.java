@@ -45,6 +45,10 @@ public class TemplateController {
 TemplateService TempS;
 
 @Autowired
+@Qualifier(value="CommonUtil")
+CommonUtil CU;
+
+@Autowired
 @Qualifier(value="TaskTemplateValidator")
 TaskTemplateValidator TMV;
 
@@ -66,21 +70,26 @@ public TaskTemplateWrapper populatetask()
 }
 	
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.GET)
-public ModelAndView Template()
+public ModelAndView Template(HttpServletRequest req)
   {
+      String[] authorizedRoles = {"admin","manager","lead"};
+      if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
       List <TaskBean> Tasklist = null;
       try
         {
             Tasklist =TempS.getAllTasksforTemplate();
 	}
         catch(Exception ex){}
-      return new ModelAndView("CreateTaskTemplate","AllTasks", Tasklist);
-   
+      return new ModelAndView("CreateTaskTemplate","AllTasks", Tasklist); 
   }
 
 @RequestMapping(value="/CreateTaskTemplate",method=RequestMethod.POST)
 public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")@Validated TemplateBean TempB,BindingResult result,HttpServletRequest req) 
 {
+    String[] authorizedRoles = {"admin","manager","lead"};
+    if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+      
      if (result.hasErrors()) {
             //validates the user input, this is server side validation
             System.out.println("error!!!!!!!!");
@@ -133,6 +142,9 @@ public String getTaskName(int taskid, List<TaskBean> Tasklist){
 @RequestMapping(value="/AddTaskTemplate",method=RequestMethod.POST)
 public ModelAndView AddTaskToTemplate(@ModelAttribute("TaskW")TaskTemplateWrapper TaskW, HttpServletRequest req)
 {
+    String[] authorizedRoles = {"admin","manager","lead"};
+    if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+      
     System.out.println("Inside Add Task to template controller");
     HttpSession session=req.getSession();
     TemplateBean TempB=(TemplateBean)session.getAttribute("Template"); 
@@ -163,8 +175,11 @@ public ModelAndView AddTaskToTemplate(@ModelAttribute("TaskW")TaskTemplateWrappe
  }
 
 @RequestMapping(value="/GetAllTaskTemplates",method=RequestMethod.GET)
-public ModelAndView GetAllTaskTemplates()
+public ModelAndView GetAllTaskTemplates(HttpServletRequest req)
 {
+    String[] authorizedRoles = {"admin","manager","lead"};
+    if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+      
     ModelAndView result=new ModelAndView("DisplayTemplates");
     List<TemplateBean> TBList= TempS.getAllTemplates();
     result.addObject("AllTemplates",TBList);
@@ -173,8 +188,11 @@ public ModelAndView GetAllTaskTemplates()
 
 
 @RequestMapping(value="/DeleteTemplate",method=RequestMethod.GET)
-    public ModelAndView DeleteTemplate(@RequestParam int id) throws ParseException
+    public ModelAndView DeleteTemplate(@RequestParam int id, HttpServletRequest req) throws ParseException
     {
+        String[] authorizedRoles = {"admin","manager","lead"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+      
            if(id!=0)
            {
                boolean value= TempS.deleteTemplate(id);
@@ -191,19 +209,23 @@ public ModelAndView GetAllTaskTemplates()
     
 
 @RequestMapping(value="/GetTemplateDetails",method=RequestMethod.GET)
-public ModelAndView GetTemplateDetails(@RequestParam int id)
+public ModelAndView GetTemplateDetails(@RequestParam int id, HttpServletRequest req)
 {
-           ModelAndView result=new ModelAndView("UpdateTemplateDetails");
-           if(id!=0)
-            {
-               List <MapTemplateTaskBean> MTTB=TempS.getAllWeights(id);
-                result.addObject("TemplateDetails",MTTB);
-                return result;
-            }
-           else{
-                result=new ModelAndView("fail");
-            }
-           return result;
+    String[] authorizedRoles = {"admin","manager","lead"};
+    if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+      
+        ModelAndView result=new ModelAndView("UpdateTemplateDetails");
+        if(id!=0)
+        {
+            List <MapTemplateTaskBean> MTTB=TempS.getAllWeights(id);
+            result.addObject("TemplateDetails",MTTB);
+            return result;
+        }
+        else
+        {
+            result=new ModelAndView("fail");
+        }
+    return result;
 }
 //
 //@RequestMapping(value="/UpdateTemplateDetails",method=RequestMethod.GET)

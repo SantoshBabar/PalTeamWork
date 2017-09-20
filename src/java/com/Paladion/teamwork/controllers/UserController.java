@@ -11,8 +11,8 @@ import com.Paladion.teamwork.beans.UserDataBean;
 
 import com.Paladion.teamwork.services.LoginService;
 import com.Paladion.teamwork.services.UserService;
+import com.Paladion.teamwork.utils.CommonUtil;
 import com.Paladion.teamwork.utils.EmailUtil;
-import com.Paladion.teamwork.utils.Validator;
 import com.Paladion.teamwork.utils.userValidator;
 import java.text.ParseException;
 import java.util.List;
@@ -21,8 +21,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +37,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 @Controller
 public class UserController {
 	
- @Autowired
+@Autowired
 @Qualifier(value="userValidator")
 userValidator UV;
    
@@ -50,17 +48,19 @@ protected void initBinder(WebDataBinder binder) {
       binder.addValidators(UV);
 }   
     
-    @Autowired
+ @Autowired
  @Qualifier(value="LoginService")
  LoginService LS;
- 
- 
  
  UserDataBean lb=null;
 	
 @Autowired
 @Qualifier(value="UserService")
- UserService userService;
+UserService userService;
+
+@Autowired
+@Qualifier(value="CommonUtil")
+CommonUtil CU;
 	
 @ModelAttribute("UserM")
  public UserDataBean PopulateLoginBean() 
@@ -69,76 +69,85 @@ protected void initBinder(WebDataBinder binder) {
 }
 	
  
-	@RequestMapping(value="/CreateUser",method=RequestMethod.GET)
-     public String createUser()
+    @RequestMapping(value="/CreateUser",method=RequestMethod.GET)
+    public ModelAndView createUser(HttpServletRequest req)
     {   
-	    return "CreateUser";
+        String[] authorizedRoles = {"admin","manager"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+	return new ModelAndView("CreateUser");
     }
 	
-	@RequestMapping(value="/CreateUser",method=RequestMethod.POST)
+    @RequestMapping(value="/CreateUser",method=RequestMethod.POST)
     public ModelAndView createUser(@ModelAttribute("UserM")@Validated UserDataBean loginBean,BindingResult result,HttpServletRequest req )
     {
+        String[] authorizedRoles = {"admin","manager"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
         
         if (result.hasErrors()) {
             //validates the user input, this is server side validation
             System.out.println("error!!!!!!!!");
-            
-         return new ModelAndView("CreateUser");
-      }
+            return new ModelAndView("CreateUser");
+        }
         System.out.println("in user controller create user post method");
     
-	  boolean results = userService.addUser(loginBean);
-	   if(results==true){
+	boolean results = userService.addUser(loginBean);
+	if(results==true){
                
-               //Send Email to user
-               EmailBean ebean=new EmailBean();
-               EmailUtil eutil=new EmailUtil();
-               ebean.setTo(loginBean.getEmail());
-               String subject="Paladion TeamWork- User Account Invitation";
-                StringBuilder mess=new StringBuilder();
+            //Send Email to user
+            EmailBean ebean=new EmailBean();
+            EmailUtil eutil=new EmailUtil();
+            ebean.setTo(loginBean.getEmail());
+            String subject="Paladion TeamWork- User Account Invitation";
+            StringBuilder mess=new StringBuilder();
                 
-                mess.append("Dear ").append(loginBean.getUsername())
-                        .append("\n\nYour account has been created in the Paladion Teamwork Protal ")
-                        .append("(http://10.0.1.128/TeamWork/).\nPlease Log into your account using the following credentials.\n\n")
-                        .append("UserName : ").append(loginBean.getEmail()).append("\nPassword : ").append(loginBean.getPassword())
-                        .append("\n\nBest Regards,\nTeam Paladion");
+            mess.append("Dear ").append(loginBean.getUsername())
+            .append("\n\nYour account has been created in the Paladion Teamwork Protal ")
+            .append("(http://10.0.1.128/TeamWork/).\nPlease Log into your account using the following credentials.\n\n")
+            .append("UserName : ").append(loginBean.getEmail()).append("\nPassword : ").append(loginBean.getPassword())
+            .append("\n\nBest Regards,\nTeam Paladion");
                
-                String message=mess.toString();
+            String message=mess.toString();
                 
-               //String message="Dear "+loginBean.getUsername()+"\n\nYour account has been created in the Paladion Teamwork Application ( http://10.0.1.128/TeamWork/ ).\nPlease Log into your account using the following credentials\n\nUsername: "+loginBean.getEmail() +"\nPassword: "+loginBean.getPassword()+"\n\n\n\nBest Regards\nTeam Paladion";
-               ebean.setSubject(subject);
-               ebean.setMessage(message);
-               HttpSession Sess=req.getSession(false);
-               SystemBean syssetting = (SystemBean)Sess.getAttribute("SysConfig");
-               eutil.sendEmail(ebean, syssetting);
+            //String message="Dear "+loginBean.getUsername()+"\n\nYour account has been created in the Paladion Teamwork Application ( http://10.0.1.128/TeamWork/ ).\nPlease Log into your account using the following credentials\n\nUsername: "+loginBean.getEmail() +"\nPassword: "+loginBean.getPassword()+"\n\n\n\nBest Regards\nTeam Paladion";
+            ebean.setSubject(subject);
+            ebean.setMessage(message);
+            HttpSession Sess=req.getSession(false);
+            SystemBean syssetting = (SystemBean)Sess.getAttribute("SysConfig");
+            eutil.sendEmail(ebean, syssetting);
                
-               //Update user list in session
+            //Update user list in session
                 
-                //important get current user deatils
-                Sess.setAttribute("AllUsers", userService.GetAllUser());
-                      
-                return new ModelAndView("CreateUser","Message","User Created Successfully");
-           }
-           else{
+            //important get current user deatils
+            Sess.setAttribute("AllUsers", userService.GetAllUser());
+            return new ModelAndView("CreateUser","Message","User Created Successfully");
+        }
+           
+        else{
                return new ModelAndView("CreateUser","Message","User Creation Failed Due to Error");
            }
         }
 
 
 @RequestMapping(value="/ViewAllUser",method=RequestMethod.GET)
-public ModelAndView ViewAllUser( )
+public ModelAndView ViewAllUser(HttpServletRequest req )
     {
+        String[] authorizedRoles = {"admin","manager"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
         System.out.println("ViewAllUser");
     
-	   List<UserDataBean> userList=userService.GetAllUser();
-	   ModelAndView result=new ModelAndView("ViewAllUser");
-           result.addObject("AllUsers",userList);
-	   return result;
-        }
+	List<UserDataBean> userList=userService.GetAllUser();
+	ModelAndView result=new ModelAndView("ViewAllUser");
+        result.addObject("AllUsers",userList);
+	return result;
+    }
 
 @RequestMapping(value="/DeleteUser",method=RequestMethod.GET)
     public ModelAndView DeleteUser(@RequestParam int id, HttpServletRequest req) throws ParseException
     {
+        String[] authorizedRoles = {"admin","manager"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
         ModelAndView result=new ModelAndView("ViewAllUser");
            if(id!=0)
            {
@@ -158,26 +167,32 @@ public ModelAndView ViewAllUser( )
     }
     
 @RequestMapping(value="/GetUserDetails",method=RequestMethod.GET)
-public ModelAndView GetUserDetails(@RequestParam int id)
+public ModelAndView GetUserDetails(@RequestParam int id, HttpServletRequest req)
 {
-           ModelAndView result=new ModelAndView("UpdateUser");
-           if(id!=0)
-            {
-                UserDataBean userBean=userService.GetUserById(id);
-                result.addObject("UserDetail",userBean);
-                return result;
-            }
-           else{
-                result=new ModelAndView("fail");
-            }
-           return result;
+    String[] authorizedRoles = {"admin","manager"};
+    if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
+    ModelAndView result=new ModelAndView("UpdateUser");
+    if(id!=0)
+    {
+        UserDataBean userBean=userService.GetUserById(id);
+        result.addObject("UserDetail",userBean);
+        return result;
+    }
+    else{
+        result=new ModelAndView("fail");
+    }
+    return result;
 }
     
 
 
 @RequestMapping(value="/UpdateUserDetails",method=RequestMethod.POST)
-    public ModelAndView updateUserDetails(@ModelAttribute("UserM")UserDataBean UserBean)
+    public ModelAndView updateUserDetails(@ModelAttribute("UserM")UserDataBean UserBean, HttpServletRequest req)
     {
+        String[] authorizedRoles = {"admin","manager"};
+        if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
+        
         System.out.println("in update user details controller method");
     
 	   userService.UpdateUserDetails(UserBean);
@@ -188,8 +203,6 @@ public ModelAndView GetUserDetails(@RequestParam int id)
            result.addObject("Message","User Details Updated Successfully");
 	   return result;
    
-	   
-        }
-    
+        } 
 }
 

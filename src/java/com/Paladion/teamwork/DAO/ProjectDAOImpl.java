@@ -55,7 +55,7 @@ public class ProjectDAOImpl implements ProjectDAO
             Transaction tx = null;
 	    tx = session1.beginTransaction();
             
-            if (role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin"))
+            if (role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin")||role.equalsIgnoreCase("scheduling"))
             {
              Criteria criteria = session1.createCriteria(ProjectBean.class);
              allProjects= criteria.list();

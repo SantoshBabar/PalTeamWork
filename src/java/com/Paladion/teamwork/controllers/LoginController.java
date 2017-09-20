@@ -19,22 +19,14 @@ import java.security.SecureRandom;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import net.tanesha.recaptcha.ReCaptchaImpl;
-import net.tanesha.recaptcha.ReCaptchaResponse;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -53,8 +45,6 @@ public class LoginController {
 @Autowired
 @Qualifier(value="Validator")
 Validator SV;
-   
-
 
 @InitBinder
 protected void initBinder(WebDataBinder binder) {
@@ -66,15 +56,15 @@ protected void initBinder(WebDataBinder binder) {
  LoginService LS;
  
  @Autowired
-@Qualifier(value="CommonUtil")
+ @Qualifier(value="CommonUtil")
  CommonUtil CU;
  
  @Autowired
-@Qualifier(value="UserService")
+ @Qualifier(value="UserService")
  UserService userService;
  
  @Autowired
-@Qualifier(value="ProjectService")
+ @Qualifier(value="ProjectService")
  ProjectService PS;
  
  @Autowired
@@ -82,7 +72,6 @@ protected void initBinder(WebDataBinder binder) {
  AdminService AS;
  
  UserDataBean lb=null;
- 
  
 @ModelAttribute("LoginM")
  public UserDataBean PopulateLoginBean() 
@@ -93,20 +82,15 @@ protected void initBinder(WebDataBinder binder) {
 @RequestMapping(value="/Login",method=RequestMethod.GET)
 public String Login()
 {
-    // change to login
     return "Login";
 }
-
-
-
 
 @RequestMapping(value="/Login",method=RequestMethod.POST)
 public ModelAndView Login(@ModelAttribute("LoginM")@Validated UserDataBean LB, BindingResult result,HttpServletRequest req )
     {
         if (result.hasErrors()) {
             //validates the user input, this is server side validation
-            System.out.println("error!!!!!!!!");
-            
+            System.out.println("error!!!!!!!!");   
          return new ModelAndView("Login");
       }
         
@@ -171,8 +155,8 @@ public ModelAndView Welcome(HttpServletRequest req)
 @RequestMapping(value="/Logout",method=RequestMethod.GET)
 public String Logout(HttpServletRequest req)
    {
-           LS.Logout(req.getSession(false));
-           return "redirect:Login.do";
+        LS.Logout(req.getSession(false));
+        return "redirect:Login.do";
    }
 
 @RequestMapping(value="/index",method=RequestMethod.GET)
@@ -216,5 +200,4 @@ public String Documents()
     // change to login
     return "Documents";
 }
-
 }

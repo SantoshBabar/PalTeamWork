@@ -57,9 +57,8 @@ public ModelAndView sendMail()
 @RequestMapping(value="/createEmailTemp",method=RequestMethod.POST)
 public String createEmailTemplate(@ModelAttribute("EmailBean")EmailTemplateBean emailBean,HttpServletRequest req)
 {
-	emailService.createEmailTemplate(emailBean);
-	
-return "Email";
+    emailService.createEmailTemplate(emailBean);
+    return "Email";
 	
 }
 
@@ -78,8 +77,6 @@ public ModelAndView deleteEmailTemplate(@PathVariable("id") int id)
 	System.out.println(id);
 	System.out.println("delete email template");
 //emailService.deleteEmailTemplate(emailBean);
-	
-	   
 return new ModelAndView( "Email","success","Email Template Deleted Successfully"  );
 }
 
