@@ -110,14 +110,14 @@
         <div class="dropdown">
             <button class="dropbtn">Projects</button>
                 <div class="dropdown-content">
-                    <%--<% if(role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("scheduling")) {%> --%>
+                    <% if(role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("scheduling")) {%> 
                     <a href="CreateProject.do">Schedule Project</a>
-                    <%-- <%}%> --%>
+                    <%}%> 
                     <a href="showAllProject.do">View All Projects</a>
                 </div>
         </div> 
         
-                    <%-- <% if(role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin")) {%>   --%>
+                     <% if(role.equalsIgnoreCase("Manager")||role.equalsIgnoreCase("Admin")) {%>   
         
         <div class="dropdown">
             <button class="dropbtn">Administration</button>
@@ -127,10 +127,10 @@
                 <a href="Administration.do">System Properties</a>
                 </div>
         </div> 
-        <%-- <%}%>  
+         <%}%>  
         
         <% if(role.equalsIgnoreCase("lead")||role.equalsIgnoreCase("manager"))
-        {%> --%>
+        {%> 
           <div class="dropdown">
             <button class="dropbtn">Tasks</button>
                 <div class="dropdown-content">
@@ -138,10 +138,10 @@
                 <a href="GetAllTasks.do">View Tasks</a>
                 </div>
         </div> 
-       <%-- <%}%> --%>
+        <%}%> 
         
         
-        <%-- <% if(role.equalsIgnoreCase("lead")||role.equalsIgnoreCase("manager")) {%> --%>
+         <% if(role.equalsIgnoreCase("lead")||role.equalsIgnoreCase("manager")) {%> 
           <div class="dropdown">
             <button class="dropbtn">Project Template</button>
                 <div class="dropdown-content">
@@ -149,7 +149,7 @@
                 <a href="GetAllTaskTemplates.do">View Project Templates</a>
                 </div>
             </div> 
-        <%--  <%}%>  --%>
+          <%}%>  
         <li><a href="index.do">knowledge base</a></li> 
         <li style="float:right"><a class="active" href="Logout.do">Logout</a></li>
        

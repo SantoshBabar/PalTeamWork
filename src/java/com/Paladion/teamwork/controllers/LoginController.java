@@ -121,9 +121,13 @@ public ModelAndView Login(@ModelAttribute("LoginM")@Validated UserDataBean LB, B
                System.out.println("MAC address: "+SystemInfo.getMAC());
                System.out.println("==================LOGS end========================");
                
+               //Invalidate pre-login session
+               HttpSession currentSess=req.getSession(true);
+               currentSess.invalidate();
                
-                      HttpSession LoginSess=req.getSession(true);
-                      LoginSess.setAttribute("Luser", lb);
+               //Create login session
+               HttpSession LoginSess=req.getSession(true);
+               LoginSess.setAttribute("Luser", lb);
                       
                       String token = RandomStringUtils.random(30, 0, 0, true, true, null, new SecureRandom());
                       LoginSess.setAttribute("AntiCsrfToken",token);

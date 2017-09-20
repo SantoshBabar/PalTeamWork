@@ -233,18 +233,15 @@ table.dataTable thead th:first-child {
 </style>        
         </head>
 <body>
-        <%@include file="Header.jsp" %>
-        
-        
-        <div class="login-card">
-        
-        <h2>Create Task Template</h2>
+    <%@include file="Header.jsp" %>
+    <div class="login-card">   
+    <h2>Create Task Template</h2>
  
 <form:form name="selection" action="CreateTaskTemplate.do" method="post" modelAttribute="TemplateM" onSubmit="return selectAll()"> 
     <table>
-    <tr><td ><h4>Template Name:</td><form:errors path="templatename" cssClass="error"/><td><form:input placeholder="Enter template name" name="t1"  path="templatename" /> </h4></td></tr>     
+    <tr><td><h4>Template Name:<form:input placeholder="Enter template name" name="t1"  path="templatename" /> <form:errors path="templatename" cssClass="error"/></h4></td></tr>     
     <br><br>
-     <tr><td ><h4>Description:  </td><form:errors path="templateDesc" cssClass="error"/><td><form:input placeholder="Enter description" name="t2"  path="templateDesc" /></h4></td></tr>
+    <tr><td><h4>Description:<form:input placeholder="Enter description" name="t2"  path="templateDesc" /><form:errors path="templateDesc" cssClass="error"/></h4></td></tr>
     <br><br>
     
    <tr><td> <select  multiple size="10" id="from">
@@ -265,8 +262,5 @@ table.dataTable thead th:first-child {
    <tr><td><input type="submit" value="Create" class="login login-submit"/></td></tr>
     </table>
     </form:form>    
-        
-
-
 </body>
 </html>

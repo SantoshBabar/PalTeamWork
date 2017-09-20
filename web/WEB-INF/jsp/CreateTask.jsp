@@ -193,10 +193,10 @@ form.reset();
 	   <form:form action="CreateTask.do" method="post" modelAttribute="TaskM" id="taskform">
 <table>
 
-<tr><td align="center"><h4>Task Name:</td><td><form:input placeholder="Enter Task Name" path="taskname" /></h4></td></tr>    
-<form:errors path="taskname" cssClass="error"/><br>
-<tr><td align="center"><h4>Description:</td><td><form:input placeholder="Enter Description" path="Description" /></h4></td></tr>  
-<form:errors path="Description" cssClass="error"/><br>
+<tr><td align="center"><h4>Task Name:</td><td><form:input placeholder="Enter Task Name" path="taskname"/> <form:errors path="taskname" cssClass="error"/></h4></td></tr>    
+<br>
+<tr><td align="center"><h4>Description:</td><td><form:input placeholder="Enter Description" path="Description"/><form:errors path="Description" cssClass="error"/></h4></td></tr>  
+<br>
 <tr></tr>
 <tr></tr>
 <tr></tr>

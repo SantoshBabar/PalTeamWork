@@ -89,16 +89,17 @@ public ModelAndView CreateTemplate(@ModelAttribute("TemplateM")@Validated Templa
 {
     String[] authorizedRoles = {"admin","manager","lead"};
     if(!CU.checkUserAuthorization(authorizedRoles, req)) return new ModelAndView("Error");
-      
+     
+     List <TaskBean> Tasklist = null;
      if (result.hasErrors()) {
             //validates the user input, this is server side validation
             System.out.println("error!!!!!!!!");
-            
-         return new ModelAndView("CreateTaskTemplate");
+             Tasklist =TempS.getAllTasksforTemplate();
+        return new ModelAndView("CreateTaskTemplate","AllTasks", Tasklist); 
       }
        System.out.println("\n inside create Template method ");
 
-        List <TaskBean> Tasklist = null;
+       
         
         HttpSession TempSession=req.getSession(false);
         TempSession.setAttribute("Template", TempB);

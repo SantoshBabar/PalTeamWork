@@ -24,14 +24,8 @@ public class Validator implements org.springframework.validation.Validator{
     public void validate(Object target, Errors errors) {
         UserDataBean sbean = (UserDataBean) target;
         Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$");
-Matcher m = p.matcher(sbean.getEmail());
-
-
-      
-	
-		
-                
-		if(m.find())
+        Matcher m = p.matcher(sbean.getEmail());
+        if(m.find())
 		{
 		    errors.rejectValue("email","email.required");
 		}
