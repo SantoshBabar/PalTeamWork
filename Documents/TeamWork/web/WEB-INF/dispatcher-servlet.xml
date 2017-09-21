@@ -7,6 +7,7 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation= "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
  
@@ -20,16 +21,27 @@
       class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
+       
     </bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="20848820" />
+    </bean>
+    <mvc:resources mapping="/WEB-INF/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/upfiles/**" location="/upfiles/" /> 
+    
 
+    <mvc:annotation-driven />
     
     <bean id="LoginService" class="com.Paladion.teamwork.services.LoginServiceImpl" />
+    <bean id="PasswordService" class="com.Paladion.teamwork.services.PasswordServiceImpl" />
     <bean id="ProjectService" class="com.Paladion.teamwork.services.ProjectServiceImpl" />
     <bean id="TaskService" class="com.Paladion.teamwork.services.TaskServiceImpl" />
     <bean id="TemplateService" class="com.Paladion.teamwork.services.TemplateServiceImpl" />
     <bean id="UserService" class="com.Paladion.teamwork.services.UserServiceImpl" />
     <bean id="EmailService" class="com.Paladion.teamwork.services.EmailServiceImpl" />
     <bean id="CommonUtil" class="com.Paladion.teamwork.utils.CommonUtil" />
+    <bean id="AdminService" class="com.Paladion.teamwork.services.AdminServiceImpl" />
    
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
@@ -56,6 +68,7 @@
                 <value>com.Paladion.teamwork.beans.MapTemplateTaskBean</value>
                 <value>com.Paladion.teamwork.beans.ProjectTransactionBean</value>
                 <value>com.Paladion.teamwork.beans.EmailTemplateBean</value>
+                <value>com.Paladion.teamwork.beans.SystemBean</value>
             </list>
         </property>
 
@@ -67,6 +80,9 @@
 <!--		<prop key="hibernate.hbm2ddl.auto">create</prop>-->
 	    </props>
         </property>
+  
+
+        
     </bean>
 
         <bean id="LoginDAO" class="com.Paladion.teamwork.DAO.LoginDAOImpl">
@@ -74,6 +90,10 @@
         </bean>
 
         <bean id="UserDAO" class="com.Paladion.teamwork.DAO.UserDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+        </bean>
+        
+        <bean id="PasswordDAO" class="com.Paladion.teamwork.DAO.PasswordDAOImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
         </bean>
 
@@ -93,4 +113,25 @@
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
         </bean>
 
+        <bean id="AdminDAO" class="com.Paladion.teamwork.DAO.AdminDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+        </bean>
+        
+        <bean id="Validator" class="com.Paladion.teamwork.utils.Validator">
+         </bean>
+         
+        <bean id="TaskValidator" class="com.Paladion.teamwork.utils.TaskValidator">
+         </bean>
+         
+        <bean id="userValidator" class="com.Paladion.teamwork.utils.userValidator">
+         </bean>
+         
+<!--         <bean id="ProjectValidator" class="com.Paladion.teamwork.utils.ProjectValidator">
+         </bean>-->
+         
+         
+         
+         <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+       <property name="basename"  value="/WEB-INF/classes/messages" />
+       </bean>
     </beans>
