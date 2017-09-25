@@ -441,7 +441,7 @@ table tr td
         <h1>How to fill Information Gathering Sheet?</h1>
         <div style="text-align:justify">  <p style="text-indent: 50px;width: 874px ">The Information Gathering Sheet is very important process, We need to fill this sheet so that Technical Lead can understand the application functionality, here we will be filling few information related to application like
                 application name, which programming language they are using for backend code, server version, how many user roles are present in the application and also a brief information about application architecture.</p></div>
-        <a href="http://localhost:8888/TeamWork/fileDownload.do?id=info">Download Information Gathering sheet</a>
+        <a href="http://localhost:8080/TeamWork/fileDownload.do?id=info">Download Information Gathering sheet</a>
         <br>
         <br>
         <br>
