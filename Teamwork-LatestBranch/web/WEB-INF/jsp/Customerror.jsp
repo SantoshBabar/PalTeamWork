@@ -17,7 +17,7 @@
             <h1>
                 <center>
                 <font color="red">
-                <h2>Opps!! Something went wrong.</h2>
+                <h2>Opps!! Something went wrong!.</h2>
                 <h2>${Message}</h2>
                 </font>
                 </center>
